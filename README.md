@@ -12,7 +12,7 @@
 
 
 ## 运行效果
- demo系统： [http://marsgis.cn/project/3d/supermap/index.html](http://marsgis.cn/project/3d/supermap/index.html)
+ demo系统： [http://marsgis.cn/github/supermap/index.html](http://marsgis.cn/github/supermap/index.html)
 
  ![image](http://cesium.marsgis.cn/docs/img/project/2.jpg)
  
