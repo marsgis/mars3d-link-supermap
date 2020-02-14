@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html class="no-js css-menubar" lang="zh-cn">
+
+<head>
+    <title> Mars3D项目模版 - 超图版（含widget模块）</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- 移动设备 viewport -->
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta name="author" content="火星科技 http://cesium.marsgis.cn ">
+    <!-- 360浏览器默认使用Webkit内核 -->
+    <meta name="renderer" content="webkit">
+    <!-- Chrome浏览器添加桌面快捷方式（安卓） -->
+    <link rel="icon" type="image/png" href="img/favicon/favicon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Safari浏览器添加到主屏幕（IOS） -->
+    <link rel="icon" sizes="192x192" href="img/favicon/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="火星科技 MarsGIS">
+    <!-- Win8标题栏及ICON图标 -->
+    <link rel="apple-touch-icon-precomposed" href="img/favicon/apple-touch-icon.png">
+    <meta name="msapplication-TileImage" content="img/favicon/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#62a8ea">
+
+    <script>window.noArrayPrototype = true;//标识haoutil.js中不扩展arary原生方法</script>
+
+    <!-- 普通加载方式 -->
+    <script type="text/javascript" src="lib/include-lib.js?time=20200102" libpath="lib/"
+        include="jquery,jquery.range,bootstrap,bootstrap-checkbox,font-awesome,web-icons,layer,haoutil,nprogress,toastr,admui,turf,mars3d-sm"></script>
+
+
+    <link href="css/style.css?time=20200102" rel="stylesheet" />
+    <style>
+        .cesium-viewer-navigationContainer {
+            top: 0px;
+            left: 0px;
+            right: auto;
+            z-index: 99;
+        }
+
+        .cesium-viewer-toolbar {
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body class="dark">
+    <div id="centerDiv">
+        <div id="cesiumContainer" class="cesium-container"></div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>

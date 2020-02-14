@@ -1,0 +1,169 @@
+﻿<!-- 2017-12-4 14:24:14 | 修改 木遥（QQ：346819890） -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title></title>
+
+    <!--第三方lib-->
+    <script type="text/javascript" src="../../lib/include-lib.js?time=20200102" libpath="../../lib/"
+            include="jquery,font-awesome,bootstrap,layer,haoutil"></script>
+
+    <link href="../../css/widget-win.css" rel="stylesheet" />
+    <style>
+        body {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .form-control {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <b>日期选择：</b>
+        <input id="selDate" type="date" value="2018-02-09" class="form-control" />
+    </div>
+    <div style="margin-top: 10px;margin-bottom: 10px">
+        <b>开始时间：</b>
+        <select id="startTime" class="form-control">
+            <option value="0">0:00</option>
+            <option value="2">2:00</option>
+            <option value="4">4:00</option>
+            <option value="6">6:00</option>
+            <option value="8">8:00</option>
+            <option value="10" selected>10:00</option>
+            <option value="12">12:00</option>
+            <option value="14">14:00</option>
+            <option value="16">16:00</option>
+            <option value="18">18:00</option>
+            <option value="20">20:00</option>
+            <option value="22">22:00</option>
+        </select>
+    </div>
+    <div style="margin-top: 10px;margin-bottom: 10px">
+        <b>结束时间：</b>
+        <select id="endTime" class="form-control">
+            <option value="2">2:00</option>
+            <option value="4">4:00</option>
+            <option value="6">6:00</option>
+            <option value="8">8:00</option>
+            <option value="10">10:00</option>
+            <option value="12" selected>12:00</option>
+            <option value="14">14:00</option>
+            <option value="16">16:00</option>
+            <option value="18">18:00</option>
+            <option value="20">20:00</option>
+            <option value="22">22:00</option>
+            <option value="24">24:00</option>
+        </select>
+    </div>
+    <div>
+        <b>底部高程：</b>
+        <input id="bottomHeight" value="20" type="number" min="0" class="form-control" />
+    </div>
+    <div style="margin-bottom: 10px;margin-top: 10px">
+        <b>拉伸高度：</b>
+        <input id="extrudeHeight" value="20" type="number" min="1" class="form-control" />
+    </div>
+    <div>
+        <button type="button" id="shadowAnalysis" class="btn btn-primary">阴影分析</button>
+        <button type="button" id="sunlight" class="btn btn-primary">日照效果</button>
+        <button type="button" id="clear" class="btn btn-primary">清除</button>
+    </div>
+
+    <script>
+        var thisWidget;
+
+        //当前页面业务
+        function initWidgetView(_thisWidget) {
+            thisWidget = _thisWidget;
+
+            if (thisWidget.config && thisWidget.config.style) {
+                $("body").addClass(thisWidget.config.style);
+            }
+
+
+            $("#shadowAnalysis").click(function () {
+                var shour = Number($("#startTime :selected").val());
+                var ehour = Number($("#endTime :selected").val()); 
+                if (shour > ehour) {
+                    haoutil.msg('结束时间必须大于开始时间'); 
+                    return;
+                }
+                thisWidget.startFX();
+            });
+            $("#sunlight").click(function () {
+                var shour = Number($("#startTime :selected").val());
+                var ehour = Number($("#endTime :selected").val());
+                if (shour > ehour) {
+                    haoutil.msg('结束时间必须大于开始时间');
+                    return;
+                }
+                thisWidget.sunlight();
+            });
+            $("#clear").click(function () {
+                thisWidget.clear();
+            });
+
+            //change
+            $('#startTime').change(function () {
+                var params = getFxParams(); 
+                thisWidget.updateStartTime(params);
+            });
+            $('#endTime').change(function () {
+                var params = getFxParams();
+                thisWidget.updateEndTime(params);
+            });
+
+            $('#bottomHeight').change(function () {
+                var bh = Number($(this).val());
+                var eh = Number($('#extrudeHeight').val());
+                thisWidget.updateRegion({
+                    bottom: bh,
+                    extend: eh
+                });
+            });
+
+            $('#extrudeHeight').change(function () {
+                var bh = Number($('#bottomHeight').val());
+                var eh = Number($(this).val());
+                thisWidget.updateRegion({
+                    bottom: bh,
+                    extend: eh
+                });
+            });
+        }
+         
+        function getFxParams() {
+            //设置分析对象的开始结束时间
+            var dateValue = $("#selDate").val();
+            var shour = Number($("#startTime :selected").val());
+            var ehour = Number($("#endTime :selected").val());
+             
+            if (shour > ehour) {
+                haoutil.msg('结束时间必须大于开始时间');
+                ehour = shour + 2; 
+            } 
+   
+            //设置分析区域、底部高程和拉伸高度
+            var bh = Number($('#bottomHeight').val());
+            var eh = Number($('#extrudeHeight').val());
+ 
+            return {
+                date: dateValue, 
+                shour: shour,
+                ehour:ehour,
+                bottom: bh,
+                extend: eh
+            };
+        }
+
+
+
+    </script>
+</body>
+</html>

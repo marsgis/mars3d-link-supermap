@@ -1,0 +1,649 @@
+﻿{
+    "map3d": {
+        "homeButton": true,
+        "sceneModePicker": true,
+        "navigationHelpButton": true,
+        "infoBox": false,
+        "vrButton": false,
+        "fullscreenButton": false,
+        "geocoder": false,
+        "showRenderLoopErrors": true,
+        "center": {"y":39.957431,"x":116.384868,"z":3961.83,"heading":0,"pitch":-44.4,"roll":0},
+        "minzoom": 1,
+        "maxzoom": 50000000,
+        "style": { "atmosphere": true, "lighting": false, "fog": false, "testTerrain": true },     
+        "contextmenu":true,  
+        "location": {
+            "format":"<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>方向：{heading}度</div> <div>视高：{height}米</div>",
+            "crs":""
+        },
+        "terrain": {
+            "url": "http://data.marsgis.cn/terrain", 
+            "visible": true
+        },
+        "basemaps": [
+            {
+                "id": 10,
+                "name": "地图底图",
+                "type": "group"
+            },
+            {
+                "pid": 10,
+                "name": "谷歌卫星",
+                "icon": "img/basemaps/google_img.png",
+                "type": "www_google",
+                "crs": "wgs84",
+                "layer": "img_d",
+                "visible": true
+            },
+            {
+                "name": "超图底图",
+                "type": "supermap_img",
+                "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400"
+            }, 
+            {
+                "pid": 10,
+                "name": "ArcGIS卫星",
+                "icon": "img/basemaps/esriWorldImagery.png",
+                "type": "arcgis",
+                "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+                "enablePickFeatures": false
+            },
+            {
+                "pid": 10,
+                "name": "微软卫星",
+                "icon": "img/basemaps/bingAerial.png",
+                "type": "www_bing",
+                "layer": "Aerial"
+            },
+            {
+                "pid": 10,
+                "name": "天地图卫星",
+                "icon": "img/basemaps/tdt_img.png",
+                "type": "www_tdt",
+                "layer": "img_d",
+                "key": [
+                  "313cd4b28ed520472e8b43de00b2de56",
+                  "83b36ded6b43b9bc81fbf617c40b83b5",
+                  "0ebd57f93a114d146a954da4ecae1e67",
+                  "6c99c7793f41fccc4bd595b03711913e",
+                  "56b81006f361f6406d0e940d2f89a39c"
+                ]
+            },
+            {
+                "pid": 10,
+                "name": "天地图电子",
+                "icon": "img/basemaps/tdt_vec.png",
+                "type": "group",
+                "layers": [
+                    { "name": "底图", "type": "www_tdt", "layer": "vec_d", "key": ["313cd4b28ed520472e8b43de00b2de56" ] },
+                    { "name": "注记", "type": "www_tdt", "layer": "vec_z", "key": [  "83b36ded6b43b9bc81fbf617c40b83b5" ] }
+                ]               
+            }, 
+            {
+                "pid": 10,
+                "name": "天地图地形",
+                "icon": "img/basemaps/tdt_ter.png",
+                "type": "group",
+                "layers": [
+                    { "name": "底图", "type": "www_tdt", "layer": "ter_d", "key": ["313cd4b28ed520472e8b43de00b2de56" ] },
+                    { "name": "注记", "type": "www_tdt", "layer": "ter_z", "key": [  "83b36ded6b43b9bc81fbf617c40b83b5" ] }
+                ]               
+            }, 
+            {
+                "pid": 10,
+                "name": "OSM地图",
+                "type": "xyz",
+                "icon": "img/basemaps/osm.png",
+                "url": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                "subdomains": "abc"
+            },
+            {
+                "pid": 10,
+                "name": "街道图",
+                "icon": "img/basemaps/mapboxStreets.png",
+                "type": "mapbox",
+                "mapId": "mapbox.streets"
+            }, 
+            {
+                "pid": 10,
+                "name": "黑色底图",
+                "icon": "img/basemaps/bd-c-dark.png",
+                "type": "mapbox",
+                "mapId": "mapbox.dark"
+            },
+            {
+                "pid": 10,
+                "name": "离线地图",
+                "type": "xyz",
+                "icon": "img/basemaps/mapboxSatellite.png",
+                "url": "http://data.marsgis.cn/maptile/wgs3857img/{z}/{x}/{y}.jpg", 
+                "rectangle": { "xmin": -180, "xmax": 180, "ymin": -85, "ymax": 85 }
+            },
+            {
+                "pid": 10,
+                "name": "单张图片",
+                "icon": "img/basemaps/offline.png",
+                "type": "image",
+                "url": "img/world/world.jpg" 
+            }   
+        ],
+        "operationallayers": [
+            {
+                "pid": 10,
+                "name": "天地图注记",
+                "type": "www_tdt",
+                "layer": "img_z",
+                "key": [
+                  "313cd4b28ed520472e8b43de00b2de56",
+                  "83b36ded6b43b9bc81fbf617c40b83b5",
+                  "0ebd57f93a114d146a954da4ecae1e67",
+                  "6c99c7793f41fccc4bd595b03711913e",
+                  "56b81006f361f6406d0e940d2f89a39c"
+                ],
+                "visible": false
+            },
+            
+            {
+                "id": 50,
+                "name": "辅助图层",
+                "type": "group"
+            },
+
+            {
+                "pid": 50,
+                "type": "custom_graticule",
+                "name": "经纬网"
+            },
+
+
+            {
+                "id": 40,
+                "name": "栅格数据",
+                "type": "group"
+            },
+            {
+                "id": 4020,
+                "pid": 40,
+                "name": "OGC WMS服务",
+                "type": "group"
+            },
+            {
+                "pid": 4020,
+                "name": "教育设施点",
+                "type": "wms",
+                "url": "http://data.marsgis.cn/geoserver/mars/wms",
+                "layers": "mars:hfjy",
+                "crs": "EPSG:4326",
+                "parameters": {
+                    "transparent": "true",
+                    "format": "image/png"
+                },
+                "showClickFeature": true,
+                "center": { "y": 31.743214, "x": 117.277097, "z": 47197.7, "heading": 0.3, "pitch": -78.8, "roll": 360 },
+                "popup": "名称：{项目名称}<br />类型：{设施类型}<br />面积：{用地面积}亩<br />位置：{具体位置}",
+                "visible": false,
+                "flyTo": true 
+            },
+            {
+                "pid": 4020,
+                "name": "道路线",
+                "type": "wms",
+                "url": "http://data.marsgis.cn/geoserver/mars/wms",
+                "layers": "mars:hfdl",
+                "crs": "EPSG:4326",
+                "parameters": {
+                    "transparent": "true",
+                    "format": "image/png"
+                },
+                "showClickFeature": true,
+                "center": { "y": 31.743214, "x": 117.277097, "z": 47197.7, "heading": 0.3, "pitch": -78.8, "roll": 360 },
+                "popup": "all",
+                "visible": false,
+                "flyTo": true
+            },
+            {
+                "pid": 4020,
+                "name": "建筑物面",
+                "type": "wms",
+                "url": "http://data.marsgis.cn/geoserver/mars/wms",
+                "layers": "mars:hfjzw",
+                "crs": "EPSG:4326",
+                "parameters": {
+                    "transparent": "true",
+                    "format": "image/png"
+                },
+                "showClickFeature": true,
+                "center": { "y": 31.79513, "x": 117.236172, "z": 3784.6, "heading": 0.7, "pitch": -42.2, "roll": 0 },
+                "popup": "all",
+                "visible": false,
+                "flyTo": true
+            },
+            {
+                "pid": 4020,
+                "name": "规划面",
+                "type": "wms",
+                "url": "http://data.marsgis.cn/geoserver/mars/wms",
+                "layers": "mars:hfgh",
+                "crs": "EPSG:4326",
+                "parameters": {
+                    "transparent": "true",
+                    "format": "image/png"
+                },
+                "showClickFeature": true,
+                "center": { "y": 31.743214, "x": 117.277097, "z": 47197.7, "heading": 0.3, "pitch": -78.8, "roll": 360 },
+                "popup": "all",
+                "visible": false,
+                "flyTo": true
+            },
+
+            {
+                "id": 4030,
+                "pid": 40,
+                "name": "ArcGIS 瓦片",
+                "type": "group"
+            },
+            {
+                "pid": 4030,
+                "name": "合肥规划图",
+                "type": "arcgis_cache",
+                "url": "http://data.marsgis.cn/maptile/hf/guihua/_alllayers/L{arc_z}/R{arc_y}/C{arc_x}.png",
+                "minimumLevel": 1,
+                "maximumLevel": 17,
+                "minimumTerrainLevel": 1,
+                "maximumTerrainLevel": 17,
+                "rectangle": { "xmin":  116.846, "xmax":  117.642, "ymin": 31.533, "ymax": 32.185 }
+            },
+            {
+                "id": 4010,
+                "pid": 40,
+                "name": "ArcGIS Dynamic",
+                "type": "group"
+            },
+
+            {
+                "id":401085,
+                "pid": 4010,
+                "type": "arcgis_dynamic",
+                "name": "主要道路",
+                "url": "http://data.marsgis.cn/arcgis/rest/services/mars/hefei/MapServer",
+                "layers": "24",
+                "showClickFeature": true,
+                "center": { "y": 31.814176, "x": 117.225362, "z": 5105.3, "heading": 359.2, "pitch": -83.1, "roll": 360 },
+                "popup": "all"
+            },
+            {
+                "id":401086,
+                "pid": 4010,
+                "type": "arcgis_dynamic",
+                "name": "建筑物",
+                "url": "http://data.marsgis.cn/arcgis/rest/services/mars/hefei/MapServer",
+                "layers": "35,36,37,39",
+                "showClickFeature": true,
+                "center": { "y": 31.816951, "x": 117.22898, "z": 2916.7, "heading": 0.3, "pitch": -78.8, "roll": 0 },
+                "popup": "名称：{NAME}<br />层数：{floor}"
+            },
+            {
+                "id":401087,
+                "pid": 4010,
+                "type": "arcgis_dynamic",
+                "name": "规划",
+                "url": "http://data.marsgis.cn/arcgis/rest/services/mars/guihua/MapServer",
+                "showClickFeature": true,
+                 "pickFeatureStyle": {
+                  "stroke": "#ff0000",
+                  "fill": "#ff0000",
+                  "fillAlpha": 0.5
+                },
+                "center": { "y": 31.816951, "x": 117.22898, "z": 2916.7, "heading": 0.3, "pitch": -78.8, "roll": 0 },
+                "popup": [
+                    { "field": "用地名称", "name": "名称" },
+                    { "field": "用地编号", "name": "编号" },
+                    { "field": "规划用地", "name": "规划" }
+                ]
+            },
+
+            {
+                "id": 30,
+                "name": "矢量数据",
+                "type": "group"
+            },
+            {
+                "id": 3040,
+                "pid": 30,
+                "name": "平台标绘JSON",
+                "type": "group"
+            },
+        
+            {
+                "id": 303011,
+                "pid": 3040,
+                "type": "geojson-draw",
+                "name": "示例数据",
+                "url": "http://data.marsgis.cn/file/geojson/draw-demo.json",
+                "popup": "{draw_typename}", 
+                "visible": false,
+                "flyTo": true
+            }, 
+            {
+                "id": 3030,
+                "pid": 30,
+                "name": "GeoJSON数据",
+                "type": "group"
+            },
+            {
+                "pid": 3030,
+                "type": "geojson",
+                "name": "建筑物面",
+                "url": "http://data.marsgis.cn/file/geojson/jzw.json",
+                "symbol": {
+                    "styleOptions": {
+                        "color": "#0d3685",
+                        "outlineColor": "#0d3685",
+                        "opacity": 0.8
+                    }
+                },
+                "buildings": {
+                    "cloumn": "floors",
+                    "height": "flo_height"
+                },
+                "popup": "all",
+                "flyTo": true
+            },
+            { 
+                "pid": 3030,
+                "type": "geojson",
+                "name": "安徽各市",
+                "url": "http://data.marsgis.cn/file/geojson/anhui.json",
+                "symbol": {
+                    "styleOptions": {
+                        "fill": true,
+                        "opacity": 0.5,
+                        "outline": true,
+                        "outlineColor": "#FED976",
+                        "outlineWidth": 3,
+                        "outlineOpacity": 1,
+                        "perPositionHeight": false,
+                        "label": { 
+                            "field": "name", 
+                            "opacity": 1,
+                            "font_size": 30,
+                            "color": "#ffffff",
+                            "border": true,
+                            "border_color": "#000000",
+                            "border_width": 3, 
+                            "scaleByDistance": true,     
+                            "scaleByDistance_far": 2743804,     
+                            "scaleByDistance_farValue":0.3,
+                            "scaleByDistance_near":10000,
+                            "scaleByDistance_nearValue":1,
+                            "distanceDisplayCondition":true,
+                            "distanceDisplayCondition_far":2743804,
+                            "distanceDisplayCondition_near":0 
+                        }
+                    }
+                },
+                "popup": "{name}",
+                "visible": false,
+                "flyTo": true
+            }, 
+            {
+                "pid": 3030,
+                "type": "geojson",
+                "name": "省界线",
+                "url": "http://data.marsgis.cn/file/geojson/sheng-line.json",
+                "symbol": {
+                    "styleOptions": {
+                        "lineType": "solid",
+                        "color": "#ffffff",
+                        "width": 2,
+                        "opacity": 0.8,
+                        "label": {
+                            "field": "name",
+                            "position":"center",
+                            "font_size": 30,
+                            "color": "#ffffff",
+                            "border": true,
+                            "border_color": "#000000",                            
+                            "scaleByDistance": true,     
+                            "scaleByDistance_far": 60000000,
+                            "scaleByDistance_farValue":0.2,
+                            "scaleByDistance_near":1000000,
+                            "scaleByDistance_nearValue":1,
+                            "distanceDisplayCondition":true,
+                            "distanceDisplayCondition_far":12000000,
+                            "distanceDisplayCondition_near":0 
+                        }
+                    }
+                },
+                "visible": false,
+                "flyTo": true
+            },
+            { 
+                "pid": 3030,
+                "type": "geojson",
+                "name": "体育设施点",
+                "url": "http://data.marsgis.cn/file/geojson/hfty-point.json",
+                "symbol": {
+                    "styleOptions": {
+                        "image": "img/marker/mark1.png",
+                        "scale": 1,
+                        "scaleByDistance": true,
+                        "scaleByDistance_far": 20000,
+                        "scaleByDistance_farValue": 0.5,
+                        "scaleByDistance_near": 1000,
+                        "scaleByDistance_nearValue": 1,
+                        "label": {
+                            "field": "项目名称", 
+                            "font_size": 25,
+                            "color": "#ffffff",
+                            "border": true,
+                            "border_color": "#000000",     
+                            "pixelOffset": [ 0, -25 ],                       
+                            "scaleByDistance": true,     
+                            "scaleByDistance_far": 80000,
+                            "scaleByDistance_farValue":0.5,
+                            "scaleByDistance_near":1000,
+                            "scaleByDistance_nearValue":1,
+                            "distanceDisplayCondition":true,
+                            "distanceDisplayCondition_far":80000,
+                            "distanceDisplayCondition_near":0 
+                        }
+                    }
+                },
+                "popup": [
+                    { "field": "项目名称", "name": "项目名称" },
+                    { "field": "建设性质", "name": "建设性质" },
+                    { "field": "设施级别", "name": "设施级别" },
+                    { "field": "所属区县", "name": "所属区县" },
+                    { "field": "建筑内容及", "name": "建筑内容" },
+                    { "field": "新增用地（", "name": "新增用地" },
+                    { "field": "开工", "name": "开工" },
+                    { "field": "总投资（万", "name": "总投资" },
+                    { "field": "资金来源", "name": "资金来源" },
+                    { "field": "初步选址", "name": "初步选址" },
+                    { "field": "设施类型", "name": "设施类型" },
+                    { "field": "设施等级", "name": "设施等级" },
+                    { "field": "所在区县", "name": "所在区县" },
+                    { "field": "具体位置", "name": "具体位置" },
+                    { "field": "建设内容（", "name": "建设内容" },
+                    { "field": "用地面积（", "name": "用地面积", "unit": "亩" },
+                    { "field": "设施规模（", "name": "设施规模" },
+                    { "field": "举办者类型", "name": "举办者类型" },
+                    { "field": "开工时间", "name": "开工时间" },
+                    { "field": "总投资额（", "name": "总投资额", "unit": "亿元" },
+                    { "field": "项目推进主", "name": "项目推进主体" },
+                    { "field": "项目进度", "name": "项目进度" },
+                    { "field": "项目来源", "name": "项目来源" },
+                    { "field": "备注", "name": "备注" }
+                ],
+                "visible": false,
+                "flyTo": true
+            }, 
+          
+            {
+                "id": 3060,
+                "pid": 30,
+                "name": "CZML数据",
+                "type": "group"
+            },
+            { 
+                "pid": 3060,
+                "type": "czml",
+                "name": "汽车",
+                "url": "http://data.marsgis.cn/file/czml/car.czml", 
+                "flyTo": true
+            }, 
+            {
+                "id": 306011,
+                "pid": 3060,
+                "type": "czml",
+                "name": "飞行编队",
+                "url": "http://data.marsgis.cn/file/czml/flight.czml",
+                "popup": "all",
+                "flyTo": true
+            },
+            {
+                "id": 306012,
+                "pid": 3060,
+                "type": "czml",
+                "name": "船舶编队",
+                "url": "http://data.marsgis.cn/file/czml/ship.czml",
+                "popup": "all",
+                "flyTo": true
+            },
+            {
+                "id": 3050,
+                "pid": 30,
+                "name": "KML数据",
+                "type": "group"
+            },
+            {
+                "pid": 3050,
+                "type": "kml", 
+                "name": "海上安全警告",
+                "url": "http://data.marsgis.cn/file/kml/NAVWARN.kmz",
+                "popup": "all"
+            },
+            {
+                "pid": 3050,
+                "type": "kml", 
+                "name": "国境线",
+                "url": "http://data.marsgis.cn/file/kml/countryboundary.kml",
+                "symbol": {
+                    "styleOptions": {
+                        "color": "#FED976",
+                        "width": 2
+                    }
+                }
+            },
+            {
+                "pid": 3050,
+                "type": "kml", 
+                "name": "省界线",
+                "url": "http://data.marsgis.cn/file/kml/province.kml",
+                "symbol": {
+                    "styleOptions": {
+                        "color": "#00FF00",
+                        "width": 2
+                    }
+                }
+            },
+            {
+                "id": 20,
+                "name": "三维模型",
+                "type": "group"
+            },
+
+    
+            
+            {
+                "id": 2010,
+                "pid": 20,
+                "name": "gltf模型",
+                "type": "group"
+            },
+            {
+                "pid": 2010,
+                "type": "gltf",
+                "name": "电线塔",
+                "url": "http://data.marsgis.cn/gltf/mars/tower/tower.glb",
+                "popup": "示例信息，这是一个电线塔",
+                "position": { "x": 117.213269, "y": 31.829509, "z": 35, "heading": 90 },
+                "center": { "y": 31.828562, "x": 117.217529, "z": 143.7, "heading": 287.2, "pitch": -10.8, "roll": 359.8 }
+            },
+            {
+                "pid": 2010,
+                "type": "gltf",
+                "name": "光伏电场",
+                "tooltip": "示例信息，这是一个光伏电场",
+                "url": "http://data.marsgis.cn/gltf/mars/taiyang/taiyang.gltf",
+                "scale": 0.5,
+                "position": { "x": 117.219828, "y": 31.828175, "z": 36.2, "heading": -59 },
+                "center": { "y": 31.827257, "x": 117.220203, "z": 126.6, "heading": 344.2, "pitch": -35.7, "roll": 359.9 }
+            },
+            { 
+                "id": 2040,
+                "name": "超图iServer服务",
+                "type": "group"
+            },
+     
+            {
+                "pid": 2040,
+                "name": "香港科技园",
+                "type": "supermap_s3m",
+                "url": "https://www.supermapol.com/realspace/services/3D-yanmofenxi/rest/realspace/datas/sci_park/config",
+                "layername": "hk",
+                "offset": {"z": 45},
+                "center": { "y": 22.427991, "x": 114.202612, "z": 296.3, "heading": 101.4, "pitch": -19.2, "roll": 0 }
+            },
+            {
+                "pid": 2040,
+                "name": "BIM",
+                "type": "supermap_s3m",
+                "url": "http://www.supermapol.com/realspace/services/3D-BIMbuilding/rest/realspace/datas/BIMbuilding/config",
+                "layername": "BIM",
+                "offset": {"z": 45},
+                "center": {"y":39.915744,"x":116.474951,"z":144.88,"heading":254.4,"pitch":-24.3,"roll":0}
+            },
+
+            {
+                "pid": 2040,
+                "name": "CBD",
+                "type": "supermap_s3m",
+                "url": "http://support.supermap.com.cn:8090/iserver/services/3D-CBD/rest/realspace",
+                "offset": {"z": 45},
+                "center": {"y":39.894307,"x":116.456491,"z":1453.27,"heading":3.8,"pitch":-40.7,"roll":0}
+            },
+            {
+                "pid": 2040,
+                "name": "鸟巢",
+                "type": "supermap_s3m",
+                "url": "http://www.supermapol.com/realspace/services/3D-Olympic/rest/realspace",
+                "center": {"y":39.957431,"x":116.384868,"z":3961.83,"heading":0,"pitch":-44.4,"roll":0},
+                "offset": {"z": 45},
+                "visible": true,
+                "flyTo": true
+            },
+           
+            {
+                "pid": 20,
+                "id": 2060,
+                "name": "3dtiles数据",
+                "type": "group"
+            },
+            {
+                "pid": 2060,
+                "type": "3dtiles",
+                "name": "厂房",
+                "url": "http://data.marsgis.cn/3dtiles/qx-changfang/tileset.json",
+                "hasOpacity": false,
+                "offset": { "x": 115.456996, "y": 40.409811, "z": 8938 },
+                "center": { "y": 40.414482, "x": 115.458781, "z": 1058.2, "heading": 194.1, "pitch": -36.6, "roll": 360 }
+            }
+
+
+
+        ]
+    } 
+}

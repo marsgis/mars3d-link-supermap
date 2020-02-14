@@ -1,0 +1,128 @@
+﻿<!-- 2017-12-4 14:24:14 | 修改 木遥（QQ：346819890） -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title></title>
+
+    <!--第三方lib-->
+    <script type="text/javascript" src="../../lib/include-lib.js?time=20200102" libpath="../../lib/"
+            include="jquery,font-awesome,bootstrap,layer,haoutil"></script>
+
+    <link href="../../css/widget-win.css" rel="stylesheet" />
+    <style>
+        body {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .talbe_style {
+            padding: 5px;
+            width: 95%;
+            border: 0;
+            font-size: 13px;
+        }
+
+            .talbe_style tr td {
+                padding: 5px;
+                text-align: left;
+            }
+
+        .nametd {
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="paramView">
+
+        <table class="talbe_style">
+            <tr>
+                <td class="nametd">最大高度(米)</td>
+                <td>
+                    <input id="maxHeight" value="71" type="number" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td class="nametd">最小高度(米)</td>
+                <td>
+                    <input id="minHeight" value="1" type="number" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td class="nametd">淹没速度(米/秒)</td>
+                <td>
+                    <input id="speed" value="10" type="number" class="form-control" />
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button type="button" id="begin" class="btn btn-primary">开始</button>
+        </div>
+    </div>
+    <div id="resultView" style="display:none;text-align: left;"> 
+        <button type="button" id="clear" class="btn btn-danger">清除</button>
+        <label id="msg"></label> 
+    </div>
+
+
+    <script>
+        var thisWidget;
+
+        var currentHeight = 0;
+        var maxValue = 0;
+        var minValue = 0;
+        var int = null;
+
+
+        //当前页面业务
+        function initWidgetView(_thisWidget) {
+            thisWidget = _thisWidget;
+
+            if (thisWidget.config && thisWidget.config.style) {
+                $("body").addClass(thisWidget.config.style);
+            }
+
+            $("#begin").click(function () {
+                $("#paramView").hide();
+                $("#resultView").show();
+                
+                maxValue = Number(document.getElementById("maxHeight").value);
+                minValue = Number(document.getElementById("minHeight").value);
+                currentHeight = minValue;
+
+                int = self.setInterval("flood()", 100);
+            });
+            $("#clear").click(function () {
+                stopFX();
+                thisWidget.clear();
+            });
+        }
+
+
+        window.flood = function () {
+            if (currentHeight > maxValue) {
+                stopFX();
+                return;
+            }
+            thisWidget.updateColor({
+                currentHeight: currentHeight,
+                minValue: minValue,
+                maxValue: maxValue
+            });
+            currentHeight += (Number(document.getElementById("speed").value)) / 10;
+            $("#msg").html('当前高度：' + currentHeight.toFixed(1));
+        };
+
+        function stopFX() {
+            self.clearInterval(int);
+
+            $("#resultView").hide();
+            $("#paramView").show();
+            $("#msg").html('');
+        }
+
+    </script>
+</body>
+</html>
