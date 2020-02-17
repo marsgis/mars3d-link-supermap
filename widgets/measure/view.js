@@ -68,6 +68,24 @@ function initWidgetView(_thisWidget) {
         });
     });
 
+    
+    $('#btn_measure_area_td').bind('click', function () {
+        $("#lbl_measure_result").html("");
+        $('#measure_danwei').show();
+        $('#measure_length_danwei').hide();
+        $('#measure_area_danwei').show();
+
+        thisType = "area";
+        lastVal = 0;
+        thisWidget.drawPolygon({
+            unit: $('#measure_area_danwei').val(),
+            terrain: true,
+            splitNum: 10,//step插值分割的个数
+            calback: showResult
+        });
+    });
+
+
     $('#btn_measure_angle').bind('click', function () {
         $("#lbl_measure_result").html("");
         $('#measure_danwei').hide();
@@ -99,8 +117,8 @@ function initWidgetView(_thisWidget) {
         thisType = "section";
         lastVal = 0;
         thisWidget.drawSection({
-            unit: $('#measure_length_danwei').val(),
-            splitNum: 9, //插值次数
+            unit: $('#measure_length_danwei').val(), 
+            splitNum: 300, //插值次数
             onStart: function () {//开始分析前回调(异步)
                 haoutil.loading.show();
             },

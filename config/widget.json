@@ -19,7 +19,12 @@
     "widgetsAtStart": [
         {
             "name": "右上角工具栏",
-            "uri": "widgets/toolBarRight/widget.js" 
+            "uri": "widgets/toolBarRight/widget.js",
+            "css":{
+                "top": "10px",
+                "left": "auto",
+                "right": "10px"
+            }          
         }
     ],
     "widgets": [

@@ -1,5 +1,5 @@
 # Mars3D基础项目模版（含widget模块） - 超图版
-   Mars3D结合超图版Cesium库（替换原生Cesium）并在传统模式Web前端技术栈下的一个具备widget基础功能的[Mars3D](http://cesium.marsgis.cn)应用的三维地球项目模版。
+   Mars3D结合[超图版Cesium库](http://support.supermap.com.cn:8090/webgl/index.html)（替换原生Cesium）并在传统模式Web前端技术栈下的一个具备widget基础功能的[Mars3D](http://cesium.marsgis.cn)应用的三维地球项目模版。
    
   其他技术栈，请参考 [Mars3D开源导航](https://github.com/marsgis/MarsGIS-for-Cesium)
  
