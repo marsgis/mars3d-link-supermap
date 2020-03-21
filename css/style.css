@@ -155,11 +155,11 @@ li {
 }
 
 
-.dark .cesium-popup-color {
+.dark .mars3d-popup-color {
     color: #ffffff;
 }
 
-.dark .cesium-popup-background {
+.dark .mars3d-popup-background {
     background: rgba(63, 72, 84, 0.9);
 }
 
@@ -173,6 +173,7 @@ li {
     color: #e6e6e6;
     fill: #e6e6e6;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    line-height: 32px;
 }
 
 .cesium-viewer-geocoderContainer .cesium-geocoder-input {
@@ -205,8 +206,11 @@ li {
 .cesium-performanceDisplay-defaultContainer {
     top: auto;
     bottom: 35px;
+    right: 50px;
 }
-
+.cesium-performanceDisplay-ms,.cesium-performanceDisplay-fps{
+    color: #fff;
+}
 
 /**cesium工具栏位置*/
 .cesium-viewer-toolbar {

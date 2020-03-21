@@ -151,10 +151,11 @@ function treeOverlays_onCheck(e, treeId, treeNode) {
         else
             $("#" + treeNode.tId + "_range").hide();
 
-        //单选的互斥的节点，特殊处理下。 
-        if (treeNode._type == "terrain" && treeNode.checked) {
+        //特殊处理同目录下的单选的互斥的节点，可在config对应图层节点中配置"radio":true即可 
+        if (layer.radio && treeNode.checked) { 
             function filter(node) {
-                return node._type == "terrain" && node._key != treeNode._key;
+                var item = layersObj[node._key];
+                return item.radio && item.pid == layer.pid && node._key != treeNode._key;
             }
             var nodes = zTree.getNodesByFilter(filter, false, treeNode.getParentNode());
             for (var nidx = 0; nidx < nodes.length; nidx++) {
@@ -234,8 +235,8 @@ var lastRightClickTreeNode;
 
 function treeOverlays_OnRightClick(event, treeId, treeNode) {
     if (treeNode == null || layersObj[treeNode._key] == null) return;
- 
-    var layer = thisWidget.getLayar(layersObj[treeNode._key] );
+
+    var layer = thisWidget.getLayar(layersObj[treeNode._key]);
     if (!layer || !layer.hasZIndex) return;
 
     //右击时的节点
@@ -359,7 +360,7 @@ function exchangeLayer(layer1, layer2) {
     var or = layer1.order;
     layer1.order = layer2.order;
     layer2.order = or;
-   
+
     if (Number(layer1.order) < Number(layer2.order)) {
         //向上移动
         thisWidget.udpateLayerZIndex(layer1, layer1.order);

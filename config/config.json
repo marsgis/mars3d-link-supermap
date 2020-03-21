@@ -14,11 +14,13 @@
         "style": { "atmosphere": true, "lighting": false, "fog": false, "testTerrain": true },     
         "contextmenu":true,  
         "location": {
-            "format":"<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>方向：{heading}度</div> <div>视高：{height}米</div>",
+            "fps":true,
+            "format":"<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div>  <div>视高：{height}米</div>",
             "crs":""
         },
         "terrain": {
             "url": "http://data.marsgis.cn/terrain", 
+            "isSct": false,
             "visible": true
         },
         "basemaps": [
@@ -195,8 +197,7 @@
                 "parameters": {
                     "transparent": "true",
                     "format": "image/png"
-                },
-                "showClickFeature": true,
+                }, 
                 "center": { "y": 31.743214, "x": 117.277097, "z": 47197.7, "heading": 0.3, "pitch": -78.8, "roll": 360 },
                 "popup": "all",
                 "visible": false,
@@ -214,6 +215,17 @@
                     "format": "image/png"
                 },
                 "showClickFeature": true,
+                "pickFeatureStyle": {
+                    "showTime": 5000, 
+                    "clampToGround": true,
+                    "fill": true,
+                    "color": "#2deaf7",
+                    "opacity": 0.6,
+                    "outline": true,
+                    "outlineWidth": 3,
+                    "outlineColor": "#e000d9",
+                    "outlineOpacity": 1.0
+                },
                 "center": { "y": 31.79513, "x": 117.236172, "z": 3784.6, "heading": 0.7, "pitch": -42.2, "roll": 0 },
                 "popup": "all",
                 "visible": false,
@@ -230,7 +242,7 @@
                     "transparent": "true",
                     "format": "image/png"
                 },
-                "showClickFeature": true,
+                "showClickFeature": false,
                 "center": { "y": 31.743214, "x": 117.277097, "z": 47197.7, "heading": 0.3, "pitch": -78.8, "roll": 360 },
                 "popup": "all",
                 "visible": false,
@@ -290,17 +302,24 @@
                 "name": "规划",
                 "url": "http://data.marsgis.cn/arcgis/rest/services/mars/guihua/MapServer",
                 "showClickFeature": true,
-                 "pickFeatureStyle": {
-                  "stroke": "#ff0000",
-                  "fill": "#ff0000",
-                  "fillAlpha": 0.5
+                "pickFeatureStyle": {
+                    "showTime": 5000,  
+                    "fill": true,
+                    "color": "#2deaf7",
+                    "opacity": 0.6,
+                    "outline": true,
+                    "outlineWidth": 3,
+                    "outlineColor": "#e000d9",
+                    "outlineOpacity": 1.0
                 },
                 "center": { "y": 31.816951, "x": 117.22898, "z": 2916.7, "heading": 0.3, "pitch": -78.8, "roll": 0 },
                 "popup": [
                     { "field": "用地名称", "name": "名称" },
                     { "field": "用地编号", "name": "编号" },
-                    { "field": "规划用地", "name": "规划" }
-                ]
+                    { "field": "规划用地", "name": "规划" },
+                    { "type": "html", "html": "<div style='text-align: right;color: #ff0000;padding-right: 10px;'>数据仅供参考</div>" }
+                ],
+                "popupNoTitle":true
             },
 
             {
@@ -314,7 +333,14 @@
                 "name": "平台标绘JSON",
                 "type": "group"
             },
-        
+            { 
+                "pid": 3040,
+                "type": "geojson-draw",
+                "name": "规划单元",
+                "url": "http://data.marsgis.cn/file/geojson/draw-cady.json", 
+                "visible": false,
+                "flyTo": true
+            }, 
             {
                 "id": 303011,
                 "pid": 3040,
@@ -365,7 +391,7 @@
                         "outlineOpacity": 1,
                         "perPositionHeight": false,
                         "label": { 
-                            "field": "name", 
+                            "text": "{name}", 
                             "opacity": 1,
                             "font_size": 30,
                             "color": "#ffffff",
@@ -399,7 +425,7 @@
                         "width": 2,
                         "opacity": 0.8,
                         "label": {
-                            "field": "name",
+                            "text": "{name}",
                             "position":"center",
                             "font_size": 30,
                             "color": "#ffffff",
@@ -434,7 +460,7 @@
                         "scaleByDistance_near": 1000,
                         "scaleByDistance_nearValue": 1,
                         "label": {
-                            "field": "项目名称", 
+                            "text": "{项目名称}", 
                             "font_size": 25,
                             "color": "#ffffff",
                             "border": true,
