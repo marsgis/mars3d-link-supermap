@@ -1,4 +1,4 @@
-/* 2017-12-5 14:28:44 | 修改 木遥（QQ：346819890） */
+/* 2017-12-5 14:28:44 | 修改 木遥（微信:  http://marsgis.cn/weixin.html ） */
 //此方式：弹窗非iframe模式
 mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     options: {
