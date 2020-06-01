@@ -102,20 +102,6 @@
             },
             {
                 "pid": 10,
-                "name": "街道图",
-                "icon": "img/basemaps/mapboxStreets.png",
-                "type": "mapbox",
-                "mapId": "mapbox.streets"
-            }, 
-            {
-                "pid": 10,
-                "name": "黑色底图",
-                "icon": "img/basemaps/bd-c-dark.png",
-                "type": "mapbox",
-                "mapId": "mapbox.dark"
-            },
-            {
-                "pid": 10,
                 "name": "离线地图",
                 "type": "xyz",
                 "icon": "img/basemaps/mapboxSatellite.png",
@@ -592,21 +578,21 @@
             {
                 "pid": 2010,
                 "type": "gltf",
-                "name": "电线塔",
-                "url": "http://data.marsgis.cn/gltf/mars/tower/tower.glb",
-                "popup": "示例信息，这是一个电线塔",
-                "position": { "x": 117.213269, "y": 31.829509, "z": 35, "heading": 90 },
-                "center": { "y": 31.828562, "x": 117.217529, "z": 143.7, "heading": 287.2, "pitch": -10.8, "roll": 359.8 }
+                "name": "风力发电机",
+                "url": "http://data.marsgis.cn/gltf/mars/fengche.gltf",
+                "position": { "x":  117.219071,"y": 31.828783, "z": 39.87},
+                "style":{   "scale": 50,  "heading": -93  },
+                "popup": "示例信息，这是一个风力发电机",
+                "center":{"y":31.821083,"x":117.21832,"z":832.64,"heading":2.3,"pitch":-39.2,"roll":0}
             },
             {
                 "pid": 2010,
                 "type": "gltf",
-                "name": "光伏电场",
-                "tooltip": "示例信息，这是一个光伏电场",
-                "url": "http://data.marsgis.cn/gltf/mars/taiyang/taiyang.gltf",
-                "scale": 0.5,
-                "position": { "x": 117.219828, "y": 31.828175, "z": 36.2, "heading": -59 },
-                "center": { "y": 31.827257, "x": 117.220203, "z": 126.6, "heading": 344.2, "pitch": -35.7, "roll": 359.9 }
+                "name": "起重车",
+                "url": "http://data.marsgis.cn/gltf/mars/qzcar/GKZY_anim.gltf",                
+                "position": { "x": 117.217458,"y":31.815349, "z": 35.03},
+                "style":{"scale": 2,   "heading": -95, "clampToGround": true} ,
+                "center":{"y":31.815363,"x":117.215958,"z":107.35,"heading":90.7,"pitch":-26.1,"roll":0.2}
             },
             { 
                 "id": 2040,
