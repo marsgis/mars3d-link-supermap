@@ -32,11 +32,11 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         this.viewWindow = null;
 
     },
- 
+
     _layers: null,
     //绑定自定义的非配置图层到图层控制控件中
     addOverlay: function (item) {
-        
+
         if (!item.name)
             item.name = "未命名";
         if (!item.id)
@@ -77,9 +77,9 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             }
         }
     },
- 
+
     getLayers: function () {
-        
+
         if (this._layers == null) {
             var layers = [];
             var basemapsCfg = this.hasManagerBaseMaps ? this.viewer.mars.config.basemaps : [];
@@ -152,8 +152,23 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
         model.setVisible(visible);
 
-        if (visible && this.config.autoCenter)
+
+        if (visible && this.config.autoCenter
+            && !model.config.noCenter)//在对应config.json图层节点配置noCenter:true 可以不定位
             model.centerAt();
+
+        //存在关联widget时 
+        if (item.onWidget) {
+            if (visible) {
+                mars3d.widget.activate({
+                    uri: item.onWidget,
+                    layerItem: item,
+                    disableOther: false
+                });
+            } else {
+                mars3d.widget.disable(item.onWidget);
+            }
+        }
 
         //更新到分屏对比
         // var mapCompare = mars3d.widget.getClass('widgets/mapCompare/widget.js');

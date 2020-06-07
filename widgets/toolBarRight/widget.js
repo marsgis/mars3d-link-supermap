@@ -40,12 +40,24 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     //每个窗口创建完成后调用
     winCreateOK: function (viewopt, html) {
         if (viewopt.type != "append") return;
- 
+
+        var arr = this.config.data || this.data;
+
+        //移动设备上，处理下菜单层次
+        if (!haoutil.system.isPCBroswer()) {
+            var item1 = arr.shift();
+            var item2 = arr.shift();
+            arr[0].children.insert(item2,0);
+            arr[0].children.insert(item1,0);
+        }
+
+        this.initMenu(arr);
+    },
+    //构造 菜单
+    initMenu: function (arr) {
         var widgetObj = {};
-        var that = this;
 
         var inhtml = "";
-        var arr = this.config.data || this.data;
         for (var i = 0, len = arr.length; i < len; i++) {
             var item = arr[i];
             if (item.hasOwnProperty("visible") && !item.visible) continue;
@@ -96,14 +108,16 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             if (mars3d.widget.isActivate(uri)) {
                 mars3d.widget.disable(uri);
             }
-            else { 
+            else {
                 var opt = widgetObj[uri] || {};
-                opt.uri = uri; 
- 
+                opt.uri = uri;
+
                 mars3d.widget.activate(opt);
             }
         });
+
     },
+
     //激活插件
     activate: function () {
 
