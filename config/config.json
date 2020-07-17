@@ -581,7 +581,7 @@
                 "name": "风力发电机",
                 "url": "http://data.marsgis.cn/gltf/mars/fengche.gltf",
                 "position": { "x":  117.219071,"y": 31.828783, "z": 39.87},
-                "style":{   "scale": 50,  "heading": -93  },
+                "style":{ "scale": 50,  "heading": -93  },
                 "popup": "示例信息，这是一个风力发电机",
                 "center":{"y":31.821083,"x":117.21832,"z":832.64,"heading":2.3,"pitch":-39.2,"roll":0}
             },
@@ -648,9 +648,9 @@
                 "pid": 2060,
                 "type": "3dtiles",
                 "name": "厂房",
-                "url": "http://data.marsgis.cn/3dtiles/qx-changfang/tileset.json",
-                "hasOpacity": false,
+                "url": "http://data.marsgis.cn/3dtiles/qx-changfang/tileset.json", 
                 "offset": { "x": 115.456996, "y": 40.409811, "z": 8938 },
+		        "maximumScreenSpaceError": 1,
                 "center": { "y": 40.414482, "x": 115.458781, "z": 1058.2, "heading": 194.1, "pitch": -36.6, "roll": 360 }
             }
 
