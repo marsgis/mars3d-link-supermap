@@ -72,5 +72,9 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             data: data
         });
     },
+    changeOnlyPickModel:function(value){
+        //控制鼠标只取模型上的点，忽略地形上的点的拾取
+        viewer.mars.onlyPickModelPosition = value
+    }
 
 }));

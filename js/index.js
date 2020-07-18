@@ -21,12 +21,12 @@ $(document).ready(function () {
     //记录url传入参数
     request = haoutil.system.getRequest();
     if(window.top){//有父级
-        request = haoutil.system.getRequest(window.top);
+        request = $.extend(request,haoutil.system.getRequest(window.top));
     }
 
 
     initUI();
-    initMap()
+    initMap();
 });
 
 function removeMask() {
@@ -35,9 +35,7 @@ function removeMask() {
 
 
 //初始化地图
-function initMap(Cesium) {
-    request = haoutil.system.getRequest();
-
+function initMap() {
     var configfile = "config/config.json"; //默认地址
     if (request.config)//url传入地址
         configfile = request.config;
@@ -112,15 +110,11 @@ function initWidget(viewer) {
                     },
                     request: request
                 });
+                viewer.mars.centerAtHome({ duration: 0 });
             }
 
             //初始化widget管理器
-            mars3d.widget.init(viewer, widgetCfg); //tip: 此方法有第3个参数支持定义父目录。
-
-            if(lastWidgetItem){
-                activateWidget(lastWidgetItem);
-                lastWidgetItem = null;
-            }
+            mars3d.widget.init(viewer, widgetCfg); //tip: 此方法有第3个参数支持定义父目录。 
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             haoutil.loading.hide();
@@ -145,81 +139,50 @@ function initWork(viewer) {
     haoutil.oneMsg('如果未出现地球，是因为地形加载失败，请刷新重新加载！', 'terrain_tip');
 
 
+    //针对不同终端的优化配置
+    if (haoutil.system.isPCBroswer()) {
+        // Cesium 1.61以后会默认关闭反走样，对于桌面端而言还是开启得好，
+        viewer.scene.postProcessStages.fxaa.enabled = true;
 
+        //鼠标滚轮放大的步长参数
+        viewer.scene.screenSpaceCameraController._zoomFactor = 2.0;
 
+        //IE浏览器优化
+        if (window.navigator.userAgent.toLowerCase().indexOf("msie") >= 0) {
+            viewer.targetFrameRate = 20;        //限制帧率
+            viewer.requestRenderMode = true;    //取消实时渲染
+        }
+
+    }
+    else {
+        //鼠标滚轮放大的步长参数
+        viewer.scene.screenSpaceCameraController._zoomFactor = 5.0;
+
+        //移动设备上禁掉以下几个选项，可以相对更加流畅 
+        viewer.requestRenderMode = true;    //取消实时渲染
+        viewer.scene.fog.enable = false;
+        viewer.scene.skyAtmosphere.show = false;
+        viewer.scene.globe.showGroundAtmosphere = false; 
+    }
+ 
     // 禁用默认的实体双击动作。
     viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
     viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
-    //鼠标滚轮放大的步长参数
-    viewer.scene.screenSpaceCameraController._zoomFactor = 1.5;
-
+    //二三维切换不用动画
+    if (viewer.sceneModePicker)
+        viewer.sceneModePicker.viewModel.duration = 0.0;
+ 
     //webgl渲染失败后，刷新页面
     //viewer.scene.renderError.addEventListener(function (scene, error) {
     //    window.location.reload();
     //});
 
+ 
 
-    //移动设备上禁掉以下几个选项，可以相对更加流畅
-    if (!haoutil.system.isPCBroswer()) {
-        viewer.targetFrameRate = 20;        //限制帧率
-        viewer.requestRenderMode = true;    //取消实时渲染
-        viewer.scene.fog.enable = false;
-        viewer.scene.skyAtmosphere.show = false;
-        viewer.scene.fxaa = false;
-    }
-
-    //IE浏览器优化
-    if (window.navigator.userAgent.toLowerCase().indexOf("msie") >= 0) {
-        viewer.targetFrameRate = 20;        //限制帧率
-        viewer.requestRenderMode = true;    //取消实时渲染
-    }
-
-
-    //二三维切换不用动画
-    if (viewer.sceneModePicker)
-        viewer.sceneModePicker.viewModel.duration = 0.0;
-
-    //设置操作习惯,更换中键和右键 
-    //viewer.scene.screenSpaceCameraController.tiltEventTypes = [
-    //    Cesium.CameraEventType.RIGHT_DRAG, Cesium.CameraEventType.PINCH,
-    //    { eventType: Cesium.CameraEventType.LEFT_DRAG, modifier: Cesium.KeyboardEventModifier.CTRL },
-    //    { eventType: Cesium.CameraEventType.RIGHT_DRAG, modifier: Cesium.KeyboardEventModifier.CTRL }
-    //];
-    //viewer.scene.screenSpaceCameraController.zoomEventTypes = [Cesium.CameraEventType.MIDDLE_DRAG, Cesium.CameraEventType.WHEEL, Cesium.CameraEventType.PINCH];
-
-
-    bindShowTilesParts();
-  
 }
 
-
-
-//bim构件的处理
-function bindShowTilesParts() {
-    var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
-    handler.setInputAction(function (event) {
-        var pickedObject = viewer.scene.pick(event.position);
-        if (pickedObject && Cesium.defined(pickedObject.primitive) &&
-            pickedObject.primitive._config && pickedObject.primitive._config.scenetree) {
-            var tilesParts = 'widgetsTS/tilesParts/widget.js';
-
-            if (mars3d.widget.isActivate(tilesParts)) {
-                var parts = mars3d.widget.getClass(tilesParts);
-                if (parts.config.layerCfg == pickedObject.primitive._config)
-                    return;//当前已激活,并且单击了相同模型时跳出
-            }
-
-            mars3d.widget.activate({
-                name: pickedObject.primitive._config.name + " 构件",
-                uri: tilesParts,
-                layerCfg: pickedObject.primitive._config,
-                disableOther: false
-            });
-        }
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-}
-
+ 
 
 //绑定图层管理有2种添加方式
 /**
@@ -283,25 +246,4 @@ function unbindLayerControl(layer) {
         manageLayersWidget.removeLayer(layer.config.name);
     }
 }
-
-//外部页面调用
-var lastWidgetItem
-function activateWidget(item) { 
-    if(!viewer){ 
-        lastWidgetItem = item;
-        return;
-    }
-    mars3d.widget.activate(item);
-}
-function disableWidget(item) {
-    mars3d.widget.disable(item);
-}
-function activateFunByMenu(fun) {
-    eval(fun);
-}
-
-
-function goHome() {
-    mars3d.widget.disableAll()
-    viewer.mars.centerAt();
-} 
+ 

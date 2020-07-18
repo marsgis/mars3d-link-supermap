@@ -44,11 +44,12 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         var arr = this.config.data || this.data;
 
         //移动设备上，处理下菜单层次
-        if (!haoutil.system.isPCBroswer()) {
+        if (!haoutil.system.isPCBroswer()
+            && arr.length == 3 && arr[0].children) {
             var item1 = arr.shift();
             var item2 = arr.shift();
-            arr[0].children.insert(item2,0);
-            arr[0].children.insert(item1,0);
+            arr[0].children.insert(item2, 0);
+            arr[0].children.insert(item1, 0);
         }
 
         this.initMenu(arr);

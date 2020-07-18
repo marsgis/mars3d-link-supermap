@@ -26,7 +26,7 @@
 
     <!-- 第3方lib引入 -->
     <script type="text/javascript" src="../../lib/include-lib.js?time=20200510" libpath="../../lib/"
-        include="jquery,font-awesome,bootstrap,admui-frame"></script>
+        include="jquery,font-awesome,bootstrap,bootstrap-checkbox,admui-frame"></script>
 
     <link href="../../css/widget-win.css" rel="stylesheet" />
     <style>
@@ -125,6 +125,13 @@
         </div>
 
     </div>
+   
+    <div class="checkbox checkbox-primary checkbox-inline">
+        <input id="chk_onlyPickModelPosition" class="styled" type="checkbox">
+        <label for="chk_onlyPickModelPosition">
+            仅测量模型(不拾取地形)
+        </label>
+    </div>
 
     <div id="measure_danwei" style="margin-top:5px;">
         <span style="font-size: 14px;padding-right:10px">单位</span>
@@ -143,6 +150,8 @@
             <option value="ha">公顷</option>
         </select>
     </div>
+
+ 
 
     <div style="margin-top:5px;">
         <span id="lbl_measure_result" style="font-size: 16px;"></span>

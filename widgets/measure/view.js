@@ -26,7 +26,7 @@ function initWidgetView(_thisWidget) {
         thisWidget.drawPolyline({
             unit: $('#measure_length_danwei').val(),
             terrain: false,
-            addHeight: 1,  //在绘制点基础自动增加高度（单位：米）
+             addHeight: 0.5,  //在绘制点基础自动增加高度（单位：米）
             calback: onMeasureChange,
             onEnd:onMeasureEnd
         });
@@ -135,7 +135,7 @@ function initWidgetView(_thisWidget) {
             onStart: function () {//开始分析前回调(异步)
                 haoutil.loading.show();
             },
-            onStop: function () {//分析完成后回调(异步)
+            onEnd: function () {//分析完成后回调(异步)
                 haoutil.loading.hide();
             },
             calback: showSectionResult,
@@ -203,6 +203,13 @@ function initWidgetView(_thisWidget) {
             onMeasureChange(valstr);
         }
     });
+
+    $("#chk_onlyPickModelPosition").change(function () {
+        var val = $(this).is(':checked');
+
+        thisWidget.changeOnlyPickModel(val);
+    });
+
 }
 
 var lastVal = 0;

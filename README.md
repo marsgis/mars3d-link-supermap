@@ -35,6 +35,8 @@
 
 ## 项目说明
  1. 该项目与 Mars3D基础项目 的目录和文件完全相同，这是Mars3D基础项目的简化开源版本，可以直接复制到该目录下进行更新。
+  * 覆盖说明: 可以将交付版本基础项目内 lib 和 widgets 目录除`widgets\toolBarRight\widget.js`和`lib\include-lib.js`后直接覆盖至当前项目中。
+
  2. 该项目主要目的是提供已有超图iServer授权的组织参考使用（**超图与Mars3D不冲突，可以结合使用**）。
 
  

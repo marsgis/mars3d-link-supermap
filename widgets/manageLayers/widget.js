@@ -154,8 +154,9 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
 
         if (visible && this.config.autoCenter
-            && !model.config.noCenter)//在对应config.json图层节点配置noCenter:true 可以不定位
+            && !model.config.noCenter) {//在对应config.json图层节点配置noCenter:true 可以不定位
             model.centerAt();
+        }
 
         //存在关联widget时 
         if (item.onWidget) {

@@ -84,16 +84,6 @@
             }, 
             {
                 "pid": 10,
-                "name": "天地图地形",
-                "icon": "img/basemaps/tdt_ter.png",
-                "type": "group",
-                "layers": [
-                    { "name": "底图", "type": "www_tdt", "layer": "ter_d", "key": ["313cd4b28ed520472e8b43de00b2de56" ] },
-                    { "name": "注记", "type": "www_tdt", "layer": "ter_z", "key": [  "83b36ded6b43b9bc81fbf617c40b83b5" ] }
-                ]               
-            }, 
-            {
-                "pid": 10,
                 "name": "OSM地图",
                 "type": "xyz",
                 "icon": "img/basemaps/osm.png",
@@ -103,20 +93,55 @@
             {
                 "pid": 10,
                 "name": "离线地图",
-                "type": "xyz",
-                "icon": "img/basemaps/mapboxSatellite.png",
-                "url": "http://data.marsgis.cn/maptile/wgs3857img/{z}/{x}/{y}.jpg", 
-                "rectangle": { "xmin": -180, "xmax": 180, "ymin": -85, "ymax": 85 }
-            },
+                "type": "group",
+                "icon": "img/basemaps/google_img.png",
+                "layers": [
+                    {        
+                        "name": "全球",                        
+                        "type": "xyz",
+                        "url": "http://data.marsgis.cn/maptile/wgs3857img/{z}/{x}/{y}.jpg", 
+                        "minimumLevel": 0, 
+                        "maximumLevel": 9
+                    },
+                    {
+                        "name": "中国",
+                        "type": "xyz", 
+                        "url": "http://data.marsgis.cn/maptile/wgs3857img/{z}/{x}/{y}.jpg", 
+                        "minimumTerrainLevel": 10,
+                        "minimumLevel": 10, 
+                        "maximumLevel": 12,
+                        "rectangle": { "xmin": 69.706929, "xmax": 136.560941, "ymin": 15.831038, "ymax": 52.558005 }
+                    },
+                    {
+                        "name": "具体项目(如合肥)",
+                        "type": "xyz", 
+                        "url": "http://data.marsgis.cn/maptile/wgs3857img/{z}/{x}/{y}.jpg", 
+                        "minimumTerrainLevel": 12,
+                        "minimumLevel": 12, 
+                        "maximumLevel": 18,
+                        "rectangle": { "xmin": 116.33236, "xmax": 118.183557, "ymin": 31.143784, "ymax": 32.565035 }
+                    }
+                ]
+            },     
+
+
             {
                 "pid": 10,
                 "name": "单张图片",
                 "icon": "img/basemaps/offline.png",
                 "type": "image",
-                "url": "img/world/world.jpg" 
+                "url": "img/tietu/world.jpg" 
             }   
         ],
-        "operationallayers": [
+        "operationallayers": [ 
+            {
+                "name": "行政区划界线",
+                "type": "xyz", 
+                "url": "https://t{s}.tianditu.gov.cn/DataServer?T=ibo_w&x={x}&y={y}&l={z}&tk=56b81006f361f6406d0e940d2f89a39c",
+                "subdomains": "01234567",
+                "maximumLevel": 10,
+                "visible": true
+            }, 
             {
                 "pid": 10,
                 "name": "天地图注记",
