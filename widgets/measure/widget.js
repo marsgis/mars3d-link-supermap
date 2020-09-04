@@ -16,7 +16,11 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     //初始化[仅执行1次]
     create: function () {
         this.measureControl = new mars3d.analysi.Measure({
-            viewer: this.viewer
+            viewer: this.viewer,
+            removeScreenSpaceEvent: true,
+            label: {//可设置文本样式 
+                "background": false,
+            }
         })
     },
     viewWindow: null,
@@ -34,7 +38,7 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         this.clearDraw();
     },
     drawPolyline: function (options) {
-        this.measureControl.measuerLength(options);
+        this.measureControl.measureLength(options);
     },
     drawPolygon: function (options) {
         this.measureControl.measureArea(options);

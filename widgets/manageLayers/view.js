@@ -108,7 +108,10 @@ function addNode(item) {
         node.icon = "images/folder.png";
         node.open = item.open == null ? true : item.open;
     } else {
-        node.icon = "images/layer.png";
+        if (thisWidget.config.style == "dark")
+            node.icon = "images/layer2.png";
+        else
+            node.icon = "images/layer.png";
         node.checked = thisWidget.getLayerVisible(item);
 
         if (item._parent)

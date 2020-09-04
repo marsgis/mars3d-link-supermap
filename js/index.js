@@ -229,10 +229,11 @@ bindToLayerControl({
 //绑定图层管理
 function bindToLayerControl(options) {
     var layer = viewer.mars.addOperationalLayer(options);
+    if (!layer) return
 
     var manageLayersWidget = mars3d.widget.getClass('widgets/manageLayers/widget.js');
     if (manageLayersWidget) {
-        manageLayersWidget.addOverlay(options);
+        manageLayersWidget.addOverlay(layer.config);
     }
     return layer;
 }

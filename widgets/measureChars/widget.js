@@ -35,10 +35,41 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     //关闭释放
     disable: function () {
         this.viewWindow = null;
-
-
+        this.hideTipMarker();
     },
 
+    showTipMarker: function (point, z, inthtml) {
+        var _position_show = Cesium.Cartesian3.fromDegrees(point.x, point.y, z)
+
+        if (!this.tipMarker) {
+            this.tipMarker = viewer.entities.add({
+                name: "当前点",
+                position: new Cesium.CallbackProperty(time => {
+                    return this.tipMarker._position_show || _position_show;
+                }, false),
+                billboard: {
+                    image: 'img/marker/mark3.png',
+                    scale: 1,
+                    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                    scaleByDistance: new Cesium.NearFarScalar(10000, 1.0, 500000, 0.2)
+                },
+                tooltip: {
+                    html: inthtml,
+                    anchor: [0, -20],//左右、上下的偏移像素值。
+                }
+            });
+        }
+        this.tipMarker._position_show = _position_show
+        this.tipMarker.tooltip.html = inthtml
+        //   this.viewer.mars.tooltip.show(tipMarker);
+    },
+
+    hideTipMarker: function () {
+        if (!this.tipMarker) return;
+        this.viewer.entities.remove(this.tipMarker);
+        this.tipMarker = null;
+    }
 
 
 

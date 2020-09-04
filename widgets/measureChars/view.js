@@ -16,14 +16,14 @@ function initWidgetView(_thisWidget) {
 
 //图表
 var myChart1;
- 
+
 //剖面分析 图表
-function setEchartsData(data) { 
+function setEchartsData(data) {
     if (myChart1 == null)
         myChart1 = echarts.init(document.getElementById('echartsView1'), 'dark');
 
     var arrPoint = data.arrPoint;
- 
+
 
     var option = {
         grid: {
@@ -43,14 +43,23 @@ function setEchartsData(data) {
             //},
             formatter: function (params) {
                 var inhtml = "";
-                if (params.length == 0) return inhtml;
+                if (params.length == 0) {
+                    thisWidget.hideTipMarker();
+                    return inhtml;
+                }
 
                 var hbgd = params[0].value; //海拔高度 
                 var point = arrPoint[params[0].dataIndex]; //所在经纬度
+                var len = haoutil.str.formatLength(Number(params[0].axisValue))
+                var hbgdStr = haoutil.str.formatLength(Number(params[0].value))
 
-                inhtml += "所在位置&nbsp;" + point.x + "," + point.y + "<br />"
-                    + "距起点&nbsp;<label>" + haoutil.str.formatLength(params[0].axisValue) + "</label><br />"
-                    + params[0].seriesName + "&nbsp;<label style='color:" + params[0].color + ";'>" + haoutil.str.formatLength(params[0].value) + "</label><br />";
+                inhtml = `当前位置<br />
+                    距起点：${len}<br />
+                    海拔：<span style='color:${params[0].color};'>${hbgdStr}</span><br />
+                    经度：${point.x}<br />
+                    纬度：${point.y}`;
+
+                thisWidget.showTipMarker(point, hbgd, inhtml);
 
                 return inhtml;
             }
@@ -73,9 +82,9 @@ function setEchartsData(data) {
             {
                 //name: '高度',
                 type: 'value',
-                min:  getMinZ(arrPoint),
+                min: getMinZ(arrPoint),
                 axisLabel: {
-                    rotate: 60,
+                    // rotate: 60,
                     formatter: '{value} 米'
                 }
             }
@@ -104,7 +113,7 @@ function setEchartsData(data) {
                     }
                 },
                 data: data.arrHB
-            }, 
+            },
         ]
     };
 
@@ -117,7 +126,7 @@ function getMinZ(arr) {
     if (arr == null || arr.length == 0) return minz;
 
     minz = arr[0].z
-    for (var i = 0; i < arr.length; i++) { 
+    for (var i = 0; i < arr.length; i++) {
         if (arr[i].z < minz) {
             minz = arr[i].z;
         }
