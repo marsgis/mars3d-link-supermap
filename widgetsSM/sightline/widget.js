@@ -39,13 +39,13 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             var jwd = [longitude, latitude, height];
             if (that.pointType == 0) {
                 point.label.text = '观察位置';
-                point.color = new Cesium.Color.fromCssColorString("#3388ff");
+                point.color = Cesium.Color.fromCssColorString("#3388ff");
 
                 that.addStartPointOK(jwd, point);
             }
             else {
                 point.label.text = '目标点';
-                point.color = new Cesium.Color.fromCssColorString("#0000ff");
+                point.color = Cesium.Color.fromCssColorString("#0000ff");
 
                 that.addEndPointOK(jwd, point);
             }

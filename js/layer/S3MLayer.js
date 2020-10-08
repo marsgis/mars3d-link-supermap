@@ -100,7 +100,7 @@ var S3MLayer = mars3d.layer.BaseLayer.extend({
                     //获取图层风格
                     //Note_GJ: rgba, 1为不透明，0为全透明。已经在模型中导入材质，所以这里的颜色不特别设置
                     //var style3D = new Cesium.Style3D();
-                    // var color = new Cesium.Color.fromCssColorString("#919191");//混泥土颜色 RGB(145, 145,145)
+                    // var color = Cesium.Color.fromCssColorString("#919191");//混泥土颜色 RGB(145, 145,145)
                     // style3D.fillForeColor = color;
                     // ql.style3D = style3D;
                     //设置后需刷新图层

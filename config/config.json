@@ -15,7 +15,7 @@
         "contextmenu":true,  
         "location": {
             "fps":true,
-            "format":"<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div>  <div>视高：{height}米</div>",
+            "format":"<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>层级：{level}</div> <div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div> <div>视高：{height}米</div>",          
             "crs":""
         },
         "terrain": {
@@ -193,6 +193,9 @@
                     "format": "image/png"
                 },
                 "showClickFeature": true,
+                "pickFeatureStyle": {
+                    "clampToGround": true
+                },
                 "center": { "y": 31.743214, "x": 117.277097, "z": 47197.7, "heading": 0.3, "pitch": -78.8, "roll": 360 },
                 "popup": "名称：{项目名称}<br />类型：{设施类型}<br />面积：{用地面积}亩<br />位置：{具体位置}",
                 "visible": false,
@@ -227,15 +230,15 @@
                 },
                 "showClickFeature": true,
                 "pickFeatureStyle": {
-                    "showTime": 5000, 
-                    "clampToGround": true,
+                    "showTime": 5000,
                     "fill": true,
                     "color": "#2deaf7",
                     "opacity": 0.6,
                     "outline": true,
                     "outlineWidth": 3,
                     "outlineColor": "#e000d9",
-                    "outlineOpacity": 1.0
+                    "outlineOpacity": 1.0, 
+                    "clampToGround": true
                 },
                 "center": { "y": 31.79513, "x": 117.236172, "z": 3784.6, "heading": 0.7, "pitch": -42.2, "roll": 0 },
                 "popup": "all",
@@ -292,6 +295,9 @@
                 "url": "http://data.marsgis.cn/arcgis/rest/services/mars/hefei/MapServer",
                 "layers": "24",
                 "showClickFeature": true,
+                "pickFeatureStyle": {
+                    "clampToGround": true
+                },
                 "center": { "y": 31.814176, "x": 117.225362, "z": 5105.3, "heading": 359.2, "pitch": -83.1, "roll": 360 },
                 "popup": "all"
             },
@@ -303,6 +309,9 @@
                 "url": "http://data.marsgis.cn/arcgis/rest/services/mars/hefei/MapServer",
                 "layers": "35,36,37,39",
                 "showClickFeature": true,
+                "pickFeatureStyle": {
+                    "clampToGround": true
+                },
                 "center": { "y": 31.816951, "x": 117.22898, "z": 2916.7, "heading": 0.3, "pitch": -78.8, "roll": 0 },
                 "popup": "名称：{NAME}<br />层数：{floor}"
             },
@@ -321,7 +330,8 @@
                     "outline": true,
                     "outlineWidth": 3,
                     "outlineColor": "#e000d9",
-                    "outlineOpacity": 1.0
+                    "outlineOpacity": 1.0,
+                    "clampToGround": true
                 },
                 "center": { "y": 31.816951, "x": 117.22898, "z": 2916.7, "heading": 0.3, "pitch": -78.8, "roll": 0 },
                 "popup": [
