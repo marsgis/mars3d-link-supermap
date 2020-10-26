@@ -34,7 +34,7 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     getDefaultExtent: function () {
         return this.viewer.mars.config.center;
     },
-    getThisExtent: function (calback) {
+    getThisExtent: function (callback) {
         var bookmark = mars3d.point.getCameraView(this.viewer, true);
 
         haoutil.loading.show();
@@ -42,10 +42,10 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         viewer.mars.expImage({
             download: false,
             width: 300, //指定 高  或 宽
-            calback: function (base64, size) {//回调
+            callback: function (base64, size) {//回调
                 haoutil.loading.close();
  
-                if (calback) calback(bookmark,base64);
+                if (callback) callback(bookmark,base64);
             }
         });
 

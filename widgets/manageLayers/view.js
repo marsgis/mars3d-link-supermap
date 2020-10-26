@@ -47,6 +47,7 @@ function initWidgetView(_thisWidget) {
         var item = layers[i];
         if (item == null || item.hide) continue;
 
+
         var node = {
             id: item.id,
             pId: item.pid,
@@ -76,17 +77,9 @@ function initWidgetView(_thisWidget) {
         }
     }
     $.fn.zTree.init($("#treeOverlays"), setting, zNodes);
-
-
-    $("#view").mCustomScrollbar({
-        theme: (thisWidget.config.style == "dark") ? "" : "dark-2",
-    });
+ 
 }
 
-
-function treeOverlays_onClick(e, treeId, treeNode, clickFlag) {
-
-}
 
 
 function addNode(item) {
@@ -133,6 +126,22 @@ function removeNode(item) {
 }
 
 
+//===================================双击定位图层====================================
+function treeOverlays_onClick(e, treeId, treeNode, clickFlag) {
+
+}
+
+
+function treeOverlays_onDblClick(event, treeId, treeNode) {
+
+    if (treeNode == null || treeNode._key == null) return;
+    var layer = layersObj[treeNode._key];
+    if (layer == null) return;
+
+    thisWidget.centerAt(layer);
+
+
+};
 
 
 //===================================勾选显示隐藏图层====================================
@@ -185,16 +194,6 @@ function treeOverlays_onCheck(e, treeId, treeNode) {
     }
 }
 
-function treeOverlays_onDblClick(event, treeId, treeNode) {
-
-    if (treeNode == null || treeNode._key == null) return;
-    var layer = layersObj[treeNode._key];
-    if (layer == null) return;
-
-    thisWidget.centerAt(layer);
-
-
-};
 
 
 //===================================透明度设置====================================

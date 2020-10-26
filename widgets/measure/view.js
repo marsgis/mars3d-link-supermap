@@ -1,5 +1,4 @@
 ﻿var thisWidget;
-var thisType = "";
 
 //当前页面业务
 function initWidgetView(_thisWidget) {
@@ -14,21 +13,16 @@ function initWidgetView(_thisWidget) {
     $("#measure_length_danwei").val("auto"); //默认值
 
 
- 
+
     $('#btn_measure_length').bind('click', function () {
         $("#lbl_measure_result").html("");
         $('#measure_danwei').show();
         $('#measure_area_danwei').hide();
         $('#measure_length_danwei').show();
 
-        thisType = "length";
-        lastVal = 0;
-        thisWidget.drawPolyline({
+        thisWidget.measure.length({
             unit: $('#measure_length_danwei').val(),
-            terrain: false,
-             addHeight: 0.5,  //在绘制点基础自动增加高度（单位：米）
-            calback: onMeasureChange,
-            onEnd:onMeasureEnd
+            addHeight: 0.5,  //在绘制点基础自动增加高度（单位：米） 
         });
     });
 
@@ -37,83 +31,13 @@ function initWidgetView(_thisWidget) {
         //用户首次使用时，提醒一次
         haoutil.oneMsg('贴地需要地形服务支撑，部分区域可能无法贴地！', 'measure_length_tip');
 
-
         $("#lbl_measure_result").html("");
         $('#measure_danwei').show();
         $('#measure_area_danwei').hide();
         $('#measure_length_danwei').show();
 
-        thisType = "length";
-        lastVal = 0;
-        thisWidget.drawPolyline({
+        thisWidget.measure.surfaceLength({
             unit: $('#measure_length_danwei').val(),
-            terrain: true,
-            calback: onMeasureChange,
-            onEnd:onMeasureEnd
-        });
-    });
-
-    $('#btn_measure_area').bind('click', function () {
-        $("#lbl_measure_result").html("");
-        $('#measure_danwei').show();
-        $('#measure_length_danwei').hide();
-        $('#measure_area_danwei').show();
-
-        thisType = "area";
-        lastVal = 0;
-        thisWidget.drawPolygon({
-            unit: $('#measure_area_danwei').val(),
-            style: {
-                color: "#00fff2",
-                outline: true,
-                outlineColor: "#fafa5a",
-                outlineWidth: 1,
-                opacity: 0.4,
-                clampToGround: false //贴地
-            },
-            calback: onMeasureChange,
-            onEnd:onMeasureEnd
-        });
-    });
-
-
-    $('#btn_measure_area_td').bind('click', function () {
-        $("#lbl_measure_result").html("");
-        $('#measure_danwei').show();
-        $('#measure_length_danwei').hide();
-        $('#measure_area_danwei').show();
-
-        thisType = "area";
-        lastVal = 0;
-        thisWidget.drawPolygon({
-            unit: $('#measure_area_danwei').val(),
-            terrain: true,
-            splitNum: 10,//step插值分割的个数
-            calback: onMeasureChange,
-            onEnd:onMeasureEnd
-        });
-    });
-
-
-    $('#btn_measure_angle').bind('click', function () {
-        $("#lbl_measure_result").html("");
-        $('#measure_danwei').hide();
-
-        thisType = "angle";
-        lastVal = 0;
-        thisWidget.measureAngle({ 
-            onEnd:onMeasureEnd
-        });
-    });
-
-    $('#btn_measure_point').bind('click', function () {
-        $("#lbl_measure_result").html("");
-        $('#measure_danwei').hide();
-
-        thisType = "point";
-        lastVal = 0;
-        thisWidget.measurePoint({ 
-            onEnd:onMeasureEnd
         });
     });
 
@@ -127,21 +51,62 @@ function initWidgetView(_thisWidget) {
         $('#measure_area_danwei').hide();
         $('#measure_length_danwei').show();
 
-        thisType = "section";
-        lastVal = 0;
-        thisWidget.drawSection({
+        thisWidget.measure.section({
             unit: $('#measure_length_danwei').val(),
-            splitNum: 300, //插值次数
-            onStart: function () {//开始分析前回调(异步)
-                haoutil.loading.show();
-            },
-            onEnd: function () {//分析完成后回调(异步)
-                haoutil.loading.hide();
-            },
-            calback: showSectionResult,
-            onEnd:onMeasureEnd
+            splitNum: 300, //插值次数 
         });
     });
+
+
+
+    $('#btn_measure_area').bind('click', function () {
+        $("#lbl_measure_result").html("");
+        $('#measure_danwei').show();
+        $('#measure_length_danwei').hide();
+        $('#measure_area_danwei').show();
+
+        thisWidget.measure.area({
+            unit: $('#measure_area_danwei').val(),
+            style: {
+                color: "#00fff2",
+                outline: true,
+                outlineColor: "#fafa5a",
+                outlineWidth: 1,
+                opacity: 0.4,
+                clampToGround: false //贴地
+            },
+        });
+    });
+
+
+    $('#btn_measure_area_td').bind('click', function () {
+        $("#lbl_measure_result").html("");
+        $('#measure_danwei').show();
+        $('#measure_length_danwei').hide();
+        $('#measure_area_danwei').show();
+
+        thisWidget.measure.surfaceeArea({
+            unit: $('#measure_area_danwei').val(),
+            splitNum: 10,//step插值分割的个数 
+        });
+    });
+
+
+    $('#btn_measure_angle').bind('click', function () {
+        $("#lbl_measure_result").html("");
+        $('#measure_danwei').hide();
+
+        thisWidget.measure.angle();
+    });
+
+    $('#btn_measure_point').bind('click', function () {
+        $("#lbl_measure_result").html("");
+        $('#measure_danwei').hide();
+
+        thisWidget.measure.point();
+    });
+
+
 
 
     $('#btn_measure_height').bind('click', function () {
@@ -150,13 +115,8 @@ function initWidgetView(_thisWidget) {
         $('#measure_area_danwei').hide();
         $('#measure_length_danwei').show();
 
-        thisType = "height";
-        lastVal = 0;
-        thisWidget.drawHeight({
+        thisWidget.measure.height({
             unit: $('#measure_length_danwei').val(),
-            isSuper: false,
-            calback: onMeasureChange,
-            onEnd:onMeasureEnd
         });
     });
 
@@ -166,42 +126,29 @@ function initWidgetView(_thisWidget) {
         $('#measure_area_danwei').hide();
         $('#measure_length_danwei').show();
 
-        thisType = "super_height";
-        lastVal = 0;
-        thisWidget.drawHeight({
+        thisWidget.measure.triangleHeight({
             unit: $('#measure_length_danwei').val(),
-            isSuper: true,
-            calback: onMeasureChange,
-            onEnd:onMeasureEnd
         });
     });
 
     $('#btn_measure_clear').bind('click', function () {
         $("#lbl_measure_result").html("");
 
-        thisType = "";
-        lastVal = 0;
         thisWidget.clearDraw();
     });
 
     //更换单位
     $("#measure_length_danwei").change(function (e) {
         var danwei = $('#measure_length_danwei').val();
-        thisWidget.updateUnit(thisType, danwei);
+        thisWidget.measure.updateUnit(danwei);
 
-        if (lastVal > 0) {
-            var valstr = thisWidget.formatLength(lastVal, danwei);
-            onMeasureChange(valstr);
-        }
+        $("#lbl_measure_result").html("");
     });
     $("#measure_area_danwei").change(function (e) {
         var danwei = $('#measure_area_danwei').val();
-        thisWidget.updateUnit(thisType, danwei);
+        thisWidget.measure.updateUnit(danwei);
 
-        if (lastVal > 0) {
-            var valstr = thisWidget.formatArea(lastVal, danwei);
-            onMeasureChange(valstr);
-        }
+        $("#lbl_measure_result").html("");
     });
 
     $("#chk_onlyPickModelPosition").change(function () {
@@ -212,26 +159,17 @@ function initWidgetView(_thisWidget) {
 
 }
 
-var lastVal = 0;
+
+
+
+
 
 //修改值回调
-function onMeasureChange(valstr, val) {
-    if (val)
-        lastVal = val;
-    $("#lbl_measure_result").html(valstr);
-} 
-
-
-function showSectionResult(param, val) {
-    if (haoutil.isutil.isString(param)) {
-        onMeasureChange(param, val);
-        return;
-    }
-    onMeasureChange(param.distancestr, param.distance);
-    thisWidget.showSectionChars(param);
+function onMeasureChange(e) {
+    $("#lbl_measure_result").html(e.label);
 }
 
 //单个对象绘制完成结束后的回调
-function onMeasureEnd(entity) {
+function onMeasureEnd(e) {
     // console.log('测量完成');
 }

@@ -39,6 +39,7 @@
                 "visible": true
             },
             {
+                "pid": 10,
                 "name": "超图底图",
                 "type": "supermap_img",
                 "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400"
@@ -64,13 +65,7 @@
                 "icon": "img/basemaps/tdt_img.png",
                 "type": "www_tdt",
                 "layer": "img_d",
-                "key": [
-                  "313cd4b28ed520472e8b43de00b2de56",
-                  "83b36ded6b43b9bc81fbf617c40b83b5",
-                  "0ebd57f93a114d146a954da4ecae1e67",
-                  "6c99c7793f41fccc4bd595b03711913e",
-                  "56b81006f361f6406d0e940d2f89a39c"
-                ]
+                "key": [ "9ae78c51a0a28f06444d541148496e36"  ]
             },
             {
                 "pid": 10,
@@ -78,8 +73,8 @@
                 "icon": "img/basemaps/tdt_vec.png",
                 "type": "group",
                 "layers": [
-                    { "name": "底图", "type": "www_tdt", "layer": "vec_d", "key": ["313cd4b28ed520472e8b43de00b2de56" ] },
-                    { "name": "注记", "type": "www_tdt", "layer": "vec_z", "key": [  "83b36ded6b43b9bc81fbf617c40b83b5" ] }
+                    { "name": "底图", "type": "www_tdt", "layer": "vec_d", "key": ["9ae78c51a0a28f06444d541148496e36" ] },
+                    { "name": "注记", "type": "www_tdt", "layer": "vec_z", "key": ["9ae78c51a0a28f06444d541148496e36" ] }
                 ]               
             }, 
             {
@@ -133,11 +128,33 @@
                 "url": "img/tietu/world.jpg" 
             }   
         ],
-        "operationallayers": [ 
+        "operationallayers": [
+            {
+                "pid": 2040,
+                "name": "超图影像图",
+                "type": "supermap_img",
+                "url": "http://www.supermapol.com/realspace/services/3D-dixingyingxiang/rest/realspace/datas/MosaicResult",
+               "center": {"y":31.059016,"x":102.651975,"z":14161.14,"heading":90.8,"pitch":-43.6,"roll":0},
+               "transparentBackColor":"#333",
+               "transparentBackColorTolerance":0.1
+            }, 
+            { 
+                "pid": 2040,
+                "name": "超图矢量瓦片",
+                "type": "supermap_mvt",
+                "url": "http://www.supermapol.com/realspace/services/map-mvt-JingJinDiQuDiTu/restjsr/v1/vectortile/maps/%E4%BA%AC%E6%B4%A5%E5%9C%B0%E5%8C%BA%E5%9C%B0%E5%9B%BE",
+                "parameters":{
+                    "canvasWidth": 512,
+                    "name": "testMVT"
+                },
+                "popup":"all",
+                "visible": false
+            }, 
+
             {
                 "name": "行政区划界线",
                 "type": "xyz", 
-                "url": "https://t{s}.tianditu.gov.cn/DataServer?T=ibo_w&x={x}&y={y}&l={z}&tk=56b81006f361f6406d0e940d2f89a39c",
+                "url": "https://t{s}.tianditu.gov.cn/DataServer?T=ibo_w&x={x}&y={y}&l={z}&tk=9ae78c51a0a28f06444d541148496e36",
                 "subdomains": "01234567",
                 "maximumLevel": 10,
                 "visible": true
@@ -147,13 +164,7 @@
                 "name": "天地图注记",
                 "type": "www_tdt",
                 "layer": "img_z",
-                "key": [
-                  "313cd4b28ed520472e8b43de00b2de56",
-                  "83b36ded6b43b9bc81fbf617c40b83b5",
-                  "0ebd57f93a114d146a954da4ecae1e67",
-                  "6c99c7793f41fccc4bd595b03711913e",
-                  "56b81006f361f6406d0e940d2f89a39c"
-                ],
+                "key": ["9ae78c51a0a28f06444d541148496e36"],
                 "visible": false
             },
             
@@ -381,6 +392,50 @@
             {
                 "pid": 3030,
                 "type": "geojson",
+                "name": "用地规划",
+                "url": "http://data.marsgis.cn/file/geojson/guihua.json",
+                "symbol": {
+                    "styleOptions": {
+                        "opacity": 0.6,
+                        "color": "#0000FF",
+                        "width": 3,
+                        "clampToGround": true
+                    },
+                    "styleField": "类型",
+                    "styleFieldOptions": {
+                        "一类居住用地": { "color": "#FFDF7F" },
+                        "二类居住用地": { "color": "#FFFF00" },
+                        "社区服务用地": { "color": "#FF6A38" },
+                        "幼托用地": { "color": "#FF6A38" },
+                        "商住混合用地": { "color": "#FF850A" },
+                        "行政办公用地": { "color": "#FF00FF" },
+                        "文化设施用地": { "color": "#FF00FF" },
+                        "小学用地": { "color": "#FF7FFF" },
+                        "初中用地": { "color": "#FF7FFF" },
+                        "体育场用地": { "color": "#00A57C" },
+                        "医院用地": { "color": "#A5527C" },
+                        "社会福利用地": { "color": "#FF7F9F" },
+                        "商业用地": { "color": "#FF0000" },
+                        "商务用地": { "color": "#7F0000" },
+                        "营业网点用地": { "color": "#FF7F7F" },
+                        "一类工业用地": { "color": "#A57C52" },
+                        "社会停车场用地": { "color": "#C0C0C0" },
+                        "通信用地": { "color": "#007CA5" },
+                        "排水用地": { "color": "#00BFFF" },
+                        "公园绿地": { "color": "#00FF00" },
+                        "防护绿地": { "color": "#007F00" },
+                        "河流水域": { "color": "#7FFFFF" },
+                        "配建停车场": { "color": "#ffffff" },
+                        "道路用地": { "color": "#ffffff" }
+                    }
+                },
+                "popup": "{类型}", 
+                "visible": false,
+                "flyTo": true
+            },
+            {
+                "pid": 3030,
+                "type": "geojson",
                 "name": "建筑物面",
                 "url": "http://data.marsgis.cn/file/geojson/jzw.json",
                 "symbol": {
@@ -466,6 +521,53 @@
                 "visible": false,
                 "flyTo": true
             },
+            { 
+                "pid": 3030,
+                "type": "geojson",
+                "name": "西藏垭口",
+                "url": "http://data.marsgis.cn/file/geojson/xizangyakou.json",
+                "symbol": {
+                    "styleOptions": {
+                        "image": "img/marker/mark1.png",
+                        "scale": 1,
+                        "scaleByDistance": true,
+                        "scaleByDistance_far": 5000000,
+                        "scaleByDistance_farValue": 0.5,
+                        "scaleByDistance_near": 1000,
+                        "scaleByDistance_nearValue": 1,
+                        "label": {
+                            "text": "{NAME}",
+                            "font_size": 25,
+                            "color": "#ffff00",
+                            "font_family": "微软雅黑",
+                            "border": true,
+                            "border_color": "#000000",
+                            "pixelOffset": [0, -40  ],
+                            "scaleByDistance": true,
+                            "scaleByDistance_far": 1000000,
+                            "scaleByDistance_farValue": 0.5,
+                            "scaleByDistance_near": 1000,
+                            "scaleByDistance_nearValue": 1,
+                            "distanceDisplayCondition": true,
+                            "distanceDisplayCondition_far": 1000000,
+                            "distanceDisplayCondition_near": 0
+                        }
+                    }
+                },
+                "popup": [
+                    {
+                        "field": "NAME",
+                        "name": "名称"
+                    },
+                    {
+                        "type": "details",
+                        "callback": "showdetails",
+                        "field": "图片"
+                    }
+                ],
+                "visible": false,
+                "flyTo": true
+            }, 
             { 
                 "pid": 3030,
                 "type": "geojson",
@@ -596,6 +698,7 @@
                     }
                 }
             },
+            
             {
                 "id": 20,
                 "name": "三维模型",
@@ -659,6 +762,10 @@
                 "name": "CBD",
                 "type": "supermap_s3m",
                 "url": "http://support.supermap.com.cn:8090/iserver/services/3D-CBD/rest/realspace",
+                "s3mOptions":{
+                    "transparentBackColor":"#333",
+                    "transparentBackColorTolerance":0.1
+                },
                 "offset": {"z": 45},
                 "center": {"y":39.894307,"x":116.456491,"z":1453.27,"heading":3.8,"pitch":-40.7,"roll":0}
             },

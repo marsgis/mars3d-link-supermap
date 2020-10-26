@@ -12,21 +12,33 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             }
         },
     },
-    measureControl: null,
+    measure: null,
     //初始化[仅执行1次]
     create: function () {
-        this.measureControl = new mars3d.analysi.Measure({
+        this.measure = new mars3d.analysi.Measure({
             viewer: this.viewer,
-            removeScreenSpaceEvent: true,
             label: {//可设置文本样式 
                 "background": false,
             }
         })
+        this.measure.on(mars3d.analysi.Measure.event.change, (e) => {
+            this.viewWindow.onMeasureChange(e);
+        });
+        this.measure.on(mars3d.analysi.Measure.event.start, (e) => {//开始分析前回调(异步)
+            haoutil.loading.show();
+        });
+        this.measure.on(mars3d.analysi.Measure.event.end, (e) => {//分析完成后回调(异步)
+            haoutil.loading.hide();
+            if (e.mtype == "section") {
+                this.showSectionChars(e);
+            }
+            this.viewWindow.onMeasureEnd(e);
+        });
     },
     viewWindow: null,
     //每个窗口创建完成后调用
     winCreateOK: function (opt, result) {
-       this.viewWindow = result;
+        this.viewWindow = result;
     },
     //激活插件
     activate: function () {
@@ -37,38 +49,10 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         this.viewWindow = null;
         this.clearDraw();
     },
-    drawPolyline: function (options) {
-        this.measureControl.measureLength(options);
-    },
-    drawPolygon: function (options) {
-        this.measureControl.measureArea(options);
-    },
-    drawHeight: function (options) {
-        this.measureControl.measureHeight(options);
-    },
-    drawSection: function (options) {
-        this.measureControl.measureSection(options);
-    },
-    measureAngle: function (options) {
-        this.measureControl.measureAngle(options);
-    },
-    measurePoint: function (options) {
-        this.measureControl.measurePoint(options); 
-    }, 
-
-    updateUnit: function (thisType, danwei) {
-        this.measureControl.updateUnit(thisType, danwei);
-    },
     clearDraw: function () {
-        this.measureControl.clearMeasure();
+        this.measure.clear();
         mars3d.widget.disable(this.jkWidgetUri);
     },
-    formatArea: function (val, unit) {
-        return this.measureControl.formatArea(val, unit);
-    },
-    formatLength: function (val, unit) {
-        return this.measureControl.formatLength(val, unit);
-    }, 
     jkWidgetUri: 'widgets/measureChars/widget.js',
     showSectionChars: function (data) {
         mars3d.widget.activate({
@@ -76,7 +60,7 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             data: data
         });
     },
-    changeOnlyPickModel:function(value){
+    changeOnlyPickModel: function (value) {
         //控制鼠标只取模型上的点，忽略地形上的点的拾取
         viewer.mars.onlyPickModelPosition = value
     }

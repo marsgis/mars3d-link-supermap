@@ -2,35 +2,41 @@
 //该类内部主要使用的的2个属性：this.config是config.json中配置的对应节点参数，this.viewer是地球对象
 
 //超图S3M 三维模型图层加载
-var S3MLayer = mars3d.layer.BaseLayer.extend({
+class S3MLayer extends mars3d.layer.BaseLayer {
+    constructor(cfg, viewer) {
+        super(cfg, viewer);
+
+        this.hasOpacity = true;
+    }
     //添加 
-    add: function () {
+    add() {
         if (this.model) {
             for (var i in this.model) {
                 this.model[i].visible = true;
+                this.model[i].show = true;
             }
         }
         else {
             this.initData();
         }
-    },
+    }
     //移除
-    remove: function () {
+    remove() {
         if (this.model) {
             for (var i in this.model) {
                 this.model[i].visible = false;
+                this.model[i].show = false;
             }
         }
-    },
+    }
     //定位至数据区域
-    centerAt: function (duration) {
+    centerAt(duration) {
         if (this.config.extent || this.config.center) {
             this.viewer.mars.centerAt(this.config.extent || this.config.center, { duration: duration, isWgs84: true });
         }
-    },
-    hasOpacity: true,
+    }
     //设置透明度
-    setOpacity: function (value) {
+    setOpacity(value) {
         if (this.model) {
             for (var i = 0; i < this.model.length; i++) {
                 var item = this.model[i];
@@ -39,8 +45,8 @@ var S3MLayer = mars3d.layer.BaseLayer.extend({
                 item.style3D.fillForeColor.alpha = value;
             }
         }
-    },
-    initData: function () {
+    }
+    initData() {
         var that = this;
 
         //场景添加S3M图层服务
@@ -59,7 +65,7 @@ var S3MLayer = mars3d.layer.BaseLayer.extend({
                 that.model = layer;
             else
                 that.model = [layer];
- 
+
             //设置图层属性
             for (var i = 0; i < that.model.length; i++) {
                 var layer = that.model[i];
@@ -68,10 +74,16 @@ var S3MLayer = mars3d.layer.BaseLayer.extend({
                 //s3mOptions
                 if (that.config.s3mOptions) {
                     for (var key in that.config.s3mOptions) {
-                        layer[key] = that.config.s3mOptions[key];
+                        var val = that.config.s3mOptions[key];
+                        if (key == "transparentBackColor") //去黑边，与offset互斥，注意别配置offset
+                            layer[key] = Cesium.Color.fromCssColorString(val);
+                        else if (key == "transparentBackColorTolerance")
+                            layer[key] = Number(val);
+                        else
+                            layer[key] = that.config.s3mOptions[key];
                     }
                 }
-                
+
                 //高度调整 offset.z
                 if (Cesium.defined(that.config.offset) && Cesium.defined(that.config.offset.z)) {
                     layer.style3D.bottomAltitude = that.config.offset.z;
@@ -112,14 +124,11 @@ var S3MLayer = mars3d.layer.BaseLayer.extend({
         }, function (e) {
             showError('渲染时发生错误，已停止渲染。', e);
         });
-    },
-    isArray: function (obj) {
+    }
+    isArray(obj) {
         return (typeof obj == 'object') && obj.constructor == Array;
-    },
-
-
-});
-
+    } 
+}
 
 
 //注册到mars3d内部图层管理中：type为s3m时，实例化S3MLayer

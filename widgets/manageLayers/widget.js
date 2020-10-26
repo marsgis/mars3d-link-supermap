@@ -147,14 +147,9 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     //更新图层:显示隐藏状态
     updateLayerVisible: function (item, visible) {
         var model = this.getLayar(item);
+        model.visible = visible
 
-        model.config.visible = visible; //修改配置中的值
-
-        model.setVisible(visible);
-
-
-        if (visible && this.config.autoCenter
-            && !model.config.noCenter) {//在对应config.json图层节点配置noCenter:true 可以不定位
+        if (visible && this.config.autoCenter && !model.config.noCenter) {//在对应config.json图层节点配置noCenter:true 可以不定位
             model.centerAt();
         }
 

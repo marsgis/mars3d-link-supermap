@@ -23,7 +23,7 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             var jd = $("#point_jd").val();
             var wd = $("#point_wd").val();
             var height = $("#point_height").val();
-             
+
             var val = { x: Number(jd), y: Number(wd), z: Number(height) };
 
             that.centerAt(val, true);
@@ -33,40 +33,36 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     handler: null,
     //激活插件
     activate: function () {
-        var that = this;
-        this.handler = new Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
-        this.handler.setInputAction(function (movement) {
-            //var cartesian = that.viewer.camera.pickEllipsoid(movement.position, that.viewer.scene.globe.ellipsoid);
-            var cartesian = mars3d.point.getCurrentMousePosition(that.viewer.scene, movement.position);
-            if (cartesian) {
-                var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
-
-                var jd = Number(Cesium.Math.toDegrees(cartographic.longitude).toFixed(6));
-                var wd = Number(Cesium.Math.toDegrees(cartographic.latitude).toFixed(6));
-                var height = Number(cartographic.height.toFixed(1));
-
-                var val = { x: jd, y: wd, z: height };
-                that.updateMarker(val);
-
-                var wgsPoint = that.viewer.mars.point2wgs({ x: jd, y: wd }); //坐标转换为wgs
-                jd = wgsPoint.x;
-                wd = wgsPoint.y;
-
-                that.showLatlng({ x: jd, y: wd, z: height });
-            }
-        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-        //$('.cesium-viewer').css('cursor', 'crosshair');
-
+        //单击地图事件
+        this.viewer.mars.on(mars3d.event.click, this.onMapClick, this);
     },
     //释放插件
     disable: function () {
-        //$('.cesium-viewer').css('cursor', '');
-        this.handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
-        this.handler.destroy();
+        //释放单击地图事件
+        this.viewer.mars.off(mars3d.event.click, this.onMapClick, this);
 
         if (this.markerXY) {
             this.viewer.entities.remove(this.markerXY);
             this.markerXY = null;
+        }
+    },
+    onMapClick: function (event) {
+        var cartesian = mars3d.point.getCurrentMousePosition(this.viewer.scene, event.position);
+        if (cartesian) {
+            var cartographic = Cesium.Cartographic.fromCartesian(cartesian);
+
+            var jd = Number(Cesium.Math.toDegrees(cartographic.longitude).toFixed(6));
+            var wd = Number(Cesium.Math.toDegrees(cartographic.latitude).toFixed(6));
+            var height = Number(cartographic.height.toFixed(1));
+
+            var val = { x: jd, y: wd, z: height };
+            this.updateMarker(val);
+
+            var wgsPoint = this.viewer.mars.point2wgs({ x: jd, y: wd }); //坐标转换为wgs
+            jd = wgsPoint.x;
+            wd = wgsPoint.y;
+
+            this.showLatlng({ x: jd, y: wd, z: height });
         }
     },
     getMapCenter: function () {

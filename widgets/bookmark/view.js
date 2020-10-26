@@ -63,7 +63,7 @@ function initWidgetView(_thisWidget) {
 }
 
 
-var cookieName = "muyaogis_bookmark";
+var cookieName = "muyao1987_bookmark";
 var arrBookmark = [];
 
 function initBookMarkList() {

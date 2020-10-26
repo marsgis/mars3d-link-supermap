@@ -118,11 +118,16 @@ li {
 .dark .form-control,
 .dark .input-group-addon,
 .dark .btn-default,
-.dark input,
 .dark .dropdown-menu {
     color: #ffffff;
     background-color: rgba(63, 72, 84, 0.7);
-    border: none;
+    border: none; 
+}
+
+.dark input{
+    color: #ffffff;
+    background-color: rgba(63, 72, 84, 0.7);
+    border-width: 1px;
 }
 
 .dark .btn-info {
@@ -163,8 +168,15 @@ li {
     background: rgba(63, 72, 84, 0.9);
 }
 
+/*黑色字体 + 白色背景*/
+/* .mars3d-popup-color,
+.mars-popup-titile {
+  color: #2b2929; 
+}
 
-
+.mars3d-popup-background {
+  background: rgba(255, 255, 255, 0.85); 
+} */
 
 
 /**cesium按钮背景色*/

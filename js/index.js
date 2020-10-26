@@ -203,7 +203,7 @@ function initWork(viewer) {
         "visible": true,
         "flyTo": true
     };
-    var layer = mars3d.layer.createLayer(json, viewer);
+    var layer = mars3d.layer.createLayer(viewer,json);
     bindToLayerControl(layer);
 **/
 

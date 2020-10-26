@@ -16,6 +16,8 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             "icon": "fa fa-cubes",
             "children": [
                 { "name": "图上量算", "icon": "fa fa-calculator", "widget": "widgets/measure/widget.js" },
+                { "name": "空间分析", "icon": "fa fa-bar-chart", "widget": "widgets/analysis/widget.js" },
+
                 { "name": "坐标定位", "icon": "fa fa-map-pin", "widget": "widgets/centerXY/widget.js" },
                 { "name": "视角书签", "icon": "fa fa-tags", "widget": "widgets/bookmark/widget.js" },
    

@@ -204,6 +204,25 @@
                     "openAtStart": false
                 },
                 {
+                    "name": "模型库",
+                    "uri": "widgets/plot-model/widget.js",
+                    "windowOptions": {
+                        "position": {
+                            "top": 45,
+                            "bottom": 30,
+                            "right": 5
+                        }
+                    }
+                }, 
+                {
+                    "name": "分组名称编辑",
+                    "uri": "widgets/plotGroupName/widget.js",
+                    "windowOptions": {
+                        "position": "t"
+                    },
+                    "disableOther": false
+                },
+                {
                     "name": "属性编辑",
                     "uri": "widgets/plotAttr/widget.js",
                     "windowOptions": {

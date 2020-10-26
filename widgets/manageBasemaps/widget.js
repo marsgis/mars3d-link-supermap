@@ -19,7 +19,7 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         var basemapsCfg = this.getBasemaps();
         for (var i = 0; i < basemapsCfg.length; i++) {
             var item = basemapsCfg[i];
-            if (!item.hasLayer || item.hide)  continue;
+            if (!item.hasLayer || item.hide) continue;
             index++;
         }
 
@@ -64,12 +64,12 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         return this.viewer.mars.config.basemaps;
     },
     getLayerVisible: function (item) {
-        var model  = this.viewer.mars.getLayer(item);
-        return model && model.getVisible();
+        var layer = this.viewer.mars.getLayer(item);
+        return layer && layer.visible;
     },
     updateLayerVisible: function (item, visible) {
-        var model  = this.viewer.mars.getLayer(item);
-        model && model.setVisible(visible);
+        var layer = this.viewer.mars.getLayer(item);
+        if (layer) layer.visible = visible;
     },
     updateTerrainVisible: function (isStkTerrain) {
         this.viewer.mars.updateTerrainProvider(isStkTerrain);
