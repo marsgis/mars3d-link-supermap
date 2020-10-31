@@ -1,4 +1,5 @@
-﻿var thisWidget;
+﻿//对应widget.js中MyWidget实例化后的对象
+var thisWidget;
 var $table;
 
 function getHeight() {

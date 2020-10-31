@@ -121,6 +121,21 @@ function initWidget(viewer) {
             haoutil.alert("config/widget.json文件加载失败！");
         }
     });
+
+    //widget相关事件监听
+    // mars3d.widget.on(mars3d.widget.event.load, function (event) {
+    //     console.log("引入加载了widget的js", event);
+    // })
+    // mars3d.widget.on(mars3d.widget.event.created, function (event) {
+    //     console.log("创建了widet", event);
+    // })
+    mars3d.widget.on(mars3d.widget.event.activated, function (event) {
+        console.log("激活了widget", event);
+    })
+    // mars3d.widget.on(mars3d.widget.event.disabled, function (event) {
+    //     console.log("释放了widget", event);
+    // })
+
 }
 
 

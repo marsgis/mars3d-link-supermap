@@ -92,14 +92,6 @@
                     "disableOther": false
                 },
                 {
-                    "name": "图上量算",
-                    "uri": "widgets/measure/widget.js"
-                },
-                {
-                    "name": "空间分析",
-                    "uri": "widgets/analysis/widget.js"
-                },
-                {
                     "name": "剖面分析图表",
                     "uri": "widgets/measureChars/widget.js",
                     "windowOptions": {
@@ -122,18 +114,6 @@
                             "right": 10
                         }
                     }
-                },
-                {
-                    "name": "坐标定位",
-                    "uri": "widgets/centerXY/widget.js"
-                },
-                {
-                    "name": "标记",
-                    "uri": "widgets/addmarker/widget.js"
-                },
-                {
-                    "name": "地区导航",
-                    "uri": "widgets/navXZQH/widget.js"
                 },
                 {
                     "name": "漫游路线设置",
@@ -204,25 +184,6 @@
                     "openAtStart": false
                 },
                 {
-                    "name": "模型库",
-                    "uri": "widgets/plot-model/widget.js",
-                    "windowOptions": {
-                        "position": {
-                            "top": 45,
-                            "bottom": 30,
-                            "right": 5
-                        }
-                    }
-                }, 
-                {
-                    "name": "分组名称编辑",
-                    "uri": "widgets/plotGroupName/widget.js",
-                    "windowOptions": {
-                        "position": "t"
-                    },
-                    "disableOther": false
-                },
-                {
                     "name": "属性编辑",
                     "uri": "widgets/plotAttr/widget.js",
                     "windowOptions": {
@@ -248,10 +209,6 @@
                             "top": 1
                         }
                     }
-                },
-                {
-                    "name": "参数设置",
-                    "uri": "widgets/setting/widget.js"
                 }
             ]
         },
