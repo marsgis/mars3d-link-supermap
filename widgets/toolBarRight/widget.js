@@ -27,19 +27,19 @@
                         { "name": "空间分析", "icon": "fa fa-bar-chart", "widget": "widgets/analysis/widget.js" },
 
                         { "name": "坐标定位", "icon": "fa fa-map-pin", "widget": "widgets/centerXY/widget.js" },
-                        { "name": "视角书签", "icon": "fa fa-tags", "widget": "widgets/bookmark/widget.js" },
-
-                        { "name": "图上量算 [超图]", "icon": "fa fa fa-calculator", "widget": "widgetsSM/measure/widget.js" },
-
-                        { "name": "可视域分析 [超图]", "icon": "fa fa-rss-square", "widget": "widgetsSM/viewshed3D/widget.js" },
-                        { "name": "阴影分析 [超图]", "icon": "fa fa-star-half-full", "widget": "widgetsSM/shadowQuery/widget.js" },
-                        { "name": "通视线分析 [超图]", "icon": "fa fa-low-vision", "widget": "widgetsSM/sightline/widget.js" },
-                        { "name": "天际线分析 [超图]", "icon": "fa fa-line-chart", "widget": "widgetsSM/skyline/widget.js" },
-                        // { "name": "淹没分析（地形）", "icon": "fa fa-ship", "widget": "widgetsSM/floodex/widget.js" },
-                        // { "name": "淹没分析（模型）", "icon": "fa fa-ship", "widget": "widgetsSM/flood/widget.js" },
-                        // { "name": "坡度坡向分析NO", "icon": "fa fa-random", "widget": "widgetsSM/terrainSlopeAnalysis/widget.js", "visible": false },
-                        { "name": "地下开挖 [超图]", "icon": "fa fa-magnet", "widget": "widgetsSM/digTerrain/widget.js", "visible": false },
-                        { "name": "模型压平 [超图]", "icon": "fa  fa-hdd-o", "widget": "widgetsSM/flatten/widget.js" }
+                        { "name": "视角书签", "icon": "fa fa-tags", "widget": "widgets/bookmark/widget.js" }
+                    ]
+                },
+                {
+                    "name": "超图",
+                    "icon": "fa fa-sitemap",
+                    "children": [
+                        { "name": "图上量算", "icon": "fa fa fa-calculator", "widget": "widgetsSM/measure/widget.js" },
+                        { "name": "可视域分析", "icon": "fa fa-rss-square", "widget": "widgetsSM/viewshed3D/widget.js" },
+                        { "name": "通视线分析", "icon": "fa fa-low-vision", "widget": "widgetsSM/sightline/widget.js" },
+                        { "name": "天际线分析", "icon": "fa fa-line-chart", "widget": "widgetsSM/skyline/widget.js" },
+                        { "name": "地下开挖", "icon": "fa fa-magnet", "widget": "widgetsSM/digTerrain/widget.js", "visible": false },
+                        { "name": "模型压平", "icon": "fa  fa-hdd-o", "widget": "widgetsSM/flatten/widget.js" }
                     ]
                 }
             ]

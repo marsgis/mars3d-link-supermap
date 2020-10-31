@@ -12,7 +12,7 @@
         "minzoom": 1,
         "maxzoom": 50000000,
         "style": { "atmosphere": true, "lighting": false, "fog": false, "testTerrain": true },     
-        "contextmenu":true,  
+        "contextmenu":false,  
         "location": {
             "fps":true,
             "format":"<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>层级：{level}</div> <div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div> <div>视高：{height}米</div>",          
