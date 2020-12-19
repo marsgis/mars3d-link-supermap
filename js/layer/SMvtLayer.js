@@ -26,8 +26,8 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
     }
     //定位至数据区域
     centerAt(duration) {
-        if (this.config.extent || this.config.center) {
-            this.viewer.mars.centerAt(this.config.extent || this.config.center, { duration: duration, isWgs84: true });
+        if (this.options.extent || this.options.center) {
+            this.viewer.mars.centerAt(this.options.extent || this.options.center, { duration: duration, isWgs84: true });
         }
         else if (this.mvtMap) {
             this.viewer.camera.flyTo({
@@ -46,13 +46,13 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
         var that = this;
 
         //场景添加mvt图层服务
-        this.config.parameters.url = this.config.url;
+        this.options.parameters.url = this.options.url;
         //mvtMap 参考API文档：http://support.supermap.com.cn:8090/webgl/Build/Documentation/VectorTilesMap.html
-        this.mvtMap = this.viewer.scene.addVectorTilesMap(this.config.parameters);
+        this.mvtMap = this.viewer.scene.addVectorTilesMap(this.options.parameters);
         var layerReadyPromise = this.mvtMap.readyPromise;
         Cesium.when(layerReadyPromise, function (data) {
             //setPaintProperty(layerId, name, value, options)
-            // for(var layerId in that.config.style){
+            // for(var layerId in that.options.style){
             //     that.mvtMap.setPaintProperty(layerId, "fill-color", "rgba(255,0,0,0.8)"); 
             // }  
 
@@ -75,11 +75,10 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
             var filter = features.reduce(function (memo, result) {
                 var attr = result.feature.properties
                 if (!attr) { return; }
-
-                debugger
+ 
                 var item = {
                     id: result.feature.id,
-                    popup: mars3d.util.getPopupForConfig(that.config, attr),
+                    popup: mars3d.util.getPopupForConfig(that.options, attr),
                     data: attr
                 }
                 this.viewer.mars.popup.show(item, position, event.position);
@@ -105,7 +104,7 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
 
         if (!properties) { return; }
 
-        selectedEntity.popup = mars3d.util.getPopupForConfig(this.config, properties)
+        selectedEntity.popup = mars3d.util.getPopupForConfig(this.options, properties)
 
         this.viewer.mars.popup.show(selectedEntity);
     }

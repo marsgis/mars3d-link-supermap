@@ -20,8 +20,8 @@ $(document).ready(function () {
 
     //记录url传入参数
     request = haoutil.system.getRequest();
-    if(window.top){//有父级
-        request = $.extend(request,haoutil.system.getRequest(window.top));
+    if (window.top) {//有父级
+        request = $.extend(request, haoutil.system.getRequest(window.top));
     }
 
 
@@ -177,9 +177,9 @@ function initWork(viewer) {
         viewer.requestRenderMode = true;    //取消实时渲染
         viewer.scene.fog.enable = false;
         viewer.scene.skyAtmosphere.show = false;
-        viewer.scene.globe.showGroundAtmosphere = false; 
+        viewer.scene.globe.showGroundAtmosphere = false;
     }
- 
+
     // 禁用默认的实体双击动作。
     viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
     viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -187,17 +187,26 @@ function initWork(viewer) {
     //二三维切换不用动画
     if (viewer.sceneModePicker)
         viewer.sceneModePicker.viewModel.duration = 0.0;
- 
+
     //webgl渲染失败后，刷新页面
     //viewer.scene.renderError.addEventListener(function (scene, error) {
     //    window.location.reload();
     //});
 
- 
+
+    //测试拾取s3m模型
+    // var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    // handler.setInputAction(event => {
+    //     var pickedObject = viewer.scene.pick(event.position, 5, 5);
+    //     if (pickedObject && pickedObject.primitive && pickedObject.primitive.isS3M) {
+    //         var s3mLayer = pickedObject.primitive //拾取到的s3m图层
+    //         debugger
+    //     }
+    // }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
 }
 
- 
+
 
 //绑定图层管理有2种添加方式
 /**
@@ -262,4 +271,3 @@ function unbindLayerControl(layer) {
         manageLayersWidget.removeLayer(layer.config.name);
     }
 }
- 

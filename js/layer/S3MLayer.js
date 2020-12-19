@@ -8,6 +8,35 @@ class S3MLayer extends mars3d.layer.BaseLayer {
 
         this.hasOpacity = true;
     }
+    get layer() {
+        return this.model;
+    }
+
+    get s3mOptions() {
+        return this.options.s3mOptions;
+    }
+
+    //设置图层属性
+    set s3mOptions(value) {
+        for (var key in value) {
+            var val = value[key];
+            this.options.s3mOptions[key] = val
+
+            if (key == "transparentBackColor") //去黑边，与offset互斥，注意别配置offset
+                val = Cesium.Color.fromCssColorString(val);
+            else if (key == "transparentBackColorTolerance")
+                val = Number(val);
+ 
+            for (var i = 0; i < this.model.length; i++) {
+                var layer = this.model[i];
+                if (layer == null) continue;
+                layer[key] = val
+            }
+        }
+    }
+
+
+
     //添加 
     add() {
         if (this.model) {
@@ -31,8 +60,8 @@ class S3MLayer extends mars3d.layer.BaseLayer {
     }
     //定位至数据区域
     centerAt(duration) {
-        if (this.config.extent || this.config.center) {
-            this.viewer.mars.centerAt(this.config.extent || this.config.center, { duration: duration, isWgs84: true });
+        if (this.options.extent || this.options.center) {
+            this.viewer.mars.centerAt(this.options.extent || this.options.center, { duration: duration, isWgs84: true });
         }
     }
     //设置透明度
@@ -51,13 +80,13 @@ class S3MLayer extends mars3d.layer.BaseLayer {
 
         //场景添加S3M图层服务
         var promise;
-        if (this.config.layername) {
-            promise = this.viewer.scene.addS3MTilesLayerByScp(this.config.url, {
-                name: this.config.layername
+        if (this.options.layername) {
+            promise = this.viewer.scene.addS3MTilesLayerByScp(this.options.url, {
+                name: this.options.layername
             });
         }
         else {
-            promise = this.viewer.scene.open(this.config.url);
+            promise = this.viewer.scene.open(this.options.url);
         }
 
         Cesium.when(promise, function (layer) {
@@ -71,39 +100,41 @@ class S3MLayer extends mars3d.layer.BaseLayer {
                 var layer = that.model[i];
                 if (layer == null) continue;
 
+                layer.isS3M = true; //标识下
+
                 //s3mOptions
-                if (that.config.s3mOptions) {
-                    for (var key in that.config.s3mOptions) {
-                        var val = that.config.s3mOptions[key];
+                if (that.options.s3mOptions) {
+                    for (var key in that.options.s3mOptions) {
+                        var val = that.options.s3mOptions[key];
                         if (key == "transparentBackColor") //去黑边，与offset互斥，注意别配置offset
                             layer[key] = Cesium.Color.fromCssColorString(val);
                         else if (key == "transparentBackColorTolerance")
                             layer[key] = Number(val);
                         else
-                            layer[key] = that.config.s3mOptions[key];
+                            layer[key] = that.options.s3mOptions[key];
                     }
                 }
 
                 //高度调整 offset.z
-                if (Cesium.defined(that.config.offset) && Cesium.defined(that.config.offset.z)) {
-                    layer.style3D.bottomAltitude = that.config.offset.z;
+                if (Cesium.defined(that.options.offset) && Cesium.defined(that.options.offset.z)) {
+                    layer.style3D.bottomAltitude = that.options.offset.z;
                     layer.refresh();
                 }
 
             }
 
 
-            if (!that.viewer.mars.isFlyAnimation() && that.config.flyTo) {
+            if (!that.viewer.mars.isFlyAnimation() && that.options.flyTo) {
                 that.centerAt(0);
             }
 
-            if (that.config.dataUrl) {
+            if (that.options.dataUrl) {
                 for (var i = 0; i < layer.length; i++) {
                     var ql = layer[i];
 
                     //读取子图层信息，通过数组的方式返回子图层的名称以及子图层所包含的对象的IDs
                     ql.setQueryParameter({
-                        url: that.config.dataUrl,
+                        url: that.options.dataUrl,
                         dataSourceName: ql.name.split("@")[1],
                         dataSetName: ql.name.split("@")[0],
                         isMerge: true
@@ -127,7 +158,7 @@ class S3MLayer extends mars3d.layer.BaseLayer {
     }
     isArray(obj) {
         return (typeof obj == 'object') && obj.constructor == Array;
-    } 
+    }
 }
 
 
