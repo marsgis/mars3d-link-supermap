@@ -35,14 +35,14 @@
                 "icon": "img/basemaps/google_img.png",
                 "type": "www_google",
                 "crs": "wgs84",
-                "layer": "img_d",
-                "visible": true
+                "layer": "img_d"
             },
             {
                 "pid": 10,
                 "name": "超图底图",
                 "type": "supermap_img",
-                "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400"
+                "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400",
+                "visible": true
             }, 
             {
                 "pid": 10,
