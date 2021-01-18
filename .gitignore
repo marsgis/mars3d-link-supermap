@@ -3,6 +3,7 @@
 node_modules
 /dist
 /_example
+/_lib版本
 /lib/cesiumjs
 
 # local env files
