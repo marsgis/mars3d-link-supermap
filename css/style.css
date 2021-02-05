@@ -121,7 +121,7 @@ li {
 .dark .dropdown-menu {
     color: #ffffff;
     background-color: rgba(63, 72, 84, 0.7);
-    border: none; 
+    border: none;
 }
 
 .dark input{
@@ -135,7 +135,7 @@ li {
 }
 
 .dark .btn-primary {
-    background-color: rgba(32, 160, 255, 0.2); 
+    background-color: rgba(32, 160, 255, 0.2);
 }
 
 .dark .btn-danger {
@@ -171,11 +171,11 @@ li {
 /*黑色字体 + 白色背景*/
 /* .mars3d-popup-color,
 .mars-popup-titile {
-  color: #2b2929; 
+  color: #2b2929;
 }
 
 .mars3d-popup-background {
-  background: rgba(255, 255, 255, 0.85); 
+  background: rgba(255, 255, 255, 0.85);
 } */
 
 
@@ -214,7 +214,7 @@ li {
  .cesium-toolbar-button img{
      height:100%;
  }
- 
+
 .cesium-performanceDisplay-defaultContainer {
     top: auto;
     bottom: 35px;
@@ -285,7 +285,7 @@ li {
 .toolbar-dropdown-menu-div {
     background: rgba(43, 44, 47, 0.8);
     border: 1px solid #2b2c2f;
- 
+
     z-index: 991;
     position: absolute;
     right: 60px;
@@ -293,8 +293,8 @@ li {
     display:none;
 }
 
-.toolbar-dropdown-menu { 
-    min-width: 110px; 
+.toolbar-dropdown-menu {
+    min-width: 110px;
     padding: 0;
 }
 .toolbar-dropdown-menu > li {
@@ -348,6 +348,10 @@ li {
     background-color: rgba(32, 160, 255, 0.2);
     border: 1px solid #e4eaec;
     font-size: 14px;
+}
+
+.infoview div {
+    margin-top: 5px;
 }
 
 

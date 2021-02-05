@@ -2,7 +2,6 @@
 <html class="no-js css-menubar" lang="zh-cn">
 
 <head>
-    <title> 超图Cesium + Mars3D三维地球 </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- 移动设备 viewport -->
@@ -23,15 +22,34 @@
     <link rel="apple-touch-icon-precomposed" href="img/favicon/apple-touch-icon.png">
     <meta name="msapplication-TileImage" content="img/favicon/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#62a8ea">
-
+    
+    <title>Mars3D三维地球 - 超图版 </title>
+ 
+    <!--第三方lib，非必须-->
+    <link rel="stylesheet" href="http://mars3d.cn/lib/fonts/font-awesome/css/font-awesome.min.css">
     <script>window.noArrayPrototype = true;//标识haoutil.js中不扩展arary原生方法</script>
+    <script type="text/javascript" src="http://mars3d.cn/lib/hao/haoutil.js"></script>
 
-    <!--第三方lib-->
-    <script type="text/javascript" src="lib/include-lib.js?time=20210105" libpath="lib/"
-        include="jquery,jquery.range,bootstrap,bootstrap-checkbox,font-awesome,web-icons,layer,haoutil,nprogress,toastr,admui,turf,mars3d-sm"></script>
+    <!--依赖包-->
+    <link rel="stylesheet" href="lib/Cesium-supermap/Widgets/widgets.css">
+    <script type="text/javascript" src="lib/Cesium-supermap/Cesium.js"></script>
+    <script type="text/javascript" src="http://mars3d.cn/lib/mars3d/plugins/compatible/cesium-version.js"></script>
+    <script type="text/javascript" src="http://mars3d.cn/lib/mars3d/plugins/compatible/cesium-zh.js"></script> 
+    <script type="text/javascript" src="http://mars3d.cn/lib/turf/turf.min.js"></script>
+    
+    <!--mars3d-->
+    <link rel="stylesheet" href="http://mars3d.cn/lib/mars3d/mars3d.css">
+    <script type="text/javascript" src="http://mars3d.cn/lib/mars3d/mars3d.js"></script>
+
+    
+    <!--超图特有图层的支持-->
+    <script type="text/javascript" src="js/layer/SImgLayer.js"></script>
+    <script type="text/javascript" src="js/layer/SMvtLayer.js"></script>
+    <script type="text/javascript" src="js/layer/S3MLayer.js"></script>
 
 
-    <link href="css/style.css?time=20210105" rel="stylesheet" />
+    <!--css-->
+    <link href="css/style.css" rel="stylesheet" /> 
     <style>
         .cesium-viewer-navigationContainer {
             top: 0px;
@@ -46,11 +64,10 @@
     </style>
 </head>
 
-<body class="dark">
-    <div id="centerDiv">
-        <div id="mars3dContainer" class="mars3d-container"></div>
-    </div>
+<body>
+    <div id="mars3dContainer" class="mars3d-container"></div>
 
+    <!--业务代码-->
     <script src="js/index.js"></script>
 </body>
 

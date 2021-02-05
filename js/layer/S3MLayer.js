@@ -1,23 +1,12 @@
-﻿//如果需要在config.json中type定义非类库内置类型时，可以按下面示例进行扩展，主要是重写add、remove等方法。
-//该类内部主要使用的的2个属性：this.config是config.json中配置的对应节点参数，this.viewer是地球对象
-
+﻿
 //超图S3M 三维模型图层加载
 class S3MLayer extends mars3d.layer.BaseLayer {
-    constructor(cfg, viewer) {
-        super(cfg, viewer);
-
-        this.hasOpacity = true;
-    }
-    get layer() {
-        return this.model;
+    get layer () {
+        return this.model
     }
 
-    get s3mOptions() {
-        return this.options.s3mOptions;
-    }
-
-    //设置图层属性
-    set s3mOptions(value) {
+    //设置s3m图层属性
+    set s3mOptions (value) {
         for (var key in value) {
             var val = value[key];
             this.options.s3mOptions[key] = val
@@ -26,7 +15,7 @@ class S3MLayer extends mars3d.layer.BaseLayer {
                 val = Cesium.Color.fromCssColorString(val);
             else if (key == "transparentBackColorTolerance")
                 val = Number(val);
- 
+
             for (var i = 0; i < this.model.length; i++) {
                 var layer = this.model[i];
                 if (layer == null) continue;
@@ -34,59 +23,26 @@ class S3MLayer extends mars3d.layer.BaseLayer {
             }
         }
     }
+    get s3mOptions () {
+        return this.options.s3mOptions;
+    }
 
 
-
-    //添加 
-    add() {
-        if (this.model) {
-            for (var i in this.model) {
-                this.model[i].visible = true;
-                this.model[i].show = true;
-            }
-        }
-        else {
-            this.initData();
-        }
-    }
-    //移除
-    remove() {
-        if (this.model) {
-            for (var i in this.model) {
-                this.model[i].visible = false;
-                this.model[i].show = false;
-            }
-        }
-    }
-    //定位至数据区域
-    centerAt(duration) {
-        if (this.options.extent || this.options.center) {
-            this.viewer.mars.centerAt(this.options.extent || this.options.center, { duration: duration, isWgs84: true });
-        }
-    }
-    //设置透明度
-    setOpacity(value) {
-        if (this.model) {
-            for (var i = 0; i < this.model.length; i++) {
-                var item = this.model[i];
-                if (item == null) continue;
-
-                item.style3D.fillForeColor.alpha = value;
-            }
-        }
-    }
-    initData() {
+    /**
+     * 创建图层对象的方法
+     */
+    _mountedHook () {
         var that = this;
-
+debugger
         //场景添加S3M图层服务
         var promise;
         if (this.options.layername) {
-            promise = this.viewer.scene.addS3MTilesLayerByScp(this.options.url, {
+            promise = this._map.scene.addS3MTilesLayerByScp(this.options.url, {
                 name: this.options.layername
             });
         }
         else {
-            promise = this.viewer.scene.open(this.options.url);
+            promise = this._map.scene.open(this.options.url);
         }
 
         Cesium.when(promise, function (layer) {
@@ -124,7 +80,7 @@ class S3MLayer extends mars3d.layer.BaseLayer {
             }
 
 
-            if (!that.viewer.mars.isFlyAnimation() && that.options.flyTo) {
+            if (!that._map.isFlyAnimation() && that.options.flyTo) {
                 that.centerAt(0);
             }
 
@@ -156,12 +112,54 @@ class S3MLayer extends mars3d.layer.BaseLayer {
             showError('渲染时发生错误，已停止渲染。', e);
         });
     }
-    isArray(obj) {
+
+    /**
+     * 添加时
+     */
+    _addedHook () {
+        for (var i in this.model) {
+            this.model[i].visible = true;
+            this.model[i].show = true;
+        }
+    }
+
+    /**
+     * 移除时
+     */
+    _removedHook () {
+        if (this.model) {
+            for (var i in this.model) {
+                this.model[i].visible = false;
+                this.model[i].show = false;
+            }
+        }
+    }
+
+    //设置透明度
+    setOpacity (value) {
+        if (this.model) {
+            for (var i = 0; i < this.model.length; i++) {
+                var item = this.model[i];
+                if (item == null) continue;
+
+                item.style3D.fillForeColor.alpha = value;
+            }
+        }
+    }
+    //定位至数据区域
+    centerAt (duration) {
+        if (this.options.extent || this.options.center) {
+            this._map.centerAt(this.options.extent || this.options.center, { duration: duration, isWgs84: true });
+        }
+    }
+
+    isArray (obj) {
         return (typeof obj == 'object') && obj.constructor == Array;
     }
+
 }
 
 
-//注册到mars3d内部图层管理中：type为s3m时，实例化S3MLayer
-mars3d.layer.regLayerForConfig("supermap_s3m", S3MLayer);
+//注册下
+mars3d.layer.register("supermap_s3m", S3MLayer);
 
