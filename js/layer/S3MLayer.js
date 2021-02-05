@@ -33,7 +33,7 @@ class S3MLayer extends mars3d.layer.BaseLayer {
      */
     _mountedHook () {
         var that = this;
-debugger
+
         //场景添加S3M图层服务
         var promise;
         if (this.options.layername) {

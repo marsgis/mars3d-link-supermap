@@ -31,7 +31,7 @@
         },
         "control":{
             "homeButton": true,
-            "baseLayerPicker": true,
+            "baseLayerPicker": false,
             "sceneModePicker": true,
             "vrButton": false,
             "fullscreenButton": false,
@@ -56,6 +56,7 @@
         "terrain": {
             "url": "http://data.marsgis.cn/terrain",
             "isSct": false,
+            "invisibility":true,
             "show": true
         },
         "basemaps": [
@@ -69,8 +70,7 @@
                 "name": "超图底图",
                 "type": "supermap_img",
                 "icon": "http://mars3d.cn/example/img/basemaps/google_img.png",
-                "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400",
-                "show": true
+                "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400"
             },
             {
                 "name": "ArcGIS卫星",
@@ -91,7 +91,8 @@
                 "icon": "http://mars3d.cn/example/img/basemaps/tdt_img.png",
                 "type": "tdt",
                 "layer": "img_d",
-                "key": ["9ae78c51a0a28f06444d541148496e36"]
+                "key": ["9ae78c51a0a28f06444d541148496e36"],
+                "show": true
             },
             {
                 "name": "天地图电子",
@@ -256,7 +257,7 @@
                     "name": "testMVT"
                 },
                 "popup":"all",
-                "show": true
+                "show": false
             },  
             { 
                 "id": 40,

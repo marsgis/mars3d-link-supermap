@@ -15,14 +15,22 @@ mars3d.Resource.fetchJson({ url: configUrl }).then(function (json) {
 
 var map
 
-function initMap (mapOptions) { 
+function initMap (mapOptions) {
+
+    // //方式1：构造地球（可以使用原生Cesium或第3方SDK方式去构造Viewer）
+    // var viewer = new Cesium.Viewer('mars3dContainer', {
+    //     animation: false,
+    //     timeline: false,
+    //     baseLayerPicker: false, //是否显示图层选择控件
+    //     imageryProvider: new Cesium.TileMapServiceImageryProvider({
+    //         url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII')
+    //     })
+    // })
+    // map = new mars3d.Map(viewer, mapOptions)
+
     //创建三维地球场景
     map = new mars3d.Map('mars3dContainer', mapOptions)
  
-    debugger
-
-    //汉化原生cesium
-    mars3d.loadCesiumZH();
 
     //以下为演示代码
 
