@@ -20,8 +20,8 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
         Cesium.when(layerReadyPromise, (data) => {
             //setPaintProperty(layerId, name, value, options)
             // for(var layerId in that.options.style){
-            //     that._mvtLayer.setPaintProperty(layerId, "fill-color", "rgba(255,0,0,0.8)"); 
-            // }  
+            //     that._mvtLayer.setPaintProperty(layerId, "fill-color", "rgba(255,0,0,0.8)");
+            // }
 
         }, function (e) {
             showError('渲染时发生错误，已停止渲染。', e);
@@ -33,7 +33,7 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
         handler.setInputAction(event => {
             if (!that._visible) return;
 
-            var position = mars3d.point.getCurrentMousePosition(scene, event.position);
+            var position = mars3d.PointUtil.getCurrentMousePosition(scene, event.position);
 
             //查询出相交图层的feature
             var features = that._mvtLayer.queryRenderedFeatures([position], {
@@ -46,7 +46,7 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
 
                 var item = {
                     id: result.feature.id,
-                    popup: mars3d.util.getPopupForConfig(that.options, attr),
+                    popup: mars3d.Util.getPopupForConfig(that.options, attr),
                     data: attr
                 }
                 this._map.openPopup(position, item, event);
@@ -96,7 +96,7 @@ class SMvtLayer extends mars3d.layer.BaseLayer {
     }
 
 }
- 
+
 //注册下
 mars3d.layer.register("supermap_mvt", SMvtLayer);
 
