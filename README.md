@@ -10,7 +10,7 @@
  
 ### 超图版Cesium库整理及修改说明
 1. 将超图版Cesium库的`\Build\Cesium\`目录拷贝到 `lib\`目录下,并将此`Cesium`改名为`Cesium-supermap`；
-1. 更多示例，请从
+2. 更多示例，请从mars3d功能示例库中拷贝即可。
  
  
 ## 运行站点
