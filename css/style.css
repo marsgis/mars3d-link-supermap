@@ -1,4 +1,18 @@
-/* 2019-7-14 09:06:53 | 修改 木遥（微信:  http://marsgis.cn/weixin.html ） */
+/*超图版本多加的css*/
+.cesium-viewer-navigationContainer {
+    top: 0px;
+    right: 0px;
+    left: auto;
+    z-index: 99;
+}
+
+.cesium-viewer-toolbar {
+    z-index: 999;
+}
+/*超图版本多加的css , end*/
+
+
+
 * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -474,3 +488,4 @@ html {
     -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35);
     background-color: rgba(0, 0, 0, .5)
 }
+

@@ -10,10 +10,11 @@
  
 ### 超图版Cesium库整理及修改说明
 1. 将超图版Cesium库的`\Build\Cesium\`目录拷贝到 `lib\`目录下,并将此`Cesium`改名为`Cesium-supermap`；
+1. 更多示例，请从
  
  
 ## 运行站点
- 在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览index.html即可
+ 在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览 `a10_createMap_viewer.html` 等示例页面即可
 
 ### 运行效果 
  [在线Demo](http://mars3d.cn/project/supermap/index.html)  
