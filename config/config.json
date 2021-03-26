@@ -9,6 +9,7 @@
         "pitch": -39.5,
         "roll": 360
       },
+      "resolutionScale":1.0,
       "shadows": false,
       "removeDblClick": true,
       "sceneMode": 3,
