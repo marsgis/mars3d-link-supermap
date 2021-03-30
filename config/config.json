@@ -292,6 +292,9 @@
         "type": "supermap_s3m",
         "url": "https://www.supermapol.com/realspace/services/3D-yanmofenxi/rest/realspace/datas/sci_park/config",
         "layername": "hk",
+        "s3mOptions": {
+          "selectEnabled":false
+        },
         "position": { "alt": 45 },
         "center": {
           "lat": 22.427991,
@@ -308,6 +311,9 @@
         "type": "supermap_s3m",
         "url": "http://www.supermapol.com/realspace/services/3D-BIMbuilding/rest/realspace/datas/BIMbuilding/config",
         "layername": "BIM",
+        "s3mOptions": {
+          "selectEnabled":false
+        },
         "position": { "alt": 45 },
         "center": {
           "lat": 39.915744,
@@ -325,8 +331,7 @@
         "type": "supermap_s3m",
         "url": "http://support.supermap.com.cn:8090/iserver/services/3D-CBD/rest/realspace",
         "s3mOptions": {
-          "transparentBackColor": "#333",
-          "transparentBackColorTolerance": 0.1
+          "selectEnabled":false
         },
         "position": { "alt": 45 },
         "center": {
@@ -349,6 +354,9 @@
           "alt": 736,
           "heading": 317,
           "pitch": -37
+        },
+        "s3mOptions":{
+          "selectEnabled":false
         },
         "position": { "alt": 45 },
         "show": true,
