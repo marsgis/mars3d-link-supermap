@@ -201,7 +201,7 @@
 
         stopEditing()
       })
-      graphicLayer.on(mars3d.EventType.delete, function (e) {
+      graphicLayer.on(mars3d.EventType.removeGraphic, function (e) {
         console.log('删除了对象', e)
 
         stopEditing()
@@ -325,7 +325,7 @@
           color: '#55ff33',
           width: 3,
           clampToGround: clampToGround,
-          clampToS3M:clampToGround, //贴s3m模型
+          // clampToS3M:clampToGround
         },
         onBeforeCreate:function(entityOptions){
           entityOptions.clampToS3M = clampToGround 
@@ -341,10 +341,10 @@
           opacity: 0.5,
           outline: true,
           outlineWidth: 2.0,
-          clampToGround: clampToGround,
-          clampToS3M:clampToGround, //贴s3m模型
+          clampToGround: clampToGround,   
         },
         onBeforeCreate:function(entityOptions){
+          //polygon的需要在entity层级赋予属性
           entityOptions.clampToS3M = clampToGround 
         }
       })
@@ -357,8 +357,11 @@
           color: '#55ff33',
           width: 3,
           clampToGround: clampToGround,
-          clampToS3M:clampToGround, //贴s3m模型
+          // clampToS3M:clampToGround, //贴s3m模型
         },
+        onBeforeCreate:function(entityOptions){
+          entityOptions.clampToS3M = clampToGround 
+        }
       })
     }
 
@@ -369,10 +372,10 @@
           color: '#55ff33',
           width: 500,
           clampToGround: clampToGround,
-          clampToS3M:clampToGround, //贴s3m模型
+          // clampToS3M:clampToGround, //贴s3m模型
         },
         onBeforeCreate:function(entityOptions){
-          entityOptions.clampToS3M = clampToGround 
+          entityOptions.clampToS3M = clampToGround //贴s3m模型
         }
       })
     }
@@ -384,10 +387,10 @@
           color: '#ffff00',
           opacity: 0.6,
           clampToGround: clampToGround,
-          clampToS3M:clampToGround, //贴s3m模型
+          // clampToS3M:clampToGround, //贴s3m模型
         },
         onBeforeCreate:function(entityOptions){
-          entityOptions.clampToS3M = clampToGround 
+          entityOptions.clampToS3M = clampToGround  //贴s3m模型
         }
       })
     }
@@ -399,8 +402,11 @@
           color: '#ffff00',
           opacity: 0.6,
           clampToGround: clampToGround,
-          clampToS3M:clampToGround, //贴s3m模型
-        }, 
+          // clampToS3M:clampToGround, //贴s3m模型
+        },
+        onBeforeCreate:function(entityOptions){
+          entityOptions.clampToS3M = clampToGround  //贴s3m模型
+        }
       })
     }
 
