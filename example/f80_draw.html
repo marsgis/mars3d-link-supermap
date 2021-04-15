@@ -19,13 +19,13 @@
     content="火星科技 合肥火星 合肥火星科技 合肥火星科技有限公司 leaflet leaflet框架 leaflet开发 cesium cesium开发 cesium框架 三维 地球 模型  gis marsgis 地图离线 地图开发 地图框架 地图外包 框架 开发 外包  地图离线 二维地图 三维地图 全景漫游 地理信息系统 云GIS 三维GIS GIS平台 WebGIS" />
 
   <link rel="shortcut icon" type="image/x-icon" href="http://mars3d.cn/favicon.ico">
-  <title>标绘 绘制 矢量数据-绘制文字、点、线、面、模型、管道等 |Mars3D|三维地图| 火星科技|合肥火星科技|合肥火星科技有限公司</title>
+  <title>标绘 绘制 矢量数据-绘制文字、点、线、面、模型、管道等 | Mars3D | 三维地图 | 火星科技 | 合肥火星科技有限公司</title>
 
   <script>window.noArrayPrototype = true;//标识haoutil.js中不扩展arary原生方法</script>
 
   <!--第三方lib-->
-  <script type="text/javascript" src="./lib/include-lib.js" libpath="./lib/"
-    include="jquery,font-awesome,web-icons,bootstrap,bootstrap-checkbox,layer,toastr,haoutil,terraformer,turf,mars3d"></script>
+  <script type="text/javascript" src="../lib/include-lib.js" libpath="../lib/"
+    include="jquery,font-awesome,web-icons,bootstrap,bootstrap-checkbox,layer,toastr,haoutil,terraformer,turf,mars3d,mars3d-widget"></script>
 
   <link href="css/style.css" rel="stylesheet" />
   <style>
@@ -51,7 +51,7 @@
         </label>
       </div>
       <div class="checkbox checkbox-primary checkbox-inline">
-        <input id="chkPopup" class="styled" type="checkbox" checked>
+        <input id="chkPopup" class="styled" type="checkbox" >
         <label for="chkPopup">
           Popup绑定
         </label>
@@ -151,8 +151,18 @@
     function initMap(options) {
       //合并属性参数，可覆盖config.json中的对应配置
       var mapOptions = mars3d.Util.merge(options, {
-        "scene":{
-         "center":{"lat":30.427314,"lng":116.305372,"alt":52022,"heading":358,"pitch":-44},
+        scene: {
+          center: {
+            y: 30.831262,
+            x: 116.342362,
+            z: 12364.89,
+            heading: 0,
+            pitch: -80,
+            roll: 0,
+          },
+        },
+        control: {
+          infoBox: false,
         },
       })
 
@@ -167,6 +177,8 @@
 
       //图层管理的相关处理，代码在\js\graphicManager.js
       initLayerManager(graphicLayer)
+
+      graphicLayer.unbindPopup()
 
       //绑定标绘相关事件监听(可以自行加相关代码实现业务需求，此处主要做示例)
       graphicLayer.on(mars3d.EventType.drawStart, function (e) {
@@ -207,29 +219,6 @@
         stopEditing()
       })
 
-      ////编辑时拖拽点颜色（修改内部默认值）
-      // mars3d.graphic.edit.PointColor.Control = Cesium.Color.fromCssColorString('#1c197d') //位置控制拖拽点
-      // mars3d.graphic.edit.PointColor.MoveHeight = Cesium.Color.fromCssColorString('#9500eb') //上下移动高度的拖拽点
-      // mars3d.graphic.edit.PointColor.EditAttr = Cesium.Color.fromCssColorString('#f73163') //辅助修改属性（如半径）的拖拽点
-      // mars3d.graphic.edit.PointColor.AddMidPoint = Cesium.Color.fromCssColorString('#04c2c9').withAlpha(0.3) //增加新点，辅助拖拽点
-
-      ////标绘时的tooltip（修改内部默认值）
-      // mars3d.graphic.edit.tooltip.draw.point.start = '单击 完成绘制'
-      // mars3d.graphic.edit.tooltip.draw.poly.start = '单击 开始绘制'
-      // mars3d.graphic.edit.tooltip.draw.poly.cont = '单击增加点，右击删除点'
-      // mars3d.graphic.edit.tooltip.draw.poly.end = '单击增加点，右击删除点<br/>双击完成绘制'
-      // mars3d.graphic.edit.tooltip.draw.poly.end2 = '单击完成绘制'
-      // mars3d.graphic.edit.tooltip.edit.start = '单击后 激活编辑'
-      // mars3d.graphic.edit.tooltip.edit.end = '释放后 完成修改'
-      // mars3d.graphic.edit.tooltip.dragger.def = '拖动 修改位置' //默认拖拽时提示
-      // mars3d.graphic.edit.tooltip.dragger.addMidPoint = '拖动 增加点'
-      // mars3d.graphic.edit.tooltip.dragger.moveHeight = '拖动 修改高度'
-      // mars3d.graphic.edit.tooltip.dragger.editRadius = '拖动 修改半径'
-      // mars3d.graphic.edit.tooltip.dragger.editHeading = '拖动 修改方向'
-      // mars3d.graphic.edit.tooltip.dragger.editScale = '拖动 修改缩放比例'
-      // mars3d.graphic.edit.tooltip.del.def = '<br/>右击 删除该点'
-      // mars3d.graphic.edit.tooltip.del.min = '无法删除，点数量不能少于'
-
       $('#btnSaveKML').click(function () {
         if (graphicLayer.length === 0) {
           window.layer.msg('当前没有标注任何数据，无需保存！')
@@ -250,7 +239,7 @@
 
       //加载历史演示数据
       if (location.hostname !== '127.0.0.1' && location.hostname !== 'localhost') {
-        $.getJSON('http://data.marsgis.cn/file/geojson/draw-demo.json', function (result) {
+        $.getJSON('http://data.marsgis.cn/file/geojson/geojson-draw.json', function (result) {
           graphicLayer.loadGeoJSON(result, { clear: true, flyTo: true })
         })
       }
@@ -267,9 +256,9 @@
             text: '可以同时支持文字',
             font_size: 20,
             color: '#ffffff',
-            border: true,
-            border_color: '#000000',
-            pixelOffset: [0, -15],
+            outline: true,
+            outlineColor: '#000000',
+            pixelOffsetY: -20,
           },
         },
       })
@@ -285,9 +274,9 @@
             text: '可以同时支持文字',
             font_size: 30,
             color: '#ffffff',
-            border: true,
-            border_color: '#000000',
-            pixelOffset: [0, -50],
+            outline: true,
+            outlineColor: '#000000',
+            pixelOffsetY: -50,
           },
         },
       })
@@ -300,9 +289,9 @@
           text: '火星科技三维地球',
           color: '#0081c2',
           font_size: 50,
-          border: true,
-          border_color: '#ffffff',
-          border_width: 2,
+          outline: true,
+          outlineColor: '#ffffff',
+          outlineWidth: 2,
         },
       })
     }
@@ -339,7 +328,7 @@
         style: {
           color: '#29cf34',
           opacity: 0.5,
-          outline: true,
+          outline: false,
           outlineWidth: 2.0,
           clampToGround: clampToGround,   
         },
@@ -417,8 +406,8 @@
           color: '#00ff00',
           opacity: 0.8,
           plane_normal: 'x',
-          dimensionsX: 1000.0,
-          dimensionsY: 1000.0,
+          dimensions_x: 1000.0,
+          dimensions_y: 1000.0,
         },
       })
     }
@@ -441,9 +430,9 @@
         style: {
           color: '#00ff00',
           opacity: 0.6,
-          dimensionsX: 1000.0,
-          dimensionsY: 1000.0,
-          dimensionsZ: 1000.0,
+          dimensions_x: 1000.0,
+          dimensions_y: 1000.0,
+          dimensions_z: 1000.0,
         },
       })
     }
@@ -474,7 +463,6 @@
     function drawExtrudedPolygon() {
       graphicLayer.startDraw({
         type: 'polygon',
-        edittype: 'extrudedPolygon', //该参数非必须，是属性编辑widget使用的
         style: {
           color: '#00ff00',
           opacity: 0.6,
@@ -486,7 +474,6 @@
     function drawExtrudedRectangle() {
       graphicLayer.startDraw({
         type: 'rectangle',
-        edittype: 'extrudedRectangle', //该参数非必须，是属性编辑widget使用的
         style: {
           color: '#00ff00',
           opacity: 0.6,
@@ -498,7 +485,6 @@
     function drawExtrudedCircle() {
       graphicLayer.startDraw({
         type: 'circle',
-        edittype: 'extrudedCircle', //该参数非必须，是属性编辑widget使用的
         style: {
           color: '#00ff00',
           opacity: 0.6,
@@ -516,7 +502,7 @@
 
       var index = 0
       geojsonObject.features.forEach((feature) => {
-        var attr = feature.properties.attr
+        var attr = feature.properties
         var style = feature.properties.style
         feature.properties = {
           id: ++index,
@@ -555,7 +541,7 @@
       var arrWKT = []
       var index = 0
       geojsonObject.features.forEach((feature) => {
-        var attr = feature.properties.attr
+        var attr = feature.properties
         var style = feature.properties.style
 
         var wkt = Terraformer.WKT.convert(feature.geometry) //geojson转换WKT格式 ,terraformer库
@@ -574,11 +560,26 @@
     var timeTik
 
     function startEditing(graphic) {
- 
+      clearTimeout(timeTik)
+
+      var plotAttr = mars3d.widget.getClass('widgets/plotAttr/widget.js')
+      if (plotAttr && plotAttr.isActivate) {
+        plotAttr.startEditing(graphic, graphic.coordinates)
+      } else {
+        mars3d.widget.activate({
+          map: map,
+          uri: 'widgets/plotAttr/widget.js',
+          name: '属性编辑',
+          graphic: graphic,
+          lonlats: graphic.coordinates,
+        })
+      }
     }
 
     function stopEditing() {
-   
+      timeTik = setTimeout(function () {
+        mars3d.widget.disable('widgets/plotAttr/widget.js')
+      }, 200)
     }
     //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
   </script>

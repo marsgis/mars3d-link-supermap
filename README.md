@@ -8,13 +8,8 @@
 
 
  
-### 超图版Cesium库整理及修改说明
-1. 将超图版Cesium库的`\Build\Cesium\`目录拷贝到 `lib\`目录下,并将此`Cesium`改名为`Cesium-supermap`；
-2. 更多示例，请从mars3d功能示例库中拷贝即可。
- 
- 
 ## 运行站点
- 在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览 `a10_createMap_viewer.html` 等示例页面即可
+ 在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览 `example\a10_createMap_viewer.html` 等示例页面即可
 
 ### 运行效果 
  [在线Demo](http://mars3d.cn/project/supermap/index.html)  
@@ -29,7 +24,24 @@
  如果需要编译、对整站压缩及混淆，请参考：[https://github.com/muyao1987/web-dist](https://github.com/muyao1987/web-dist)
 
  
-
+ 
+### 超图版Cesium库整理及修改说明
+1. 将超图版Cesium库的`\Build\Cesium\`目录拷贝到 `lib\`目录下,并将此`Cesium`改名为`Cesium-supermap`；
+2. 修改`lib\include-lib.js`文件的`mars3d`节点配置，将相关库切换到`Cesium-supermap`
+```js
+'mars3d': [
+    //超图版本，三维地球“主库” 
+    libpath_local + 'Cesium-supermap/Widgets/widgets.css', //cesium  
+    libpath_local + 'Cesium-supermap/Cesium.js',
+    libpath + 'mars3d/plugins/compatible/cesium-version.js', //cesium版本兼容处理
+    libpath + 'mars3d/mars3d.css', //mars3d
+    libpath + 'mars3d/mars3d.js',
+    libpath + 'mars3d/plugins/supermap/mars3d-supermap.js', 
+    libpath + 'mars3d/plugins/compatible/cesium-zh.js',
+  ],
+``` 
+3. 更多示例，请从 [https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d) 中拷贝即可,2个仓库目录结构是一致的。
+ 
 
 
 ## Mars3D 是什么 
