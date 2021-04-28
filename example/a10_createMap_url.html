@@ -64,11 +64,7 @@
 
     function initMap(options) {
       //合并属性参数，可覆盖config.json中的对应配置
-      var mapOptions = mars3d.Util.merge(options, {
-        scene: {
-          center: { lat: 25.37169, lng: 119.094153, alt: 1182971, heading: 346, pitch: -60 },
-        },
-      })
+      var mapOptions = mars3d.Util.merge(options, {  })
 
       //创建三维地球场景
       var map = new mars3d.Map('mars3dContainer', mapOptions)
