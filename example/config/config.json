@@ -1,7 +1,13 @@
 ﻿{
   "map3d": {
     "scene": {
-      "center": { "lat": 30.526361, "lng": 116.335987, "alt": 45187, "heading": 0, "pitch": -45 },
+      "center": {
+        "lat": 50.526361,
+        "lng": 116.335987,
+        "alt": 45187,
+        "heading": 0,
+        "pitch": -45
+      },
       "scene3DOnly": false,
       "shadows": false,
       "removeDblClick": true,
@@ -40,7 +46,7 @@
       "timeline": false,
       "infoBox": true,
       "geocoder": true,
-      "geocoderConfig": { "key": ["ae29a37307840c7ae4a785ac905927e0"] },
+      "geocoderConfig": { "key": ["ae29a37507860c7ae4a785ac905927e0"] },
 
       "defaultContextMenu": true,
       "location": {
@@ -57,7 +63,7 @@
     "basemaps": [
       { "id": 10, "name": "地图底图", "type": "group" },
       {
-        "id": 2020,
+        "pid": 10,
         "name": "天地图卫星",
         "icon": "http://mars3d.cn/example/img/basemaps/tdt_img.png",
         "type": "tdt",
@@ -66,6 +72,7 @@
         "show": true
       },
       {
+        "pid": 10,
         "name": "天地图电子",
         "icon": "http://mars3d.cn/example/img/basemaps/tdt_vec.png",
         "type": "group",
@@ -75,33 +82,75 @@
         ]
       },
       {
-         "pid": 10,
-         "name": "超图底图",
-         "type": "supermap_img",
-         "icon": "img/basemaps/google_img.png",
-         "url": "http://www.supermapol.com/realspace/services/map-China400/rest/maps/China400"
-       },
-      {
-        "name": "谷歌卫星",
-        "icon": "http://mars3d.cn/example/img/basemaps/google_img.png",
-        "type": "google",
-        "layer": "img_d"
+        "id": 2021,
+        "pid": 10,
+        "name": "高德影像",
+        "type": "group",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_img.png",
+        "layers": [
+          { "name": "底图", "type": "gaode", "layer": "img_d" },
+          { "name": "注记", "type": "gaode", "layer": "img_z" }
+        ]
       },
       {
-        "name": "ArcGIS卫星",
+        "pid": 10,
+        "name": "高德电子",
+        "type": "gaode",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_vec.png",
+        "layer": "vec"
+      },
+      {
+        "pid": 10,
+        "name": "百度影像",
+        "type": "group",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-img.png",
+        "layers": [
+          { "name": "底图", "type": "baidu", "layer": "img_d" },
+          { "name": "注记", "type": "baidu", "layer": "img_z" }
+        ]
+      },
+      {
+        "pid": 10,
+        "name": "百度电子",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-vec.png",
+        "type": "baidu",
+        "layer": "vec"
+      },
+      {
+        "pid": 10,
+        "name": "腾讯影像",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_img.png",
+        "type": "group",
+        "layers": [
+          { "name": "底图", "type": "tencent", "layer": "img_d" },
+          { "name": "注记", "type": "tencent", "layer": "img_z" }
+        ]
+      },
+      {
+        "pid": 10,
+        "name": "腾讯电子",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_vec.png",
+        "type": "tencent",
+        "layer": "vec"
+      },
+      {
+        "pid": 10,
+        "name": "ArcGIS影像",
         "icon": "http://mars3d.cn/example/img/basemaps/esriWorldImagery.png",
-        "type": "arcgis",
-        "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "type": "xyz",
+        "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         "enablePickFeatures": false
       },
       {
-        "name": "微软卫星",
+        "pid": 10,
+        "name": "微软影像",
         "icon": "http://mars3d.cn/example/img/basemaps/bingAerial.png",
         "type": "bing",
         "key": "AuKhM0WRkjhX8E4y1OM0TukYycaw_4Vh3eSfXONDf7OARls-WEB3K_Rfx89bWxof",
         "layer": "Aerial"
       },
       {
+        "pid": 10,
         "name": "OSM地图",
         "type": "xyz",
         "icon": "http://mars3d.cn/example/img/basemaps/osm.png",
@@ -109,14 +158,25 @@
         "subdomains": "abc"
       },
       {
-        "name": "黑色底图",
-        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-dark.png",
-        "type": "mapbox",
-        "username": "marsgis",
-        "styleId": "cki0a2mtc2vyo1bqu76p8ks8m",
-        "scaleFactor": true
+        "id": 2017,
+        "pid": 10,
+        "name": "蓝色底图",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-midnight.png",
+        "type": "xyz",
+        "url": "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+        "chinaCRS": "GCJ02",
+        "enablePickFeatures": false
       },
       {
+        "pid": 10,
+        "name": "黑色底图",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-dark.png",
+        "type": "tencent",
+        "layer": "custom",
+        "style": "4"
+      },
+      {
+        "pid": 10,
         "name": "灰色底图",
         "icon": "http://mars3d.cn/example/img/basemaps/bd-c-grayscale.png",
         "type": "mapbox",
@@ -124,21 +184,12 @@
         "styleId": "cki0a92b123qo1aluk0e5v7sb",
         "scaleFactor": true
       },
-
       {
-        "id": 2017,
-        "name": "蓝色底图(GCJ02偏移)",
-        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-midnight.png",
-        "crs": "gcj",
-        "type": "arcgis",
-        "url": "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer",
-        "enablePickFeatures": false
-      },
-      {
+        "pid": 10,
         "name": "离线地图  (供参考)",
         "type": "xyz",
         "icon": "http://mars3d.cn/example/img/basemaps/mapboxSatellite.png",
-        "url": "http://data.marsgis.cn/maptile/wgs3857img/{z}/{x}/{y}.jpg",
+        "url": "http://data.marsgis.cn/maptile/googleImg/{z}/{x}/{y}.jpg",
         "minimumLevel": 1,
         "maximumLevel": 18,
         "minimumTerrainLevel": 1,
@@ -146,15 +197,17 @@
         "rectangle": { "xmin": -180, "xmax": 180, "ymin": -85, "ymax": 85 }
       },
       {
-        "name": "单张图片  (本地离线)",
+        "pid": 10,
+        "name": "单张图片 (本地离线)",
         "icon": "http://mars3d.cn/example/img/basemaps/offline.png",
         "type": "image",
         "url": "http://mars3d.cn/example/img/tietu/world.jpg"
       }
     ],
     "layers": [
+      { "id": 20, "name": "辅助图层", "type": "group" },
       {
-        "pid": 10,
+        "pid":20,
         "name": "行政区划界线",
         "type": "xyz",
         "url": "https://t{s}.tianditu.gov.cn/DataServer?T=ibo_w&x={x}&y={y}&l={z}&tk=9ae78c51a0a28f06444d541148496e36",
@@ -163,26 +216,28 @@
         "show": false
       },
       {
+        "pid":20,
         "name": "天地图注记",
         "type": "tdt",
         "layer": "img_z",
         "key": ["9ae78c51a0a28f06444d541148496e36"],
         "show": false
       },
+
       {
-        "id": 20,
+        "id": 40,
         "name": "3dtiles数据",
         "type": "group"
       },
       {
-        "pid": 20,
+        "pid": 40,
         "type": "3dtiles",
         "name": "厂房",
         "url": "http://data.marsgis.cn/3dtiles/qx-changfang/tileset.json",
-        "position": { "lng": 115.456996, "lat": 40.409811, "alt": 8938 },
+        "position": { "lng": 115.456996, "lat": 60.609811, "alt": 8938 },
         "maximumScreenSpaceError": 1,
         "center": {
-          "lng": 40.414482,
+          "lng": 60.414482,
           "lat": 115.458781,
           "alt": 1058.2,
           "heading": 194.1,
@@ -192,12 +247,19 @@
       },
 
       {
-        "id": 30,
+        "id": 50,
         "name": "超图瓦片服务",
         "type": "group"
+      }, 
+      {
+        "pid": 50,
+        "name": "超图底图",
+        "type": "supermap_img",
+        "icon": "img/basemaps/google_img.png",
+        "url": "http://www.supermapol.com/realspace/services/map-China600/rest/maps/China600"
       },
       {
-        "pid": 30,
+        "pid": 50,
         "name": "超图影像图",
         "type": "supermap_img",
         "url": "http://www.supermapol.com/realspace/services/3D-dixingyingxiang/rest/realspace/datas/MosaicResult",
@@ -213,7 +275,7 @@
         "transparentBackColorTolerance": 0.1
       },
       {
-        "pid": 30,
+        "pid": 50,
         "name": "超图矢量瓦片",
         "type": "supermap_mvt",
         "url": "http://www.supermapol.com/realspace/services/map-mvt-JingJinDiQuDiTu/restjsr/v1/vectortile/maps/%E4%BA%AC%E6%B4%A5%E5%9C%B0%E5%8C%BA%E5%9C%B0%E5%9B%BE",
@@ -225,18 +287,18 @@
         "show": false
       },
       {
-        "id": 40,
+        "id": 60,
         "name": "超图S3M服务",
         "type": "group"
       },
       {
-        "pid": 40,
+        "pid": 60,
         "name": "香港科技园",
         "type": "supermap_s3m",
         "url": "https://www.supermapol.com/realspace/services/3D-yanmofenxi/rest/realspace/datas/sci_park/config",
         "layername": "hk",
         "s3mOptions": {
-          "selectEnabled":false
+          "selectEnabled": false
         },
         "position": { "alt": 45 },
         "center": {
@@ -249,13 +311,13 @@
         }
       },
       {
-        "pid": 40,
+        "pid": 60,
         "name": "BIM",
         "type": "supermap_s3m",
         "url": "http://www.supermapol.com/realspace/services/3D-BIMbuilding/rest/realspace/datas/BIMbuilding/config",
         "layername": "BIM",
         "s3mOptions": {
-          "selectEnabled":false
+          "selectEnabled": false
         },
         "position": { "alt": 45 },
         "center": {
@@ -269,25 +331,25 @@
       },
 
       {
-        "pid": 40,
+        "pid": 60,
         "name": "CBD",
         "type": "supermap_s3m",
         "url": "http://support.supermap.com.cn:8090/iserver/services/3D-CBD/rest/realspace",
         "s3mOptions": {
-          "selectEnabled":false
+          "selectEnabled": false
         },
         "position": { "alt": 45 },
         "center": {
-          "lat": 39.894307,
+          "lat": 39.894507,
           "lng": 116.456491,
           "alt": 1453.27,
           "heading": 3.8,
-          "pitch": -40.7,
+          "pitch": -60.7,
           "roll": 0
         }
       },
       {
-        "pid": 40,
+        "pid": 60,
         "name": "鸟巢",
         "type": "supermap_s3m",
         "url": "http://www.supermapol.com/realspace/services/3D-Olympic/rest/realspace",
@@ -298,8 +360,8 @@
           "heading": 317,
           "pitch": -37
         },
-        "s3mOptions":{
-          "selectEnabled":false
+        "s3mOptions": {
+          "selectEnabled": false
         },
         "position": { "alt": 45 },
         "show": true,
