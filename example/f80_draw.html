@@ -21,7 +21,6 @@
   <link rel="shortcut icon" type="image/x-icon" href="http://mars3d.cn/favicon.ico">
   <title>标绘 绘制 矢量数据-绘制文字、点、线、面、模型、管道等 | Mars3D | 三维地图 | 火星科技 | 合肥火星科技有限公司</title>
 
-  <script>window.noArrayPrototype = true;//标识haoutil.js中不扩展arary原生方法</script>
 
   <!--第三方lib-->
   <script type="text/javascript" src="../lib/include-lib.js" libpath="../lib/"
@@ -136,11 +135,18 @@
 
   </div>
 
- 
+
+  <!-- 切换视角到模型或地形（山区）的快捷按钮 -->
+  <script type="text/javascript" src="js/center_terrain_3dtiles.js"></script>
+
   <!-- 图层管理相关处理js -->
   <script type="text/javascript" src="./js/graphicManager.js"></script>
 
- 
+
+  <!-- 导出KML数据 -->
+  <script type="text/javascript" src="../lib/kml/tokml.js"></script>
+
+
   <script src="./js/common.js"></script>
   <script type="text/javascript">
     'use script' //开发环境建议开启严格模式
@@ -269,14 +275,16 @@
         type: 'billboard',
         style: {
           image: 'img/marker/mark1.png',
+          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
           label: {
             //不需要文字时，去掉label配置即可
             text: '可以同时支持文字',
-            font_size: 30,
+            font_size: 26,
             color: '#ffffff',
             outline: true,
             outlineColor: '#000000',
-            pixelOffsetY: -50,
+            pixelOffsetY: -60,
           },
         },
       })
@@ -301,7 +309,7 @@
         type: 'model',
         style: {
           scale: 10,
-          modelUrl: 'http://data.marsgis.cn/gltf/mars/firedrill/xiaofangche.gltf',
+          url: 'http://data.marsgis.cn/gltf/mars/firedrill/xiaofangche.gltf',
         },
       })
     }
@@ -311,7 +319,7 @@
         type: 'polyline',
         // maxPointNum: 2,  //限定最大点数，可以绘制2个点的线，自动结束
         style: {
-          color: '#55ff33',
+          color: clampToGround ? '#ffff00' : '#3388ff',
           width: 3,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround
@@ -326,11 +334,11 @@
       graphicLayer.startDraw({
         type: 'polygon',
         style: {
-          color: '#29cf34',
+          color: clampToGround ? '#ffff00' : '#3388ff',
           opacity: 0.5,
           outline: false,
           outlineWidth: 2.0,
-          clampToGround: clampToGround,   
+          clampToGround: clampToGround,
         },
         onBeforeCreate:function(entityOptions){
           //polygon的需要在entity层级赋予属性
@@ -343,7 +351,7 @@
       graphicLayer.startDraw({
         type: 'curve',
         style: {
-          color: '#55ff33',
+          color: clampToGround ? '#ffff00' : '#3388ff',
           width: 3,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
@@ -358,7 +366,7 @@
       graphicLayer.startDraw({
         type: 'corridor',
         style: {
-          color: '#55ff33',
+          color: clampToGround ? '#ffff00' : '#3388ff',
           width: 500,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
@@ -373,7 +381,7 @@
       graphicLayer.startDraw({
         type: 'circle',
         style: {
-          color: '#ffff00',
+          color: clampToGround ? '#ffff00' : '#3388ff',
           opacity: 0.6,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
@@ -388,7 +396,7 @@
       graphicLayer.startDraw({
         type: 'rectangle',
         style: {
-          color: '#ffff00',
+          color: clampToGround ? '#ffff00' : '#3388ff',
           opacity: 0.6,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
@@ -444,7 +452,7 @@
           fill: true,
           color: '#00ff00',
           opacity: 0.6,
-          diffHeight: 1000,
+          length: 1000,
         },
       })
     }
@@ -492,6 +500,7 @@
         },
       })
     }
+
     function toKML() {
       var geojsonObject = graphicLayer.toGeoJSON()
       if (geojsonObject == null) {
@@ -522,9 +531,9 @@
       })
 
       var kml = tokml(geojsonObject, {
-        name: 'MarsGIS标绘数据',
-        documentName: 'MarsGIS标绘数据',
-        documentDescription: 'MarsGIS标绘数据 by marsgis',
+        name: 'Mars3D标绘数据',
+        documentName: 'Mars3D标绘数据文件',
+        documentDescription: '标绘数据 by mars3d.cn',
         simplestyle: true,
       })
 

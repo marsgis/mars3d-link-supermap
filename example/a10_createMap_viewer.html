@@ -21,8 +21,6 @@
   <title>原生Cesium来创建地球(可与第3方SDK结合使用) | Mars3D | 三维地图 | 火星科技 | 合肥火星科技有限公司</title>
 
 
-  <script>window.noArrayPrototype = true;//标识haoutil.js中不扩展arary原生方法</script>
-  
   <!--第三方lib-->
   <script type="text/javascript" src="../lib/include-lib.js" libpath="../lib/"
     include="jquery,font-awesome,bootstrap,layer,haoutil,turf,mars3d"></script>
@@ -45,7 +43,9 @@
     })
 
     function initMap() {
- 
+      //与超图结合示例：      https://github.com/marsgis/mars3d-link-supermap
+      //与earthsdk结合示例：  https://github.com/marsgis/mars3d-link-earthsdk
+
       //构造地球（可以使用原生Cesium或第3方SDK方式去构造Viewer）
       var viewer = new Cesium.Viewer('mars3dContainer', {
         animation: false,
@@ -58,7 +58,13 @@
 
       //mars3d.Map也可以直接传入外部已经构造好的viewer, 支持config.json所有参数
       var map = new mars3d.Map(viewer, {
-        scene: {    fxaa: true,   }, 
+        scene: {
+          center: { lat: 30.054604, lng: 108.885436, alt: 17036414, heading: 0, pitch: -90 },
+          fxaa: true,
+        },
+        control: {
+          defaultContextMenu: true, //右键菜单
+        },
       })
 
       //cesium对应的原始地球对象

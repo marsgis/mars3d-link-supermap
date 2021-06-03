@@ -42,7 +42,7 @@
       { "name": "color", "label": "颜色", "type": "color", "defval": "#ffffff" },
       { "name": "opacity", "label": "透明度", "type": "slider", "defval": 1.0 },
 
-      { "name": "outline", "label": "是否衬色", "type": "radio", "defval": true, "impact": ["outlineColor", "outlineOpacity", "outlineWidth"] },
+      { "name": "outline", "label": "是否衬色", "type": "radio", "defval": false, "impact": ["outlineColor", "outlineOpacity", "outlineWidth"] },
       { "name": "outlineColor", "label": "衬色颜色", "type": "color", "defval": "#000000" },
       { "name": "outlineOpacity", "label": "衬色透明度", "type": "slider", "defval": 0.6 },
       { "name": "outlineWidth", "label": "衬色宽度", "type": "number", "defval": 3.0 },
@@ -338,7 +338,6 @@
     "name": "圆",
     "style": [
       { "name": "radius", "label": "半径", "type": "number", "defval": 0.0 },
-      { "name": "height", "label": "高程", "type": "number", "defval": 0.0 },
       { "name": "diffHeight", "label": "立体高度", "type": "number", "defval": 0.0 },
 
       { "name": "fill", "label": "是否填充", "type": "radio", "defval": true, "impact": ["materialType", "color", "opacity"] },
@@ -402,7 +401,6 @@
     "style": [
       { "name": "semiMinorAxis", "label": "短半径", "type": "number", "defval": 0.0 },
       { "name": "semiMajorAxis", "label": "长半径", "type": "number", "defval": 0.0 },
-      { "name": "height", "label": "高程", "type": "number", "defval": 0.0 },
       { "name": "diffHeight", "label": "立体高度", "type": "number", "defval": 0.0 },
 
       { "name": "fill", "label": "是否填充", "type": "radio", "defval": true, "impact": ["materialType", "color", "opacity"] },
@@ -702,6 +700,7 @@
         "data": [
           { "text": "实线", "value": "Color" },
           { "text": "虚线", "value": "PolylineDash", "impact": ["dashLength"] },
+          { "text": "衬色线", "value": "PolylineOutline", "impact": ["outlineColor", "outlineWidth"] },
           { "text": "光晕", "value": "PolylineGlow" , "impact": ["glowPower"]},
           { "text": "箭头", "value": "PolylineArrow" },
           { "text": "流动线", "value": "LineFlow", "impact": ["speed", "image", "repeat"] },
@@ -711,6 +710,8 @@
         ]
       },
       { "name": "dashLength", "label": "虚线间长", "type": "number", "defval": 16.0 },
+      { "name": "outlineColor", "label": "衬色颜色", "type": "color", "defval": "#ffffff" },
+      { "name": "outlineWidth", "label": "衬色宽度", "type": "number", "defval": 2.0 },
       { "name": "glowPower", "label": "高亮强度", "type": "number", "defval":0.25 },
       { "name": "image", "label": "图片", "type": "label", "defval": "img/textures/lineClr.png" },
       { "name": "speed", "label": "速度", "type": "number", "defval": 10.0 },
@@ -722,14 +723,6 @@
 
       { "name": "closure", "label": "是否闭合", "type": "radio", "defval": false },
       { "name": "clampToGround", "label": "是否贴地", "type": "radio", "defval": false },
-
-      { "name": "outline", "label": "是否衬色", "type": "radio", "defval": false, "impact": ["outlineColor", "outlineWidth"] },
-      { "name": "outlineColor", "label": "衬色颜色", "type": "color", "defval": "#ffffff" },
-      { "name": "outlineWidth", "label": "衬色宽度", "type": "number", "defval": 2.0 },
-
-      { "name": "depthFail", "label": "是否显示遮挡", "type": "radio", "defval": false, "impact": ["depthFailColor", "depthFailOpacity"] },
-      { "name": "depthFailColor", "label": "遮挡处颜色", "type": "color", "defval": "#ff0000" },
-      { "name": "depthFailOpacity", "label": "遮挡处透明度", "type": "slider", "defval": 0.2 },
 
       {
         "name": "distanceDisplayCondition",
@@ -793,7 +786,7 @@
         "defval": "Color",
         "data": [
           { "text": "纯色", "value": "Color" },
-          { "text": "流动效果", "value": "LineFlow", "impact": ["speed", "image", "repeat", "axisY"] },
+          { "text": "流动效果", "value": "LineFlow", "impact": ["speed", "image", "repeat_x", "repeat_y", "axisY"] },
           { "text": "走马灯效果", "value": "WallScroll", "impact": ["speed", "image", "count"] },
           { "text": "文本", "value": "Text", "impact": ["text", "font_size", "font_weight", "font_family", "font_style"] },
           { "text": "网格", "value": "Grid", "impact": ["cellAlpha", "lineCount", "lineThickness"] },
@@ -808,7 +801,7 @@
       { "name": "axisY", "label": "竖直方向", "type": "radio", "defval": false },
       { "name": "count", "label": "数量", "type": "number", "defval": 1.0 },
 
-      { "name": "text", "label": "文本内容", "type": "text", "defval": "" },
+      { "name": "text", "label": "文本内容", "type": "text", "defval": "文字" },
       {
         "name": "font_family",
         "label": "字体",
@@ -822,7 +815,7 @@
           { "text": "黑体", "value": "黑体" }
         ]
       },
-      { "name": "font_size", "label": "字体大小", "type": "number", "defval": 30.0 },
+      { "name": "font_size", "label": "字体大小", "type": "number", "defval": 100 },
       {
         "name": "font_weight",
         "label": "是否加粗",
