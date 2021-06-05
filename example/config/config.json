@@ -49,7 +49,7 @@
       "geocoderConfig": { "key": ["ae29a37507860c7ae4a785ac905927e0"] },
 
       "defaultContextMenu": true,
-      "location": {
+      "locationBar": {
         "fps": true,
         "format": "<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>层级：{level}</div>  <div>俯仰角：{pitch}度</div> <div>视高：{height}米</div>"
       }
