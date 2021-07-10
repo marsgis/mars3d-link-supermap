@@ -15,6 +15,7 @@ function initLayerManager(graphicLayer) {
 
   //可在图层上绑定popup,对所有加到这个图层的矢量数据都生效
   bindLayerPopup(graphicLayer)
+
   $('#chkPopup').change(function () {
     let val = $(this).is(':checked')
 
@@ -92,7 +93,7 @@ function initLayerManager(graphicLayer) {
 
     let fileName = file.name
     let fileType = fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length).toLowerCase()
-    if (fileType !== 'json') {
+    if (fileType !== 'json' || fileType !== 'geojson') {
       window.layer.msg('文件类型不合法,请选择json格式标注文件！')
       clearSelectFile()
       return
@@ -114,9 +115,14 @@ function initLayerManager(graphicLayer) {
 }
 
 function bindLayerPopup(graphicLayer) {
-  graphicLayer.bindPopup('我是layer上绑定的Popup', {
-    anchor: [0, -10],
-  })
+  graphicLayer.bindPopup(
+    function (event) {
+      return '我是layer上绑定的Popup'
+    },
+    {
+      anchor: [0, -10],
+    }
+  )
 }
 
 function bindLayerContextMenu(graphicLayer) {
@@ -254,7 +260,7 @@ function initGraphicManager(graphic) {
     graphic.highlight({
       time: 20, //闪烁时长（秒）
       maxAlpha: 0.5,
-      color: Cesium.Color.RED,
+      color: Cesium.Color.YELLOW,
       onEnd: function () {
         //结束后回调
       },

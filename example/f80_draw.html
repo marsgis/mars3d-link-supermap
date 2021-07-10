@@ -87,7 +87,7 @@
       <input id="btnSaveKML" type="button" class="btn btn-primary" value="另存KML" />
       <input id="btnSaveWKT" type="button" class="btn btn-primary" value="另存WKT" />
 
-      <input id="input_draw_file" type="file" accept=".json" style="display:none;" />
+      <input id="input_draw_file" type="file" accept=".json,.geojson" style="display:none;" />
     </div>
 
 
@@ -157,16 +157,6 @@
     function initMap(options) {
       //合并属性参数，可覆盖config.json中的对应配置
       var mapOptions = mars3d.Util.merge(options, {
-        scene: {
-          center: {
-            y: 30.831262,
-            x: 116.342362,
-            z: 12364.89,
-            heading: 0,
-            pitch: -80,
-            roll: 0,
-          },
-        },
         control: {
           infoBox: false,
         },
@@ -182,7 +172,7 @@
       map.addLayer(graphicLayer)
 
       //图层管理的相关处理，代码在\js\graphicManager.js
-      initLayerManager(graphicLayer)
+      window.initLayerManager(graphicLayer)
 
       graphicLayer.unbindPopup()
 
@@ -245,7 +235,7 @@
 
       //加载历史演示数据
       if (location.hostname !== '127.0.0.1' && location.hostname !== 'localhost') {
-        $.getJSON('http://data.marsgis.cn/file/geojson/geojson-draw.json', function (result) {
+        $.getJSON('//data.mars3d.cn/file/geojson/mars3d-draw.json', function (result) {
           graphicLayer.loadGeoJSON(result, { clear: true, flyTo: true })
         })
       }
@@ -309,7 +299,7 @@
         type: 'model',
         style: {
           scale: 10,
-          url: 'http://data.marsgis.cn/gltf/mars/firedrill/xiaofangche.gltf',
+          url: '//data.mars3d.cn/gltf/mars/firedrill/xiaofangche.gltf',
         },
       })
     }
@@ -336,7 +326,8 @@
         style: {
           color: clampToGround ? '#ffff00' : '#3388ff',
           opacity: 0.5,
-          outline: false,
+          outline: true,
+          outlineColor: '#ffffff',
           outlineWidth: 2.0,
           clampToGround: clampToGround,
         },
@@ -367,6 +358,7 @@
         type: 'corridor',
         style: {
           color: clampToGround ? '#ffff00' : '#3388ff',
+          opacity: 0.6,
           width: 500,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
@@ -383,6 +375,9 @@
         style: {
           color: clampToGround ? '#ffff00' : '#3388ff',
           opacity: 0.6,
+          outline: true,
+          outlineColor: '#ffffff',
+          outlineWidth: 2.0,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
         },
@@ -398,6 +393,9 @@
         style: {
           color: clampToGround ? '#ffff00' : '#3388ff',
           opacity: 0.6,
+          outline: true,
+          outlineColor: '#ffffff',
+          outlineWidth: 2.0,
           clampToGround: clampToGround,
           // clampToS3M:clampToGround, //贴s3m模型
         },
@@ -530,7 +528,7 @@
         }
       })
 
-      var kml = tokml(geojsonObject, {
+      var kml = window.tokml(geojsonObject, {
         name: 'Mars3D标绘数据',
         documentName: 'Mars3D标绘数据文件',
         documentDescription: '标绘数据 by mars3d.cn',

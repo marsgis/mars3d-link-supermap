@@ -1,13 +1,7 @@
 ﻿{
   "map3d": {
     "scene": {
-      "center": {
-        "lat": 50.526361,
-        "lng": 116.335987,
-        "alt": 45187,
-        "heading": 0,
-        "pitch": -45
-      },
+      "center": { "lat": 30.526361, "lng": 116.335987, "alt": 45187, "heading": 0, "pitch": -45 },
       "scene3DOnly": false,
       "shadows": false,
       "removeDblClick": true,
@@ -32,7 +26,8 @@
         "enableTranslate": true,
         "enableTilt": true,
         "enableZoom": true,
-        "enableCollisionDetection": true
+        "enableCollisionDetection": true,
+        "minimumCollisionTerrainHeight": 15000
       }
     },
     "control": {
@@ -46,16 +41,19 @@
       "timeline": false,
       "infoBox": true,
       "geocoder": true,
-      "geocoderConfig": { "key": ["ae29a37507860c7ae4a785ac905927e0"] },
+      "geocoderConfig": { "key": ["ae29a37307840c7ae4a785ac905927e0"] },
+      "selectionIndicator":false,
 
       "defaultContextMenu": true,
       "locationBar": {
         "fps": true,
-        "format": "<div>经度:{x}</div> <div>纬度:{y}</div> <div>海拔：{z}米</div> <div>层级：{level}</div>  <div>俯仰角：{pitch}度</div> <div>视高：{height}米</div>"
+        "crs":"CGCS2000_GK_Zone_3",
+        "crsDecimal":0,
+        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div>层级：{level}</div><div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div><div>视高：{cameraHeight}米</div>"
       }
     },
     "terrain": {
-      "url": "http://data.marsgis.cn/terrain",
+      "url": "//data.mars3d.cn/terrain",
       "isSct": false,
       "invisibility": true,
       "show": true
@@ -63,14 +61,13 @@
     "basemaps": [
       { "id": 10, "name": "地图底图", "type": "group" },
       {
-        "id": 2020,
+        "id": 2021,
         "pid": 10,
         "name": "天地图影像",
         "icon": "http://mars3d.cn/example/img/basemaps/tdt_img.png",
         "type": "tdt",
         "layer": "img_d",
-        "key": ["9ae78c51a0a28f06444d541148496e36"],
-        "show": true
+        "key": ["9ae78c51a0a28f06444d541148496e36"]
       },
       {
         "pid": 10,
@@ -83,7 +80,6 @@
         ]
       },
       {
-        "id": 2021,
         "pid": 10,
         "name": "高德影像",
         "type": "group",
@@ -125,7 +121,8 @@
         "layers": [
           { "name": "底图", "type": "tencent", "layer": "img_d" },
           { "name": "注记", "type": "tencent", "layer": "img_z" }
-        ]
+        ],
+        "show": true
       },
       {
         "pid": 10,
@@ -190,7 +187,7 @@
         "name": "离线地图  (供参考)",
         "type": "xyz",
         "icon": "http://mars3d.cn/example/img/basemaps/mapboxSatellite.png",
-        "url": "http://data.marsgis.cn/maptile/googleImg/{z}/{x}/{y}.jpg",
+        "url": "//data.mars3d.cn/tile/googleImg/{z}/{x}/{y}.jpg",
         "minimumLevel": 1,
         "maximumLevel": 18,
         "minimumTerrainLevel": 1,
@@ -202,7 +199,7 @@
         "name": "单张图片 (本地离线)",
         "icon": "http://mars3d.cn/example/img/basemaps/offline.png",
         "type": "image",
-        "url": "http://mars3d.cn/example/img/tietu/world.jpg"
+        "url": "//data.mars3d.cn/file/img/world/world.jpg"
       }
     ],
     "layers": [
@@ -224,28 +221,23 @@
         "key": ["9ae78c51a0a28f06444d541148496e36"],
         "show": false
       },
+      { "id": 30, "name": "实时路况", "type": "group" },
+      {
+        "pid":30,
+        "name": "高德实时路况",
+        "type": "gaode",
+        "layer": "time",
+        "minimumTerrainLevel": 4,
+        "minimumLevel": 4,
+        "proxy": "//server.mars3d.cn/proxy/"
+      },
+      {
+        "pid":30,
+        "name": "百度实时路况",
+        "type": "baidu",
+        "layer": "time"
+      },
 
-      {
-        "id": 40,
-        "name": "3dtiles数据",
-        "type": "group"
-      },
-      {
-        "pid": 40,
-        "type": "3dtiles",
-        "name": "厂房",
-        "url": "http://data.marsgis.cn/3dtiles/qx-changfang/tileset.json",
-        "position": { "lng": 115.456996, "lat": 60.609811, "alt": 8938 },
-        "maximumScreenSpaceError": 1,
-        "center": {
-          "lng": 60.414482,
-          "lat": 115.458781,
-          "alt": 1058.2,
-          "heading": 194.1,
-          "pitch": -36.6,
-          "roll": 360
-        }
-      },
 
       {
         "id": 50,
