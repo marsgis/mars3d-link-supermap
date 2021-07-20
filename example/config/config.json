@@ -345,7 +345,7 @@
         "pid": 60,
         "name": "鸟巢",
         "type": "supermap_s3m",
-        "url": "http://www.supermapol.com/realspace/services/3D-Olympic/rest/realspace",
+        "url": "http://www.supermapol.com/realspace/services/3D-NewOlympicGreen/rest/realspace",
         "center": {
           "lat": 39.98578,
           "lng": 116.395599,
