@@ -10,14 +10,7 @@
  
 ## 运行站点
  在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览 `example\a10_createMap_viewer.html` 等示例页面即可
-
-### 运行效果 
- [在线Demo](http://mars3d.cn/project/supermap/index.html)  
-
- ![image](http://mars3d.cn/project/img/supermap.jpg)
  
- [更多项目体验](http://mars3d.cn/project.html)
-
 
 
 ## 压缩及混淆
