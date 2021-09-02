@@ -121,8 +121,7 @@
         "layers": [
           { "name": "底图", "type": "tencent", "layer": "img_d" },
           { "name": "注记", "type": "tencent", "layer": "img_z" }
-        ],
-        "show": true
+        ]
       },
       {
         "pid": 10,
@@ -137,7 +136,8 @@
         "icon": "http://mars3d.cn/example/img/basemaps/esriWorldImagery.png",
         "type": "xyz",
         "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-        "enablePickFeatures": false
+        "enablePickFeatures": false,
+        "show": true
       },
       {
         "pid": 10,
@@ -358,7 +358,7 @@
         },
         "position": { "alt": 45 },
         "show": true,
-        "flyTo": true
+        "flyTo": false
       }
     ]
   }
