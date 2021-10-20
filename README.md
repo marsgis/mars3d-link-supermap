@@ -1,10 +1,10 @@
 # Mars3D最简项目模版 - 超图版
   Mars3D支持结合`Cesium相关的各类平台`来兼容使用，方便结合不同平台的优点来达到完成各种项目需求。
-
   
   本仓库是Mars3D平台，在[超图版Cesium库](http://support.supermap.com.cn:8090/webgl/index.html)技术栈下的最简的应用项目模版。
 
  > 其他技术栈，请参考： [https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
+ > vue项目模板参考：[mars3d-vue-template](https://github.com/marsgis/mars3d-vue2-template/tree/master/mars3d-vue2-supermap)
 
 
  
@@ -50,4 +50,4 @@
 
 ## 版权说明
 1. 任何`个人或组织`可以在遵守Mars3D相关要求下`免费无限制`使用。
-2. 如有`个性化需求`或`商业应用`，请联系[火星科技](http://mars3d.cn)购买。
+2. 如有个性化定制需求，请联系[火星科技](http://mars3d.cn)付费提供相关服务。
