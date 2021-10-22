@@ -35,10 +35,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marsgis/mars3d-widget-project.git"
+    "url": "https://github.com/marsgis/mars3d-link-supermap.git"
   },
   "bugs": {
-    "url": "https://github.com/marsgis/mars3d-widget-project/issues",
+    "url": "https://github.com/marsgis/mars3d-link-supermap/issues",
     "email": "wh@marsgis.cn"
   },
   "keywords": [
