@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="author" content="火星科技 http://mars3d.cn " />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+
+    <!-- <title><%= htmlWebpackPlugin.options.title %></title> -->
+    <title>Mars3D+超图+Vue版 最简项目模版</title>
+
+    <script type="text/javascript">
+      window.basePathUrl = '<%= BASE_URL %>' //标识config、widgets所在的目录
+      window.CESIUM_BASE_URL = '<%= BASE_URL %>lib/Cesium-supermap/'
+    </script>
+    <link rel="stylesheet" href="<%= BASE_URL %>lib/Cesium-supermap/Widgets/widgets.css" />
+    <script type="text/javascript" src="<%= BASE_URL %>lib/Cesium-supermap/Cesium.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

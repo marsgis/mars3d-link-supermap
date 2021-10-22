@@ -1,0 +1,365 @@
+﻿{
+  "map3d": {
+    "scene": {
+      "center": { "lat": 30.526361, "lng": 116.335987, "alt": 45187, "heading": 0, "pitch": -45 },
+      "scene3DOnly": false,
+      "shadows": false,
+      "removeDblClick": true,
+      "sceneMode": 3,
+      "showSun": true,
+      "showMoon": true,
+      "showSkyBox": true,
+      "showSkyAtmosphere": true,
+      "fog": true,
+      "fxaa": true,
+      "globe": {
+        "depthTestAgainstTerrain": false,
+        "baseColor": "#546a53",
+        "showGroundAtmosphere": true,
+        "enableLighting": false
+      },
+      "cameraController": {
+        "zoomFactor": 3.0,
+        "minimumZoomDistance": 1,
+        "maximumZoomDistance": 50000000,
+        "enableRotate": true,
+        "enableTranslate": true,
+        "enableTilt": true,
+        "enableZoom": true,
+        "enableCollisionDetection": true,
+        "minimumCollisionTerrainHeight": 15000
+      }
+    },
+    "control": {
+      "homeButton": true,
+      "baseLayerPicker": true,
+      "sceneModePicker": true,
+      "vrButton": false,
+      "fullscreenButton": false,
+      "navigationHelpButton": true,
+      "animation": false,
+      "timeline": false,
+      "infoBox": true,
+      "geocoder": true,
+      "geocoderConfig": { "key": ["ae29a37307840c7ae4a785ac905927e0"] },
+      "selectionIndicator":false,
+
+      "defaultContextMenu": true,
+      "locationBar": {
+        "fps": true,
+        "crs":"CGCS2000_GK_Zone_3",
+        "crsDecimal":0,
+        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div>层级：{level}</div><div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div><div>视高：{cameraHeight}米</div>"
+      }
+    },
+    "terrain": {
+      "url": "//data.mars3d.cn/terrain",
+      "isSct": false,
+      "invisibility": true,
+      "show": true
+    },
+    "basemaps": [
+      { "id": 10, "name": "地图底图", "type": "group" },
+      {
+        "id": 2021,
+        "pid": 10,
+        "name": "天地图影像",
+        "icon": "http://mars3d.cn/example/img/basemaps/tdt_img.png",
+        "type": "tdt",
+        "layer": "img_d",
+        "key": ["9ae78c51a0a28f06444d541148496e36"]
+      },
+      {
+        "pid": 10,
+        "name": "天地图电子",
+        "icon": "http://mars3d.cn/example/img/basemaps/tdt_vec.png",
+        "type": "group",
+        "layers": [
+          { "name": "底图", "type": "tdt", "layer": "vec_d", "key": ["9ae78c51a0a28f06444d541148496e36"] },
+          { "name": "注记", "type": "tdt", "layer": "vec_z", "key": ["9ae78c51a0a28f06444d541148496e36"] }
+        ]
+      },
+      {
+        "pid": 10,
+        "name": "高德影像",
+        "type": "group",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_img.png",
+        "layers": [
+          { "name": "底图", "type": "gaode", "layer": "img_d" },
+          { "name": "注记", "type": "gaode", "layer": "img_z" }
+        ]
+      },
+      {
+        "pid": 10,
+        "name": "高德电子",
+        "type": "gaode",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_vec.png",
+        "layer": "vec"
+      },
+      {
+        "pid": 10,
+        "name": "百度影像",
+        "type": "group",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-img.png",
+        "layers": [
+          { "name": "底图", "type": "baidu", "layer": "img_d" },
+          { "name": "注记", "type": "baidu", "layer": "img_z" }
+        ]
+      },
+      {
+        "pid": 10,
+        "name": "百度电子",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-vec.png",
+        "type": "baidu",
+        "layer": "vec"
+      },
+      {
+        "pid": 10,
+        "name": "腾讯影像",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_img.png",
+        "type": "group",
+        "layers": [
+          { "name": "底图", "type": "tencent", "layer": "img_d" },
+          { "name": "注记", "type": "tencent", "layer": "img_z" }
+        ],
+        "show": true
+      },
+      {
+        "pid": 10,
+        "name": "腾讯电子",
+        "icon": "http://mars3d.cn/example/img/basemaps/gaode_vec.png",
+        "type": "tencent",
+        "layer": "vec"
+      },
+      {
+        "pid": 10,
+        "name": "ArcGIS影像",
+        "icon": "http://mars3d.cn/example/img/basemaps/esriWorldImagery.png",
+        "type": "xyz",
+        "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        "enablePickFeatures": false
+      },
+      {
+        "pid": 10,
+        "name": "微软影像",
+        "icon": "http://mars3d.cn/example/img/basemaps/bingAerial.png",
+        "type": "bing",
+        "key": "AuKhM0WRkjhX8E4y1OM0TukYycaw_4Vh3eSfXONDf7OARls-WEB3K_Rfx89bWxof",
+        "layer": "Aerial"
+      },
+      {
+        "pid": 10,
+        "name": "OSM地图",
+        "type": "xyz",
+        "icon": "http://mars3d.cn/example/img/basemaps/osm.png",
+        "url": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "subdomains": "abc"
+      },
+      {
+        "id": 2017,
+        "pid": 10,
+        "name": "蓝色底图",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-midnight.png",
+        "type": "xyz",
+        "url": "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+        "chinaCRS": "GCJ02",
+        "enablePickFeatures": false
+      },
+      {
+        "pid": 10,
+        "name": "黑色底图",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-dark.png",
+        "type": "tencent",
+        "layer": "custom",
+        "style": "4"
+      },
+      {
+        "pid": 10,
+        "name": "灰色底图",
+        "icon": "http://mars3d.cn/example/img/basemaps/bd-c-grayscale.png",
+        "type": "mapbox",
+        "username": "marsgis",
+        "styleId": "cki0a92b123qo1aluk0e5v7sb",
+        "scaleFactor": true
+      },
+      {
+        "pid": 10,
+        "name": "离线地图  (供参考)",
+        "type": "xyz",
+        "icon": "http://mars3d.cn/example/img/basemaps/mapboxSatellite.png",
+        "url": "//data.mars3d.cn/tile/googleImg/{z}/{x}/{y}.jpg",
+        "minimumLevel": 1,
+        "maximumLevel": 18,
+        "minimumTerrainLevel": 1,
+        "maximumTerrainLevel": 18,
+        "rectangle": { "xmin": -180, "xmax": 180, "ymin": -85, "ymax": 85 }
+      },
+      {
+        "pid": 10,
+        "name": "单张图片 (本地离线)",
+        "icon": "http://mars3d.cn/example/img/basemaps/offline.png",
+        "type": "image",
+        "url": "//data.mars3d.cn/file/img/world/world.jpg"
+      }
+    ],
+    "layers": [
+      { "id": 20, "name": "辅助图层", "type": "group" },
+      {
+        "pid":20,
+        "name": "行政区划界线",
+        "type": "xyz",
+        "url": "https://t{s}.tianditu.gov.cn/DataServer?T=ibo_w&x={x}&y={y}&l={z}&tk=9ae78c51a0a28f06444d541148496e36",
+        "subdomains": "01234567",
+        "maximumLevel": 10,
+        "show": false
+      },
+      {
+        "pid":20,
+        "name": "天地图注记",
+        "type": "tdt",
+        "layer": "img_z",
+        "key": ["9ae78c51a0a28f06444d541148496e36"],
+        "show": false
+      },
+      { "id": 30, "name": "实时路况", "type": "group" },
+      {
+        "pid":30,
+        "name": "高德实时路况",
+        "type": "gaode",
+        "layer": "time",
+        "minimumTerrainLevel": 4,
+        "minimumLevel": 4,
+        "proxy": "//server.mars3d.cn/proxy/"
+      },
+      {
+        "pid":30,
+        "name": "百度实时路况",
+        "type": "baidu",
+        "layer": "time"
+      },
+
+
+      {
+        "id": 50,
+        "name": "超图瓦片服务",
+        "type": "group"
+      }, 
+      {
+        "pid": 50,
+        "name": "超图底图",
+        "type": "supermap_img",
+        "icon": "img/basemaps/google_img.png",
+        "url": "http://www.supermapol.com/realspace/services/map-China600/rest/maps/China600"
+      },
+      {
+        "pid": 50,
+        "name": "超图影像图",
+        "type": "supermap_img",
+        "url": "http://www.supermapol.com/realspace/services/3D-dixingyingxiang/rest/realspace/datas/MosaicResult",
+        "center": {
+          "lat": 31.059016,
+          "lng": 102.651975,
+          "alt": 14161.14,
+          "heading": 90.8,
+          "pitch": -43.6,
+          "roll": 0
+        },
+        "transparentBackColor": "#333",
+        "transparentBackColorTolerance": 0.1
+      },
+      {
+        "pid": 50,
+        "name": "超图矢量瓦片",
+        "type": "supermap_mvt",
+        "url": "http://www.supermapol.com/realspace/services/map-mvt-JingJinDiQuDiTu/restjsr/v1/vectortile/maps/%E4%BA%AC%E6%B4%A5%E5%9C%B0%E5%8C%BA%E5%9C%B0%E5%9B%BE",
+        "parameters": {
+          "canvasWidth": 512,
+          "name": "testMVT"
+        },
+        "popup": "all",
+        "show": false
+      },
+      {
+        "id": 60,
+        "name": "超图S3M服务",
+        "type": "group"
+      },
+      {
+        "pid": 60,
+        "name": "香港科技园",
+        "type": "supermap_s3m",
+        "url": "https://www.supermapol.com/realspace/services/3D-yanmofenxi/rest/realspace/datas/sci_park/config",
+        "layername": "hk",
+        "s3mOptions": {
+          "selectEnabled": false
+        },
+        "position": { "alt": 45 },
+        "center": {
+          "lat": 22.427991,
+          "lng": 114.202612,
+          "alt": 296.3,
+          "heading": 101.4,
+          "pitch": -19.2,
+          "roll": 0
+        }
+      },
+      {
+        "pid": 60,
+        "name": "BIM",
+        "type": "supermap_s3m",
+        "url": "http://www.supermapol.com/realspace/services/3D-BIMbuilding/rest/realspace/datas/BIMbuilding/config",
+        "layername": "BIM",
+        "s3mOptions": {
+          "selectEnabled": false
+        },
+        "position": { "alt": 45 },
+        "center": {
+          "lat": 39.915744,
+          "lng": 116.474951,
+          "alt": 144.88,
+          "heading": 254.4,
+          "pitch": -24.3,
+          "roll": 0
+        }
+      },
+
+      {
+        "pid": 60,
+        "name": "CBD",
+        "type": "supermap_s3m",
+        "url": "http://support.supermap.com.cn:8090/iserver/services/3D-CBD/rest/realspace",
+        "s3mOptions": {
+          "selectEnabled": false
+        },
+        "position": { "alt": 45 },
+        "center": {
+          "lat": 39.894507,
+          "lng": 116.456491,
+          "alt": 1453.27,
+          "heading": 3.8,
+          "pitch": -60.7,
+          "roll": 0
+        }
+      },
+      {
+        "pid": 60,
+        "name": "鸟巢",
+        "type": "supermap_s3m",
+        "url": "http://www.supermapol.com/realspace/services/3D-NewOlympicGreen/rest/realspace",
+        "center": {
+          "lat": 39.98578,
+          "lng": 116.395599,
+          "alt": 736,
+          "heading": 317,
+          "pitch": -37
+        },
+        "s3mOptions": {
+          "selectEnabled": false
+        },
+        "position": { "alt": 45 },
+        "show": true,
+        "flyTo": true
+      }
+    ]
+  }
+}

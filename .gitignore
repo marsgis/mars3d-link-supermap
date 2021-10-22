@@ -22,5 +22,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-lib/Cesium-supermap/Cesium-src.js
+Cesium-src.js
 _SMexamples/
