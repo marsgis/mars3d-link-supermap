@@ -1,8 +1,9 @@
+ 
 <p align="center">
 <img src="https://mars3d.cn/logo.png" width="300px" />
 </p>
 
-<p align="center">基于超图+Vue模板的Mars3d开发模板</p>
+<p align="center">超图 + Mars3D 结合使用的🌎Vue2最简项目模板</p>
 
 <p align="center">
 <a target="_black" href="https://github.com/marsgis/mars3d">
@@ -14,7 +15,8 @@
 <a target="_black" href="https://www.npmjs.com/package/mars3d">
 <img alt="Npm version" src="https://img.shields.io/npm/v/mars3d.svg?style=flat&logo=npm&label=version"/>
 </a>
-</p>
+</p> 
+
 
  [**English**](./README_EN.md) |[**中文**](./README.md) 
  
@@ -25,9 +27,9 @@
 
    本仓库是Mars3D平台，在[超图版Cesium库](http://support.supermap.com.cn:8090/webgl/index.html)技术栈下的最简的应用项目模版。
 
- > 超图功能示例，请参考： [https://github.com/marsgis/mars3d-link-supermap](https://github.com/marsgis/mars3d-link-supermap)
+ > 超图功能示例，请参考： [mars3d-sm-example](../mars3d-sm-example/)
 
- > 其他技术栈，请参考： [https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
+
 
 
 
@@ -84,8 +86,9 @@ import Map from '../components/mars3d/Map.vue'
 ### 相关网站 
 - Mars3D官网：[http://mars3d.cn](http://mars3d.cn)  
 
-- GitHub导航列表：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
+- Mars3D开源项目列表：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
 
 
 ## 版权说明
-1. 任何`个人或组织`可以在遵守Mars3D相关要求下`免费无限制`使用。
+1. Mars3D平台由[火星科技](http://marsgis.cn/)自主研发，拥有所有权利。
+2. 任何个人或组织可以在遵守相关要求下可以免费无限制使用。

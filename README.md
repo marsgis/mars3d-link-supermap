@@ -2,8 +2,9 @@
 <p align="center">
 <img src="https://mars3d.cn/logo.png" width="300px" />
 </p>
+ 
+<p align="center">超图 + Mars3D 结合使用的🌎功能示例和项目模板</p>
 
-<p align="center">超图 + Mars3D 平台结合应用的示例和项目模板</p>
 
 <p align="center">
 <a target="_black" href="https://github.com/marsgis/mars3d">
@@ -40,9 +41,10 @@
 ### 相关网站 
 - Mars3D官网：[http://mars3d.cn](http://mars3d.cn)  
 
-- GitHub导航列表：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
+- Mars3D开源项目列表：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
 
 
 ## 版权说明
-1. 任何`个人或组织`可以在遵守Mars3D相关要求下`免费无限制`使用。
+1. Mars3D平台由[火星科技](http://marsgis.cn/)自主研发，拥有所有权利。
+2. 任何个人或组织可以在遵守相关要求下可以免费无限制使用。
 
