@@ -1,6 +1,6 @@
  
 <p align="center">
-<img src="https://mars3d.cn/logo.png" width="300px" />
+<img src="https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/logo.png" width="300px" />
 </p>
 
 <p align="center">超图 + Mars3D 结合使用的🌎Vue2最简项目模板</p>

@@ -1,6 +1,6 @@
  
 <p align="center">
-<img src="https://mars3d.cn/logo.png" width="300px" />
+<img src="https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/logo.png" width="300px" />
 </p>
 
 <p align="center">超图 + Mars3D 结合使用的🌎Vue2+Widget基础项目</p>
@@ -53,7 +53,7 @@
 ## 运行效果 
  [在线Demo](http://mars3d.cn/project/jcxm/)  
 
- ![image](http://mars3d.cn/img/jcxm.jpg)
+ ![image](https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/xm/jcxm/1.jpg)
  
 
  

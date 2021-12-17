@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://mars3d.cn/logo.png" width="300px" />
+<img src="https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/logo.png" width="300px" />
 </p>
 
 <p align="center">Mars3d widget project template based on Vue version</p>
@@ -54,7 +54,7 @@
 ## Operation effect
  [online Demo](http://mars3d.cn/project/jcxm/)  
 
- ![image](http://mars3d.cn/img/jcxm.jpg)
+ ![image](https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/xm/jcxm/1.jpg)
  
 
  
