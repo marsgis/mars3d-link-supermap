@@ -3,7 +3,8 @@
 <img src="https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/logo.png" width="300px" />
 </p>
 
-<p align="center">超图 + Mars3D 结合使用的🌎功能示例</p>
+<p align="center">基于传统JS技术栈的 Mars3D🌎功能示例</p>
+
 
 <p align="center">
 <a target="_black" href="https://github.com/marsgis/mars3d">
@@ -15,43 +16,149 @@
 <a target="_black" href="https://www.npmjs.com/package/mars3d">
 <img alt="Npm version" src="https://img.shields.io/npm/v/mars3d.svg?style=flat&logo=npm&label=version"/>
 </a>
-</p> 
+</p>
+
 
   Mars3D支持结合`Cesium相关的各类平台`来兼容使用，方便结合不同平台的优点来达到完成各种项目需求。
   
-  本仓库是Mars3D平台，在[超图版Cesium库](http://support.supermap.com.cn:8090/webgl/index.html)技术栈下的最简的应用项目模版。
-
-
+  本仓库是Mars3D平台，在[超图版Cesium库](http://support.supermap.com.cn:8090/webgl/index.html)技术栈下基于原生JS开发的功能示例。
  
 
- 
-## 运行站点
- 在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览 `example\a10_createMap_viewer.html` 等示例页面即可
- 
+## 项目介绍
+
+ 这是一个基于 原生JS 开发的 mars3d 功能示例项目。
+
+ > 如果您不熟悉原生JS，对Vue比较熟悉，可以阅读：
+ [功能示例Vue版教程](http://mars3d.cn/dev/guide/start/example.html) 、
+ [mars3d-vue-example代码](https://gitee.com/marsgis/mars3d-vue-example) 
 
 
-## 压缩及混淆
+
+## 下载运行项目
+ 
+### 下载代码
+ 下面我们已[Github地址](https://github.com/marsgis/mars3d-es5-example)为例， [Gitee地址(国内)](https://gitee.com/marsgis/mars3d-es5-example) 操作类同。
+ 
+ - 如果本地没有git软件，可以浏览器输入[https://github.com/marsgis/mars3d-es5-example](https://github.com/marsgis/mars3d-es5-example)地址后，按下图下载zip包。
+
+ ![image](http://mars3d.cn/dev/img/guide/start-example-down.jpg)
+
+ - 如果本地有git软件，可以输入下面命令，拉取代码
+```sh
+git clone https://github.com/marsgis/mars3d-es5-example.git
+```
+
+ ![image](http://mars3d.cn/dev/img/guide/start-example-git.jpg) 
+
+
+
+### 运行环境
+
+在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览`examples.html`或对应示例页面即可 ，
+
+建议使用VScode工具打开代码目录（请参考上一章节安装好VScode 及 Live Server插件）。
+
+- 推荐使用 vscode，安装参考[开发环境搭建教程](guide/start/env.html)
+- 安装 vscode 插件，推荐安装 Live Server
+
+ 参考下图通过Live Server访问各页面
+
+ ![image](http://mars3d.cn/dev/img/guide/start-example-run.jpg) 
+
+
+
+
+### 运行效果  
+运行后示例列表与在mars3d官网看到的功能示例是相同的。
+
+ ![image](http://mars3d.cn/dev/img/guide/start-example-yulan.jpg) 
+
+
+
+### 压缩及混淆
  如果需要编译、对整站压缩及混淆，请参考：[https://github.com/muyao1987/web-dist](https://github.com/muyao1987/web-dist)
 
+
+
+## 如何反馈问题？
+- 发现您发现项目中存在的问题或者需要优化的地方；
+- 如果您有一些自己全新编写的示例，希望也开源与大家分享。
+
+提交方式：
+- 欢迎在github或gitee上[提交PR](https://www.baidu.com/s?wd=在GitHub上提交PR) 
+- 如果对git不熟悉，也可以整理示例代码发送邮件到 wh@marsgis.cn 由我们来整理集成。
+
+
+## 项目架构
+
+
+### 主要目录说明
+```
+mars3d-es5-example
+└───data                列表配置信息及截图
+│───example             示例代码，每个示例页面可以单独运行【重要】
+│───lib                 示例依赖资源
+│   └─include-lib.js    lib资源统一配置文件
+│───static              列表页、编辑页对应js、css
+└───examples.html       列表页
+```
+
+与示例相关的2个主要目录是：`example`、`lib`。
+
+
+#### include-lib.js文件说明 
+
+我们当前原生JS版本`功能示例`页面，第三方类库及我们的sdk类库都存放在lib目录下，每个目录均有`README.md`文件说明该类库的github地址、官网和用途等信息。
+
+ ![image](http://mars3d.cn/dev/img/guide/start-includeLib-ml.jpg) 
+
+为了方便切换和引入第3方lib，我们编写了一个独立的js文件[include-lib.js](https://cdn.jsdelivr.net/gh/marsgis/mars3d-es5-example/lib//include-lib.js)来统一调用使用第3方lib,在需要的页面按下面方式引入lib：
+```html
+<!--第三方lib-->
+<script type="text/javascript" src="../lib/include-lib.js" libpath="../lib/"
+    include="font-awesome,mars3d"></script>
+```
+该方式等价于（如不习惯include-lib.js，也可以改为下面演示的直接引入方式）： 
+
+```html
+<!--对应font-awesome-->
+<link rel="stylesheet" href="../lib/fonts/font-awesome/css/font-awesome.min.css">
+
+<!--对应turf-->
+<script type="text/javascript" src="../lib/turf/turf.min.js"></script>
+
+<!--对应mars3d-->
+<link rel="stylesheet" href="../lib/Cesium/Widgets/widgets.css">
+<script type="text/javascript" src="../lib/Cesium/Cesium.js"></script>
+<link rel="stylesheet" href="../lib/mars3d/mars3d.css">
+<script type="text/javascript" src="../lib/mars3d/mars3d.js"></script>
+```
  
  
-### 超图版Cesium库整理及修改说明
-1. 将超图版Cesium库的`\Build\Cesium\`目录拷贝到 `lib\`目录下,并将此`Cesium`改名为`Cesium-supermap`；
-2. 修改`lib\include-lib.js`文件的`mars3d`节点配置，将相关库切换到`Cesium-supermap`
-```js
-'mars3d': [
-    //超图版本，三维地球“主库” 
-    libpath_local + 'Cesium-supermap/Widgets/widgets.css', //cesium  
-    libpath_local + 'Cesium-supermap/Cesium.js',
-    libpath + 'mars3d/plugins/compatible/cesium-version.js', //cesium版本兼容处理
-    libpath + 'mars3d/mars3d.css', //mars3d
-    libpath + 'mars3d/mars3d.js',
-    libpath + 'mars3d/plugins/supermap/mars3d-supermap.js', 
-    libpath + 'mars3d/plugins/compatible/cesium-zh.js',
-  ],
-``` 
-3. 更多示例，请从 [https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d) 中拷贝即可,2个仓库目录结构是一致的。
+## 添加新的示例
+复制`example\00_model.html`文件后改名，并修改代码即可。
+
+
+
+## 阅读示例源码和调试学习
+ 示例的目的是演示平台的每个功能点，可以按需求或兴趣去学习每一个示例，
+- （1）学习中可以查询相关类的API文档
+- （2）尝试修改源码中参数、方法等，来体验不同的呈现效果。
+
+
+## 开发中常见问题
+
+
+### 1. 局域网离线使用时注意事项
+ 平台所有代码层面来说支持离线运行和使用的，但需要注意的是离线时的地图服务的相关处理。
  
+ 如果局域网内有相关地形、卫星底图服务可以按内网服务类型和URL地址替换下`config.json`或`构造Map的代码中`的默认地形和底图。
+
+ 如果局域网内没有相关服务，可以按下面处理：
+- 修改config.json中`terrain`配置中，将已有的`"show": true`配置，改为`"show": false` 
+- 修改config.json中`basemaps`数组配置中，将已有的`"show": true`的图层，将该值改为`"show": false` ，并将单张图片或离线地图加上`"show": true`，并修改相关URL地址。
+- 您也可以参考教程[发布三维数据服务](/guide/data/server.html)进行部署离线地图服务，里面也有一些示例离线数据。
+
 
 
 ## Mars3D 是什么 
@@ -68,4 +175,3 @@
 ## 版权说明
 1. Mars3D平台由[火星科技](http://marsgis.cn/)自主研发，拥有所有权利。
 2. 任何个人或组织可以在遵守相关要求下可以免费无限制使用。
-

@@ -133,6 +133,7 @@
         "name": "horizontalOrigin",
         "label": "横向对齐",
         "type": "combobox",
+        "valType":"number",
         "defval": 0,
         "data": [
           { "text": "左边", "value": 1 },
@@ -144,6 +145,7 @@
         "name": "verticalOrigin",
         "label": "垂直对齐",
         "type": "combobox",
+        "valType":"number",
         "defval": 1,
         "data": [
           { "text": "顶部", "value": -1 },
@@ -187,6 +189,7 @@
         "name": "horizontalOrigin",
         "label": "横向定位",
         "type": "combobox",
+        "valType":"number",
         "defval": 0,
         "data": [
           { "text": "左边", "value": 1 },
@@ -198,6 +201,7 @@
         "name": "verticalOrigin",
         "label": "垂直定位",
         "type": "combobox",
+        "valType":"number",
         "defval": 0,
         "data": [
           { "text": "顶部", "value": -1 },
@@ -244,6 +248,7 @@
         "name": "horizontalOrigin",
         "label": "横向对齐",
         "type": "combobox",
+        "valType":"number",
         "defval": 0,
         "data": [
           { "text": "左边", "value": 1 },
@@ -255,6 +260,7 @@
         "name": "verticalOrigin",
         "label": "垂直对齐",
         "type": "combobox",
+        "valType":"number",
         "defval": 1,
         "data": [
           { "text": "顶部", "value": -1 },
@@ -413,8 +419,8 @@
           { "text": "纯色", "value": "Color", "impact": ["color", "opacity"] },
           { "text": "波纹", "value": "CircleWave", "impact": ["color", "opacity", "speed", "count", "gradient"] },
           { "text": "网格", "value": "Grid", "impact": ["cellAlpha", "lineCount", "lineThickness"] },
-          { "text": "条纹", "value": "Stripe", "impact": ["color", "opacity", "repeat", "evenColor", "oddColor"] },
-          { "text": "棋盘", "value": "Checkerboard", "impact": ["color", "opacity", "repeat", "evenColor", "oddColor"] },
+          { "text": "条纹", "value": "Stripe", "impact": ["repeat", "evenColor", "oddColor"] },
+          { "text": "棋盘", "value": "Checkerboard", "impact": ["repeat", "evenColor", "oddColor"] },
           { "text": "图片", "value": "Image", "impact": ["image", "opacity"] }
         ]
       },
@@ -879,11 +885,12 @@
         "name": "cornerType",
         "label": "顶点样式",
         "type": "combobox",
-        "defval": "ROUNDED",
+        "valType":"number",
+        "defval": 0,
         "data": [
-          { "text": "圆滑", "value": "ROUNDED" },
-          { "text": "斜接", "value": "MITERED" },
-          { "text": "斜切", "value": "BEVELED" }
+          { "text": "圆滑", "value": 0 },
+          { "text": "斜接", "value":1},
+          { "text": "斜切", "value": 2 }
         ]
       },
 

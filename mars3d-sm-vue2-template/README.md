@@ -63,7 +63,7 @@ npm install mars3d-supermap
 2. ### 拷贝文件
  > 场景配置文件：`public\config\config.json`
  
- > Cesium库文件：`public\lib`，建议通过超图官网下载最新Cesium覆盖至`public\lib\Cesium-supermap`
+ > Cesium库文件：`public\lib`，建议通过超图官网下载最新Cesium覆盖至`public\lib\Cesium-supermap` 【或者当前项目中拷贝】
 
  > 组件定义文件：`src\components\mars3d\Map.vue`
 

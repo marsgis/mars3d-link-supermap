@@ -13,7 +13,7 @@ $(function () {
       that.parent().siblings(".mp_tab_con").children().eq(index).addClass("cur").siblings().removeClass("cur");
 
       var _id = $(this).attr("id");
-      localforage.setItem("mars3d_plotAttr", _id);
+      localforage.setItem(storageName, _id)
     }
   });
 
@@ -27,20 +27,23 @@ $(function () {
 //     $("#tab_plot").click();
 // }
 
+var storageName = "mars3d_plotAttr";
+
 function tab2attr() {
   // $("#tab_attr").removeClass('disabled');
   // $("#tab_latlng").removeClass('disabled');
 
   // if ($("#tab_plot").hasClass('cur'))
 
-  //读取localforage值
-  localforage.getItem("mars3d_plotAttr").then(function (last_attr_tab) {
+   //读取localStorage值
+  localforage.getItem(storageName).then(function (last_attr_tab) {
     if (last_attr_tab != null) {
       $("#" + last_attr_tab).click();
     } else {
       $("#tab_attr").click();
     }
-  });
+  })
+
 }
 
 function changeOpenShowHide() {

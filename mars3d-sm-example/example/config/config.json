@@ -12,6 +12,7 @@
       "showSkyAtmosphere": true,
       "fog": true,
       "fxaa": true,
+      "requestRenderMode": true,
       "globe": {
         "depthTestAgainstTerrain": false,
         "baseColor": "#546a53",
@@ -39,7 +40,7 @@
       "navigationHelpButton": true,
       "animation": false,
       "timeline": false,
-      "infoBox": true,
+      "infoBox": false,
       "geocoder": true,
       "geocoderConfig": { "key": ["ae29a37307840c7ae4a785ac905927e0"] },
       "selectionIndicator":false,
@@ -49,7 +50,7 @@
         "fps": true,
         "crs":"CGCS2000_GK_Zone_3",
         "crsDecimal":0,
-        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div>层级：{level}</div><div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div><div>视高：{cameraHeight}米</div>"
+        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div>视高：{cameraHeight}米</div>"
       }
     },
     "terrain": {

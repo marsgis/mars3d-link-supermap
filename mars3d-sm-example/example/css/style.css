@@ -1,23 +1,6 @@
 /*
 * index页面css
 */
-
-
-/*超图版本多加的css*/
-.cesium-viewer-navigationContainer {
-    top: 0px;
-    right: 0px;
-    left: auto;
-    z-index: 99;
-}
-
-.cesium-viewer-toolbar {
-    z-index: 999;
-}
-/*超图版本多加的css , end*/
-
-
-
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -352,6 +335,7 @@ li {
 .toolbar-dropdown-menu i {
   padding-right: 5px;
 }
+
 
 /**infoview浮动面板*/
 .infoview {

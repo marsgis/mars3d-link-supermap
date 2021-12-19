@@ -3,10 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0" />
     <meta name="apple-touch-fullscreen" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -15,29 +12,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 
     <!-- 标题及搜索关键字 -->
-    <meta
-      name="keywords"
-      content="火星科技,cesium,3D,GIS,marsgis,三维,地球,地图,开发,框架,系统,示例,资料,模型,离线,外包,合肥,安徽,中国"
-    />
+    <meta name="keywords" content="火星科技,cesium,3D,GIS,marsgis,三维,地球,地图,开发,框架,系统,示例,资料,模型,离线,外包,合肥,安徽,中国" />
     <meta
       name="description"
       content="火星科技 合肥火星 合肥火星科技 合肥火星科技有限公司 leaflet leaflet框架 leaflet开发 cesium cesium开发 cesium框架 三维 地球 模型  gis marsgis 地图离线 地图开发 地图框架 地图外包 框架 开发 外包  地图离线 二维地图 三维地图 全景漫游 地理信息系统 云GIS 三维GIS GIS平台 WebGIS"
     />
 
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="https://cdn.jsdelivr.net/gh/muyao1987/cdn/marsgis.cn/favicon/favicon.ico"
-    />
-    <title>
-      GeoJson图层 | Mars3D | 三维地图 | 火星科技 | 合肥火星科技有限公司
-    </title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/muyao1987/cdn/marsgis.cn/favicon/favicon.ico" />
+    <title>GeoJson图层 | Mars3D | 三维地图 | 火星科技 | 合肥火星科技有限公司</title>
 
     <script
       type="text/javascript"
       src="../lib/include-lib.js"
       libpath="../lib/"
-      include="jquery,font-awesome,bootstrap,layer,haoutil,ztree,turf,mars3d"
+      include="jquery,font-awesome,bootstrap,layer,haoutil,ztree,mars3d"
     ></script>
 
     <link href="css/style.css" rel="stylesheet" />
@@ -51,74 +39,21 @@
 
     <div id="viewSL" class="infoview">
       示例：
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="标绘数据"
-        onclick="showDrawDemo(true)"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="体育设施点"
-        onclick="showPointDemo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="省界线"
-        onclick="showChinaLineDemo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="合肥区域面"
-        onclick="showAnhuiDemo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="合肥边界墙"
-        onclick="showAnhui2Demo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="规划面"
-        onclick="showGuihuaDemo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="世界各国"
-        onclick="showWorldDemo()"
-      />
+      <input type="button" class="btn btn-primary" value="标绘数据" onclick="showDrawDemo(true)" />
+      <input type="button" class="btn btn-primary" value="体育设施点" onclick="showPointDemo()" />
+      <input type="button" class="btn btn-primary" value="省界线" onclick="showChinaLineDemo()" />
+      <input type="button" class="btn btn-primary" value="合肥区域面" onclick="showAnhuiDemo()" />
+      <input type="button" class="btn btn-primary" value="合肥边界墙" onclick="showAnhui2Demo()" />
+      <input type="button" class="btn btn-primary" value="规划面" onclick="showGuihuaDemo()" />
+      <input type="button" class="btn btn-primary" value="世界各国" onclick="showWorldDemo()" />
 
       <br />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="立体建筑物"
-        onclick="showJianzhuwuDemo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="分层分户楼栋"
-        onclick="showJianzhuwuFcDemo()"
-      />
-      <input
-        type="button"
-        class="btn btn-primary"
-        value="单体化面"
-        onclick="showDantihuaDemo()"
-      />
+      <input type="button" class="btn btn-primary" value="立体建筑物" onclick="showJianzhuwuDemo()" />
+      <input type="button" class="btn btn-primary" value="分层分户楼栋" onclick="showJianzhuwuFcDemo()" />
+      <input type="button" class="btn btn-primary" value="单体化面" onclick="showDantihuaDemo()" />
     </div>
 
-    <div
-      class="infoview"
-      style="overflow: auto; right: 5px; left: auto; top: 50px; max-height: 90%"
-    >
+    <div class="infoview" style="overflow: auto; right: 5px; left: auto; top: 50px; max-height: 90%">
       <ul id="treeOverlays" class="ztree"></ul>
     </div>
 
@@ -132,13 +67,7 @@
         //合并属性参数，可覆盖config.json中的对应配置
         var mapOptions = mars3d.Util.merge(options, {
           scene: {
-            center: {
-              lat: 30.402686,
-              lng: 116.303632,
-              alt: 48692,
-              heading: 3,
-              pitch: -43,
-            },
+            center: { lat: 30.402686, lng: 116.303632, alt: 48692, heading: 3, pitch: -43 },
           },
         });
 
@@ -244,11 +173,7 @@
             { field: "所在区县", name: "所在区县" },
             { field: "具体位置", name: "具体位置" },
             { field: "建设内容（", name: "建设内容" },
-            {
-              field: "用地面积（",
-              name: "用地面积",
-              format: "mars3d.MeasureUtil.formatArea",
-            },
+            { field: "用地面积（", name: "用地面积", format: "mars3d.MeasureUtil.formatArea" },
             { field: "设施规模（", name: "设施规模" },
             { field: "举办者类型", name: "举办者类型" },
             { field: "开工时间", name: "开工时间" },
@@ -280,11 +205,15 @@
           name: "全国省界",
           url: "//data.mars3d.cn/file/geojson/areas/100000_full.json",
           symbol: {
-            type: "polylineP",
+            type: "polylineCombine",
             styleOptions: {
-              color: "#ffffff",
               width: 2,
-              opacity: 0.8,
+              material: mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.LineFlow, {
+                color: "#00ffff",
+                image: "img/textures/fenceline.png",
+                speed: 10,
+                repeat_x: 10,
+              }),
               label: {
                 text: "{name}",
                 font_size: 30,
@@ -320,13 +249,7 @@
       function showGuihuaDemo() {
         removeLayer();
 
-        map.setCameraView({
-          lat: 31.591382,
-          lng: 120.718945,
-          alt: 784,
-          heading: 279,
-          pitch: -67,
-        });
+        map.setCameraView({ lat: 31.591382, lng: 120.718945, alt: 784, heading: 279, pitch: -67 });
 
         geoJsonLayer = new mars3d.layer.GeoJsonLayer({
           id: 1987,
@@ -337,6 +260,9 @@
             styleOptions: {
               opacity: 0.6,
               color: "#0000FF",
+              outline: true,
+              outlineWidth: 3,
+              outlineColor: "#ffffff",
             },
             styleField: "类型",
             styleFieldOptions: {
@@ -400,18 +326,11 @@
               opacity: 0.8,
             },
             callback: function (attr, styleOpt) {
-              var diffHeight =
-                Number(attr.floors || 1) * Number(attr.flo_height);
+              var diffHeight = Number(attr.floors || 1) * Number(attr.flo_height);
               return { height: 0, diffHeight: diffHeight };
             },
           },
-          center: {
-            lat: 31.928659,
-            lng: 120.420654,
-            alt: 838,
-            heading: 344,
-            pitch: -42,
-          },
+          center: { lat: 31.928659, lng: 120.420654, alt: 838, heading: 344, pitch: -42 },
           popup: "all",
           flyTo: true,
         });
@@ -453,13 +372,7 @@
             },
           },
           // popup: "all",
-          center: {
-            lat: 31.821524,
-            lng: 117.179329,
-            alt: 255,
-            heading: 25,
-            pitch: -48,
-          },
+          center: { lat: 31.821524, lng: 117.179329, alt: 255, heading: 25, pitch: -48 },
           flyTo: true,
         });
         map.addLayer(geoJsonLayer);
@@ -483,6 +396,9 @@
               fill: true,
               randomColor: true, //随机色
               opacity: 0.3,
+              distanceDisplayCondition: true,
+              distanceDisplayCondition_far: 500000,
+              distanceDisplayCondition_near: 0,
               outline: true,
               outlineStyle: {
                 color: "#FED976",
@@ -518,8 +434,8 @@
                 scaleByDistance_near: 1000,
                 scaleByDistance_nearValue: 1,
 
-                distanceDisplayCondition: false,
-                distanceDisplayCondition_far: 10000,
+                distanceDisplayCondition: true,
+                distanceDisplayCondition_far: 200000,
                 distanceDisplayCondition_near: 0,
                 visibleDepth: false,
               },
@@ -545,13 +461,7 @@
       function showAnhui2Demo() {
         removeLayer();
 
-        map.setCameraView({
-          lat: 30.561661,
-          lng: 117.663884,
-          alt: 113078,
-          heading: 346,
-          pitch: -43,
-        });
+        map.setCameraView({ lat: 30.561661, lng: 117.663884, alt: 113078, heading: 346, pitch: -43 });
 
         geoJsonLayer = new mars3d.layer.GeoJsonLayer({
           name: "合肥市",
@@ -583,7 +493,7 @@
         //绑定事件
         geoJsonLayer.on(mars3d.EventType.load, function (event) {
           console.log("数据加载完成", event);
-          initTree(event.graphics);
+          initTree(event.list);
         });
         geoJsonLayer.on(mars3d.EventType.click, function (event) {
           console.log("单击了图层", event);
@@ -632,13 +542,7 @@
             { field: "ssdw", name: "所属单位" },
             { field: "remark", name: "备注信息" },
           ],
-          center: {
-            lat: 33.589442,
-            lng: 119.031613,
-            alt: 254,
-            heading: 5,
-            pitch: -37,
-          },
+          center: { lat: 33.589442, lng: 119.031613, alt: 254, heading: 5, pitch: -37 },
           flyTo: true,
         });
         map.addLayer(geoJsonLayer);
@@ -654,13 +558,7 @@
       function showWorldDemo() {
         removeLayer();
 
-        map.setCameraView({
-          lat: 22.564341,
-          lng: 89.44688,
-          alt: 10817167,
-          heading: 356,
-          pitch: -87,
-        });
+        map.setCameraView({ lat: 22.564341, lng: 89.44688, alt: 10817167, heading: 356, pitch: -87 });
 
         geoJsonLayer = new mars3d.layer.GeoJsonLayer({
           name: "国界线",
@@ -692,7 +590,7 @@
         //绑定事件
         geoJsonLayer.on(mars3d.EventType.load, function (event) {
           console.log("数据加载完成", event);
-          initTree(event.graphics);
+          initTree(event.list);
         });
         geoJsonLayer.on(mars3d.EventType.click, function (event) {
           console.log("单击了图层", event);
