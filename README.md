@@ -30,7 +30,10 @@
 |[mars3d-sm-vue2-widget-project](./mars3d-sm-vue2-widget-project/README.md)	|  vue2.x技术栈下的基础项目 | 
 |[mars3d-sm-vue2-project](./mars3d-sm-vue2-project/README.md)	|  超图iEarth项目模板 | 
 
- 
+
+
+### mars3d-supermap插件源码
+可以访问：[https://github.com/marsgis/mars3d-plugin](https://github.com/marsgis/mars3d-plugin/)
 
 
 
