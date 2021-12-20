@@ -244,7 +244,7 @@
         "id": 50,
         "name": "超图瓦片服务",
         "type": "group"
-      }, 
+      },
       {
         "pid": 50,
         "name": "超图底图",
@@ -273,10 +273,6 @@
         "name": "超图矢量瓦片",
         "type": "supermap_mvt",
         "url": "http://www.supermapol.com/realspace/services/map-mvt-JingJinDiQuDiTu/restjsr/v1/vectortile/maps/%E4%BA%AC%E6%B4%A5%E5%9C%B0%E5%8C%BA%E5%9C%B0%E5%9B%BE",
-        "parameters": {
-          "canvasWidth": 512,
-          "name": "testMVT"
-        },
         "popup": "all",
         "show": false
       },

@@ -23,12 +23,16 @@
 define(['./when-8d13db60', './createTaskProcessorWorker', './pako_inflate-8ea163f9', './unzip-9ad5f9b4'], function (when, createTaskProcessorWorker, pako_inflate, unzip) { 'use strict';
 
     var unzipwasmReady = false;
-    unzip.unzip.onRuntimeInitialized = function() {
-        unzipwasmReady = true;
-    };
 
-    var unzipwasm = unzip.unzip.cwrap('unzip', 'number', ['number', 'number', 'number', 'number']);
-    var freec = unzip.unzip.cwrap('freePointer', null, ['number']);
+    if( typeof WebAssembly !== 'undefined')
+    {
+        unzip.unzip.onRuntimeInitialized = function() {
+            unzipwasmReady = true;
+        };
+        
+        var unzipwasm = unzip.unzip.cwrap('unzip', 'number', ['number', 'number', 'number', 'number']);
+        var freec = unzip.unzip.cwrap('freePointer', null, ['number']);
+    }
     function unzipWithwasm(datazip) {
         var unzipsize = datazip.length * 4;
         var offset = unzip.unzip._malloc(Uint8Array.BYTES_PER_ELEMENT * unzipsize); //开辟内存

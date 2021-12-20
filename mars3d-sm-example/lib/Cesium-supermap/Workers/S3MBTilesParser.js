@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographic-f2a06374', './Cartesian4-5af5bb24', './createTaskProcessorWorker', './Cartesian2-16a61632', './BoundingSphere-356f49c6', './RuntimeError-ba10bc3e', './WebGLConstants-4c11ee5f', './ComponentDatatype-5862616f', './PrimitiveType-97893bc7', './FeatureDetection-7bd32c34', './buildModuleUrl-e7952659', './IndexDatatype-9435b55f', './arrayFill-9766fb2e', './BoundingRectangle-5c75c80b', './Color-69f1845f', './pako_inflate-8ea163f9', './S3MCompressType-57899ff4', './unzip-9ad5f9b4', './PixelFormat-e6d821ed'], function (when, Check, _Math, Cartographic, Cartesian4, createTaskProcessorWorker, Cartesian2, BoundingSphere, RuntimeError, WebGLConstants, ComponentDatatype, PrimitiveType, FeatureDetection, buildModuleUrl, IndexDatatype, arrayFill, BoundingRectangle, Color, pako_inflate, S3MCompressType, unzip, PixelFormat) { 'use strict';
+define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographic-f2a06374', './Cartesian2-16a61632', './BoundingSphere-d018a565', './Cartesian4-5af5bb24', './RuntimeError-ba10bc3e', './WebGLConstants-4c11ee5f', './ComponentDatatype-5862616f', './PrimitiveType-97893bc7', './FeatureDetection-7bd32c34', './buildModuleUrl-392763e2', './IndexDatatype-9435b55f', './createTaskProcessorWorker', './arrayFill-9766fb2e', './BoundingRectangle-5c75c80b', './Color-69f1845f', './pako_inflate-8ea163f9', './S3MCompressType-8157e6e2', './unzip-9ad5f9b4', './PixelFormat-e6d821ed'], function (when, Check, _Math, Cartographic, Cartesian2, BoundingSphere, Cartesian4, RuntimeError, WebGLConstants, ComponentDatatype, PrimitiveType, FeatureDetection, buildModuleUrl, IndexDatatype, createTaskProcessorWorker, arrayFill, BoundingRectangle, Color, pako_inflate, S3MCompressType, unzip, PixelFormat) { 'use strict';
 
     /**
          * Create a shallow copy of an array from begin to end.
@@ -927,7 +927,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         };
     }
 
-    function loadVertex(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage) {
+    function loadVertex(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, modelMatrix) {
         var newBytesOffset = bufferByteOffset;
         var nVerticesCount = view.getUint32(newBytesOffset + viewByteOffset, true);
         vertexPackage.verticesCount = nVerticesCount;
@@ -946,6 +946,24 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         var byteLength = nVerticesCount * nVertexDimension * Float32Array.BYTES_PER_ELEMENT;
         var vertexBuffer = typedArray.subarray(newBytesOffset, newBytesOffset + byteLength);
         newBytesOffset += byteLength;
+
+        if(nVertexDimension === 3 && when.defined(modelMatrix)) { // 计算W位片元高度
+            var scratchPositionMC = new Cartographic.Cartesian3();
+            var scratchPositionWC = new Cartographic.Cartesian3();
+            var positionsFloat32 = new Float32Array(vertexBuffer.buffer, vertexBuffer.byteOffset, vertexBuffer.byteLength / 4);
+            var positionsHasW = new Float32Array(vertexBuffer.byteLength / 4 + nVerticesCount); // 多申请一个W位
+            var len = positionsFloat32.length;
+            for(var i = 0, j = 0; i < len; i+=3,j+=4) {
+                positionsHasW[j] = positionsFloat32[i];
+                positionsHasW[j + 1] = positionsFloat32[i + 1];
+                positionsHasW[j + 2] = positionsFloat32[i + 2];
+                BoundingSphere.Matrix4.multiplyByPoint(modelMatrix, Cartographic.Cartesian3.fromElements(positionsHasW[j], positionsHasW[j + 1], positionsHasW[j + 2], scratchPositionMC), scratchPositionWC);
+                positionsHasW[j + 3] = Cartographic.Cartographic.fromCartesian(scratchPositionWC).height;
+            }
+            vertexBuffer = positionsHasW;
+            nVertexDimension = 4;
+            nVertexStride = nVertexDimension * Float32Array.BYTES_PER_ELEMENT;
+        }
 
         var attributes = vertexPackage.vertexAttributes;
         var attrLocation = vertexPackage.attrLocation;
@@ -1198,7 +1216,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         };
     }
 
-    function loadCompressSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion) {
+    function loadCompressSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion, modelMatrix) {
         var newBytesOffset = bufferByteOffset;
         var nCompressOptions = view.getUint32(newBytesOffset + viewByteOffset, true);
         vertexPackage.nCompressOptions = nCompressOptions;
@@ -1209,7 +1227,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
             newBytesOffset = result.bytesOffset;
         }
         else {
-            result = loadVertex(typedArray, view, viewByteOffset, newBytesOffset, vertexPackage);
+            result = loadVertex(typedArray, view, viewByteOffset, newBytesOffset, vertexPackage, modelMatrix);
             newBytesOffset = result.bytesOffset;
         }
 
@@ -1249,10 +1267,10 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         }
     }
 
-    function loadStandardSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion) {
+    function loadStandardSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion, modelMatrix) {
         var newBytesOffset = bufferByteOffset;
         var result;
-        result = loadVertex(typedArray, view, viewByteOffset, newBytesOffset, vertexPackage);
+        result = loadVertex(typedArray, view, viewByteOffset, newBytesOffset, vertexPackage, modelMatrix);
         newBytesOffset = result.bytesOffset;
 
         result = loadNormal(typedArray, view, viewByteOffset, newBytesOffset, vertexPackage);
@@ -1282,15 +1300,23 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         return arrIndexPackage[0].materialCode === CLAMP_GROUND_LINE_PASS_NAME;
     }
 
-    function loadSkeletonEntities(skeletonBuffer, view, viewByteOffset, geoPackage, isOldVersion, transferableObjects, isHasOBB, version) {
+    function loadSkeletonEntities(skeletonBuffer, view, viewByteOffset, geoPackage, isOldVersion, transferableObjects, isHasOBB, version, modelMatrix, geoMatMap) {
         var typedArray = skeletonBuffer;
         var bufferByteOffset = 0;
         var nCount = view.getUint32(bufferByteOffset + viewByteOffset, true);
         bufferByteOffset += Uint32Array.BYTES_PER_ELEMENT;
+        geoMatMap = when.defaultValue(geoMatMap, when.defaultValue.EMPTY_OBJECT);
+        var scratchMat = undefined;
         for (var i = 0; i < nCount; i++) {
             // S3MB头名字长度
             var result = loadString(view, viewByteOffset, typedArray, bufferByteOffset);
             var strGeometryName = result.string;
+            if(when.defined(modelMatrix)) {
+                var geoMat = when.defaultValue(geoMatMap[strGeometryName], BoundingSphere.Matrix4.IDENTITY);
+                scratchMat = new BoundingSphere.Matrix4();
+                BoundingSphere.Matrix4.multiply(modelMatrix, geoMat, scratchMat);
+            }
+
             bufferByteOffset = result.bytesOffset;
             var align = bufferByteOffset % 4;
             if (align !== 0) {
@@ -1362,11 +1388,11 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
             }
             else {
                 if (nTagValue == S3MBVertexTag.SV_Standard) {
-                    result = loadStandardSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion);
+                    result = loadStandardSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion, scratchMat);
                     bufferByteOffset = result.bytesOffset;
                 }
                 else if (nTagValue == S3MBVertexTag.SV_Compressed) {
-                    result = loadCompressSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion);
+                    result = loadCompressSkeleton(typedArray, view, viewByteOffset, bufferByteOffset, vertexPackage, isOldVersion, scratchMat);
                     bufferByteOffset = result.bytesOffset;
                 }
 
@@ -1378,7 +1404,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
 
                 var edgeGeometry;
 
-                if(arrIndexPackage.length === 2 && arrIndexPackage[1].primitiveType === 13){ // 13表示EffectOutline线框
+                if(arrIndexPackage.length === 2 && arrIndexPackage[1].primitiveType === 13 && arrIndexPackage[1].indicesCount >= 3){ // 13表示EffectOutline线框
                     edgeGeometry = S3MCompressType.S3MEdgeProcessor.createEdgeDataByIndices(vertexPackage, arrIndexPackage[1], transferableObjects);
                 }
 
@@ -1457,11 +1483,12 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         }
     }
 
-    function loadGeodeEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset) {
+    function loadGeodeEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset, geoMatMap) {
         var geode = {};
         var skeletonNames = [];
         var geoMatrix = new BoundingSphere.Matrix4();
         var typedArray = shellBuffer;
+        geoMatMap = when.defaultValue(geoMatMap, {});
         for (var matIndex = 0; matIndex < 16; matIndex++) {
             geoMatrix[matIndex] = view.getFloat64(bufferByteOffset + dataViewByteOffset, true);
             bufferByteOffset += Float64Array.BYTES_PER_ELEMENT;
@@ -1475,6 +1502,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
             var strSkeletonName = res.string;
             bufferByteOffset = res.bytesOffset;
             skeletonNames.push(strSkeletonName);
+            geoMatMap[strSkeletonName] = geoMatrix;
         }
         return {
             byteOffset: bufferByteOffset,
@@ -1491,7 +1519,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         return oldTileName.replace(ignoreString, '');
     }
 
-    function loadPageLODEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset) {
+    function loadPageLODEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset, geoMatMap) {
         var pageLOD = {};
         var dbDis = view.getFloat32(bufferByteOffset + dataViewByteOffset, true);
         bufferByteOffset += Float32Array.BYTES_PER_ELEMENT;
@@ -1524,7 +1552,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         var nGeodeCount = view.getUint32(bufferByteOffset + dataViewByteOffset, true);
         bufferByteOffset += Uint32Array.BYTES_PER_ELEMENT;
         for (var i = 0; i < nGeodeCount; i++) {
-            var res = loadGeodeEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset);
+            var res = loadGeodeEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset, geoMatMap);
             bufferByteOffset = res.byteOffset;
             pageLOD.geodes.push(res.geode);
         }
@@ -1535,14 +1563,14 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         }
     }
 
-    function loadShellEntites(shellBuffer, view, dataViewByteOffset) {
+    function loadShellEntites(shellBuffer, view, dataViewByteOffset, geoMatMap) {
         var bufferByteOffset = 0;
         var groupNode = {};
         var pageLods = [];
         var nCount = view.getUint32(bufferByteOffset + dataViewByteOffset, true);
         bufferByteOffset += Uint32Array.BYTES_PER_ELEMENT;
         for (var i = 0; i < nCount; i++) {
-            var res = loadPageLODEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset);
+            var res = loadPageLODEntities(shellBuffer, view, bufferByteOffset, dataViewByteOffset, geoMatMap);
             bufferByteOffset = res.bytesOffset;
             pageLods.push(res.pageLOD);
         }
@@ -1887,6 +1915,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
                     pickInfo[nDictID].vertexColorOffset = vertexColorOffset;
                     pickInfo[nDictID].vertexCount = vertexCount;
                 }
+
                 createBatchIdAttribute(geoPackage[strGeometryName].vertexPackage, batchIds, undefined);
             }
             else {
@@ -1904,7 +1933,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
                     for (var k = 0; k < nSize; k++) {
                         var instanceId = view.getUint32(bufferByteOffset + dataViewByteOffset, true);
                         bufferByteOffset += Uint32Array.BYTES_PER_ELEMENT;
-                        if (version === 2) {
+                        if (version === 3) {
                             var vertexCount = view.getUint32(bufferByteOffset + dataViewByteOffset, true);
                             bufferByteOffset += Uint32Array.BYTES_PER_ELEMENT;
                         }
@@ -2113,6 +2142,178 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         }
     }
 
+    function combineIndexPackage(geoPackage, texturePackage, materialObj){
+        delete geoPackage['ignoreNormal'];
+        for(var key in geoPackage){
+            if(geoPackage.hasOwnProperty(key)){
+                var geo = geoPackage[key];
+                var arrIndexPackage = geo.arrIndexPackage;
+                if(arrIndexPackage.length < 1){
+                    continue ;
+                }
+
+                if(arrIndexPackage.length === 1){
+                    var uvLocation = geo.vertexPackage.attrLocation['aTexCoord0'];
+                    if(uvLocation !== undefined){
+                        var attr = geo.vertexPackage.vertexAttributes[uvLocation];
+                        var uvValues = new Float32Array(attr.typedArray.buffer, attr.typedArray.byteOffset, attr.typedArray.byteLength / 4);
+                        if(attr.componentsPerAttribute === 3 && uvValues[2] < 0){
+                            continue ;
+                        }
+                    }
+                }
+
+                var totalLen = 0;
+                var result = {};
+                var i, j;
+                for(i = 0,j = arrIndexPackage.length;i < j;i++){
+                    totalLen += arrIndexPackage[i].indicesTypedArray.byteLength;
+                    if(i === 0){
+                        result.indicesCount = 0;
+                        result.indexType = arrIndexPackage[i].indexType;
+                        result.primitiveType = arrIndexPackage[i].primitiveType;
+                        result.materialCode = arrIndexPackage[i].materialCode;
+                    }
+                }
+
+                result.indicesCount = totalLen / 2;
+
+                var indices = new Uint8Array(totalLen);
+                var offset = 0;
+                for(i = 0,j = arrIndexPackage.length;i < j;i++){
+                    var indexPackage = arrIndexPackage[i];
+                    indices.set(indexPackage.indicesTypedArray, offset, offset + indexPackage.indicesTypedArray.byteLength);
+                    offset += indexPackage.indicesTypedArray.byteLength;
+                }
+
+
+                result.indicesTypedArray = indices;
+                geo.arrIndexPackage = [result];
+
+                var len = arrIndexPackage.length * 2 * 4;
+                var pbrBatchTextureValues = new Float32Array(len);
+                var mapPass = {};
+                for(i = 0,j = materialObj.material.length;i < j;i++){
+                    var material = materialObj.material[i].material;
+                    mapPass[material.id] = material;
+                }
+
+                for(i = 0,j = arrIndexPackage.length;i < j;i++){
+                    var indexPackage = arrIndexPackage[i];
+                    var materialCode = indexPackage.materialCode;
+                    var material = mapPass[materialCode];
+                    if(!material){
+                        continue;
+                    }
+                    var pbrParameter = material.pbrMetallicRoughness;
+                    if(!pbrParameter){
+                        continue ;
+                    }
+                    pbrBatchTextureValues[8 * i] = pbrParameter.metallicFactor;
+                    pbrBatchTextureValues[8 * i + 1] = pbrParameter.roughnessFactor;
+                    pbrBatchTextureValues[8 * i + 2] = material.alphaCutoff;
+                    var alphaMode = material.alphaMode === '' ? 0 : 1;
+                    var doubleSide = material.cullMode === 'none' ? 0 : 1;
+                    pbrBatchTextureValues[8 * i + 3] = doubleSide | (alphaMode << 16);
+                    pbrBatchTextureValues[8 * i + 4] = pbrParameter.emissiveFactor.x;
+                    pbrBatchTextureValues[8 * i + 5] = pbrParameter.emissiveFactor.y;
+                    pbrBatchTextureValues[8 * i + 6] = pbrParameter.emissiveFactor.z;
+                    pbrBatchTextureValues[8 * i + 7] = 0;
+
+                    material.pbrIndex = i;
+                }
+
+                var pbrName = 'PBRMaterialParam_' + key;
+                for(i = 0,j = materialObj.material.length;i < j;i++){
+                    var material = materialObj.material[i].material;
+                    if(material.id === result.materialCode) {
+                        material.textureunitstates.push({
+                            textureunitstate : {
+                                addressmode : {u: 0, v: 0, w: 0},
+                                filteringoption : 0,
+                                filtermax : 2,
+                                filtermin : 2,
+                                id : pbrName,
+                                texmodmatrix : [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+                                url : ""
+                            }
+                        });
+                        break;
+                    }
+                }
+
+                var vertexPackage = geo.vertexPackage;
+                var attrLocation = vertexPackage.attrLocation['aTexCoord1'];
+                var uvs;
+                if(attrLocation !== undefined){
+                    var attr = vertexPackage.vertexAttributes[attrLocation];
+                    uvs = new Float32Array(vertexPackage.verticesCount * 2);
+                    attr.typedArray = uvs;
+                }
+                else {
+                    uvs = new Float32Array(vertexPackage.verticesCount * 2);
+                    attrLocation = vertexPackage.vertexAttributes.length;
+                    vertexPackage.attrLocation['aTexCoord1'] = attrLocation;
+                    vertexPackage.vertexAttributes.push({
+                        index : attrLocation,
+                        typedArray : uvs,
+                        componentsPerAttribute : 2,
+                        componentDatatype : 5126,
+                        offsetInBytes : 0,
+                        strideInBytes : 8,
+                        normalize: false
+                    });
+                }
+
+                var aColors;
+                attrLocation = vertexPackage.attrLocation['aColor'];
+                if(attrLocation !== undefined) {
+                    var attr = vertexPackage.vertexAttributes[attrLocation];
+                    aColors = attr.typedArray;
+                }
+
+                for(i = 0,j = arrIndexPackage.length;i < j;i++){
+                    var indexPackage = arrIndexPackage[i];
+                    var materialCode = indexPackage.materialCode;
+                    var material = mapPass[materialCode];
+                    if(!material || !material.pbrMetallicRoughness){
+                        continue ;
+                    }
+
+                    var baseColor = material.pbrMetallicRoughness.baseColor;
+                    var isResetColor = aColors !== undefined;
+                    var u = material.pbrIndex;
+
+                    var indices = indexPackage.indicesTypedArray;
+                    indices = new Uint16Array(indices.buffer, indices.byteOffset, indices.byteLength / 2);
+                    for(var m = 0,n = indices.length;m < n;m++){
+                        var index = indices[m];
+                        uvs[index * 2] = u;
+
+                        if(isResetColor){
+                            aColors[index * 4] = baseColor.x * 255;
+                            aColors[index * 4 + 1] = baseColor.y * 255;
+                            aColors[index * 4 + 2] = baseColor.z * 255;
+                            aColors[index * 4 + 3] = baseColor.w * 255;
+                        }
+
+                    }
+                }
+
+                texturePackage[pbrName] = {
+                    id : pbrName,
+                    width : arrIndexPackage.length * 2,
+                    height : 1,
+                    compressType: 0,
+                    nFormat: 25,
+                    imageBuffer : pbrBatchTextureValues,
+                    mipmapLevel : 0
+                };
+
+            }
+        }
+    }
+
     function parseS3MB(parameters, transferableObjects) {
         var buffer = parameters.buffer;
         var bZip = parameters.isS3MZ;
@@ -2120,6 +2321,8 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         var supportCompressType = parameters.supportCompressType;
         var bVolume = parameters.bVolume;//是否是体渲染数据;
         var isS3MBlock = parameters.isS3MBlock;
+        var modelMatrix = parameters.modelMatrix;
+        var materialType = parameters.materialType;
         var bound3D = null;
         var volBounds = null;
         var volImageBuffer = null;
@@ -2196,6 +2399,11 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         var view = new DataView(buffer);
         var version = view.getFloat32(bytesOffset, true);
         bytesOffset += Float32Array.BYTES_PER_ELEMENT;
+        if(version > 2.2){
+            return {
+                result : false
+            };
+        }
         if(isS3MBlock){
             var count = view.getUint32(bytesOffset, true);
             bytesOffset += Uint32Array.BYTES_PER_ELEMENT;
@@ -2257,7 +2465,8 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         var loadStreamResult = loadStream(view, buffer, bytesOffset);
         var shellBuffer = loadStreamResult.buffer;
         bytesOffset = loadStreamResult.byteOffset;
-        var groupNode = loadShellEntites(shellBuffer, view, loadStreamResult.dataViewByteOffset);
+        var geoMatMap = {};
+        var groupNode = loadShellEntites(shellBuffer, view, loadStreamResult.dataViewByteOffset, geoMatMap);
         var align = bytesOffset % 4;
         if (align !== 0) {
             bytesOffset += (4 - align);
@@ -2267,7 +2476,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         loadStreamResult = loadStream(view, buffer, bytesOffset);
         var skeletonBuffer = loadStreamResult.buffer;
         var hasOBB = version > 2.09 ? true:false;
-        loadSkeletonEntities(skeletonBuffer, view, loadStreamResult.dataViewByteOffset, geoPackage, isOldVersion, transferableObjects, hasOBB, version);
+        loadSkeletonEntities(skeletonBuffer, view, loadStreamResult.dataViewByteOffset, geoPackage, isOldVersion, transferableObjects, hasOBB, version, modelMatrix, geoMatMap);
         bytesOffset = loadStreamResult.byteOffset;
 
         if(hasOBB){
@@ -2323,9 +2532,7 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
         var materialBuffer = typedArray.subarray(bytesOffset, bytesOffset + strJsonMaterialsLength);
         var strJsonMaterials = S3MCompressType.getStringFromTypedArray(materialBuffer);
         bytesOffset += strJsonMaterialsLength;
-        if(/(.*)(\n\0)$/.test(strJsonMaterials)) { // 兼容大疆倾斜数据
-            strJsonMaterials = strJsonMaterials.replace(/\n\0/, "");
-        }
+        strJsonMaterials = strJsonMaterials.replace(/\n\0/, "");// 兼容大疆倾斜数据
         var matrialObj = JSON.parse(strJsonMaterials);
 
         var bHasSelectionInfo = (nOptions & S3MBVertexOptions.SVO_HasInstSelInfo) == S3MBVertexOptions.SVO_HasInstSelInfo;
@@ -2357,6 +2564,10 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
             }
         }
 
+        if(materialType === 'BatchPBR'){
+            combineIndexPackage(geoPackage, texturePackage, matrialObj);
+        }
+
         return {
             result: true,
             groupNode: groupNode,
@@ -2381,6 +2592,13 @@ define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographi
     }
 
     function S3MBTilesParser(event) {
+        if( typeof WebAssembly === 'undefined')
+        {
+            self.onmessage = createTaskProcessorWorker(parseS3MB);
+            self.postMessage(true);
+            
+            return ;
+        }
         var data = event.data;
 
         // Expect the first message to be to load a web assembly module

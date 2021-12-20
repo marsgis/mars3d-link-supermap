@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9e6', './pbf-0ab1b71f'], function (when, createTaskProcessorWorker, earcut2_2_1, pbf) { 'use strict';
+define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9e6', './pbf-9fe59c76'], function (when, createTaskProcessorWorker, earcut2_2_1, pbf) { 'use strict';
 
     function DictionaryCoder(strings) {
         this._stringToNumber = {};
@@ -693,10 +693,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     Color$1.red = new Color$1(1, 0, 0, 1);
 
     var NullType = {kind: 'null'};
-    var NumberType$1 = {kind: 'number'};
+    var NumberType = {kind: 'number'};
     var StringType = {kind: 'string'};
     var BooleanType = {kind: 'boolean'};
-    var ColorType$1 = {kind: 'color'};
+    var ColorType = {kind: 'color'};
     var ObjectType = {kind: 'object'};
     var ValueType = {kind: 'value'};
     var FormattedType = {kind: 'formatted'};
@@ -723,10 +723,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     var valueMemberTypes = [
         NullType,
-        NumberType$1,
+        NumberType,
         StringType,
         BooleanType,
-        ColorType$1,
+        ColorType,
         FormattedType,
         ObjectType,
         array(ValueType),
@@ -871,10 +871,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     };
 
     var NullType$1 = {kind: 'null'};
-    var NumberType$2 = {kind: 'number'};
+    var NumberType$1 = {kind: 'number'};
     var StringType$1 = {kind: 'string'};
     var BooleanType$1 = {kind: 'boolean'};
-    var ColorType$2 = {kind: 'color'};
+    var ColorType$1 = {kind: 'color'};
     var ObjectType$1 = {kind: 'object'};
     var ValueType$1 = {kind: 'value'};
     var CollatorType = {kind: 'collator'};
@@ -955,9 +955,9 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         } else if (typeof value === 'boolean') {
             return BooleanType$1;
         } else if (typeof value === 'number') {
-            return NumberType$2;
+            return NumberType$1;
         } else if (value instanceof Color$1) {
-            return ColorType$2;
+            return ColorType$1;
         } else if (value instanceof Collator) {
             return CollatorType;
         } else if (value instanceof Formatted$1) {
@@ -1002,7 +1002,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         }
     };
 
-    var NumberType$3 = {kind: 'number'};
+    var NumberType$2 = {kind: 'number'};
     var StringType$2 = {kind: 'string'};
     var BooleanType$2 = {kind: 'boolean'};
     var ObjectType$2 = {kind: 'object'};
@@ -1018,7 +1018,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     var types = {
         string: StringType$2,
-        number: NumberType$3,
+        number: NumberType$2,
         boolean: BooleanType$2,
         object: ObjectType$2
     };
@@ -1128,7 +1128,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         }));
     };
 
-    var NumberType$4 = {kind: 'number'};
+    var NumberType$3 = {kind: 'number'};
     var ValueType$3 = {kind: 'value'};
 
     function array$3(itemType, N) {
@@ -1150,7 +1150,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
             return context.error(("Expected 2 arguments, but found " + (args.length - 1) + " instead."));
         }
 
-        var index = context.parse(args[1], 1, NumberType$4);
+        var index = context.parse(args[1], 1, NumberType$3);
         var input = context.parse(args[2], 2, array$3(context.expectedType || ValueType$3));
 
         if (!index || !input) {
@@ -1379,16 +1379,16 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         return serialized;
     };
 
-    var NumberType$5 = {kind: 'number'};
+    var NumberType$4 = {kind: 'number'};
     var StringType$3 = {kind: 'string'};
     var BooleanType$4 = {kind: 'boolean'};
-    var ColorType$3 = {kind: 'color'};
+    var ColorType$2 = {kind: 'color'};
     var ValueType$5 = {kind: 'value'};
 
     var types$1 = {
         'to-boolean': BooleanType$4,
-        'to-color': ColorType$3,
-        'to-number': NumberType$5,
+        'to-color': ColorType$2,
+        'to-number': NumberType$4,
         'to-string': StringType$3
     };
 
@@ -1797,9 +1797,9 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     ComparisonEnum.LessThanOrEqual = makeComparison('<=', lteq, lteqCollate);
     ComparisonEnum.GreaterThanOrEqual = makeComparison('>=', gteq, gteqCollate);
 
-    var NumberType$6 = {kind: 'number'};
+    var NumberType$5 = {kind: 'number'};
     var StringType$5 = {kind: 'string'};
-    var ColorType$4 = {kind: 'color'};
+    var ColorType$3 = {kind: 'color'};
     var ValueType$7 = {kind: 'value'};
     var FormattedType$2 = {kind: 'formatted'};
     var ResolvedImageType$2 = {kind: 'resolvedImage'};
@@ -1837,7 +1837,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
                 var scale = null;
                 if (arg['font-scale']) {
-                    scale = context.parse(arg['font-scale'], 1, NumberType$6);
+                    scale = context.parse(arg['font-scale'], 1, NumberType$5);
                     if (!scale) {
                         return null;
                     }
@@ -1853,7 +1853,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
                 var textColor = null;
                 if (arg['text-color']) {
-                    textColor = context.parse(arg['text-color'], 1, ColorType$4);
+                    textColor = context.parse(arg['text-color'], 1, ColorType$3);
                     if (!textColor) {
                         return null;
                     }
@@ -1990,7 +1990,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         return ["image", this.input.serialize()];
     };
 
-    var Interpolate$1 = function Interpolate(type, operator, interpolation, input, stops) {
+    var Interpolate = function Interpolate(type, operator, interpolation, input, stops) {
         this.type = type;
         this.operator = operator;
         this.interpolation = interpolation;
@@ -2008,7 +2008,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         }
     };
 
-    Interpolate$1.interpolationFactor = function interpolationFactor(interpolation, input, lower, upper) {
+    var NumberType$6 = {kind: 'number'};
+    var ColorType$4 = {kind: 'color'};
+
+    Interpolate.interpolationFactor = function interpolationFactor(interpolation, input, lower, upper) {
         var t = 0;
         if (interpolation.name === 'exponential') {
             t = exponentialInterpolation(input, interpolation.base, lower, upper);
@@ -2022,7 +2025,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         return t;
     };
 
-    Interpolate$1.parse = function parse(args, context) {
+    Interpolate.parse = function parse(args, context) {
         var operator = args[0];
         var interpolation = args[1];
         var input = args[2];
@@ -2070,7 +2073,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
             return context.error("Expected an even number of arguments.");
         }
 
-        input = context.parse(input, 2, NumberType);
+        input = context.parse(input, 2, NumberType$6);
         if (!input) {
             return null;
         }
@@ -2079,7 +2082,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
         var outputType = (null );
         if (operator === 'interpolate-hcl' || operator === 'interpolate-lab') {
-            outputType = ColorType;
+            outputType = ColorType$4;
         } else if (context.expectedType && context.expectedType.kind !== 'value') {
             outputType = context.expectedType;
         }
@@ -2117,10 +2120,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
             return context.error(("Type " + (toString(outputType)) + " is not interpolatable."));
         }
 
-        return new Interpolate$1(outputType, (operator ), interpolation, input, stops);
+        return new Interpolate(outputType, (operator ), interpolation, input, stops);
     };
 
-    Interpolate$1.prototype.evaluate = function evaluate(ctx) {
+    Interpolate.prototype.evaluate = function evaluate(ctx) {
         var labels = this.labels;
         var outputs = this.outputs;
 
@@ -2141,7 +2144,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         var index = findStopLessThanOrEqualTo(labels, value);
         var lower = labels[index];
         var upper = labels[index + 1];
-        var t = Interpolate$1.interpolationFactor(this.interpolation, value, lower, upper);
+        var t = Interpolate.interpolationFactor(this.interpolation, value, lower, upper);
 
         var outputLower = outputs[index].evaluate(ctx);
         var outputUpper = outputs[index + 1].evaluate(ctx);
@@ -2155,7 +2158,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         }
     };
 
-    Interpolate$1.prototype.eachChild = function eachChild(fn) {
+    Interpolate.prototype.eachChild = function eachChild(fn) {
         fn(this.input);
         for (var i = 0, list = this.outputs; i < list.length; i += 1) {
             var expression = list[i];
@@ -2164,7 +2167,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         }
     };
 
-    Interpolate$1.prototype.possibleOutputs = function possibleOutputs() {
+    Interpolate.prototype.possibleOutputs = function possibleOutputs() {
         var ref;
 
         return (ref = []).concat.apply(ref, this.outputs.map(function (output) {
@@ -2172,7 +2175,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         }));
     };
 
-    Interpolate$1.prototype.serialize = function serialize() {
+    Interpolate.prototype.serialize = function serialize() {
         var interpolation;
         if (this.interpolation.name === 'linear') {
             interpolation = ["linear"];
@@ -2977,9 +2980,9 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         'format': FormatExpression$1,
         'image': ImageExpression$1,
         'in': In,
-        'interpolate': Interpolate$1,
-        'interpolate-hcl': Interpolate$1,
-        'interpolate-lab': Interpolate$1,
+        'interpolate': Interpolate,
+        'interpolate-hcl': Interpolate,
+        'interpolate-lab': Interpolate,
         'length': Length,
         'let': Let,
         'literal': Literal,
@@ -5753,7 +5756,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     		if (!ret.buffer) {
     		  ret = new Uint8Array(ret);
     		}
-    		assert(ret.buffer);
+    		assert$1(ret.buffer);
     		return ret;
     	  };
 
@@ -5798,7 +5801,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     		  return new Uint8Array(readbuffer(f));
     		}
     		data = read(f, 'binary');
-    		assert(typeof data === 'object');
+    		assert$1(typeof data === 'object');
     		return data;
     	  };
 
@@ -5889,10 +5892,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	moduleOverrides = undefined;
 
     	// perform assertions in shell.js after we set up out() and err(), as otherwise if an assertion fails it cannot print the message
-    	assert(typeof Module['memoryInitializerPrefixURL'] === 'undefined', 'Module.memoryInitializerPrefixURL option was removed, use Module.locateFile instead');
-    	assert(typeof Module['pthreadMainPrefixURL'] === 'undefined', 'Module.pthreadMainPrefixURL option was removed, use Module.locateFile instead');
-    	assert(typeof Module['cdInitializerPrefixURL'] === 'undefined', 'Module.cdInitializerPrefixURL option was removed, use Module.locateFile instead');
-    	assert(typeof Module['filePackagePrefixURL'] === 'undefined', 'Module.filePackagePrefixURL option was removed, use Module.locateFile instead');
+    	assert$1(typeof Module['memoryInitializerPrefixURL'] === 'undefined', 'Module.memoryInitializerPrefixURL option was removed, use Module.locateFile instead');
+    	assert$1(typeof Module['pthreadMainPrefixURL'] === 'undefined', 'Module.pthreadMainPrefixURL option was removed, use Module.locateFile instead');
+    	assert$1(typeof Module['cdInitializerPrefixURL'] === 'undefined', 'Module.cdInitializerPrefixURL option was removed, use Module.locateFile instead');
+    	assert$1(typeof Module['filePackagePrefixURL'] === 'undefined', 'Module.filePackagePrefixURL option was removed, use Module.locateFile instead');
 
     	// stack management, and other functionality that is provided by the compiled code,
     	// should not be used before it is ready
@@ -5985,7 +5988,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	var ABORT = false;
 
     	/** @type {function(*, string=)} */
-    	function assert(condition, text) {
+    	function assert$1(condition, text) {
     	  if (!condition) {
     		abort('Assertion failed: ' + text);
     	  }
@@ -5994,7 +5997,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	// Returns the C function with a specified identifier (for C++, you need to do manual name mangling)
     	function getCFunc(ident) {
     	  var func = Module['_' + ident]; // closure exported function
-    	  assert(func, 'Cannot call unknown function ' + ident + ', make sure it is exported');
+    	  assert$1(func, 'Cannot call unknown function ' + ident + ', make sure it is exported');
     	  return func;
     	}
 
@@ -6028,7 +6031,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	  var func = getCFunc(ident);
     	  var cArgs = [];
     	  var stack = 0;
-    	  assert(returnType !== 'array', 'Return type should not be "array".');
+    	  assert$1(returnType !== 'array', 'Return type should not be "array".');
     	  if (args) {
     		for (var i = 0; i < args.length; i++) {
     		  var converter = toC[argTypes[i]];
@@ -6183,7 +6186,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	// Returns the number of bytes written, EXCLUDING the null terminator.
 
     	function stringToUTF8(str, outPtr, maxBytesToWrite) {
-    	  assert(typeof maxBytesToWrite == 'number', 'stringToUTF8(str, outPtr, maxBytesToWrite) is missing the third parameter that specifies the length of the output buffer!');
+    	  assert$1(typeof maxBytesToWrite == 'number', 'stringToUTF8(str, outPtr, maxBytesToWrite) is missing the third parameter that specifies the length of the output buffer!');
     	  return stringToUTF8Array(str, HEAPU8,outPtr, maxBytesToWrite);
     	}
 
@@ -6194,7 +6197,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	var UTF16Decoder = typeof TextDecoder !== 'undefined' ? new TextDecoder('utf-16le') : undefined;
 
     	function writeArrayToMemory(array, buffer) {
-    	  assert(array.length >= 0, 'writeArrayToMemory array must have a length (should be an array or typed array)');
+    	  assert$1(array.length >= 0, 'writeArrayToMemory array must have a length (should be an array or typed array)');
     	  HEAP8.set(array, buffer);
     	}
 
@@ -6283,20 +6286,20 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     		DYNAMIC_BASE = 5248752,
     		DYNAMICTOP_PTR = 5840;
 
-    	assert(STACK_BASE % 16 === 0, 'stack must start aligned');
-    	assert(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
+    	assert$1(STACK_BASE % 16 === 0, 'stack must start aligned');
+    	assert$1(DYNAMIC_BASE % 16 === 0, 'heap must start aligned');
 
 
 
     	var TOTAL_STACK = 5242880;
-    	if (Module['TOTAL_STACK']) assert(TOTAL_STACK === Module['TOTAL_STACK'], 'the stack size can no longer be determined at runtime');
+    	if (Module['TOTAL_STACK']) assert$1(TOTAL_STACK === Module['TOTAL_STACK'], 'the stack size can no longer be determined at runtime');
 
     	var INITIAL_TOTAL_MEMORY = Module['TOTAL_MEMORY'] || 16777216;
     	if (INITIAL_TOTAL_MEMORY < TOTAL_STACK) err('TOTAL_MEMORY should be larger than TOTAL_STACK, was ' + INITIAL_TOTAL_MEMORY + '! (TOTAL_STACK=' + TOTAL_STACK + ')');
 
     	// Initialize the runtime's memory
     	// check for full engine support (use string 'subarray' to avoid closure compiler confusion)
-    	assert(typeof Int32Array !== 'undefined' && typeof Float64Array !== 'undefined' && Int32Array.prototype.subarray !== undefined && Int32Array.prototype.set !== undefined,
+    	assert$1(typeof Int32Array !== 'undefined' && typeof Float64Array !== 'undefined' && Int32Array.prototype.subarray !== undefined && Int32Array.prototype.set !== undefined,
     		   'JS engine does not provide full typed array support');
 
 
@@ -6308,18 +6311,18 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	// Use a provided buffer, if there is one, or else allocate a new one
     	if (Module['buffer']) {
     	  buffer = Module['buffer'];
-    	  assert(buffer.byteLength === INITIAL_TOTAL_MEMORY, 'provided buffer should be ' + INITIAL_TOTAL_MEMORY + ' bytes, but it is ' + buffer.byteLength);
+    	  assert$1(buffer.byteLength === INITIAL_TOTAL_MEMORY, 'provided buffer should be ' + INITIAL_TOTAL_MEMORY + ' bytes, but it is ' + buffer.byteLength);
     	} else {
     	  // Use a WebAssembly memory where available
     	  if (typeof WebAssembly === 'object' && typeof WebAssembly.Memory === 'function') {
-    		assert(INITIAL_TOTAL_MEMORY % WASM_PAGE_SIZE === 0);
+    		assert$1(INITIAL_TOTAL_MEMORY % WASM_PAGE_SIZE === 0);
     		wasmMemory = new WebAssembly.Memory({ 'initial': INITIAL_TOTAL_MEMORY / WASM_PAGE_SIZE });
     		buffer = wasmMemory.buffer;
     	  } else
     	  {
     		buffer = new ArrayBuffer(INITIAL_TOTAL_MEMORY);
     	  }
-    	  assert(buffer.byteLength === INITIAL_TOTAL_MEMORY);
+    	  assert$1(buffer.byteLength === INITIAL_TOTAL_MEMORY);
     	}
     	updateGlobalBufferViews();
 
@@ -6329,7 +6332,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     	// Initializes the stack cookie. Called at the startup of main and at the startup of each thread in pthreads mode.
     	function writeStackCookie() {
-    	  assert((STACK_MAX & 3) == 0);
+    	  assert$1((STACK_MAX & 3) == 0);
     	  HEAPU32[(STACK_MAX >> 2)-1] = 0x02135467;
     	  HEAPU32[(STACK_MAX >> 2)-2] = 0x89BACDFE;
     	}
@@ -6430,10 +6433,10 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	}
 
 
-    	assert(Math.imul, 'This browser does not support Math.imul(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
-    	assert(Math.fround, 'This browser does not support Math.fround(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
-    	assert(Math.clz32, 'This browser does not support Math.clz32(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
-    	assert(Math.trunc, 'This browser does not support Math.trunc(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
+    	assert$1(Math.imul, 'This browser does not support Math.imul(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
+    	assert$1(Math.fround, 'This browser does not support Math.fround(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
+    	assert$1(Math.clz32, 'This browser does not support Math.clz32(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
+    	assert$1(Math.trunc, 'This browser does not support Math.trunc(), build with LEGACY_VM_SUPPORT or POLYFILL_OLD_MATH_FUNCTIONS to add in a polyfill');
 
 
 
@@ -6455,7 +6458,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     		Module['monitorRunDependencies'](runDependencies);
     	  }
     	  if (id) {
-    		assert(!runDependencyTracking[id]);
+    		assert$1(!runDependencyTracking[id]);
     		runDependencyTracking[id] = 1;
     		if (runDependencyWatcher === null && typeof setInterval !== 'undefined') {
     		  // Check for missing dependencies every few seconds
@@ -6476,7 +6479,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     		Module['monitorRunDependencies'](runDependencies);
     	  }
     	  if (id) {
-    		assert(runDependencyTracking[id]);
+    		assert$1(runDependencyTracking[id]);
     		delete runDependencyTracking[id];
     	  }
     	  if (runDependencies == 0) {
@@ -6612,7 +6615,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	  function receiveInstantiatedSource(output) {
     		// 'output' is a WebAssemblyInstantiatedSource object which has both the module and instance.
     		// receiveInstance() will swap in the exports (to Module.asm) so they can be called
-    		assert(Module === trueModule, 'the Module object should not be replaced during async compilation - perhaps the order of HTML elements is wrong?');
+    		assert$1(Module === trueModule, 'the Module object should not be replaced during async compilation - perhaps the order of HTML elements is wrong?');
     		trueModule = null;
     		  // TODO: Due to Closure regression https://github.com/google/closure-compiler/issues/3193, the above line no longer optimizes out down to the following line.
     		  // When the regression is fixed, can restore the above USE_PTHREADS-enabled path.
@@ -6686,7 +6689,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	  env['__table_base'] = 0;
 
     	  var exports = createWasm(env);
-    	  assert(exports, 'binaryen setup failed (no wasm support?)');
+    	  assert$1(exports, 'binaryen setup failed (no wasm support?)');
     	  return exports;
     	};
 
@@ -6706,7 +6709,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     	/* no memory initializer */
     	var tempDoublePtr = 5856;
-    	assert(tempDoublePtr % 8 == 0);
+    	assert$1(tempDoublePtr % 8 == 0);
 
     	// {{PRE_LIBRARY}}
 
@@ -6778,7 +6781,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     	  function ___lock() {}
     var SYSCALLS={buffers:[null,[],[]],printChar:function (stream, curr) {
     			var buffer = SYSCALLS.buffers[stream];
-    			assert(buffer);
+    			assert$1(buffer);
     			if (curr === 0 || curr === 10) {
     			  (stream === 1 ? out : err)(UTF8ArrayToString(buffer, 0));
     			  buffer.length = 0;
@@ -6794,11 +6797,11 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     			return ret;
     		  },get64:function () {
     			var low = SYSCALLS.get(), high = SYSCALLS.get();
-    			if (low >= 0) assert(high === 0);
-    			else assert(high === -1);
+    			if (low >= 0) assert$1(high === 0);
+    			else assert$1(high === -1);
     			return low;
     		  },getZero:function () {
-    			assert(SYSCALLS.get() === 0);
+    			assert$1(SYSCALLS.get() === 0);
     		  }};function ___syscall140(which, varargs) {SYSCALLS.varargs = varargs;
     	  try {
     	   // llseek
@@ -6923,7 +6926,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     		}function _emscripten_resize_heap(requestedSize) {
     		  var oldSize = _emscripten_get_heap_size();
     		  // With pthreads, races can happen (another thread might increase the size in between), so return a failure, and let the caller retry.
-    		  assert(requestedSize > oldSize);
+    		  assert$1(requestedSize > oldSize);
     	  
     	  
     		  var PAGE_MULTIPLE = 65536;
@@ -7034,274 +7037,274 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     	var real___ZSt18uncaught_exceptionv = asm["__ZSt18uncaught_exceptionv"];
     	asm["__ZSt18uncaught_exceptionv"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real___ZSt18uncaught_exceptionv.apply(null, arguments);
     	};
 
     	var real____cxa_can_catch = asm["___cxa_can_catch"];
     	asm["___cxa_can_catch"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real____cxa_can_catch.apply(null, arguments);
     	};
 
     	var real____cxa_is_pointer_type = asm["___cxa_is_pointer_type"];
     	asm["___cxa_is_pointer_type"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real____cxa_is_pointer_type.apply(null, arguments);
     	};
 
     	var real____errno_location = asm["___errno_location"];
     	asm["___errno_location"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real____errno_location.apply(null, arguments);
     	};
 
     	var real__earcut = asm["_earcut"];
     	asm["_earcut"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__earcut.apply(null, arguments);
     	};
 
     	var real__fflush = asm["_fflush"];
     	asm["_fflush"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__fflush.apply(null, arguments);
     	};
 
     	var real__free = asm["_free"];
     	asm["_free"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__free.apply(null, arguments);
     	};
 
     	var real__llvm_maxnum_f64 = asm["_llvm_maxnum_f64"];
     	asm["_llvm_maxnum_f64"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__llvm_maxnum_f64.apply(null, arguments);
     	};
 
     	var real__llvm_minnum_f64 = asm["_llvm_minnum_f64"];
     	asm["_llvm_minnum_f64"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__llvm_minnum_f64.apply(null, arguments);
     	};
 
     	var real__malloc = asm["_malloc"];
     	asm["_malloc"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__malloc.apply(null, arguments);
     	};
 
     	var real__sbrk = asm["_sbrk"];
     	asm["_sbrk"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real__sbrk.apply(null, arguments);
     	};
 
     	var real_establishStackSpace = asm["establishStackSpace"];
     	asm["establishStackSpace"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real_establishStackSpace.apply(null, arguments);
     	};
 
     	var real_stackAlloc = asm["stackAlloc"];
     	asm["stackAlloc"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real_stackAlloc.apply(null, arguments);
     	};
 
     	var real_stackRestore = asm["stackRestore"];
     	asm["stackRestore"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real_stackRestore.apply(null, arguments);
     	};
 
     	var real_stackSave = asm["stackSave"];
     	asm["stackSave"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return real_stackSave.apply(null, arguments);
     	};
     	Module["asm"] = asm;
     	var __ZSt18uncaught_exceptionv = Module["__ZSt18uncaught_exceptionv"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["__ZSt18uncaught_exceptionv"].apply(null, arguments)
     	};
 
     	var ___cxa_can_catch = Module["___cxa_can_catch"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["___cxa_can_catch"].apply(null, arguments)
     	};
 
     	var ___cxa_is_pointer_type = Module["___cxa_is_pointer_type"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["___cxa_is_pointer_type"].apply(null, arguments)
     	};
 
     	var ___errno_location = Module["___errno_location"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["___errno_location"].apply(null, arguments)
     	};
 
     	var _earcut = Module["_earcut"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_earcut"].apply(null, arguments)
     	};
 
     	var _emscripten_replace_memory = Module["_emscripten_replace_memory"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_emscripten_replace_memory"].apply(null, arguments)
     	};
 
     	var _fflush = Module["_fflush"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_fflush"].apply(null, arguments)
     	};
 
     	var _free = Module["_free"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_free"].apply(null, arguments)
     	};
 
     	var _llvm_maxnum_f64 = Module["_llvm_maxnum_f64"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_llvm_maxnum_f64"].apply(null, arguments)
     	};
 
     	var _llvm_minnum_f64 = Module["_llvm_minnum_f64"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_llvm_minnum_f64"].apply(null, arguments)
     	};
 
     	var _malloc = Module["_malloc"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_malloc"].apply(null, arguments)
     	};
 
     	var _memcpy = Module["_memcpy"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_memcpy"].apply(null, arguments)
     	};
 
     	var _memset = Module["_memset"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_memset"].apply(null, arguments)
     	};
 
     	var _sbrk = Module["_sbrk"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["_sbrk"].apply(null, arguments)
     	};
 
     	var establishStackSpace = Module["establishStackSpace"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["establishStackSpace"].apply(null, arguments)
     	};
 
     	var stackAlloc = Module["stackAlloc"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["stackAlloc"].apply(null, arguments)
     	};
 
     	var stackRestore = Module["stackRestore"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["stackRestore"].apply(null, arguments)
     	};
 
     	var stackSave = Module["stackSave"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["stackSave"].apply(null, arguments)
     	};
 
     	var dynCall_ii = Module["dynCall_ii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_ii"].apply(null, arguments)
     	};
 
     	var dynCall_iidiiii = Module["dynCall_iidiiii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_iidiiii"].apply(null, arguments)
     	};
 
     	var dynCall_iiii = Module["dynCall_iiii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_iiii"].apply(null, arguments)
     	};
 
     	var dynCall_jiji = Module["dynCall_jiji"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_jiji"].apply(null, arguments)
     	};
 
     	var dynCall_v = Module["dynCall_v"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_v"].apply(null, arguments)
     	};
 
     	var dynCall_vi = Module["dynCall_vi"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_vi"].apply(null, arguments)
     	};
 
     	var dynCall_vii = Module["dynCall_vii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_vii"].apply(null, arguments)
     	};
 
     	var dynCall_viiii = Module["dynCall_viiii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_viiii"].apply(null, arguments)
     	};
 
     	var dynCall_viiiii = Module["dynCall_viiiii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_viiiii"].apply(null, arguments)
     	};
 
     	var dynCall_viiiiii = Module["dynCall_viiiiii"] = function() {
-    	  assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
-    	  assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+    	  assert$1(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+    	  assert$1(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
     	  return Module["asm"]["dynCall_viiiiii"].apply(null, arguments)
     	};
 
@@ -7435,7 +7438,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     		if (Module['onRuntimeInitialized']) Module['onRuntimeInitialized']();
 
-    		assert(!Module['_main'], 'compiled without a main, but one is present. if you added it from JS, use Module["onRuntimeInitialized"]');
+    		assert$1(!Module['_main'], 'compiled without a main, but one is present. if you added it from JS, use Module["onRuntimeInitialized"]');
 
     		postRun();
     	  }
@@ -9130,6 +9133,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     }
 
     isConstant.isFeatureConstant = function(e){
+        var CompoundExpression = ParsingContext.CompoundExpression;
         if (e instanceof CompoundExpression) {
             if (e.name === 'get' && e.args.length === 1) {
                 return false;
@@ -9158,6 +9162,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     };
 
     isConstant.isStateConstant = function(e){
+        var CompoundExpression = ParsingContext.CompoundExpression;
         if (e instanceof CompoundExpression) {
             if (e.name === 'feature-state') {
                 return false;
@@ -9173,6 +9178,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
     };
 
     isConstant.isGlobalPropertyConstant = function(e, properties){
+        var CompoundExpression = ParsingContext.CompoundExpression;
         if (e instanceof CompoundExpression && properties.indexOf(e.name) >= 0) {
             return false;
         }
@@ -9354,36 +9360,36 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         return typeof v === 'undefined' ? null : v;
     }
 
-    var CompoundExpression$1 = function CompoundExpression(name, type, evaluate, args) {
+    var CompoundExpression = function CompoundExpression(name, type, evaluate, args) {
         this.name = name;
         this.type = type;
         this._evaluate = evaluate;
         this.args = args;
     };
 
-    CompoundExpression$1.prototype.evaluate = function evaluate(ctx, crossFields) {
+    CompoundExpression.prototype.evaluate = function evaluate(ctx, crossFields) {
         return this._evaluate(ctx, this.args, crossFields);
     };
 
-    CompoundExpression$1.prototype.eachChild = function eachChild(fn) {
+    CompoundExpression.prototype.eachChild = function eachChild(fn) {
         this.args.forEach(fn);
     };
 
-    CompoundExpression$1.prototype.possibleOutputs = function possibleOutputs() {
+    CompoundExpression.prototype.possibleOutputs = function possibleOutputs() {
         return [undefined];
     };
 
-    CompoundExpression$1.prototype.serialize = function serialize() {
+    CompoundExpression.prototype.serialize = function serialize() {
         return [this.name].concat(this.args.map(function (arg) {
             return arg.serialize();
         }));
     };
 
-    CompoundExpression$1.parse = function parse(args, context) {
+    CompoundExpression.parse = function parse(args, context) {
         var ref$1;
 
         var op = (args[0] );
-        var definition = CompoundExpression$1.definitions[op];
+        var definition = CompoundExpression.definitions[op];
         if (!definition) {
             return context.error(("Unknown expression \"" + op + "\". If you wanted a literal array, use [\"literal\", [...]]."), 0);
         }
@@ -9455,7 +9461,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
             }
 
             if (signatureContext.errors.length === 0) {
-                return new CompoundExpression$1(op, type, evaluate, parsedArgs);
+                return new CompoundExpression(op, type, evaluate, parsedArgs);
             }
         }
 
@@ -9489,11 +9495,11 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         return null;
     };
 
-    CompoundExpression$1.register = function register(registry, definitions) {
+    CompoundExpression.register = function register(registry, definitions) {
         //assert_1(!CompoundExpression.definitions);
-        CompoundExpression$1.definitions = definitions;
+        CompoundExpression.definitions = definitions;
         for (var name in definitions) {
-            registry[name] = CompoundExpression$1;
+            registry[name] = CompoundExpression;
         }
     };
 
@@ -9542,7 +9548,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         return new Color(r / 255 * alpha, g / 255 * alpha, b / 255 * alpha, alpha);
     }
 
-    CompoundExpression$1.register(expressions, {
+    CompoundExpression.register(expressions, {
         'error': [
             ErrorType,
             [StringType$8],
@@ -10507,6 +10513,8 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         ]
     });
 
+    ParsingContext.CompoundExpression = CompoundExpression;
+
     var StyleExpression$1 = function StyleExpression(expression, propertySpec) {
         this.expression = expression;
         this._warningHistory = {};
@@ -10606,6 +10614,47 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         };
     }
 
+    // Zoom-dependent expressions may only use ["zoom"] as the input to a top-level "step" or "interpolate"
+    // expression (collectively referred to as a "curve"). The curve may be wrapped in one or more "let" or
+    // "coalesce" expressions.
+    function findZoomCurve(expression) {
+        var result = null;
+        if (expression instanceof Let) {
+            result = findZoomCurve(expression.result);
+
+        } else if (expression instanceof Coalesce) {
+            for (var arg of expression.args) {
+                result = findZoomCurve(arg);
+                if (result) {
+                    break;
+                }
+            }
+
+        } else if ((expression instanceof Step || expression instanceof Interpolate) &&
+            expression.input instanceof ParsingContext.CompoundExpression &&
+            expression.input.name === 'zoom') {
+
+            result = expression;
+        }
+
+        if (result instanceof ParsingError) {
+            return result;
+        }
+
+        expression.eachChild((child) => {
+            const childResult = findZoomCurve(child);
+            if (childResult instanceof ParsingError) {
+                result = childResult;
+            } else if (!result && childResult) {
+                result = new ParsingError('', '"zoom" expression may only be used as input to a top-level "step" or "interpolate" expression.');
+            } else if (result && childResult && result !== childResult) {
+                result = new ParsingError('', 'Only one zoom-based "step" or "interpolate" subexpression may be used in an expression.');
+            }
+        });
+
+        return result;
+    }
+
     function getExpectedType(spec) {
         var types = {
             color: ColorType$6,
@@ -10668,6 +10717,99 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
             input = undefined;
         }
         return coalesce(input, parameters.default, propertySpec.default);
+    }
+
+    function createExpression(expression, propertySpec) {
+        var parser = new ParsingContext(expressions, [], propertySpec ? getExpectedType(propertySpec) : undefined);
+
+        // For string-valued properties, coerce to string at the top level rather than asserting.
+        var parsed = parser.parse(expression, undefined, undefined, undefined,
+            propertySpec && propertySpec.type === 'string' ? {typeAnnotation: 'coerce'} : undefined);
+
+        if (!parsed) {
+            assert(parser.errors.length > 0);
+            return error(parser.errors);
+        }
+
+        return success(new StyleExpression$1(parsed, propertySpec));
+    }
+
+    function ZoomConstantExpression$1(kind, expression) {
+        this.kind = kind;
+        this._styleExpression = expression;
+        this.isStateDependent = kind !== ('constant') && !isConstant.isStateConstant(expression.expression);
+    }
+
+    ZoomConstantExpression$1.prototype.evaluateWithoutErrorHandling = function(globals, feature, featureState, canonical, availableImages, formattedSection) {
+        return this._styleExpression.evaluateWithoutErrorHandling(globals, feature, featureState, canonical, availableImages, formattedSection);
+    };
+
+    ZoomConstantExpression$1.prototype.evaluate = function(globals, feature, featureState, canonical, availableImages, formattedSection) {
+        return this._styleExpression.evaluate(globals, feature, featureState, canonical, availableImages, formattedSection);
+    };
+
+    function ZoomDependentExpression$1(kind, expression, zoomStops, interpolationType) {
+        this.kind = kind;
+        this.zoomStops = zoomStops;
+        this._styleExpression = expression;
+        this.isStateDependent = kind !== ('camera') && !isConstant.isStateConstant(expression.expression);
+        this.interpolationType = interpolationType;
+    }
+
+    ZoomDependentExpression$1.prototype.evaluateWithoutErrorHandling = function(globals, feature, featureState, canonical, availableImages, formattedSection) {
+        return this._styleExpression.evaluateWithoutErrorHandling(globals, feature, featureState, canonical, availableImages, formattedSection);
+    };
+
+    ZoomDependentExpression$1.prototype.evaluate = function(globals, feature, featureState, canonical, availableImages, formattedSection) {
+        return this._styleExpression.evaluate(globals, feature, featureState, canonical, availableImages, formattedSection);
+    };
+
+    ZoomDependentExpression$1.prototype.interpolationFactor = function(input, lower, upper) {
+        if (this.interpolationType) {
+            return Interpolate.interpolationFactor(this.interpolationType, input, lower, upper);
+        } else {
+            return 0;
+        }
+    };
+
+    function createPropertyExpression(expression, propertySpec) {
+        expression = createExpression(expression, propertySpec);
+        if (expression.result === 'error') {
+            return expression;
+        }
+
+        var parsed = expression.value.expression;
+
+        var isFeatureConstant = isConstant.isFeatureConstant(parsed);
+        if (!isFeatureConstant && !Supports.supportsPropertyExpression(propertySpec)) {
+            return error([new ParsingError('', 'data expressions not supported')]);
+        }
+
+        var isZoomConstant = isConstant.isGlobalPropertyConstant(parsed, ['zoom']);
+        if (!isZoomConstant && !Supports.supportsZoomExpression(propertySpec)) {
+            return error([new ParsingError('', 'zoom expressions not supported')]);
+        }
+
+        var zoomCurve = findZoomCurve(parsed);
+        if (!zoomCurve && !isZoomConstant) {
+            return error([new ParsingError('', '"zoom" expression may only be used as input to a top-level "step" or "interpolate" expression.')]);
+        } else if (zoomCurve instanceof ParsingError) {
+            return error([zoomCurve]);
+        } else if (zoomCurve instanceof Interpolate && !Supports.supportsInterpolation(propertySpec)) {
+            return error([new ParsingError('', '"interpolate" expressions cannot be used with this property')]);
+        }
+
+        if (!zoomCurve) {
+            return success(isFeatureConstant ?
+                new ZoomConstantExpression$1('constant', expression.value) :
+                new ZoomConstantExpression$1('source', expression.value));
+        }
+
+        var interpolationType = zoomCurve instanceof Interpolate ? zoomCurve.interpolation : undefined;
+
+        return success(isFeatureConstant ?
+            new ZoomDependentExpression$1('camera', expression.value, zoomCurve.labels, interpolationType) :
+        new ZoomDependentExpression$1('composite', expression.value, zoomCurve.labels, interpolationType));
     }
 
     function createFunction(parameters, propertySpec) {
@@ -11067,7 +11209,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
     FeatureIndex.prototype.loadVTLayers = function loadVTLayers() {
         if (!this.vtLayers) {
-            this.vtLayers = new VectorTile(new pbf.PBF(this.rawTileData)).layers;
+            this.vtLayers = new VectorTile(new pbf.Protobuf(this.rawTileData)).layers;
             this.sourceLayerCoder = new DictionaryCoder(this.vtLayers ? Object.keys(this.vtLayers).sort() : ['_geojsonTileLayer']);
         }
         return this.vtLayers;
@@ -11362,8 +11504,11 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         this.zoom = options.zoom;
         this.overscaling = options.overscaling;
         this.layers = options.layers;
-        this.layerIds = this.layers.map(function (layer) {
-            return layer.id;
+        this._sourceLayerIds = {};
+        var that = this;
+        this.layerIds = this.layers.map(function (layer, index) {
+            that._sourceLayerIds[layer.sourceLayer] = index;
+            return layer.sourceLayer;
         });
         this.index = options.index;
         this.hasPattern = false;
@@ -11394,7 +11539,12 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
             var feature = ref.feature;
             var index = ref.index;
             var sourceLayerIndex = ref.sourceLayerIndex;
-            var currentLayer = this.layers[sourceLayerIndex];
+            var sourceLayerId = ref.sourceLayerId;
+            var currentLayerIndex = this._sourceLayerIds[sourceLayerId];
+            var currentLayer = this.layers[currentLayerIndex];
+            if(!currentLayer) {
+                continue;
+            }
             var pixelsToTileUnits = EXTENT / 512;
             var circleRadius = currentLayer.paint.get('circle-radius').value.value * pixelsToTileUnits;
 
@@ -12062,6 +12212,9 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
 
         if (name === 'visibility') {
             this.visibility = value;
+            if(this.config && this.config.layout) {
+                this.config.layout.visibility = value;
+            }
             return;
         }
 
@@ -18544,7 +18697,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
         if (!when.defined(rawData)) {
             return;
         }
-        return new VectorTile(new pbf.PBF(rawData));
+        return new VectorTile(new pbf.Protobuf(rawData));
     }
 
     function parse(vectorTile, layerIndex, imageMap, featureIndex, zoom, indexData) {
@@ -18571,7 +18724,7 @@ define(['./when-8d13db60', './createTaskProcessorWorker', './earcut-2.2.1-b404d9
                 var features = [];
                 for (var index = 0; index < sourceLayer.length; index++) {
                     var feature = sourceLayer.feature(index);
-                    features.push({feature: feature, index: index, sourceLayerIndex: sourceLayerIndex});
+                    features.push({feature: feature, index: index, sourceLayerIndex: sourceLayerIndex, sourceLayerId: sourceLayerId});
                 }
 
                 for (var i = 0, list = layerFamilies[sourceLayerId]; i < list.length; i += 1) {

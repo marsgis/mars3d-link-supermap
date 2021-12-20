@@ -11,6 +11,8 @@
 /node_modules
 lib/CesiumUnminified/
 mars3d-*src.*
+!mars3d-supermap-src.js*
+!mars3d-widget-src.js*
 
 # profiling files
 chrome-profiler-events*.json
@@ -46,4 +48,4 @@ testem.log
 
 # System Files
 .DS_Store
-Thumbs.db 
+Thumbs.db
