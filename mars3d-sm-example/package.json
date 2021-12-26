@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "mars3d": "^3.1.15",
+		"mars3d": "^3.1.18",
     "babel-eslint": "^10.0.1",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
