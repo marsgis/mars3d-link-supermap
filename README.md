@@ -1,6 +1,6 @@
  
 <p align="center">
-<img src="https://cdn.jsdelivr.net/gh/muyao1987/cdn/mars3d.cn/logo.png" width="300px" />
+<img src="https://muyao1987.gitee.io/cdn/mars3d.cn/logo.png" width="300px" />
 </p>
  
 <p align="center">超图 + Mars3D 结合使用的🌎功能示例和项目模板</p>
@@ -25,10 +25,9 @@
   
 | 目录  |   说明  | 
 |  ----  | ----  |
-|[mars3d-sm-example](./mars3d-sm-example/README.md)	|  功能示例 | 
-|[mars3d-sm-vue2-template](./mars3d-sm-vue2-template/README.md)	|  最简项目模板 | 
-|[mars3d-sm-vue2-widget-project](./mars3d-sm-vue2-widget-project/README.md)	|  vue2.x技术栈下的基础项目 | 
-|[mars3d-sm-vue2-project](./mars3d-sm-vue2-project/README.md)	|  超图iEarth项目模板 | 
+|[mars3d-es5-example](./mars3d-es5-example/README.md)	|  功能示例 | 
+|[mars3d-vue-template](./mars3d-vue-template/README.md)	|  Vue最简项目 | 
+|[mars3d-vue-project](./mars3d-vue-project/README.md)	|  基础项目Vue版 |  
 
 
 
