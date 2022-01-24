@@ -30,6 +30,14 @@
 |[mars3d-vue-project](./mars3d-vue-project/README.md)	|  基础项目Vue版 |  
 
 
+ 
+### 超图版特别说明
+ 不是所有功能都可以正常用，因为：
+
+- 使用的是超图版Cesium，所以mars3d-cesium的所有修改都无效，影响到wfs、模型编辑、地形编辑等功能(可以用超图的相关API来替代实现)
+- 超图Cesium修改了地球的默认参数，造成3dtiles加载位置偏差很大。
+
+
 
 ### mars3d-supermap插件源码
 可以访问：[https://github.com/marsgis/mars3d-plugin](https://github.com/marsgis/mars3d-plugin/)
