@@ -498,7 +498,7 @@ html {
 
 /* 超图专用*/
 .cesium-viewer-navigationContainer{
-  top: 0px;
-  left: 10px;
-  right: auto;
+  top: auto;
+  right: 35px;
+  bottom: 25px;
 }

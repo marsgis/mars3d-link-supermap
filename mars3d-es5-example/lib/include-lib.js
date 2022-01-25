@@ -13,14 +13,15 @@ var configLibs = {
   //   "mars3d/mars3d.css", //mars3d
   //   "mars3d/mars3d.js",
   // ],
-  'mars3d': [
+  "mars3d": [
     //超图版本，三维地球“主库”
-    'Cesium-supermap/Widgets/widgets.css', //cesium
-    'Cesium-supermap/Cesium.js',
-    'mars3d/plugins/compatible/cesium-version.js', //cesium版本兼容处理
-    'mars3d/mars3d.css', //mars3d
-    'mars3d/mars3d.js',
-    'mars3d/plugins/supermap/mars3d-supermap.js',
+    "Cesium-supermap/Widgets/widgets.css", //cesium
+    "Cesium-supermap/Cesium.js",
+    "mars3d/plugins/compatible/cesium-version.js", //cesium版本兼容处理
+    "turf/turf.min.js",
+    "mars3d/mars3d.css", //mars3d
+    "mars3d/mars3d.js",
+    "mars3d/plugins/supermap/mars3d-supermap.js",
   ],
   "mars3d-space": [
     //卫星插件

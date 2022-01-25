@@ -13,6 +13,7 @@
       "fog": true,
       "fxaa": true,
       "requestRenderMode": true,
+      "resolutionScale":1.0,
       "globe": {
         "depthTestAgainstTerrain": false,
         "baseColor": "#546a53",

@@ -8,7 +8,7 @@
  * Mars3D三维可视化平台
  *
  * 版本信息：v3.1.23，
- * 编译日期：2022-01-21 10:24:17
+ * 编译日期：2022-01-25 16:22:12
  *
  * 版权所有：Copyright by 火星科技  http://mars3d.cn
  *
@@ -7031,6 +7031,7 @@ export namespace ModelEntity {
      * @property [heading = 0] - 方向角 （度数值，0-360度）
      * @property [pitch = 0] - 俯仰角（度数值，0-360度）
      * @property [roll = 0] - 翻滚角（度数值，0-360度）
+     * @property [radius] - 编辑时，半径圆圈的半径，默认自动
      * @property [noPitchRoll] - 当addDynamicPosition时，设置为true时，可以设置模型只动态更改方向，内部固定模型的Pitch和Roll方向值为0
      * @property [minimumPixelSize = 0.0] - 指定模型的近似最小像素大小，而不考虑缩放。
      * @property [maximumScale] - 模型的最大比例尺寸。minimumPixelSize的上限。
@@ -7071,6 +7072,7 @@ export namespace ModelEntity {
         heading?: number;
         pitch?: number;
         roll?: number;
+        radius?: number;
         noPitchRoll?: boolean;
         minimumPixelSize?: number;
         maximumScale?: number;
@@ -27415,15 +27417,17 @@ export class TerrainClip extends TerrainEditBase {
 /**
  * 地形开挖、淹没等分析 基础类
  * @param [options] - 参数对象，包括以下：
+ * @param [options.positions] - 坐标位置数组，只显示单个区域【单个区域场景时使用】
  * @param [options.id = uuid()] - 对象的id标识
  * @param [options.enabled = true] - 对象的启用状态
- * @param [options.positions] - 坐标位置数组，只显示单个区域【单个区域场景时使用】
+ * @param [options.eventParent] - 指定的事件冒泡对象，默认为所加入的map对象，false时不冒泡事件
  */
 export class TerrainEditBase extends BaseThing {
     constructor(options?: {
+        positions?: any[][] | string[] | LatLngPoint[] | Cesium.Cartesian3[];
         id?: string | number;
         enabled?: boolean;
-        positions?: any[][] | string[] | LatLngPoint[] | Cesium.Cartesian3[];
+        eventParent?: BaseClass | boolean;
     });
     /**
      * 区域 列表
@@ -27635,17 +27639,19 @@ export class TilesetClip extends TilesetEditBase {
 /**
  * 3dtiles模型分析（裁剪、压平、淹没） 基础类
  * @param [options] - 参数对象，包括以下：
- * @param [options.id = uuid()] - 对象的id标识
- * @param [options.enabled = true] - 对象的启用状态
  * @param options.layer - 需要模型分析的对象（3dtiles图层）
  * @param [options.positions] - 坐标位置数组，只分析的单个区域【单个区域场景时使用】
+ * @param [options.id = uuid()] - 对象的id标识
+ * @param [options.enabled = true] - 对象的启用状态
+ * @param [options.eventParent] - 指定的事件冒泡对象，默认为所加入的map对象，false时不冒泡事件
  */
 export class TilesetEditBase extends BaseThing {
     constructor(options?: {
-        id?: string | number;
-        enabled?: boolean;
         layer: TilesetLayer;
         positions?: any[][] | string[] | LatLngPoint[] | Cesium.Cartesian3[];
+        id?: string | number;
+        enabled?: boolean;
+        eventParent?: BaseClass | boolean;
     });
     /**
      * 区域 列表
@@ -29855,6 +29861,10 @@ namespace Util {
      * @returns 是否为简单类型（包括：String\Boolean\Number\Array）
      */
     function isSimpleType(value: any): boolean;
+    /**
+     * 判断当前Cesium库是否mars3d修改后的版本(mars3d-cesium库)
+     */
+    const isMars3DCesium: any;
     /**
      * 格式化数字，返回指定小数位的数字
      * @param num - 数字
