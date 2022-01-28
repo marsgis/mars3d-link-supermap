@@ -160,7 +160,7 @@
       //
       function addGraphic_02(graphicLayer) {
         var graphic = new mars3d.graphic.EllipseEntity({
-          position: new mars3d.LatLngPoint(116.329199, 30.881595, 390.3),
+          position: new mars3d.LngLatPoint(116.329199, 30.881595, 390.3),
           style: {
             semiMajorAxis: 1500, //长半轴 半径
             semiMinorAxis: 900, // 短半轴 半径
@@ -179,7 +179,7 @@
         var _rotation = Math.random();
 
         var graphic = new mars3d.graphic.EllipseEntity({
-          position: new mars3d.LatLngPoint(116.392526, 30.903729, 933.55),
+          position: new mars3d.LngLatPoint(116.392526, 30.903729, 933.55),
           style: {
             semiMajorAxis: 1500, //长半轴 半径
             semiMinorAxis: 900, // 短半轴 半径
@@ -242,7 +242,7 @@
 
       function addGraphic_05(graphicLayer) {
         var graphic = new mars3d.graphic.EllipseEntity({
-          position: new mars3d.LatLngPoint(116.37617, 30.847384, 396.12),
+          position: new mars3d.LngLatPoint(116.37617, 30.847384, 396.12),
           style: {
             semiMajorAxis: 1500, //长半轴 半径
             semiMinorAxis: 900, // 短半轴 半径
@@ -648,7 +648,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
     </script>
   </body>

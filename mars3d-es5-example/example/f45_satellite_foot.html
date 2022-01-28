@@ -102,7 +102,7 @@
           var intervalBetweenFootPrints = 40 * secondMultiplier; //setInterval间隔脚印的时长
           var numberOfFootPrintsAtAtime = parseInt(90 / Math.ceil(secondMultiplier)) * 5; //保持足迹的数量个数
 
-          var point = mars3d.LatLngPoint.fromCartesian(entity.position, map.clock.currentTime);
+          var point = mars3d.LngLatPoint.fromCartesian(entity.position, map.clock.currentTime);
           this.drawOneFoot(point, instrumentFOV);
 
           var timeLast = map.clock.currentTime.secondsOfDay + intervalBetweenFootPrints;
@@ -119,7 +119,7 @@
                 graphicLayer.clear();
               }
 
-              var point = mars3d.LatLngPoint.fromCartesian(entity.position, map.clock.currentTime);
+              var point = mars3d.LngLatPoint.fromCartesian(entity.position, map.clock.currentTime);
               this.drawOneFoot(point, instrumentFOV);
             }
           });

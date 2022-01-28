@@ -162,11 +162,12 @@
         contourLine = new mars3d.thing.ContourLine({
           spacing: 100,
           width: 1.5,
-          color: Cesium.Color.RED,
+          color: "rgba(255,0,0,0.8)",
           minHeight: -414.0,
           maxHeight: 8777.0,
-          //地表渲染的配色方案
+          shadingAlpha: 0.6, ///地表渲染的透明度
           colorScheme: {
+            //地表渲染的配色方案
             elevation: {
               step: [0.0, 0.045, 0.1, 0.15, 0.37, 0.54, 1.0],
               color: ["#000000", "#2747E0", "#D33B7D", "#D33038", "#FF9742", "#FF9742", "#ffd700"],

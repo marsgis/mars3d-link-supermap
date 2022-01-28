@@ -148,9 +148,19 @@
         var treeObj = $.fn.zTree.getZTreeObj(treeId);
         //获得所有改变check状态的节点
         var changedNodes = treeObj.getChangeCheckedNodes();
+
+        haoutil.array.remove(changedNodes, chktreeNode);
+        changedNodes.push(chktreeNode);
+
         for (var i = changedNodes.length - 1; i >= 0; i--) {
           var treeNode = changedNodes[i];
           treeNode.checkedOld = treeNode.checked;
+
+          if (treeNode.check_Child_State == 1) {
+            // 0:无子节点被勾选,  1:部分子节点被勾选,  2:全部子节点被勾选, -1:不存在子节点 或 子节点全部设置为 nocheck = true
+            continue;
+          }
+
           var layer = layersObj[treeNode.uuid];
           if (layer == null) {
             continue;
@@ -163,36 +173,7 @@
             $("#" + treeNode.tId + "_range").hide();
           }
 
-          //特殊处理同目录下的单选的互斥的节点，可在config对应图层节点中配置"radio":true即可
-          if (layer.options.radio && treeNode.checked) {
-            var nodes = treeObj.getNodesByFilter(
-              function (node) {
-                var item = layersObj[node.uuid];
-                return item.options.radio && item.pid == layer.pid && node.uuid != treeNode.uuid;
-              },
-              false,
-              treeNode.getParentNode()
-            );
-            for (var nidx = 0; nidx < nodes.length; nidx++) {
-              nodes[nidx].checkedOld = false;
-              treeObj.checkNode(nodes[nidx], false, true);
-
-              $("#" + nodes[nidx].tId + "_range").hide();
-
-              var layertmp = layersObj[nodes[nidx].uuid];
-              layertmp.show = false;
-            }
-          }
-
-          //处理图层显示隐藏
-          if (treeNode._parentId) {
-            var parentLayer = layersObj[treeNode._parentId];
-            if (parentLayer) {
-              updateLayerShow(parentLayer, treeNode.checked);
-            }
-          } else {
-            updateLayerShow(layer, treeNode.checked);
-          }
+          updateLayerShow(layer, treeNode.checked);
         }
       }
 
@@ -204,11 +185,10 @@
           if (!layer.isAdded) {
             map.addLayer(layer);
           }
-          layer.flyTo();
         } else {
-          // if (layer.isAdded) {
-          //   map.removeLayer(layer)
-          // }
+          if (layer.isAdded) {
+            map.removeLayer(layer);
+          }
         }
       }
 

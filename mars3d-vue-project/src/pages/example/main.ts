@@ -1,3 +1,4 @@
+import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
 import "mars3d/dist/mars3d.css"
 
 import { createApp } from "vue"
@@ -7,7 +8,6 @@ import { store as testStore, key as testKey } from "@mars/common/store/test"
 import store from "./widget-store"
 import { install as iconInstall } from "@icon-park/vue-next/es/all"
 import MarsUI from "@mars/components/mars-ui"
-import directive from "@mars/directive/index"
 
 import * as mars3d from "mars3d"
 
@@ -23,7 +23,6 @@ iconInstall(app)
 
 app.use(injectState(store), key)
 app.use(testStore, testKey)
-app.use(directive)
 
 // mars3d sdk的挂载
 app.config.globalProperties.mars3d = mars3d

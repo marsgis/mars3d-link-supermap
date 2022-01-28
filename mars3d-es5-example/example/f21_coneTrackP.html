@@ -250,7 +250,7 @@
         property.forwardExtrapolationType = Cesium.ExtrapolationType.HOLD;
 
         let start = map.clock.currentTime;
-        let positions = mars3d.LatLngArray.toCartesians(points);
+        let positions = mars3d.LngLatArray.toCartesians(points);
         for (let i = 0; i < positions.length; i++) {
           let time = Cesium.JulianDate.addSeconds(start, i * 20, new Cesium.JulianDate());
           let position = positions[i];

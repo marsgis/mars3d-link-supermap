@@ -26,7 +26,7 @@
 | 目录  |   说明  | 
 |  ----  | ----  |
 |[mars3d-es5-example](./mars3d-es5-example/README.md)	|  功能示例 | 
-|[mars3d-vue-template](./mars3d-vue-template/README.md)	|  Vue最简项目 | 
+|[mars3d-vue-template](./mars3d-vue-template/README.md)	|  最简项目Vue版 | 
 |[mars3d-vue-project](./mars3d-vue-project/README.md)	|  基础项目Vue版 |  
 
 

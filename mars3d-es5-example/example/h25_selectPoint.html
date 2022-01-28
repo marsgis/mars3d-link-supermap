@@ -307,7 +307,7 @@
         map.once(mars3d.EventType.click, function (event) {
           map.setCursor(false);
           var cartesian = event.cartesian;
-          var point = mars3d.LatLngPoint.fromCartesian(cartesian);
+          var point = mars3d.LngLatPoint.fromCartesian(cartesian);
           point.format(); //经度、纬度、高度
 
           currJD = point.lng;

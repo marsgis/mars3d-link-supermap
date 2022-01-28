@@ -94,7 +94,7 @@
               return Cesium.defined(e.cartesian);
             },
             callback: function (e) {
-              var mpt = mars3d.LatLngPoint.fromCartesian(e.cartesian);
+              var mpt = mars3d.LngLatPoint.fromCartesian(e.cartesian);
               haoutil.alert(mpt.toString(), "位置信息");
             },
           },
@@ -235,7 +235,7 @@
         map.addLayer(graphicLayer);
 
         let graphic = new mars3d.graphic.BoxEntity({
-          position: new mars3d.LatLngPoint(116.336525, 31.196721, 323.35),
+          position: new mars3d.LngLatPoint(116.336525, 31.196721, 323.35),
           style: {
             dimensions: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             fill: true,

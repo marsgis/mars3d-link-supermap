@@ -252,7 +252,7 @@
 
             tiles3dLayer.center = position;
 
-            var point = mars3d.LatLngPoint.fromCartesian(position);
+            var point = mars3d.LngLatPoint.fromCartesian(position);
             $("#txt_x").val(point.lng);
             $("#txt_y").val(point.lat);
             $("#txt_z").val(point.alt);

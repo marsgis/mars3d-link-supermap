@@ -175,7 +175,7 @@
       function addGraphic_02(graphicLayer) {
         var graphic = new mars3d.graphic.PointEntity({
           name: "根据视距缩放点",
-          position: new mars3d.LatLngPoint(116.301798, 30.835848, 915),
+          position: new mars3d.LngLatPoint(116.301798, 30.835848, 915),
           style: {
             color: "#00ff00",
             pixelSize: 32,
@@ -188,7 +188,7 @@
       function addGraphic_03(graphicLayer) {
         var graphic = new mars3d.graphic.PointEntity({
           name: "贴地点",
-          position: new mars3d.LatLngPoint(116.39224, 30.902853),
+          position: new mars3d.LngLatPoint(116.39224, 30.902853),
           style: {
             color: "#ffff00",
             pixelSize: 10,
@@ -210,7 +210,7 @@
       function addGraphic_04(graphicLayer) {
         var graphic = new mars3d.graphic.PointEntity({
           name: "根据视距显示点",
-          position: new mars3d.LatLngPoint(116.329102, 30.977955, 1548.6),
+          position: new mars3d.LngLatPoint(116.329102, 30.977955, 1548.6),
           style: {
             color: "#0000ff",
             pixelSize: 20,
@@ -608,7 +608,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
         </script>
   </body>

@@ -62,7 +62,7 @@ git clone https://github.com/marsgis/mars3d-es5-example.git
 
 
 
-### 运行环境
+### 运行方式1：使用vscode及其插件
 
 在任意开发编辑器（如vscode等）或http服务器(如node、nginx、tomcat、IIS等)下直接运行浏览`index.html`或对应示例页面即可 ，
 
@@ -76,6 +76,27 @@ git clone https://github.com/marsgis/mars3d-es5-example.git
  ![image](http://mars3d.cn/dev/img/guide/start-example-run.jpg) 
 
 
+### 运行方式2：运行npm命令
+
+#### 首次运行前安装依赖
+```
+npm install
+
+//或使用代理
+npm i --registry=http://registry.taobao.org
+```
+
+#### 启动开发环境
+```
+npm run serve
+```
+
+#### 编译构建
+```
+npm run build //编译后生成在dist目录，拷贝出去发布即可
+npm run serve:dist  //测试dist运行状态
+```
+ 
 
 
 ### 运行效果   
@@ -84,11 +105,7 @@ git clone https://github.com/marsgis/mars3d-es5-example.git
  ![image](http://mars3d.cn/dev/img/guide/start-example-yulan.jpg) 
 
 
-
-### 压缩及混淆
- 如果需要编译、对整站压缩及混淆，请参考：[https://github.com/muyao1987/web-dist](https://github.com/muyao1987/web-dist)
-
-
+ 
 
 ## 如何反馈问题？
 - 发现您发现项目中存在的问题或者需要优化的地方；

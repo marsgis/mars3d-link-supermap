@@ -150,7 +150,7 @@
         let graphic = graphicLayer.getGraphics()[0];
         let poly = graphic.toGeoJSON({ closure: true });
 
-        var centerPoint = mars3d.LatLngPoint.fromCartesian(graphic.center).toArray(); // 围绕执行旋转的点
+        var centerPoint = mars3d.LngLatPoint.fromCartesian(graphic.center).toArray(); // 围绕执行旋转的点
 
         // truf旋转操作
         var rotatedPoly = turf.transformRotate(poly, angle, { pivot: centerPoint });

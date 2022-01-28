@@ -168,7 +168,7 @@
       //
       function addGraphic_02(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidEntity({
-          position: new mars3d.LatLngPoint(116.2, 31.0, 1000),
+          position: new mars3d.LngLatPoint(116.2, 31.0, 1000),
           style: {
             radii: new Cesium.Cartesian3(2500.0, 2500.0, 1000.0),
             maximumConeDegree: 90, //半球
@@ -191,7 +191,7 @@
 
       function addGraphic_03(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidEntity({
-          position: new mars3d.LatLngPoint(116.307258, 30.999546, 1239.2),
+          position: new mars3d.LngLatPoint(116.307258, 30.999546, 1239.2),
           style: {
             radii: 2500,
             maximumConeDegree: 90,
@@ -253,7 +253,7 @@
       //半圆顶球体
       function addGraphic_06(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidEntity({
-          position: new mars3d.LatLngPoint(116.2, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.2, 30.9, 1000),
           style: {
             radii: 2500,
             maximumConeDegree: 90,
@@ -279,7 +279,7 @@
       //含内半径 半圆顶球体
       function addGraphic_07(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidEntity({
-          position: new mars3d.LatLngPoint(116.3, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.3, 30.9, 1000),
           style: {
             radii: 2500,
             innerRadii: 1000,
@@ -302,7 +302,7 @@
       //被切开的含内半径 半圆顶球体
       function addGraphic_08(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidEntity({
-          position: new mars3d.LatLngPoint(116.4, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.4, 30.9, 1000),
           style: {
             radii: 2500,
             innerRadii: 1000,
@@ -709,7 +709,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
         </script>
   </body>

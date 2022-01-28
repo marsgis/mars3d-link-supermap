@@ -1,11 +1,9 @@
 import { createApp } from 'vue'
-import mars3dPlugin from '@/plugins/index'
-import Application from './App.vue'
+import App from './App.vue'
+import "./style.css"
 
-// 加载全局样式
-import './styles/index.scss'
+import "mars3d/dist/mars3d.css";
+import "mars3d"
+import "mars3d-supermap"
 
-const app = createApp(Application)
-
-app.use(mars3dPlugin)
-app.mount('#app')
+createApp(App).mount('#app')

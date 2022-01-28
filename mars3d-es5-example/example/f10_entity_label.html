@@ -160,7 +160,7 @@
 
       function addGraphic_01(graphicLayer) {
         var graphic = new mars3d.graphic.LabelEntity({
-          position: new mars3d.LatLngPoint(116.308659, 30.914005, 429.94),
+          position: new mars3d.LngLatPoint(116.308659, 30.914005, 429.94),
           style: {
             text: "合肥火星科技有限公司",
             font_size: 25,
@@ -196,7 +196,7 @@
       function addGraphic_02(graphicLayer) {
         var graphic = new mars3d.graphic.LabelEntity({
           name: "贴地文字",
-          position: new mars3d.LatLngPoint(116.241728, 30.879732),
+          position: new mars3d.LngLatPoint(116.241728, 30.879732),
           style: {
             text: "Mars3D",
             font_size: 25,
@@ -210,7 +210,7 @@
       function addGraphic_03(graphicLayer) {
         var graphic = new mars3d.graphic.LabelEntity({
           name: "根据视距缩放文字",
-          position: new mars3d.LatLngPoint(116.340026, 30.873948, 383.31),
+          position: new mars3d.LngLatPoint(116.340026, 30.873948, 383.31),
           style: {
             text: "中国安徽合肥",
             color: "#00ff00",
@@ -224,7 +224,7 @@
       function addGraphic_04(graphicLayer) {
         var graphic = new mars3d.graphic.LabelEntity({
           name: "根据视距显示文字",
-          position: new mars3d.LatLngPoint(116.329102, 30.977955, 1548.6),
+          position: new mars3d.LngLatPoint(116.329102, 30.977955, 1548.6),
           style: {
             text: "火星科技Mars3D平台",
             font_size: 25,
@@ -630,7 +630,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
     </script>
   </body>

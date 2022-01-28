@@ -119,7 +119,7 @@
       //
       function addGraphic_02(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.2, 31.0, 1000),
+          position: new mars3d.LngLatPoint(116.2, 31.0, 1000),
           style: {
             radii: new Cesium.Cartesian3(1000.0, 1000.0, 1000.0),
             color: Cesium.Color.RED.withAlpha(0.5),
@@ -133,7 +133,7 @@
       //
       function addGraphic_03(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.307258, 30.999546, 1239.2),
+          position: new mars3d.LngLatPoint(116.307258, 30.999546, 1239.2),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             maximumConeDegree: 90,
@@ -148,7 +148,7 @@
 
       function addGraphic_03b(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.303345, 31.087028, 452.2),
+          position: new mars3d.LngLatPoint(116.303345, 31.087028, 452.2),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             maximumConeDegree: 90,
@@ -232,7 +232,7 @@
       //半圆顶球体
       function addGraphic_06(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.2, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.2, 30.9, 1000),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             maximumConeDegree: 90,
@@ -247,7 +247,7 @@
       //含内半径 半圆顶球体
       function addGraphic_07(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.3, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.3, 30.9, 1000),
           style: {
             radii: new Cesium.Cartesian3(2500.0, 2000.0, 1500.0),
             innerRadii: new Cesium.Cartesian3(1000.0, 800.0, 600.0),
@@ -263,7 +263,7 @@
       //被切开的含内半径 半圆顶球体
       function addGraphic_08(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.4, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.4, 30.9, 1000),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             innerRadii: new Cesium.Cartesian3(1000.0, 1000.0, 1000.0),
@@ -280,7 +280,7 @@
       //顶部和底部切出的桶形体
       function addGraphic_09(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.5, 30.9, 1000),
+          position: new mars3d.LngLatPoint(116.5, 30.9, 1000),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             innerRadii: new Cesium.Cartesian3(1000.0, 1000.0, 1000.0),
@@ -297,7 +297,7 @@
       //碗行体
       function addGraphic_10(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.1, 30.8, 1000),
+          position: new mars3d.LngLatPoint(116.1, 30.8, 1000),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             innerRadii: new Cesium.Cartesian3(1800.0, 1800.0, 1800.0),
@@ -313,7 +313,7 @@
       //时钟开孔
       function addGraphic_11(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.2, 30.8, 1000),
+          position: new mars3d.LngLatPoint(116.2, 30.8, 1000),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             innerRadii: new Cesium.Cartesian3(1500.0, 1500.0, 1500.0),
@@ -332,7 +332,7 @@
       //局部圆顶
       function addGraphic_12(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.3, 30.8, 1000),
+          position: new mars3d.LngLatPoint(116.3, 30.8, 1000),
           style: {
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             minimumClockDegree: -90.0,
@@ -349,7 +349,7 @@
       //部分椭圆体
       function addGraphic_13(graphicLayer) {
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
-          position: new mars3d.LatLngPoint(116.4, 30.8, 1000),
+          position: new mars3d.LngLatPoint(116.4, 30.8, 1000),
           style: {
             radii: new Cesium.Cartesian3(3000.0, 3000.0, 3000.0),
             innerRadii: new Cesium.Cartesian3(700.0, 700.0, 700.0),
@@ -366,7 +366,7 @@
 
       //土星综合对象
       function addGraphic_14(graphicLayer) {
-        var position = new mars3d.LatLngPoint(116.5, 30.8, 1000);
+        var position = new mars3d.LngLatPoint(116.5, 30.8, 1000);
         var graphic = new mars3d.graphic.EllipsoidPrimitive({
           name: "土星",
           position: position,
@@ -794,7 +794,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
         </script>
   </body>

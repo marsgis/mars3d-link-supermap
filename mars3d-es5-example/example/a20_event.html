@@ -62,7 +62,7 @@
       var clickTimeId; //双击会触发两次单击事件的解决
 
       function map_clickHandler(event) {
-        var point = mars3d.LatLngPoint.fromCartesian(event.cartesian); //转换为地理坐标(经纬度)
+        var point = mars3d.LngLatPoint.fromCartesian(event.cartesian); //转换为地理坐标(经纬度)
 
         clearTimeout(clickTimeId);
         clickTimeId = setTimeout(function () {

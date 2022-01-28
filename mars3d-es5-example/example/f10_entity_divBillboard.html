@@ -125,7 +125,7 @@
 
       function addGraphic_a1(graphicLayer) {
         var graphic = new mars3d.graphic.DivBillboardEntity({
-          position: new mars3d.LatLngPoint(116.301798, 30.835848, 915),
+          position: new mars3d.LngLatPoint(116.301798, 30.835848, 915),
           style: {
             html: `<div class="marsImgPanel2">
                     <div class="title">测试DIV点</div>
@@ -576,7 +576,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
     </script>
   </body>

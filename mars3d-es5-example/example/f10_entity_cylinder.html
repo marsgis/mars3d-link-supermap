@@ -182,7 +182,7 @@
       //
       function addGraphic_04(graphicLayer) {
         var graphic = new mars3d.graphic.CylinderEntity({
-          position: new mars3d.LatLngPoint(116.329199, 30.881595, 390.3),
+          position: new mars3d.LngLatPoint(116.329199, 30.881595, 390.3),
           style: {
             length: 2000.0,
             topRadius: 1000.0,
@@ -222,7 +222,7 @@
       //
       function addGraphic_05(graphicLayer) {
         //添加卫星1
-        var point = new mars3d.LatLngPoint(116.148832, 30.920609, 9000);
+        var point = new mars3d.LngLatPoint(116.148832, 30.920609, 9000);
 
         //添加模型
         var graphicModel = new mars3d.graphic.ModelEntity({
@@ -640,7 +640,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
     </script>
   </body>

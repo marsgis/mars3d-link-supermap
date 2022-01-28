@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Mars3D基础项目 - 超图Vue版</title>
+
+    <script type="text/javascript">
+      window.CESIUM_BASE_URL = '/lib/Cesium-supermap/'
+    </script>
+    <link rel="stylesheet" href="/lib/Cesium-supermap/Widgets/widgets.css" />
+    <script type="text/javascript" src="/lib/Cesium-supermap/Cesium.js"></script>
+
+    <style>
+      .cesium-viewer-navigationContainer{
+        top: 50px;
+        left: 10px;
+        right: auto;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/pages/index/main.ts"></script>
+  </body>
+</html>

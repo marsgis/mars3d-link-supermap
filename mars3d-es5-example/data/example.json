@@ -307,6 +307,12 @@
               "fileName": "c20_tileLayer_options"
             },
             {
+              "name": "瓦片颜色滤镜",
+              "version": "3.2",
+              "thumbnail": "c20_filterColor.jpg",
+              "fileName": "c20_filterColor"
+            },
+            {
               "name": "瓦片加载事件",
               "version": "2.1",
               "thumbnail": "c20_tileLayer_event.jpg",
@@ -568,10 +574,40 @@
           "name": "WFS矢量数据服务",
           "children": [
             {
+              "name": "矢量数据Lod加载",
+              "version": "1.7",
+              "thumbnail": "e30_lodGraphicLayer.jpg",
+              "fileName": "e30_lodGraphicLayer"
+            },
+            {
+              "name": "WFS图层",
+              "version": "3.0",
+              "thumbnail": "e25_wfs.jpg",
+              "fileName": "e25_wfs"
+            },
+            {
               "name": "ArcGIS Server动态图层",
               "version": "2.1",
               "thumbnail": "c15_arcgis.jpg",
               "fileName": "c15_arcgis"
+            },
+            {
+              "name": "ArcGIS WFS图层",
+              "version": "3.0",
+              "thumbnail": "e25_arcgis_wfs.jpg",
+              "fileName": "e25_arcgis_wfs"
+            },
+            {
+              "name": "ArcGIS WFS图层贴模型",
+              "version": "3.0",
+              "thumbnail": "e25_arcgis_wfs_surface.jpg",
+              "fileName": "e25_arcgis_wfs_surface"
+            },
+            {
+              "name": "高德POI图层",
+              "version": "3.0",
+              "thumbnail": "e30_gaode_poi.jpg",
+              "fileName": "e30_gaode_poi"
             }
           ]
         },
@@ -1069,6 +1105,12 @@
               "fileName": "f35_pit"
             },
             {
+              "name": "四面体",
+              "version": "3.1",
+              "thumbnail": "f26_tetrahedron.jpg",
+              "fileName": "f26_tetrahedron"
+            },
+            {
               "name": "矿区岩层效果",
               "version": "2.0",
               "thumbnail": "f45_kuangqu.jpg",
@@ -1085,6 +1127,42 @@
               "version": "2.1",
               "thumbnail": "f27_flatBillboard.jpg",
               "fileName": "f27_flatBillboard"
+            },
+            {
+              "name": "PlaneCombine 平面",
+              "version": "3.2",
+              "thumbnail": "f27_primitiveC_plane.jpg",
+              "fileName": "f27_primitiveC_plane"
+            },
+            {
+              "name": "BoxCombine 盒子",
+              "version": "3.2",
+              "thumbnail": "f27_primitiveC_box.jpg",
+              "fileName": "f27_primitiveC_box"
+            },
+            {
+              "name": "CircleCombine 圆、椭圆、圆柱",
+              "version": "3.2",
+              "thumbnail": "f27_primitiveC_circle.jpg",
+              "fileName": "f27_primitiveC_circle"
+            },
+            {
+              "name": "CylinderCombine 圆锥、圆柱",
+              "version": "3.2",
+              "thumbnail": "f27_primitiveC_cylinder.jpg",
+              "fileName": "f27_primitiveC_cylinder"
+            },
+            {
+              "name": "FrustumCombine  四棱锥体",
+              "version": "3.2",
+              "thumbnail": "f27_primitiveC_frustum.jpg",
+              "fileName": "f27_primitiveC_frustum"
+            },
+            {
+              "name": "EllipsoidCombine  球、半球、椭球",
+              "version": "3.2",
+              "thumbnail": "f27_primitiveC_ellipsoid.jpg",
+              "fileName": "f27_primitiveC_ellipsoid"
             },
             {
               "name": "ModelCombine 大量模型",
@@ -1104,6 +1182,30 @@
               "version": "2.1",
               "thumbnail": "f45_line_wind.gif",
               "fileName": "f45_line_wind"
+            },
+            {
+              "name": "PolylineVolumeCombine 管道线",
+              "version": "3.2",
+              "thumbnail": "f28_primitiveC_polylineVolume.jpg",
+              "fileName": "f28_primitiveC_polylineVolume"
+            },
+            {
+              "name": "CorridorCombine 走廊",
+              "version": "3.2",
+              "thumbnail": "f28_primitiveC_corridor.jpg",
+              "fileName": "f28_primitiveC_corridor"
+            },
+            {
+              "name": "WallCombine 墙",
+              "version": "3.2",
+              "thumbnail": "f28_primitiveC_wall.jpg",
+              "fileName": "f28_primitiveC_wall"
+            },
+            {
+              "name": "RectangleCombine 矩形",
+              "version": "3.2.0",
+              "thumbnail": "f28_primitiveC_rectangle.jpg",
+              "fileName": "f28_primitiveC_rectangle"
             },
             {
               "name": "PolygonCombine 面",
@@ -1163,6 +1265,12 @@
         {
           "name": "粒子效果等对象",
           "children": [
+            {
+              "name": "积云",
+              "version": "3.2.0",
+              "thumbnail": "f30_cloud.jpg",
+              "fileName": "f30_cloud"
+            },
             {
               "name": "粒子效果",
               "version": "3.0",
@@ -2114,6 +2222,12 @@
           "name": "地形相关",
           "children": [
             {
+              "name": "地形开挖",
+              "version": "1.8",
+              "thumbnail": "k15_terrainClip.jpg",
+              "fileName": "k15_terrainClip"
+            },
+            {
               "name": "地形开挖(planes)",
               "version": "1.6",
               "thumbnail": "k15_terrainPlanClip.jpg",
@@ -2136,6 +2250,12 @@
               "version": "1.6",
               "thumbnail": "k15_floodByGraphic.jpg",
               "fileName": "k15_floodByGraphic"
+            },
+            {
+              "name": "淹没分析（globe材质）",
+              "version": "1.8",
+              "thumbnail": "k15_floodByMaterial.jpg",
+              "fileName": "k15_floodByMaterial"
             }
           ]
         },
@@ -2165,6 +2285,24 @@
               "version": "1.9",
               "thumbnail": "k20_jzwStyle.gif",
               "fileName": "k20_jzwStyle"
+            },
+            {
+              "name": "模型压平",
+              "version": "2.0",
+              "thumbnail": "k20_tilesetFlat.jpg",
+              "fileName": "k20_tilesetFlat"
+            },
+            {
+              "name": "模型裁剪开挖",
+              "version": "2.0",
+              "thumbnail": "k20_tilesetClip.jpg",
+              "fileName": "k20_tilesetClip"
+            },
+            {
+              "name": "模型淹没分析",
+              "version": "2.0",
+              "thumbnail": "k20_tilesetFlood.jpg",
+              "fileName": "k20_tilesetFlood"
             },
             {
               "name": "模型热力图",

@@ -274,7 +274,7 @@
           $("#td_time").html(date.format("yyyy-M-d HH:mm:ss"));
 
           if (weixin.position) {
-            var point = mars3d.LatLngPoint.fromCartesian(weixin.position);
+            var point = mars3d.LngLatPoint.fromCartesian(weixin.position);
             $("#td_jd").html(point.lng);
             $("#td_wd").html(point.lat);
             $("#td_gd").html(haoutil.str.formatLength(point.alt));

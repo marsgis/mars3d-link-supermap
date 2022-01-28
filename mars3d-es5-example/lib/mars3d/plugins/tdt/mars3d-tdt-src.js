@@ -1,7 +1,7 @@
 /*!
  * Mars3D平台插件, 支持对 天地图三维地名服务和地形服务加载使用
- * 版本信息：v3.1.17, hash值: 0b1e14242815ecaa3be2
- * 编译日期：2021-12-19 12:08:56
+ * 版本信息：v3.2.0, hash值: df23a3a3d8d64c80c541
+ * 编译日期：2022-01-28 14:16:49
  * 版权所有：Copyright by 火星科技 http://mars3d.cn
  * 
  */
@@ -114,25 +114,14 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__0__;
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
 }
 
-module.exports = _typeof;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 2 */
@@ -147,13 +136,11 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__2__;
 function _getPrototypeOf(o) {
   module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
   return _getPrototypeOf(o);
 }
 
-module.exports = _getPrototypeOf;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 4 */
@@ -165,11 +152,35 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-module.exports = _classCallCheck;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
+
+module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var setPrototypeOf = __webpack_require__(10);
@@ -179,21 +190,23 @@ function _inherits(subClass, superClass) {
     throw new TypeError("Super expression must either be null or a function");
   }
 
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
+  Object.defineProperty(subClass, "prototype", {
+    value: Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    }),
+    writable: false
   });
   if (superClass) setPrototypeOf(subClass, superClass);
 }
 
-module.exports = _inherits;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _typeof = __webpack_require__(1)["default"];
@@ -210,11 +223,10 @@ function _possibleConstructorReturn(self, call) {
   return assertThisInitialized(self);
 }
 
-module.exports = _possibleConstructorReturn;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 function _defineProperty(obj, key, value) {
@@ -232,31 +244,7 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-module.exports = _defineProperty;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 9 */
@@ -40586,14 +40574,11 @@ function _setPrototypeOf(o, p) {
   module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
-  };
-
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
   return _setPrototypeOf(o, p);
 }
 
-module.exports = _setPrototypeOf;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 11 */
@@ -40607,8 +40592,7 @@ function _assertThisInitialized(self) {
   return self;
 }
 
-module.exports = _assertThisInitialized;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 12 */
@@ -40628,27 +40612,27 @@ var external_commonjs2_mars3d_cesium_amd_mars3d_cesium_commonjs_mars3d_cesium_ro
 // EXTERNAL MODULE: ./src/tdt/lib/cesiumTdt.js
 var cesiumTdt = __webpack_require__(9);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(7);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(8);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/classCallCheck.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(4);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(8);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
+var createClass = __webpack_require__(5);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(5);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(6);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(6);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(7);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/getPrototypeOf.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
 var getPrototypeOf = __webpack_require__(3);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
@@ -40663,9 +40647,9 @@ var external_mars3d_ = __webpack_require__(2);
 
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { defineProperty_default()(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
@@ -40677,13 +40661,24 @@ var BaseLayer = external_mars3d_["layer"].BaseLayer;
 /**
  * 天地图 三维地名服务图层
  * 【需要引入 mars3d-tdt 插件库】
- * @param {Object} options 参数对象，包括以下：
- * @param {BaseGraphicLayer.ConstructorOptions} [options.通用参数] 包含父类支持的所有参数
- *
+ * @param {Object} [options] 参数对象，包括以下：
  * @param {String} [options.url='https://t{s}.tianditu.gov.cn/mapservice/GetTiles'] 天地图服务地址
  * @param {String} [options.subdomains='01234567'] 服务负载子域
  * @param {String} [options.key=mars3d.Token.tianditu] 天地图服务token令牌
  *
+ * @param {String|Number} [options.id = uuid()] 图层id标识
+ * @param {String|Number} [options.pid = -1] 图层父级的id，一般图层管理中使用
+ * @param {String} [options.name = ''] 图层名称
+ * @param {Boolean} [options.show = true] 图层是否显示
+ * @param {BaseClass|Boolean} [options.eventParent]  指定的事件冒泡对象，默认为map对象，false时不冒泡
+ * @param {Object} [options.center] 图层自定义定位视角 {@link Map#setCameraView}
+ * @param {Number} options.center.lng 经度值, 180 - 180
+ * @param {Number} options.center.lat 纬度值, -90 - 90
+ * @param {Number} [options.center.alt] 高度值
+ * @param {Number} [options.center.heading] 方向角度值，绕垂直于地心的轴旋转角度, 0-360
+ * @param {Number} [options.center.pitch] 俯仰角度值，绕纬度线旋转角度, 0-360
+ * @param {Number} [options.center.roll] 翻滚角度值，绕经度线旋转角度, 0-360
+ * @param {Boolean} [options.flyTo] 加载完成数据后是否自动飞行定位到数据所在的区域。
  * @export
  * @class TdtDmLayer
  * @extends {BaseLayer}
@@ -40997,6 +40992,7 @@ external_mars3d_["layer"].register("tdt_dm", TdtDmLayer_TdtDmLayer);
 
 
 
+
 function TdtTerrainProvider_createSuper(Derived) { var hasNativeReflectConstruct = TdtTerrainProvider_isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
 function TdtTerrainProvider_isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
@@ -41007,16 +41003,14 @@ function TdtTerrainProvider_isNativeReflectConstruct() { if (typeof Reflect === 
  * 天地图 地形服务
  * 【需要引入 mars3d-tdt 插件库】
  *
- * @param {Object} options 参数对象，包括以下：
- * @param {BaseGraphicLayer.ConstructorOptions} [options.通用参数] 包含父类支持的所有参数
- *
+ * @param {Object} [options] 参数对象，包括以下：
  * @param {String} [options.url='https://t{s}.tianditu.gov.cn/DataServer'] 天地图服务地址
  * @param {String} [options.subdomains='01234567'] 服务负载子域
  * @param {String} [options.key=mars3d.Token.tianditu] 天地图服务token令牌
  *
  * @export
  * @class TdtTerrainProvider
- * @extends {Cesium.GeoTerrainProvider}
+ * @extends {Cesium.TerrainProvider}
  */
 
 var TdtTerrainProvider_TdtTerrainProvider = /*#__PURE__*/function (_Cesium$GeoTerrainPro) {
@@ -41055,7 +41049,7 @@ var TdtTerrainProvider_TdtTerrainProvider = /*#__PURE__*/function (_Cesium$GeoTe
     return _super.call(this, options);
   }
 
-  return TdtTerrainProvider;
+  return createClass_default()(TdtTerrainProvider);
 }(external_commonjs2_mars3d_cesium_amd_mars3d_cesium_commonjs_mars3d_cesium_root_Cesium_["GeoTerrainProvider"]);
 external_mars3d_["LayerUtil"].registerTerrainProvider("tdt", TdtTerrainProvider_TdtTerrainProvider);
 external_mars3d_["provider"].TdtTerrainProvider = TdtTerrainProvider_TdtTerrainProvider;

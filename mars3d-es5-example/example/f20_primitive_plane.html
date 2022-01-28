@@ -108,7 +108,7 @@
 
       function addGraphic_a2(graphicLayer) {
         var primitive = new mars3d.graphic.PlanePrimitive({
-          position: new mars3d.LatLngPoint(116.294498, 30.892548, 432.93),
+          position: new mars3d.LngLatPoint(116.294498, 30.892548, 432.93),
           style: {
             plane_normal: Cesium.Cartesian3.UNIT_Y,
             dimensions_x: 2000.0,
@@ -526,7 +526,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
         </script>
   </body>

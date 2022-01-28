@@ -205,7 +205,7 @@
       }
 
       function onClickMap(event) {
-        let point = mars3d.LatLngPoint.fromCartesian(event.cartesian);
+        let point = mars3d.LngLatPoint.fromCartesian(event.cartesian);
 
         let rightFrame = document.getElementById("streeScape");
         rightFrame.contentWindow.setPosition(point);

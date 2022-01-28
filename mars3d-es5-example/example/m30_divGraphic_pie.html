@@ -140,7 +140,7 @@
           let cityName = arr[i].PortName; //城市名字
           let points = [arr[i].X, arr[i].Y]; //位置
 
-          var point = mars3d.LatLngPoint.fromCartesian(points); //经纬度坐标
+          var point = mars3d.LngLatPoint.fromCartesian(points); //经纬度坐标
           var divPostion = point._position;
 
           //白色背景

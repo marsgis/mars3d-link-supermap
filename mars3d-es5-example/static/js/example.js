@@ -14,18 +14,12 @@ $(document).ready(function () {
   //记录url传入参数
   let request = haoutil.system.getRequest();
 
-  fetch(request.json || window.exampleConfig || "../data/example.json")
-    .then(function (response) {
-      if (!response.ok) {
-        let error = new Error(response.statusText);
-        error.response = response;
-        throw error;
-      } else {
-        return response.json();
-      }
-    })
-    .then((json) => {
-      exConfig = json.result;
+  $.ajax({
+    type: "get",
+    dataType: "json",
+    url: request.json || window.exampleConfig || "../data/example.json",
+    success: function (result) {
+      exConfig = result.result;
       //赋值id
       exConfig.forEach((item, index1) => {
         item.id = "ex_" + index1;
@@ -44,11 +38,12 @@ $(document).ready(function () {
       haoutil.storage.add("mars3d-es5-example", JSON.stringify(exConfig));
 
       initPage();
-    })
-    .catch(function (error) {
+    },
+    error: function (error) {
       console.log("加载JSON出错", error);
       haoutil.alert(error?.message, "出错了");
-    });
+    },
+  });
 });
 
 //左侧层级不包含例子，只包含分类

@@ -190,7 +190,7 @@
           var item = arr[i];
 
           var graphic = new mars3d.graphic.BillboardEntity({
-            position: new mars3d.LatLngPoint(item.lng, item.lat, item.z || 0),
+            position: new mars3d.LngLatPoint(item.lng, item.lat, item.z || 0),
             style: {
               image: "img/marker/mark3.png",
               horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
@@ -253,7 +253,7 @@
 
             for (var i = 0, len = arrData.length; i < len; i++) {
               var item = arrData[i];
-              var point = mars3d.LatLngPoint.fromCartesian(raisedPositions[i]);
+              var point = mars3d.LngLatPoint.fromCartesian(raisedPositions[i]);
 
               item[lonCol] = point.lng;
               item[latCol] = point.lat;

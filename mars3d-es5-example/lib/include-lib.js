@@ -80,6 +80,10 @@ var configLibs = {
     "ammo/ex/geometries/ConvexGeometry.js", //仅convexBreak使用
     "mars3d/thirdParty/meshVisualizer/CesiumMeshVisualizer.js"
   ],
+  "cesium-sensorVolumes": [
+    //支持agi_conicSensor，agi_customPatternSensor和agi_rectangularSensor展示的czml插件
+    "mars3d/thirdParty/sensorVolumes/cesium-sensor-volumes.js"
+  ],
   'olcesium': [
     "ol/ol.css",
     "ol/ol.js",
@@ -88,11 +92,11 @@ var configLibs = {
 
   //////////////////////////mars2d及其插件////////////////////////
   'mars2d': [//地图 主库
-    "https://unpkg.com/leaflet/dist/leaflet.css",    //leaflet
+    "https://unpkg.com/leaflet/dist/leaflet.css", //leaflet
     "https://unpkg.com/leaflet/dist/leaflet.js",
-    "https://unpkg.com/mars2d/dist/mars2d.css", //mars2d
-    "https://unpkg.com/mars2d/dist/mars2d.js",
-    "https://unpkg.com/mars2d-esri/dist/mars2d-esri.js",
+    "http://mars2d.cn/lib/mars2d/mars2d.css", //mars2d
+    "http://mars2d.cn/lib/mars2d/mars2d.js",
+    "http://mars2d.cn/lib/mars2d/plugins/esri/mars2d-esri.js"
   ],
 
   //////////////////////////其他地图渲染相关库////////////////////////

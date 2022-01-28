@@ -1,9 +1,9 @@
 /*!
  * Mars3D平台插件,原生JS下的项目widget模块化设计功能模块
- * 版本信息：v3.1.17, hash值: 90d3bc1335d8a33b2b81
- * 编译日期：2021-12-20 13:39:27
+ * 版本信息：v3.2.0, hash值: d8b45db3fc4311bfd79c
+ * 编译日期：2022-01-27 10:16:35
  * 版权所有：Copyright by 火星科技 http://mars3d.cn
- *
+ * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -114,25 +114,14 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__0__;
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-
-    module.exports["default"] = module.exports, module.exports.__esModule = true;
-  }
-
-  return _typeof(obj);
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
 }
 
-module.exports = _typeof;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 2 */
@@ -153,8 +142,7 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-module.exports = _defineProperty;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 3 */
@@ -163,13 +151,11 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 function _getPrototypeOf(o) {
   module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
   return _getPrototypeOf(o);
 }
 
-module.exports = _getPrototypeOf;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 4 */
@@ -181,8 +167,7 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-module.exports = _classCallCheck;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 5 */
@@ -201,11 +186,13 @@ function _defineProperties(target, props) {
 function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
   return Constructor;
 }
 
-module.exports = _createClass;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 6 */
@@ -218,18 +205,20 @@ function _inherits(subClass, superClass) {
     throw new TypeError("Super expression must either be null or a function");
   }
 
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
+  Object.defineProperty(subClass, "prototype", {
+    value: Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    }),
+    writable: false
   });
   if (superClass) setPrototypeOf(subClass, superClass);
 }
 
-module.exports = _inherits;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 7 */
@@ -249,8 +238,7 @@ function _possibleConstructorReturn(self, call) {
   return assertThisInitialized(self);
 }
 
-module.exports = _possibleConstructorReturn;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 8 */
@@ -266,14 +254,11 @@ function _setPrototypeOf(o, p) {
   module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
-  };
-
-  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
   return _setPrototypeOf(o, p);
 }
 
-module.exports = _setPrototypeOf;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 10 */
@@ -287,8 +272,7 @@ function _assertThisInitialized(self) {
   return self;
 }
 
-module.exports = _assertThisInitialized;
-module.exports["default"] = module.exports, module.exports.__esModule = true;
+module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
 /* 11 */
@@ -332,11 +316,11 @@ var external_mars3d_ = __webpack_require__(0);
 // EXTERNAL MODULE: ./src/theme/widget.scss
 var widget = __webpack_require__(8);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/typeof.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
 var helpers_typeof = __webpack_require__(1);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/defineProperty.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
 var defineProperty = __webpack_require__(2);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
@@ -584,9 +568,9 @@ var WidgetEventType = {
 
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { defineProperty_default()(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 /**
  * widget模块化框架，公共处理类
@@ -620,7 +604,7 @@ var removeKeys = ["_class"];
  * @return {void}  无
  * @example
 let widgetCfg ={
-  "version": "20220120",
+  "version": "2017",
   "defaultOptions": {
     "style": "dark",
     "windowOptions": {
@@ -945,17 +929,18 @@ function activate(item, noDisableOther) {
     // eslint-disable-next-line no-console
     console.log("开始激活widget：" + thisItem.uri);
     window.location.hash = "#" + thisItem.uri;
-  } //兼容之前历史版本的错误命名时的属性名称
-
-
-  if (thisItem.hasOwnProperty("disableOhter") && !thisItem.hasOwnProperty("disableOther")) {
-    thisItem.disableOther = thisItem.disableOhter;
   } //释放其他已激活的widget
 
 
   if (thisItem.disableOther) {
-    disableAll(thisItem.uri, thisItem.group);
-  } else {
+    if (Array.isArray(thisItem.disableOther)) {
+      disable(thisItem.disableOther);
+    } else {
+      disableAll(thisItem.uri, thisItem.group);
+    }
+  }
+
+  if (thisItem.group) {
     disableGroup(thisItem.group, thisItem.uri);
   } //激活本widget
 
@@ -1060,7 +1045,7 @@ function isActivate(uri) {
 /**
  * 释放指定的widget
  *
- * @param {String} uri widget的uri 或 id
+ * @param {String|String[]} uri widget的uri 或 id
  * @return {Boolean} 是否成功调用了释放
  */
 
@@ -1069,17 +1054,36 @@ function disable(uri) {
     return false;
   }
 
-  if ((typeof id === "undefined" ? "undefined" : typeof_default()(id)) === "object") {
-    uri = uri.uri;
-  }
+  if (Array.isArray(uri)) {
+    var arrUri = uri;
 
-  for (var i = 0; i < widgetsdata.length; i++) {
-    var item = widgetsdata[i];
+    for (var i = 0; i < widgetsdata.length; i++) {
+      var item = widgetsdata[i];
 
-    if (item._class && (uri == item.uri || uri == item.id)) {
-      item._class.disableBase();
+      for (var j = 0; j < arrUri.length; j++) {
+        var _uri2 = arrUri[j];
 
-      return true;
+        if (item._class && (_uri2 == item.uri || _uri2 == item.id)) {
+          item._class.disableBase();
+
+          arrUri.splice(j, 1);
+          break;
+        }
+      }
+    }
+  } else {
+    if (typeof_default()(uri) === "object") {
+      uri = uri.uri;
+    }
+
+    for (var _i5 = 0; _i5 < widgetsdata.length; _i5++) {
+      var _item4 = widgetsdata[_i5];
+
+      if (_item4._class && (uri == _item4.uri || uri == _item4.id)) {
+        _item4._class.disableBase();
+
+        return true;
+      }
     }
   }
 
@@ -1089,7 +1093,7 @@ function disable(uri) {
  * 关闭释放所有widget
  *
  * @export
- * @param {String|Boolean} [nodisable]  指定不释放的widget的uri或id 或 传true值强制释放所有widget(默认autoDisable为false的widet不会释放)
+ * @param {String|Boolean} [nodisable] 传string时 指定不释放的widget的uri或id ，传true值强制释放所有widget(默认autoDisable为false的widet不会释放)
  * @param {String} [group] 指定强制释放的group名(默认autoDisable为false的widet不会释放)，传入group值后会强制释放所有同group组的widget
  * @return {void}  无
  */
@@ -1381,23 +1385,23 @@ function once(types, fn, context) {
 function listens(type, propagate) {
   return eventTarget.listens(type, propagate);
 }
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/classCallCheck.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(4);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/createClass.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
 var createClass = __webpack_require__(5);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/inherits.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
 var inherits = __webpack_require__(6);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/possibleConstructorReturn.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
 var possibleConstructorReturn = __webpack_require__(7);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
-// EXTERNAL MODULE: ./node_modules/_@babel_runtime@7.15.3@@babel/runtime/helpers/getPrototypeOf.js
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
 var getPrototypeOf = __webpack_require__(3);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
@@ -1410,9 +1414,9 @@ var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 
 
-function BaseWidget_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function BaseWidget_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function BaseWidget_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { BaseWidget_ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { BaseWidget_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function BaseWidget_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? BaseWidget_ownKeys(Object(source), !0).forEach(function (key) { defineProperty_default()(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : BaseWidget_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
 
@@ -1456,12 +1460,12 @@ var _resources_cache = [];
  * @property {Boolean} [windowOptions.shadeClose=false] 当shade是存在的，点击弹层外区域后是否关闭弹窗。
  * @property {Number} [windowOptions.closeBtn=1] 当为0时，不显示关闭按钮，配置1和2来展示两种风格的关闭按钮
  * @property {Number} [windowOptions.noTitle=false] 是否不显示标题，为true是不显示标题
+ * @property {Boolean} [windowOptions.show=true] 激活后是否显示弹窗，false时激活后自动隐藏弹窗。
  *
  * @property {Boolean} [openAtStart=false] 打开系统后是否自动启动本插件
  * @property {String} [style] 添加到widget的view中的class样式名
  * @property {Object} [css] 添加到widget的css值
- * @property {Boolean} [show=true] 激活后是否显示弹窗，false时激活后自动隐藏弹窗。
- * @property {*} [其他] 传入数据等，定义的任意参数在widget内部方法中都可以通过this.config获取到
+ * @property {*} [多个参数] 传入数据等，定义的任意参数在widget内部方法中都可以通过this.config获取到
  */
 
 /**
@@ -1591,9 +1595,9 @@ var BaseWidget_BaseWidget = /*#__PURE__*/function (_BaseClass) {
     }
     /**
      * 定义关联的view弹窗或页面配置信息，目前支持3种类型，
-     * （1）type:'window'，iframe模式弹窗	,参考_example示例，	独立的html子页面，比较自由，简单粗暴、无任何限制；可以每个页面用不同的UI和第三方插件不用考虑冲突问题；任何水平的开发人员均容易快速开发。
-     * （2）type:'divwindow'，div元素模式弹窗	参考_example_divwin示例，可直接互相访问，这种模式弊端是易引起模块间id命名冲突，在css和html中命名时需注意。
-     * （3）type:'append'，任意html元素	参考_example_append示例，任意div节点，比较自由。
+     * （1）type:'window'，iframe模式弹窗 ,参考_example示例， 独立的html子页面，比较自由，简单粗暴、无任何限制；可以每个页面用不同的UI和第三方插件不用考虑冲突问题；任何水平的开发人员均容易快速开发。
+     * （2）type:'divwindow'，div元素模式弹窗 参考_example_divwin示例，可直接互相访问，这种模式弊端是易引起模块间id命名冲突，在css和html中命名时需注意。
+     * （3）type:'append'，任意html元素 参考_example_append示例，任意div节点，比较自由。
      * 为空时表示当前模块无关联的view页面，
      * 其中url地址规则，参考resources说明
      * @type {Object|Object[]}
@@ -1849,14 +1853,18 @@ var BaseWidget_BaseWidget = /*#__PURE__*/function (_BaseClass) {
           viewopt._layerOpening = false;
           viewopt._dom = layero; //得到iframe页的窗口对象，执行iframe页的方法：viewWindow.method();
 
-          var viewWindow = window[layero.find("iframe")[0]["name"]]; //设置css
+          var viewWindow = window[layero.find("iframe")[0]["name"]]; //绑定常用对象到子页面，方便直接使用
+
+          viewWindow.map = _this2.map;
+          viewWindow.mars3d = external_mars3d_;
+          viewWindow.Cesium = external_mars3d_["Cesium"]; //设置css
 
           if (_this2.options.css) {
             BaseWidget_jQuery("#layui-layer" + viewopt._layerIdx).css(_this2.options.css);
           } //隐藏弹窗
 
 
-          if (_this2.options.hasOwnProperty("visible") && !_this2.options.visible) {
+          if (viewopt.windowOptions.hasOwnProperty("show") && !viewopt.windowOptions.show) {
             BaseWidget_jQuery(layero).hide();
           }
 
@@ -1924,7 +1932,7 @@ var BaseWidget_BaseWidget = /*#__PURE__*/function (_BaseClass) {
             viewopt._layerOpening = false;
             viewopt._dom = layero; //隐藏弹窗
 
-            if (_this3.options.hasOwnProperty("show") && !_this3.options.show) {
+            if (viewopt.windowOptions.hasOwnProperty("show") && !viewopt.windowOptions.show) {
               BaseWidget_jQuery(layero).hide();
             }
 

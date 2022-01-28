@@ -1,7 +1,7 @@
 /*!
  * Mars3D平台插件,结合supermap超图库使用的功能插件
- * 版本信息：v3.1.17, hash值: 7596fcf29d59e48b56ae
- * 编译日期：2021-12-22 11:02:11
+ * 版本信息：v3.2.0, hash值: 6394c98c6553da1e9324
+ * 编译日期：2022-01-28 14:18:36
  * 版权所有：Copyright by 火星科技 http://mars3d.cn
  * 
  */
@@ -376,7 +376,7 @@ var BaseLayer = external_mars3d_["layer"].BaseLayer;
  * 超图S3M三维模型图层,
  * 【需要引入  mars3d-supermap 插件库】
  *
- * @param {Object} options 参数对象，包括以下：
+ * @param {Object} [options] 参数对象，包括以下：
  * @param {String} options.url supermap的S3M服务地址,示例："url": "http://www.supermapol.com/realspace/services/3D-Olympic/rest/realspace"
  * @param {String} [options.layername] 指定图层名称,未指定时，打开iserver场景服务下所有图层
  * @param {String} [options.sceneName] 工作空间中有多个场景，需要指定场景名称；设置为undefined，默认打开第一个
@@ -392,10 +392,10 @@ var BaseLayer = external_mars3d_["layer"].BaseLayer;
  * @param {Object} [options.center] 图层自定义定位视角 {@link Map#setCameraView}
  * @param {Number} options.center.lng 经度值, 180 - 180
  * @param {Number} options.center.lat 纬度值, -90 - 90
- * @param {Number} options.center.alt 高度值
- * @param {Number} options.center.heading 方向角度值，绕垂直于地心的轴旋转角度, 0-360
- * @param {Number} options.center.pitch 俯仰角度值，绕纬度线旋转角度, 0-360
- * @param {Number} options.center.roll 翻滚角度值，绕经度线旋转角度, 0-360
+ * @param {Number} [options.center.alt] 高度值
+ * @param {Number} [options.center.heading] 方向角度值，绕垂直于地心的轴旋转角度, 0-360
+ * @param {Number} [options.center.pitch] 俯仰角度值，绕纬度线旋转角度, 0-360
+ * @param {Number} [options.center.roll] 翻滚角度值，绕经度线旋转角度, 0-360
  * @param {Boolean} [options.flyTo] 加载完成数据后是否自动飞行定位到数据所在的区域。
  * @export
  * @class S3MLayer
@@ -652,7 +652,7 @@ var BaseTileLayer = external_mars3d_["layer"].BaseTileLayer;
  * 超图影像瓦片服务图层,
  * 【需要引入  mars3d-supermap 插件库】
  *
- * @param {Object} options 参数对象，包括以下：
+ * @param {Object} [options] 参数对象，包括以下：
  * @param {String} options.url supermap的影像服务地址
  * @param {String|String[]} [options.subdomains] URL模板中用于 {s} 占位符的子域。 如果此参数是单个字符串，则字符串中的每个字符都是一个子域。如果是 一个数组，数组中的每个元素都是一个子域。
  * @param {String} [options.tileFormat] 影像图片格式，默认为png。
@@ -670,7 +670,7 @@ var BaseTileLayer = external_mars3d_["layer"].BaseTileLayer;
  * @param {Number} options.rectangle.xmax 最大纬度值, -180 至 180
  * @param {Number} options.rectangle.ymin 最小纬度值, -90 至 90
  * @param {Number} options.rectangle.ymax 最大纬度值, -90 至 90
- * @param {Number[]} options.bbox bbox规范的瓦片数据的矩形区域范围,与rectangle二选一即可。
+ * @param {Number[]} [options.bbox] bbox规范的瓦片数据的矩形区域范围,与rectangle二选一即可。
  * @param {Number} [options.zIndex] 控制图层的叠加层次，默认按加载的顺序进行叠加，但也可以自定义叠加顺序，数字大的在上面。
  * @param {CRS} [options.crs=CRS.EPSG:3857] 瓦片数据的坐标系信息，默认为墨卡托投影
  * @param {ChinaCRS} [options.chinaCRS] 标识瓦片的国内坐标系（用于自动纠偏或加偏），自动将瓦片转为map对应的chinaCRS类型坐标系。
@@ -709,10 +709,10 @@ var BaseTileLayer = external_mars3d_["layer"].BaseTileLayer;
  * @param {Object} [options.center] 图层自定义定位视角 {@link Map#setCameraView}
  * @param {Number} options.center.lng 经度值, 180 - 180
  * @param {Number} options.center.lat 纬度值, -90 - 90
- * @param {Number} options.center.alt 高度值
- * @param {Number} options.center.heading 方向角度值，绕垂直于地心的轴旋转角度, 0-360
- * @param {Number} options.center.pitch 俯仰角度值，绕纬度线旋转角度, 0-360
- * @param {Number} options.center.roll 翻滚角度值，绕经度线旋转角度, 0-360
+ * @param {Number} [options.center.alt] 高度值
+ * @param {Number} [options.center.heading] 方向角度值，绕垂直于地心的轴旋转角度, 0-360
+ * @param {Number} [options.center.pitch] 俯仰角度值，绕纬度线旋转角度, 0-360
+ * @param {Number} [options.center.roll] 翻滚角度值，绕经度线旋转角度, 0-360
  * @param {Boolean} [options.flyTo] 加载完成数据后是否自动飞行定位到数据所在的区域。
  * @export
  * @class SmImgLayer
@@ -807,13 +807,13 @@ var SmMvtLayer_BaseLayer = external_mars3d_["layer"].BaseLayer;
  * 超图MVT矢量瓦片图层,
  * 【需要引入  mars3d-supermap 插件库】
  *
- * @param {Object} options 参数对象，包括以下：
+ * @param {Object} [options] 参数对象，包括以下：
  * @param {String} options.url 适用于通过SuperMap桌面软件生成mvt数据,经iServer发布为rest风格的地图服务，只需提供服务地址。
  * @param {String} options.layer 图层名称,适用于第三方发布的WMTS服务。
  * @param {Number} [options.canvasWidth] 用来绘制矢量的纹理边长。默认是512，越大越精细，越小性能越高。
  * @param {String} [options.format='mvt'] 适用于第三方发布的WMTS服务。
  * @param {Object} [options.mapboxStyle] 使用的mapBox风格。
- * @param {Object} [options.其他] 参考[supermap官方API]{@link http://support.supermap.com.cn:8090/webgl/docs/Documentation/Scene.html#addVectorTilesLayer}
+ * @param {Object} [options.多个参数] 参考[supermap官方API]{@link http://support.supermap.com.cn:8090/webgl/docs/Documentation/Scene.html#addVectorTilesLayer}
  *
  *
  * @param {String|Number} [options.id = uuid()] 图层id标识
@@ -824,10 +824,10 @@ var SmMvtLayer_BaseLayer = external_mars3d_["layer"].BaseLayer;
  * @param {Object} [options.center] 图层自定义定位视角 {@link Map#setCameraView}
  * @param {Number} options.center.lng 经度值, 180 - 180
  * @param {Number} options.center.lat 纬度值, -90 - 90
- * @param {Number} options.center.alt 高度值
- * @param {Number} options.center.heading 方向角度值，绕垂直于地心的轴旋转角度, 0-360
- * @param {Number} options.center.pitch 俯仰角度值，绕纬度线旋转角度, 0-360
- * @param {Number} options.center.roll 翻滚角度值，绕经度线旋转角度, 0-360
+ * @param {Number} [options.center.alt] 高度值
+ * @param {Number} [options.center.heading] 方向角度值，绕垂直于地心的轴旋转角度, 0-360
+ * @param {Number} [options.center.pitch] 俯仰角度值，绕纬度线旋转角度, 0-360
+ * @param {Number} [options.center.roll] 翻滚角度值，绕经度线旋转角度, 0-360
  * @param {Boolean} [options.flyTo] 加载完成数据后是否自动飞行定位到数据所在的区域。
  * @export
  * @class SmMvtLayer

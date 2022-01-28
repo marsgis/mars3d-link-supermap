@@ -119,7 +119,7 @@
 
       function addGraphic_a2(graphicLayer) {
         var primitive = new mars3d.graphic.CirclePrimitive({
-          position: new mars3d.LatLngPoint(116.329199, 30.881595, 390.3),
+          position: new mars3d.LngLatPoint(116.329199, 30.881595, 390.3),
           style: {
             radius: 1500.0,
             image: "img/textures/excavate_bottom_min.jpg",
@@ -130,7 +130,7 @@
 
       function addGraphic_a3(graphicLayer) {
         var primitive = new mars3d.graphic.CirclePrimitive({
-          position: new mars3d.LatLngPoint(116.392526, 30.903729, 933.55),
+          position: new mars3d.LngLatPoint(116.392526, 30.903729, 933.55),
           style: {
             radius: 1500.0,
             material: mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.CircleWave, {
@@ -159,7 +159,7 @@
 
       function addGraphic_a5(graphicLayer) {
         var primitive = new mars3d.graphic.CirclePrimitive({
-          position: new mars3d.LatLngPoint(116.37617, 30.847384, 396.12),
+          position: new mars3d.LngLatPoint(116.37617, 30.847384, 396.12),
           style: {
             radius: 900.0,
             material: mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.CircleWave, {
@@ -175,7 +175,7 @@
 
       function addGraphic_a6(graphicLayer) {
         var primitive = new mars3d.graphic.CirclePrimitive({
-          position: new mars3d.LatLngPoint(116.258301, 30.979046, 1483.7),
+          position: new mars3d.LngLatPoint(116.258301, 30.979046, 1483.7),
           style: {
             radius: 1200.0,
             clampToGround: true,
@@ -190,7 +190,7 @@
 
       function addGraphic_a7(graphicLayer) {
         var primitive = new mars3d.graphic.CirclePrimitive({
-          position: new mars3d.LatLngPoint(116.318342, 30.972578, 1431.9),
+          position: new mars3d.LngLatPoint(116.318342, 30.972578, 1431.9),
           style: {
             radius: 1200.0,
             clampToGround: true,
@@ -606,7 +606,7 @@
         var jd = haoutil.math.random(116.1 * 1000, 116.6 * 1000) / 1000;
         var wd = haoutil.math.random(30.8 * 1000, 31.1 * 1000) / 1000;
         var height = haoutil.math.random(1000, 9000);
-        return new mars3d.LatLngPoint(jd, wd, height);
+        return new mars3d.LngLatPoint(jd, wd, height);
       }
         </script>
   </body>

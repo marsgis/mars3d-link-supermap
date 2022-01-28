@@ -123,7 +123,7 @@ class FloorGraphic extends mars3d.graphic.BasePointEntity {
     for (let i = 0; i < this._models.length; i++) {
       let model = this._models[i];
 
-      model.position = new mars3d.LatLngPoint(point.lng, point.lat, model.attr.origAlt);
+      model.position = new mars3d.LngLatPoint(point.lng, point.lat, model.attr.origAlt);
       model.show = true;
     }
   }
@@ -143,7 +143,7 @@ class FloorGraphic extends mars3d.graphic.BasePointEntity {
 
     for (let i = floorNum; i < this._models.length; i++) {
       let model = this._models[i];
-      model.position = new mars3d.LatLngPoint(point.lng, point.lat, maxHeight);
+      model.position = new mars3d.LngLatPoint(point.lng, point.lat, maxHeight);
       model.show = false;
     }
 
