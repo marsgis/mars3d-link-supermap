@@ -5,7 +5,7 @@
 /**
  * 地图渲染组件
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2021-12-30
+ * @author 火星吴彦祖 2022-02-19
  */
 import { computed, onBeforeUnmount, onMounted } from "vue"
 import * as mars3d from "mars3d"
@@ -32,7 +32,6 @@ let map: mars3d.Map // 地图对象
 const withKeyId = computed(() => `mars3d-container-${props.mapKey}`)
 
 onMounted(() => {
-  console.log(mars3d)
   // 获取配置
   mars3d.Util.fetchJson({ url: props.url }).then((data: any) => {
     initMars3d({
@@ -72,7 +71,8 @@ const initMars3d = (option: any) => {
     }
   } else {
     map.zoomFactor = 5.0 // 鼠标滚轮放大的步长参数
-    map.scene.screenSpaceCameraController.enableTilt = false
+
+    // map.scene.screenSpaceCameraController.enableTilt = false
 
     // 移动设备上禁掉以下几个选项，可以相对更加流畅
     map.scene.requestRenderMode = true // 取消实时渲染
@@ -143,17 +143,13 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="less">
-.mars3d-container {
-  height: 100%;
-  overflow: hidden;
-}
 
 /**cesium 工具按钮栏*/
 .cesium-viewer-toolbar {
-  top: auto;
-  bottom: 35px;
-  left: 12px;
-  right: auto;
+  top: auto !important;
+  bottom: 35px !important;
+  left: 12px !important;
+  right: auto !important;
 }
 .cesium-toolbar-button img {
   height: 100%;

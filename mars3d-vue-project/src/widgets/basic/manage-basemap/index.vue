@@ -1,5 +1,5 @@
 <template>
-  <mars-dialog title="底图" :width="380" :height="500" :top="50" :right="10">
+  <mars-dialog title="底图" :width="380" :position="{ top: 50, right: 10 }">
     <ul class="basemap">
       <li v-for="(item, i) in baseMaps" :key="i" class="basemap-card" :class="{ 'active-card': active === item.uuid }" @click="changeBaseMaps(item)">
         <div><img class="icon" :src="`${item.options.icon || 'img/basemaps/bingAerial.png'}`" /></div>
@@ -14,24 +14,20 @@
 </template>
 
 <script setup lang="ts">
-import { onUnmounted, ref, markRaw } from "vue"
+import { ref, markRaw, onMounted } from "vue"
 import useLifecycle from "@mars/common/uses/use-lifecycle"
-import MarsDialog from "@mars/components/mars-work/mars-dialog.vue"
 import * as mapWork from "./map"
 
 // 启用map.ts生命周期
 useLifecycle(mapWork)
 
 const baseMaps = ref<any[]>([])
-
 const active = ref("")
-
 const chkHasTerrain = ref(false)
 
-mapWork.eventTarget.on("mapLoaded", initData)
-
-onUnmounted(() => {
-  mapWork.eventTarget.off("mapLoaded", initData)
+onMounted(() => {
+  const layers = mapWork.getLayers()
+  initData(layers)
 })
 
 function initData(e: any) {
@@ -76,9 +72,10 @@ function changeTerrain() {
     .active-card();
   }
   .icon {
-    border: 2px solid #fff;
+    border: 1px solid #4db3ff78;
     width: 75px;
     height: 70px;
+    padding: 1px;
   }
 }
 

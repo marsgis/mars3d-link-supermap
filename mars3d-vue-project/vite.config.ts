@@ -4,6 +4,8 @@ import { defineConfig, loadEnv } from "vite"
 import vue from "@vitejs/plugin-vue"
 import eslintPlugin from "vite-plugin-eslint"
 
+import { createStyleImportPlugin, AndDesignVueResolve } from "vite-plugin-style-import"
+
 export default ({ mode }: ConfigEnv) => {
   const root = process.cwd()
 
@@ -13,22 +15,27 @@ export default ({ mode }: ConfigEnv) => {
   console.log(`ENV：`, ENV)
 
   return defineConfig({
-    base: ENV.VITE_PUBLIC_PATH,
-    plugins: [
-      vue(),
-      eslintPlugin({ cache: false })
-    ],
+    base: ENV.VITE_BASE_URL,
+    server: {
+      host: "localhost",
+      https: false,
+      port: 3002
+    },
+    define: {
+      "process.env": {
+        mode: mode,
+        BASE_URL: ENV.VITE_BASE_URL
+      }
+    },
     resolve: {
       alias: {
         "@mars": path.join(__dirname, "src")
       },
       extensions: [".js", ".ts", ".jsx", ".tsx", ".json"]
     },
-    define: {
-      "process.env": {
-        mode: mode,
-        BASE_URL: ENV.VITE_PUBLIC_PATH
-      }
+    optimizeDeps: {
+      include: ["mars3d", "kml-geojson",  "@mars/common/store/widget"],
+      exclude: ["mars3d-cesium"]
     },
     json: {
       // 支持从 .json 文件中进行按名导入
@@ -38,29 +45,29 @@ export default ({ mode }: ConfigEnv) => {
     css: {
       preprocessorOptions: {
         less: {
-          javascriptEnabled: true
+          javascriptEnabled: true,
+          additionalData: `@import "${path.resolve(__dirname, "src/components/mars-ui/base.less")}";`
         }
       }
     },
-    optimizeDeps: {
-      include: [
-        "@mars/common/store/widget"
-      ]
-    },
     build: {
       // 输出路径
-      outDir: path.join("./dist", ENV.VITE_PUBLIC_PATH),
+      outDir: path.join("./dist", ENV.VITE_BASE_URL),
       // 小于此阈值的导入或引用资源将内联为 base64 编码， 以避免额外的http请求， 设置为 0, 可以完全禁用此项，
       assetsInlineLimit: 4096,
       // 启动 / 禁用 CSS 代码拆分
       cssCodeSplit: true,
       // 构建后是否生成 soutrce map 文件
       sourcemap: false,
+      // 自定义rollup-commonjs插件选项
+      commonjsOptions: {
+        include: /node_modules|src\/common/
+      },
       // 自定义底层的 Rollup 打包配置
       rollupOptions: {
         input: {
           index: path.resolve(__dirname, "index.html"),
-          example: path.resolve(__dirname, "example.html")
+          demo: path.resolve(__dirname, "demo.html")
         }
       },
       // 当设置为 true, 构建后将会生成 manifest.json 文件
@@ -73,6 +80,22 @@ export default ({ mode }: ConfigEnv) => {
       write: true,
       // 默认情况下 若 outDir 在 root 目录下， 则 Vite 会在构建时清空该目录。
       emptyOutDir: true
-    }
+    },
+    plugins: [
+      vue(),
+      eslintPlugin({ cache: false }),
+      createStyleImportPlugin({
+        resolves: [AndDesignVueResolve()],
+        libs: [
+          {
+            libraryName: "ant-design-vue",
+            esModule: true,
+            resolveStyle: (name) => {
+              return `ant-design-vue/es/${name}/style/index`
+            }
+          }
+        ]
+      })
+    ]
   })
 }

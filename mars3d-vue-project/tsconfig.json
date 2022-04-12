@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "outDir": "./dist",
     "lib": [
       "esnext",
       "dom",
@@ -30,12 +31,17 @@
       "@mars/*": [
         "src/*"
       ]
-    },
+    }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "tests/server/**/*.ts",
+    "src/**/*.js",
+    "dist"
+  ]
 }

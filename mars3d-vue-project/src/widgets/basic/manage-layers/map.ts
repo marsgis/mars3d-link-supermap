@@ -1,14 +1,12 @@
 /**
  * 图层管理
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2021-12-10
+ * @author 火星吴彦祖 2022-01-10
  */
 import * as mars3d from "mars3d"
 const Cesium = mars3d.Cesium
 
 let map: mars3d.Map // 地图对象
-
-export const eventTarget = new mars3d.BaseClass()
 
 /**
  * 初始化地图业务，生命周期钩子函数（必须）
@@ -18,7 +16,6 @@ export const eventTarget = new mars3d.BaseClass()
  */
 export function onMounted(mapInstance: mars3d.Map) {
   map = mapInstance // 记录首次创建的map
-  eventTarget.fire("loadOK")
 }
 
 /**
@@ -29,7 +26,7 @@ export function onUnmounted() {
   map = null
 }
 
-export function addLayer(layer: mars3d.BaseLayer) {
+export function addLayer(layer: mars3d.layer.BaseLayer) {
   map.addLayer(layer)
 }
 
@@ -88,4 +85,3 @@ export function checkModelStyle(layerid: number, arrIds: any) {
     }
   })
 }
-

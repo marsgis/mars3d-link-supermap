@@ -1,5 +1,5 @@
 <template>
-  <mars-dialog title="图层" width="320" :min-width="320" top="50" bottom="40" right="10">
+  <mars-dialog title="图层" width="280" :min-width="250" top="50" bottom="40" right="10">
     <mars-tree checkable :tree-data="treeData" v-model:expandedKeys="expandedKeys" v-model:checkedKeys="checkedKeys" @check="checkedChange">
       <template #title="node">
         <mars-dropdown :trigger="['contextmenu']">
@@ -14,27 +14,34 @@
           </template>
         </mars-dropdown>
         <span v-if="node.hasOpacity" v-show="node.checked" class="tree-slider">
-          <!-- <a-slider v-model:value="node.data.opacity" :min="0" :step="1" :max="100" @change="opcityChange(node)" /> -->
-          <a-slider v-model:value="opacityObj[node.id]" :min="0" :step="1" :max="100" @change="opcityChange(node)" />
+          <mars-slider v-model:value="opacityObj[node.id]" :min="0" :step="1" :max="100" @change="opcityChange(node)" />
         </span>
       </template>
     </mars-tree>
   </mars-dialog>
 </template>
 <script lang="ts" setup>
-import MarsDialog from "@mars/components/mars-work/mars-dialog.vue"
-import { onUnmounted, nextTick, reactive, ref } from "vue"
+import { onUnmounted, nextTick, reactive, ref, onMounted } from "vue"
 import useLifecycle from "@mars/common/uses/use-lifecycle"
 import * as mapWork from "./map"
 import { useWidget } from "@mars/common/store/widget"
 
-const { activate, disable } = useWidget()
-
+const { activate, disable, currentWidget } = useWidget()
+onMounted(() => {
+  initTree()
+})
 onUnmounted(() => {
   disable("layer-tree")
 })
 
 useLifecycle(mapWork)
+
+currentWidget.onUpdate(() => {
+  treeData.value = []
+  expandedKeys.value = []
+  checkedKeys.value = []
+  initTree()
+})
 
 const treeData = ref<any[]>([])
 
@@ -45,10 +52,6 @@ const checkedKeys = ref<string[]>([])
 const layersObj: any = {}
 
 const opacityObj: any = reactive({})
-
-mapWork.eventTarget.on("loadOK", () => {
-  initTree()
-})
 
 let lastWidget: any
 const checkedChange = (keys: string[], e: any) => {
@@ -107,11 +110,6 @@ const checkedChange = (keys: string[], e: any) => {
     // 处理图层构件树控件
     if (layer.options.scenetree) {
       initLayerTree(layer)
-    }
-
-    if (layer.options.onWidght) {
-      const clockWidget = layer.options.onWidght
-      activate(clockWidget)
     }
   }
 }
@@ -189,10 +187,14 @@ function initTree() {
   for (let i = layers.length - 1; i >= 0; i--) {
     const layer = layers[i] // 创建图层
 
+    if (!layer._hasMapInit && layer.pid === -1 && layer.id !== 99) {
+      layer.pid = 99 // 示例中创建的图层都放到99分组下面
+    }
+
     if (layer && layer.pid === -1) {
       const node: any = reactive({
         index: i,
-        title: layer.name,
+        title: layer.name || `未命名(${layer.type})`,
         key: layer.id,
         id: layer.id,
         pId: layer.pid,
@@ -230,7 +232,7 @@ function findChild(parent: any, list: any[]) {
     .map((item: any, i: number) => {
       const node: any = {
         index: i,
-        title: item.name,
+        title: item.name || `未命名(${item.type})`,
         key: item.id,
         id: item.id,
         pId: item.pid,
@@ -261,20 +263,29 @@ function findChild(parent: any, list: any[]) {
 
 function initLayerTree(layer: any) {
   disable("layer-tree")
+
+  if (lastBindClickLayer) {
+    lastBindClickLayer.off("click", onClickBimLayer)
+    lastBindClickLayer = null
+  }
+
   // 处理图层构件树控件
   if (layer.options.scenetree) {
-    layer.on("click", () => {
-      const url = layer.options.url
-      const id = layer.id
-      activate({
-        name: "layer-tree",
-        data: {
-          url,
-          id
-        }
-      })
-    })
+    layer.on("click", onClickBimLayer)
+    lastBindClickLayer = layer
   }
+}
+
+let lastBindClickLayer
+
+function onClickBimLayer(event: any) {
+  const layer = event.layer
+  const url = layer.options.url
+  const id = layer.id
+  activate({
+    name: "layer-tree",
+    data: { url, id }
+  })
 }
 </script>
 

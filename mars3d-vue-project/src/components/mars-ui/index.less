@@ -2,7 +2,7 @@
  * 所有页面全局公共CSS
  *
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2021-11-01
+ * @author 火星吴彦祖 2022-01-01
  */
 
 /* 清除内外边距 */
@@ -29,6 +29,9 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构�
 /*滚动条*/
 body,
 html {
+  background-color: @background-base;
+  color: @mars-basecolor;
+  font-size: 14px;
   overflow: hidden;
   * {
     scrollbar-base-color: #f4f7fc;
@@ -39,7 +42,27 @@ html {
     scrollbar-3dlight-color: #f4f7fc;
     scrollbar-highlight-color: #f4f7fc;
     scrollbar-darkshadow-color: #f4f7fc;
+    font-size: @font-size-base;
     scrollbar-width: thin;
+  }
+}
+
+.layout-right__header {
+  background-color: @mars-background-active;
+  h3 {
+    color: @mars-basecolor !important;
+  }
+}
+.editor-container .editor-header {
+  background-color: @mars-background-active;
+  .fileTip {
+    color: @mars-basecolor !important;
+  }
+}
+
+.mars-link-btn-primary {
+  * {
+    color: @primary-color !important;
   }
 }
 
@@ -106,12 +129,32 @@ html {
   background: #209ffd1c;
 }
 
-.mars-popup-content label {
+.mars3d-template-content label {
   padding-right: 6px;
 }
 
-.mars-popup-titile a {
+.mars3d-template-titile a {
   font-size: 16px;
+}
+
+.icon-vertical-a {
+  width: 20px;
+  height: 20px;
+  vertical-align: -0.3em !important;
+}
+
+.ant-popover {
+  .ant-popover-title {
+    color: @mars-basecolor;
+  }
+}
+.ant-popover-inner-content {
+  a {
+    color: @primary-color !important;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .mars-primary-table {

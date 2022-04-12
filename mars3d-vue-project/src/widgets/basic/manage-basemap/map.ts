@@ -1,7 +1,7 @@
 /**
  * 底图控制
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2021-12-10
+ * @author 火星吴彦祖 2022-01-10
  */
 import * as mars3d from "mars3d"
 
@@ -14,10 +14,6 @@ export const eventTarget = new mars3d.BaseClass()
 export function onMounted(mapInstance: mars3d.Map): void {
   map = mapInstance // 记录map
 
-  const baseMaps = map.getBasemaps(true)
-  const hasTerrain = map.hasTerrain
-
-  eventTarget.fire("mapLoaded", { baseMaps, hasTerrain })
 }
 
 // 释放当前业务
@@ -31,4 +27,11 @@ export function changeBaseMaps(id: string) {
 
 export function changeTerrain(value: boolean) {
   map.hasTerrain = value
+}
+
+export function getLayers() {
+  return {
+    baseMaps: map.getBasemaps(true),
+    hasTerrain: map.hasTerrain
+  }
 }

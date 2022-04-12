@@ -228,11 +228,11 @@ export interface WidgetState {
 
 ## 如何增加新的 widget
 
-下面我们以 `src/widgets/example/sample-dialog/` 为示例做讲解
+下面我们以 `src/widgets/demo/sample-dialog/` 为示例做讲解
 
 ### 1.创建示例
 
-在 widgets 目录下按项目需要建立好多层目录，比如我们将测试和演示的 widget 放在`src/widgets/example`目录下面，基础项目的功能放在`src/widgets/basic`目录下。
+在 widgets 目录下按项目需要建立好多层目录，比如我们将测试和演示的 widget 放在`src/widgets/demo`目录下面，基础项目的功能放在`src/widgets/basic`目录下。
 
 首先建立后 sample-dialog 目录，并参考已有示例新建`index.vue` 和 `map.ts` 2 个文件。
 
@@ -261,7 +261,6 @@ index.vue 完整代码为：
 
 <script setup lang="ts">
 import { onUnmounted, ref } from "vue"
-import { BookmarkOne } from "@icon-park/vue-next"
 import useLifecycle from "@mars/common/uses/use-lifecycle"
 import MarsDialog from "@mars/components/mars-work/mars-dialog.vue"
 import * as mapWork from "./map"
@@ -504,7 +503,7 @@ onUnmounted(() => {
 
 #### store.ts 清单配置
 
-在对应 page 页面下的 `src/pages/example/widget-store.ts` 中，需要配置刚才新建的 widget 相关信息；
+在对应 page 页面下的 `src/pages/demo/widget-store.ts` 中，需要配置刚才新建的 widget 相关信息；
 
 ```js
 import { defineAsyncComponent, markRaw } from "vue"
@@ -516,7 +515,7 @@ const store: StoreOptions<WidgetState> = {
     //已忽略其他配置
     widgets: [
       {
-        component: markRaw(defineAsyncComponent(() => import("@mars/widgets/example/sample-dialog/index.vue"))),
+        component: markRaw(defineAsyncComponent(() => import("@mars/widgets/demo/sample-dialog/index.vue"))),
         name: "sample-dialog"
       }
     ]
@@ -535,7 +534,7 @@ export default store
 
 下面已目录为例：
 
-在`widgets/example/menu/index.vue`中加入“弹窗示例”按钮，按钮单击事件调用对应方法，
+在`widgets/demo/menu/index.vue`中加入“弹窗示例”按钮，按钮单击事件调用对应方法，
 
 activate 和 disable 函数支持 string（直接传递 name） 和 Widget（传递 widget 对象，将会合并传递的属性，必须包含 name 字段） 类型的参数，上述 name 字段与 store.ts 中的 name 需要一致。
 
@@ -608,8 +607,8 @@ const show = (name: string) => {
 ```json
 // dependencies中添加
 {
-  "mars3d": "^3.1.21",
-  "mars3d-cesium": "^1.89.0",
+  "mars3d": "^3.3.0",
+  "mars3d-cesium": "^1.92.0",
   "@turf/turf": "^6.5.0",
   "kml-geojson": "^1.2.0",
   "vue": "^3.2.26",
@@ -618,7 +617,6 @@ const show = (name: string) => {
   "axios": "^0.23.0",
   "core-js": "^3.6.5",
   "ant-design-vue": "3.0.0-alpha.13",
-  "@icon-park/vue-next": "^1.3.5",
   "nprogress": "^0.2.0",
   "echarts": "^5.2.2",
   "localforage": "^1.10.0"
@@ -702,7 +700,7 @@ chainWebpack: (config) => {
 //已忽略其他配置
 "dependencies": {
   "@turf/turf": "^6.5.0",
-  "mars3d-cesium": "^1.89.0",
+  "mars3d-cesium": "^1.92.0",
 },
 ```
  ![image](http://mars3d.cn/dev/img/guide/basics-download-import.jpg) 
