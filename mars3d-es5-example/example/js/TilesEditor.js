@@ -47,7 +47,7 @@ class TilesEditor extends mars3d.BaseClass {
   set enabled(val) {
     this._enabled = val;
     if (val) {
-      var self = this;
+      let self = this;
       this.handler.setInputAction((p) => {
         self.handler_onLeafDown(p);
       }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
@@ -114,10 +114,10 @@ class TilesEditor extends mars3d.BaseClass {
 
   //========== 方法 ==========
   handler_onLeafDown(event) {
-    var pickedObjects = this.scene.drillPick(event.position, 2);
+    let pickedObjects = this.scene.drillPick(event.position, 2);
 
-    for (var i = 0; i < pickedObjects.length; i++) {
-      var pickedObject = pickedObjects[i];
+    for (let i = 0; i < pickedObjects.length; i++) {
+      let pickedObject = pickedObjects[i];
 
       if (Cesium.defined(pickedObject) && pickedObject.primitive === this.movep) {
         this.dragging = true;
@@ -132,7 +132,7 @@ class TilesEditor extends mars3d.BaseClass {
   }
 
   handler_onMouseMove(event) {
-    var position = this.pickTerrain(event.endPosition);
+    let position = this.pickTerrain(event.endPosition);
     if (!position) {
       return;
     }
@@ -166,8 +166,8 @@ class TilesEditor extends mars3d.BaseClass {
   }
 
   pickTerrain(wndpos) {
-    var ray = this.map.camera.getPickRay(wndpos);
-    var pos = this.map.scene.globe.pick(ray, this.map.scene);
+    let ray = this.map.camera.getPickRay(wndpos);
+    let pos = this.map.scene.globe.pick(ray, this.map.scene);
     return pos;
   }
 

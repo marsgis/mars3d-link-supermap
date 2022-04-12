@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 //当前代码来源：https://github.com/muyao1987/web-dist
 
 //在gulpfile中先载入gulp包，因为这个包提供了一些API
@@ -11,8 +12,6 @@ const header = require("gulp-header");
 const htmlmin = require("gulp-htmlmin");
 const cheerio = require("gulp-cheerio");
 const cssmin = require("gulp-clean-css");
-const imagemin = require("gulp-imagemin");
-const pngquant = require("imagemin-pngquant");
 
 const fs = require("fs");
 const path = require("path");
@@ -21,7 +20,7 @@ const path = require("path");
 const copyright = "版权所有 火星科技 http://marsgis.cn";
 
 //这个时间后修改的文件不处理（增量更新时使用）
-var lastTime;
+let lastTime;
 
 //排除不拷贝的文件类型后缀
 const noCopyFileType = [".psd", ".doc", ".docx", ".txt", ".md", ".zip", ".rar"];
@@ -30,6 +29,7 @@ const noCopyFileType = [".psd", ".doc", ".docx", ".txt", ".md", ".zip", ".rar"];
 const noCopyPathDef = [
   ".svn",
   ".git",
+  "dist",
   "node_modules",
   ".eslintrc",
   ".editorconfig",
@@ -48,13 +48,13 @@ const noPipePathDef = ["lib"];
 ////////////////////自定义设置////////////////////
 
 //需要压缩混淆的根目录
-var srcPath = "./";
+let srcPath = "./";
 
 //生成到的目标目录
-var distPath = "dist";
+let distPath = "dist";
 
-var noPipePath = [];
-var noCopyPath = ["example-dev", "example-test"];
+let noPipePath = [];
+let noCopyPath = ["example-dev", "example-test"];
 
 // lastTime = new Date("2022-08-01 08:00:00")
 
@@ -70,7 +70,7 @@ gulp.task("build", (done) => {
   travel(srcPath);
 
   fileList.forEach((t) => {
-    var srcFile = t.pathname;
+    let srcFile = t.pathname;
     const outFilePath = distPath;
     // console.log('读取：' + srcFile + '\n输出：' + outFilePath + '\n');
 
@@ -205,30 +205,6 @@ gulp.task("build", (done) => {
           .pipe(header(banner, bannerData))
           .pipe(gulp.dest(outFilePath));
         break;
-      case "png":
-      case "jpg":
-      case "gif":
-      case "ico":
-        gulp
-          .src(srcFile, {
-            base: srcPath,
-          })
-          .pipe(
-            plumber({
-              errorHandler: function (err) {
-                throwOnlyCopy(srcPath, srcFile, outFilePath, err);
-              },
-            })
-          )
-          .pipe(
-            imagemin({
-              //optimizationLevel: 5,   //类型：Number  默认：3  取值范围：0-7（优化等级）
-              progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
-              use: [pngquant()], //使用pngquant深度压缩png图片的imagemin插件
-            })
-          )
-          .pipe(gulp.dest(outFilePath));
-        break;
       default:
         gulp
           .src(srcFile, {
@@ -301,8 +277,9 @@ function throwOnlyCopy(srcPath, pathname, outFilePath, message) {
   }
 }
 
+// eslint-disable-next-line no-extend-native
 Date.prototype.format = function (fmt) {
-  var o = {
+  let o = {
     "M+": this.getMonth() + 1, //月份
     "d+": this.getDate(), //日
     "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
@@ -315,7 +292,7 @@ Date.prototype.format = function (fmt) {
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
   }
-  for (var k in o) {
+  for (let k in o) {
     if (new RegExp("(" + k + ")").test(fmt)) {
       fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
     }

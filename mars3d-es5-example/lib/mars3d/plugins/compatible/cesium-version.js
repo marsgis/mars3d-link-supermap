@@ -1,25 +1,25 @@
 //兼容不同版本cesium，补充官方删除更改的方法或类名 by mars3d.cn
 
+//兼容1.92（2022-4-2）删除的方法
+//请引入cesium-when.js
+
 //兼容1.87（2021-11-1）删除的方法
-Cesium.sprintf = function (format) {
+Cesium.sprintf = Cesium.sprintf || function (format) {
   return format;
 };
 
+
 //兼容1.73（2020-9-1）删除的方法
-Cesium.BingMapsApi = { defaultKey: "" };
-Cesium.MapboxApi = { defaultAccessToken: "" };
+Cesium.BingMapsApi = Cesium.BingMapsApi || { defaultKey: "" };
+Cesium.MapboxApi = Cesium.BingMapsApi || { defaultAccessToken: "" };
 
 //兼容1.67（2020-3-3）删除的方法
 if (!Cesium.defineProperties) Cesium.defineProperties = Object.defineProperties;
 if (!Cesium.isArray) Cesium.isArray = Array.isArray;
 
 //兼容1.62（2019-10-01）改名的方法
-if (!Cesium.Matrix4.getMatrix3)
-  Cesium.Matrix4.getMatrix3 = Cesium.Matrix4.getRotation;
-if (!Cesium.TileMapServiceImageryProvider)
-  Cesium.TileMapServiceImageryProvider =
-    Cesium.createTileMapServiceImageryProvider;
-
+if (!Cesium.Matrix4.getMatrix3) Cesium.Matrix4.getMatrix3 = Cesium.Matrix4.getRotation;
+if (!Cesium.TileMapServiceImageryProvider) Cesium.TileMapServiceImageryProvider = Cesium.createTileMapServiceImageryProvider;
 if (!Cesium.createTileMapServiceImageryProvider) {
   Cesium.createTileMapServiceImageryProvider = function (options) {
     return new Cesium.TileMapServiceImageryProvider(options);

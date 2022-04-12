@@ -5,8 +5,8 @@ function fontSize(res) {
 
 function initEcharts() {
   //饼形图
-  var myChart = echarts.init(document.getElementById("ring"));
-  var option = {
+  let myChart = echarts.init(document.getElementById("ring"));
+  let option = {
     backgroundColor: "transparent",
     legend: {
       show: false,
@@ -125,8 +125,8 @@ function initEcharts() {
   myChart.setOption(option);
 
   //柱状图
-  var myChart2 = echarts.init(document.getElementById("bar"), "dark");
-  var option2 = {
+  let myChart2 = echarts.init(document.getElementById("bar"), "dark");
+  let option2 = {
     backgroundColor: "transparent",
 
     tooltip: {
@@ -259,7 +259,7 @@ function initEcharts() {
 
   // 折线图
   let myChart3 = echarts.init(document.getElementById("line"), "dark");
-  var option3 = {
+  let option3 = {
     backgroundColor: "transparent",
 
     tooltip: {

@@ -27,20 +27,20 @@ class PoiQueryButton extends mars3d.control.BaseControl {
       if (!item) {
         return;
       }
-      var inHtml = `<div class="mars-popup-titile"><a href="https://www.amap.com/detail/${item.id}"  target="_black" style="color: #ffffff; ">${item.name}</a></div><div class="mars-popup-content" >`;
+      let inHtml = `<div class="mars-popup-titile"><a href="https://www.amap.com/detail/${item.id}"  target="_black" style="color: #ffffff; ">${item.name}</a></div><div class="mars-popup-content" >`;
 
-      var phone = $.trim(item.tel);
+      let phone = $.trim(item.tel);
       if (phone != "") {
         inHtml += "<div><label>电话</label>" + phone + "</div>";
       }
 
-      var dz = $.trim(item.address);
+      let dz = $.trim(item.address);
       if (dz != "") {
         inHtml += "<div><label>地址</label>" + dz + "</div>";
       }
 
       if (item.type) {
-        var fl = $.trim(item.type);
+        let fl = $.trim(item.type);
         if (fl != "") {
           inHtml += "<div><label>类别</label>" + fl + "</div>";
         }
@@ -52,8 +52,8 @@ class PoiQueryButton extends mars3d.control.BaseControl {
   }
 
   clear() {
-    var ulList = this.poiButtonResult.querySelector(".searchResults");
-    var gaodesousuo = this.poiButtonResult.querySelector(".gaodesousuo");
+    let ulList = this.poiButtonResult.querySelector(".searchResults");
+    let gaodesousuo = this.poiButtonResult.querySelector(".gaodesousuo");
     if (ulList) {
       ulList.remove();
     }
@@ -104,7 +104,7 @@ class PoiQueryButton extends mars3d.control.BaseControl {
     this._container.addEventListener("mouseout", (e) => {
       cacheTarget = null;
       // console.log("mouseout");
-      var queryVal = this.toolSearch.querySelector(".searchInput").value;
+      let queryVal = this.toolSearch.querySelector(".searchInput").value;
       if (queryVal.length == 0) {
         this.clear();
         this.toolSearchNoShow("none");
@@ -123,13 +123,13 @@ class PoiQueryButton extends mars3d.control.BaseControl {
     this.toolSearchNoShow("none");
 
     // 创建input输入框
-    var textInput = mars3d.DomUtil.create("input", "searchInput");
+    let textInput = mars3d.DomUtil.create("input", "searchInput");
     textInput.type = "search";
     textInput.setAttribute("placeholder", "请输入地址...");
     this.toolSearch.appendChild(textInput);
 
     // input的单击事件
-    var deleteInput = mars3d.DomUtil.create("div", "deleteInput");
+    let deleteInput = mars3d.DomUtil.create("div", "deleteInput");
     this.toolSearch.appendChild(deleteInput);
 
     this.addElementP(deleteInput, "×", () => {
@@ -142,13 +142,13 @@ class PoiQueryButton extends mars3d.control.BaseControl {
     });
 
     // 绑定change事件
-    var timetik;
+    let timetik;
 
     textInput.addEventListener("input", () => {
       this.clear();
       clearTimeout(timetik);
       timetik = setTimeout(() => {
-        var queryVal = this.toolSearch.querySelector(".searchInput").value;
+        let queryVal = this.toolSearch.querySelector(".searchInput").value;
         if (queryVal.length !== 0) {
           deleteInput.style.display = "block";
           this.autoTip(queryVal);
@@ -183,7 +183,7 @@ class PoiQueryButton extends mars3d.control.BaseControl {
 
   // 根据输入框内容，查询显示列表
   strartQueryPOI() {
-    var text = this.toolSearch.querySelector(".searchInput").value;
+    let text = this.toolSearch.querySelector(".searchInput").value;
     if (text.trim().length == 0) {
       haoutil.msg("请输入搜索关键字！");
       return;
@@ -203,14 +203,14 @@ class PoiQueryButton extends mars3d.control.BaseControl {
       page: this.showPages - 1,
       success: (result) => {
         // console.log("文字搜索", result);
-        var pois = result.list;
+        let pois = result.list;
         if (pois.length > 0) {
           result.list.forEach((item, index) => {
             if (!item.x || !item.y) {
               return;
             }
             // 在地图上将搜寻的结果展现为矢量数据
-            var graphic = new mars3d.graphic.PointEntity({
+            let graphic = new mars3d.graphic.PointEntity({
               id: item.id,
               position: [item.x, item.y],
               style: {
@@ -257,7 +257,7 @@ class PoiQueryButton extends mars3d.control.BaseControl {
   }
 
   flyTo(item) {
-    var graphic = this.graphicLayer.getGraphicById(item.id);
+    let graphic = this.graphicLayer.getGraphicById(item.id);
     if (graphic == null) {
       window.toastr.warning(item.name + " 无经纬度坐标信息！");
       return;
@@ -278,28 +278,28 @@ class PoiQueryButton extends mars3d.control.BaseControl {
     this.poiButtonResult.innerHTML = "";
 
     // 页面上显示结果li列表
-    var resultDiv = document.createElement("div");
+    let resultDiv = document.createElement("div");
     resultDiv.className = "searchResults";
 
-    var suggestionsList = document.createElement("ul");
+    let suggestionsList = document.createElement("ul");
     resultDiv.appendChild(suggestionsList);
 
     this.poiButtonResult.appendChild(resultDiv);
 
     result.list.forEach((item, index) => {
-      var name = item.name;
+      let name = item.name;
       if (!item.x || !item.y) {
         return;
       }
 
-      var number;
+      let number;
       if (this.showPages > 1) {
         number = (this.showPages - 1) * 10 + index + 1;
       } else {
         number = index + 1;
       }
-      var suggestions = document.createElement("li");
-      var resultList = document.createTextNode(number + ". " + name);
+      let suggestions = document.createElement("li");
+      let resultList = document.createTextNode(number + ". " + name);
 
       suggestionsList.appendChild(suggestions);
       suggestions.appendChild(resultList);
@@ -307,7 +307,7 @@ class PoiQueryButton extends mars3d.control.BaseControl {
         this.flyTo(item);
       });
     });
-    var allPages = Math.ceil(result.allcount / 10); // 全部的页数 10 = result.count
+    let allPages = Math.ceil(result.allcount / 10); // 全部的页数 10 = result.count
     this.resultNextPages = document.createElement("div");
     this.resultNextPages.className = "resultNextPages";
     this.poiButtonResult.appendChild(this.resultNextPages);
@@ -347,8 +347,8 @@ class PoiQueryButton extends mars3d.control.BaseControl {
 
   // 添加p元素
   addElementP(parentElement, chilidWord, callback) {
-    var allResult = document.createElement("p");
-    var allResultWord = document.createTextNode(chilidWord);
+    let allResult = document.createElement("p");
+    let allResultWord = document.createTextNode(chilidWord);
     parentElement.appendChild(allResult); //添加p元素
 
     allResult.appendChild(allResultWord); // 给p元素添加内容
@@ -370,26 +370,26 @@ class PoiQueryButton extends mars3d.control.BaseControl {
     this.queryPoi.autoTip({
       text: text,
       success: (result) => {
-        var pois = result.list;
+        let pois = result.list;
         let gaodesousuo = this.poiButtonResult.querySelector(".gaodesousuo");
         if (gaodesousuo) {
           gaodesousuo.remove();
         }
-        var resultDiv = document.createElement("div");
+        let resultDiv = document.createElement("div");
         resultDiv.className = "searchResults gaodesousuo";
 
-        var suggestionsList = document.createElement("ul");
+        let suggestionsList = document.createElement("ul");
         resultDiv.appendChild(suggestionsList);
 
         this.poiButtonResult.appendChild(resultDiv);
 
         if (pois.length > 0) {
           result.list.forEach((item) => {
-            var name = item.name;
+            let name = item.name;
 
-            var suggestions = document.createElement("li");
-            var resultList = document.createTextNode(name);
-            var fa_search = document.createElement("span");
+            let suggestions = document.createElement("li");
+            let resultList = document.createTextNode(name);
+            let fa_search = document.createElement("span");
             fa_search.className = "fa fa-search";
             suggestions.appendChild(fa_search);
 
@@ -416,17 +416,17 @@ class PoiQueryButton extends mars3d.control.BaseControl {
 
   //===================坐标定位处理========================
   isLonLat(text) {
-    var reg = /^-?((0|1?[0-7]?[0-9]?)(([.][0-9]*)?)|180(([.][0]*)?)),-?((0|[1-8]?[0-9]?)(([.][0-9]*)?)|90(([.][0]*)?))$/; /*定义验证表达式*/
+    let reg = /^-?((0|1?[0-7]?[0-9]?)(([.][0-9]*)?)|180(([.][0]*)?)),-?((0|[1-8]?[0-9]?)(([.][0-9]*)?)|90(([.][0]*)?))$/; /*定义验证表达式*/
     return reg.test(text); /*进行验证*/
   }
   centerAtLonLat(text) {
-    var arr = text.split(",");
+    let arr = text.split(",");
     if (arr.length != 2) {
       return;
     }
 
-    var jd = Number(arr[0]);
-    var wd = Number(arr[1]);
+    let jd = Number(arr[0]);
+    let wd = Number(arr[1]);
     if (isNaN(jd) || isNaN(wd)) {
       return;
     }
@@ -434,7 +434,7 @@ class PoiQueryButton extends mars3d.control.BaseControl {
     this.map.setCameraView({ x: jd, y: wd, minz: 2500 });
 
     //添加实体
-    var graphic = new mars3d.graphic.PointEntity({
+    let graphic = new mars3d.graphic.PointEntity({
       position: Cesium.Cartesian3.fromDegrees(jd, wd),
       style: {
         color: "#3388ff",

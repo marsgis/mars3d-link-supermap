@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 let thisWidget;
 
 //当前页面业务
@@ -204,7 +205,7 @@ var plotEdit = {
       let edit = attrcfg[idx];
       tempKyes[edit.name] = true;
     }
-    for (var key in attr.attr) {
+    for (let key in attr.attr) {
       let attrVal = attr.attr[key];
       if (tempKyes[key]) {
         continue;
@@ -214,7 +215,7 @@ var plotEdit = {
         attrcfg.push({ name: key, label: key, type: "text", defval: "" });
       } else if (haoutil.isutil.isNumber(attrVal)) {
         attrcfg.push({ name: key, label: key, type: "number", defval: 0.0 });
-      } else if (typeof attrVal == "boolean") {
+      } else if (typeof attrVal === "boolean") {
         attrcfg.push({ name: key, label: key, type: "radio", defval: false });
       }
     }

@@ -208,7 +208,7 @@
 
           return canvas
         })
-        .otherwise(function (error) {
+        .catch(function (error) {
           return undefined
         })
     }
@@ -290,7 +290,7 @@
       }).then((json) => {
         this.options.styleConfig = json
       })
-        .otherwise(function (error) {
+        .catch(function (error) {
           console.log("加载样式出错", error);
         });
     }

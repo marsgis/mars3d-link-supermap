@@ -7,13 +7,13 @@ $(function () {
     if ($(this).hasClass("cur") || $(this).hasClass("disabled")) {
       return false;
     } else {
-      var that = $(this),
+      let that = $(this),
         index = that.index();
       that.addClass("cur").siblings("li").removeClass("cur");
       that.parent().siblings(".mp_tab_con").children().eq(index).addClass("cur").siblings().removeClass("cur");
 
-      var _id = $(this).attr("id");
-      localforage.setItem(storageName, _id)
+      let _id = $(this).attr("id");
+      localforage.setItem(storageName, _id);
     }
   });
 
@@ -27,7 +27,7 @@ $(function () {
 //     $("#tab_plot").click();
 // }
 
-var storageName = "mars3d_plotAttr";
+let storageName = "mars3d_plotAttr";
 
 function tab2attr() {
   // $("#tab_attr").removeClass('disabled');
@@ -35,20 +35,19 @@ function tab2attr() {
 
   // if ($("#tab_plot").hasClass('cur'))
 
-   //读取localStorage值
+  //读取localStorage值
   localforage.getItem(storageName).then(function (last_attr_tab) {
     if (last_attr_tab != null) {
       $("#" + last_attr_tab).click();
     } else {
       $("#tab_attr").click();
     }
-  })
-
+  });
 }
 
 function changeOpenShowHide() {
-  var openlis = $(this).siblings();
-  var opent = $(this).children(".tree_icon");
+  let openlis = $(this).siblings();
+  let opent = $(this).children(".tree_icon");
   openlis.toggle();
   if (openlis.is(":hidden")) {
     opent.html("+");
@@ -65,7 +64,7 @@ function refHeight() {
 
 (function ($) {
   //下拉菜单默认参数
-  var defaluts = {
+  let defaluts = {
     select: "mp_select",
     select_text: "mp_select_text",
     select_ul: "mp_select_ul",
@@ -74,19 +73,19 @@ function refHeight() {
   $.fn.extend({
     // 下拉菜单
     select: function (options) {
-      var opts = $.extend({}, defaluts, options);
+      let opts = $.extend({}, defaluts, options);
       return this.each(function () {
-        var that = $(this);
+        let that = $(this);
         //模拟下拉列表
         if (that.data("value") !== undefined && that.data("value") !== "") {
           that.val(that.data("value"));
         }
-        var _html = [];
+        let _html = [];
         _html.push('<div class="' + that.attr("class") + '">');
         _html.push('<div class="' + opts.select_text + '">' + that.find(":selected").text() + "</div>");
         _html.push('<ul class="' + opts.select_ul + '">');
         that.children("option").each(function () {
-          var option = $(this);
+          let option = $(this);
           if (that.data("value") == option.val()) {
             _html.push('<li data-value="' + option.val() + '">' + option.text() + "</li>");
           } else {
@@ -95,9 +94,9 @@ function refHeight() {
         });
         _html.push("</ul>");
         _html.push("</div>");
-        var select = $(_html.join(""));
-        var select_text = select.find("." + opts.select_text);
-        var select_ul = select.find("." + opts.select_ul);
+        let select = $(_html.join(""));
+        let select_text = select.find("." + opts.select_text);
+        let select_ul = select.find("." + opts.select_ul);
         that.after(select);
         that.hide();
         //下拉列表操作
@@ -116,8 +115,8 @@ function refHeight() {
           select_ul.slideUp();
         });
         select_ul.on("click", "li", function () {
-          var li = $(this);
-          var val = li.addClass("selecton").siblings("li").removeClass("selecton").end().data("value").toString();
+          let li = $(this);
+          let val = li.addClass("selecton").siblings("li").removeClass("selecton").end().data("value").toString();
           if (val !== that.attr("data-value")) {
             select_text.text(li.text());
             that.attr("data-value", val);
@@ -129,7 +128,7 @@ function refHeight() {
 
     //滑动条
     progress: function (max) {
-      var opts = {
+      let opts = {
         progress: "puiprogress",
         progress_bg: "puiprogress_bg",
         progress_btn: "puiprogress_btn",
@@ -137,9 +136,9 @@ function refHeight() {
         progress_text: "puiprogress_text",
       };
       return this.each(function () {
-        var that = $(this);
+        let that = $(this);
         //模拟进度条
-        var _html = [];
+        let _html = [];
         _html.push('<div class="' + opts.progress + '">');
         _html.push('<div class="' + opts.progress_bg + '">');
         _html.push('<div class="' + opts.progress_bar + '">' + "</div>");
@@ -147,21 +146,21 @@ function refHeight() {
         _html.push('<div class="' + opts.progress_btn + '">' + "</div>");
         _html.push('<div class="' + opts.progress_text + '">' + that.val() + "%</div>");
         _html.push("</div>");
-        var pro = $(_html.join(""));
-        var progress_bg = pro.find("." + opts.progress_bg);
-        var progress_btn = pro.find("." + opts.progress_btn);
-        var progress_bar = pro.find("." + opts.progress_bar);
-        var progress_text = pro.find("." + opts.progress_text);
+        let pro = $(_html.join(""));
+        let progress_bg = pro.find("." + opts.progress_bg);
+        let progress_btn = pro.find("." + opts.progress_btn);
+        let progress_bar = pro.find("." + opts.progress_bar);
+        let progress_text = pro.find("." + opts.progress_text);
         that.after(pro);
         that.hide();
         //进度条操作
-        var tag = false,
+        let tag = false,
           ox = 0,
           left = 0,
           bgleft = 0;
         pro.css("width", max);
 
-        var _val = Number(that.val());
+        let _val = Number(that.val());
         left = (max * _val) / 100;
         progress_btn.css("left", left);
         progress_bar.width(left);
@@ -185,7 +184,7 @@ function refHeight() {
             }
             progress_btn.css("left", left);
             progress_bar.width(left);
-            var _val = parseInt((left / max) * 100);
+            let _val = parseInt((left / max) * 100);
             progress_text.html(_val + "%");
 
             that.val(_val);
@@ -204,7 +203,7 @@ function refHeight() {
             }
             progress_btn.css("left", left);
             progress_bar.animate({ width: left }, max);
-            var _val = parseInt((left / max) * 100);
+            let _val = parseInt((left / max) * 100);
             progress_text.html(_val + "%");
             that.val(_val);
             that.change();

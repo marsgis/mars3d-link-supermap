@@ -112,7 +112,7 @@
                 });
             }
 
-            function clear($toastElement, clearOptions) { 
+            function clear($toastElement, clearOptions) {
                 var options = getOptions();
                 if (!$container) { getContainer(options); }
                 if (!clearToast($toastElement, options, clearOptions)) {
@@ -120,7 +120,7 @@
                 }
             }
 
-            function remove($toastElement) { 
+            function remove($toastElement) {
                 var options = getOptions();
                 if (!$container) { getContainer(options); }
                 if ($toastElement && $(':focus', $toastElement).length === 0) {
@@ -142,7 +142,7 @@
             }
 
             function clearToast($toastElement, options, clearOptions) {
-                last_message = null; 
+                last_message = null;
                 var force = clearOptions && clearOptions.force ? clearOptions.force : false;
                 if ($toastElement && (force || $(':focus', $toastElement).length === 0)) {
                     $toastElement[options.hideMethod]({
@@ -194,7 +194,7 @@
                         warning: 'toast-warning'
                     },
                     iconClass: 'toast-info',
-                    positionClass: 'toast-bottom-left',
+                    positionClass: 'toast-bottom-right',
                     timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
                     titleClass: 'toast-title',
                     messageClass: 'toast-message',

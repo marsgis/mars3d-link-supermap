@@ -419,7 +419,7 @@
 
 .marsTiltPanel-theme-green .area {
   background-image: linear-gradient(135deg, transparent 30px, #06e3486c 30px, #06e3486c 50%, transparent 50%),
-    linear-gradient(-45deg, transparent 30px, #06e3486c 30px, #06e3486c 50.1%, transparent 50%);
+    linear-gradient(-45deg, transparent 30px, #06e3486c 30px, #06e3486c 50%, transparent 50%);
 }
 
 .marsTiltPanel-theme-green .title {

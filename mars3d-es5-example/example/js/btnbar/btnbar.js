@@ -1,4 +1,4 @@
-var btnbar = {
+let btnbar = {
   canMove: true,
   picDiv: null,
   positionl: 0,
@@ -12,9 +12,9 @@ var btnbar = {
       );
     }
 
-    var inhtml = "";
-    for (var i = 0; i < arrdata.length; i++) {
-      var item = arrdata[i];
+    let inhtml = "";
+    for (let i = 0; i < arrdata.length; i++) {
+      let item = arrdata[i];
       inhtml += '<div class="btnbar_item">' + item.name + "</div>";
       this.fundata[item.name] = item;
     }
@@ -26,7 +26,7 @@ var btnbar = {
     $(".btnbar_item").bind("click", function () {
       $(this).addClass("btnbar_item_select").siblings().removeClass("btnbar_item_select");
 
-      var _text = $(this).text();
+      let _text = $(this).text();
       btnbar.fundata[_text].click();
     });
 
@@ -73,3 +73,4 @@ var btnbar = {
     });
   },
 };
+window.btnbar = btnbar;

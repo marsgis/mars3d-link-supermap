@@ -57,7 +57,7 @@ class HuxingLayer extends mars3d.layer.GraphicLayer {
           }
           this._load_data(data);
         })
-        .otherwise(function (error) {
+        .catch(function (error) {
           this.showError("服务出错", error);
         });
     } else if (this.options.data) {
@@ -89,10 +89,10 @@ class HuxingLayer extends mars3d.layer.GraphicLayer {
       return;
     }
 
-    var flrH = attr.floorh || 0; //底面高度
-    var lyrH = attr.layerh || 0; //楼层高度
+    let flrH = attr.floorh || 0; //底面高度
+    let lyrH = attr.layerh || 0; //楼层高度
 
-    var primitiveBian = new mars3d.graphic.CorridorPrimitive({
+    let primitiveBian = new mars3d.graphic.CorridorPrimitive({
       positions: positions,
       style: {
         height: flrH,
@@ -105,7 +105,7 @@ class HuxingLayer extends mars3d.layer.GraphicLayer {
     });
     this.addGraphic(primitiveBian);
 
-    var primitiveDi = new mars3d.graphic.PolygonEntity({
+    let primitiveDi = new mars3d.graphic.PolygonEntity({
       positions: positions,
       style: {
         height: flrH,
@@ -120,8 +120,8 @@ class HuxingLayer extends mars3d.layer.GraphicLayer {
     this.addGraphic(primitiveDi);
 
     //记录到缓存中
-    var loudongHao = attr.LDH; //楼栋号
-    var cengHao = attr.CH; //层号
+    let loudongHao = attr.LDH; //楼栋号
+    let cengHao = attr.CH; //层号
 
     this._cache_huxin[loudongHao] = this._cache_huxin[loudongHao] || {};
     this._cache_huxin[loudongHao][cengHao] = this._cache_huxin[loudongHao][cengHao] || [];
@@ -133,10 +133,10 @@ class HuxingLayer extends mars3d.layer.GraphicLayer {
     //将上次隐藏的层，恢复下
     this._map_clickHandler();
 
-    var attr = event.graphic.attr;
+    let attr = event.graphic.attr;
 
-    var loudongHao = attr.LDH; //楼栋号
-    var cengHao = attr.CH; //层号
+    let loudongHao = attr.LDH; //楼栋号
+    let cengHao = attr.CH; //层号
 
     let loudongGraphics = this._cache_huxin[loudongHao];
     Object.keys(loudongGraphics).forEach((ceng) => {
@@ -162,7 +162,7 @@ class HuxingLayer extends mars3d.layer.GraphicLayer {
   }
 
   _graphic_mouseOverHandler(event) {
-    var graphic = event.graphic;
+    let graphic = event.graphic;
     this.openSmallTooltip(event.windowPosition, graphic.attr.WZ);
   }
   _graphic_mouseOutHandler(event) {

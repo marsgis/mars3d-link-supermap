@@ -162,11 +162,9 @@ li {
   background-color: #4db3ff;
 }
 
-
 .dark .slider-selection {
   background-image: linear-gradient(to bottom, #86b9e6 0, #86b9e6 100%);
 }
-
 
 .dark .mars3d-popup-color {
   color: #ffffff;
@@ -176,17 +174,25 @@ li {
   background: rgba(63, 72, 84, 0.9);
 }
 
-/*黑色字体 + 白色背景*/
-/* .mars3d-popup-color,
-.mars-popup-titile {
-  color: #2b2929;
+/**cesium 工具按钮栏*/
+.cesium-viewer-toolbar {
+  top: auto;
+  bottom: 35px;
+  left: 12px;
+  right: auto;
 }
-
-.mars3d-popup-background {
-  background: rgba(255, 255, 255, 0.85);
-} */
-
-/**cesium按钮背景色*/
+.cesium-toolbar-button img {
+  height: 100%;
+  vertical-align: middle;
+}
+.cesium-viewer-toolbar > .cesium-toolbar-button,
+.cesium-navigationHelpButton-wrapper,
+.cesium-viewer-geocoderContainer {
+  margin-bottom: 5px;
+  float: left;
+  clear: both;
+  text-align: center;
+}
 .cesium-button {
   background-color: #3f4854;
   color: #e6e6e6;
@@ -195,33 +201,61 @@ li {
   line-height: 32px;
 }
 
+/**cesium 底图切换面板*/
+.cesium-baseLayerPicker-dropDown {
+  bottom: 0;
+  left: 40px;
+  max-height: 700px;
+  margin-bottom: 5px;
+}
+
+/**cesium 帮助面板*/
+.cesium-navigation-help {
+  top: auto;
+  bottom: 0;
+  left: 40px;
+  transform-origin: left bottom;
+}
+
+/**cesium 二维三维切换*/
+.cesium-sceneModePicker-wrapper {
+  width: auto;
+}
+.cesium-sceneModePicker-wrapper .cesium-sceneModePicker-dropDown-icon {
+  float: right;
+  margin: 0 3px;
+}
+
+/**cesium POI查询输入框*/
+.cesium-viewer-geocoderContainer .search-results {
+  left: 0;
+  right: 40px;
+  width: auto;
+  z-index: 9999;
+}
+.cesium-geocoder-searchButton {
+  background-color: #3f4854;
+}
 .cesium-viewer-geocoderContainer .cesium-geocoder-input {
   background-color: rgba(63, 72, 84, 0.7);
 }
-
 .cesium-viewer-geocoderContainer .cesium-geocoder-input:focus {
   background-color: rgba(63, 72, 84, 0.9);
 }
-
 .cesium-viewer-geocoderContainer .search-results {
   background-color: #3f4854;
 }
 
-.cesium-geocoder-searchButton {
-  background-color: #3f4854;
+/**cesium info信息框*/
+.cesium-infoBox {
+  top: 50px;
+  background: rgba(63, 72, 84, 0.9);
 }
-
 .cesium-infoBox-title {
   background-color: #3f4854;
 }
 
-.cesium-infoBox {
-  background: rgba(63, 72, 84, 0.9);
-}
-.cesium-toolbar-button img {
-  height: 100%;
-}
-
+/**cesium 任务栏的FPS信息*/
 .cesium-performanceDisplay-defaultContainer {
   top: auto;
   bottom: 35px;
@@ -232,61 +266,14 @@ li {
   color: #fff;
 }
 
-/**cesium工具栏位置*/
-.cesium-viewer-toolbar {
-  top: auto;
-  left: auto;
-  right: 12px;
-  bottom: 35px;
-}
-
-.cesium-viewer-toolbar > .cesium-toolbar-button,
-.cesium-navigationHelpButton-wrapper,
-.cesium-viewer-geocoderContainer {
-  margin-bottom: 5px;
-  float: right;
-  clear: both;
-  text-align: center;
-}
-
-.cesium-baseLayerPicker-dropDown {
-  bottom: 0;
-  right: 40px;
-  max-height: 700px;
-  margin-bottom: 5px;
-}
-
-.cesium-navigation-help {
-  top: auto;
-  bottom: 0;
-  right: 40px;
-  transform-origin: right bottom;
-}
-
-.cesium-sceneModePicker-wrapper {
-  width: auto;
-}
-
-.cesium-sceneModePicker-wrapper .cesium-sceneModePicker-dropDown-icon {
-  float: left;
-  margin: 0 3px;
-}
-
-.cesium-viewer-geocoderContainer .search-results {
-  left: 0;
-  right: 40px;
-  width: auto;
-  z-index: 9999;
-}
-
-.cesium-infoBox-title {
+/**cesium tileset调试信息面板*/
+.cesium-viewer-cesiumInspectorContainer {
+  top: 10px;
+  left: 10px;
+  right: auto;
   background-color: #3f4854;
 }
 
-.cesium-infoBox {
-  top: 50px;
-  background: rgba(63, 72, 84, 0.9);
-}
 
 /**左下工具栏菜单*/
 .toolbar-dropdown-menu-div {
@@ -336,12 +323,11 @@ li {
   padding-right: 5px;
 }
 
-
 /**infoview浮动面板*/
 .infoview {
   position: absolute;
   top: 10px;
-  left: 10px;
+  right: 10px;
   padding: 10px 15px;
   border-radius: 4px;
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -350,9 +336,9 @@ li {
   box-shadow: 0 3px 14px rgba(128, 128, 128, 0.5);
   z-index: 19870101;
 }
-.infoview-right {
-  left: auto;
-  right: 10px;
+.infoview-left {
+   right: auto;
+   left: 10px;
 }
 
 .infoview input,
@@ -376,7 +362,7 @@ li {
   top: auto;
   bottom: 60px;
   left: auto;
-  right: 50px;
+  right: 10px;
 }
 
 .loadingIndicator {
@@ -482,7 +468,6 @@ html {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-
 /* 测试专用*/
 /* #mars3dContainer {
   position:absolute;
@@ -498,7 +483,6 @@ html {
 
 /* 超图专用*/
 .cesium-viewer-navigationContainer{
-  top: auto;
-  right: 35px;
-  bottom: 25px;
+  top: 0;
+  left: 0;
 }

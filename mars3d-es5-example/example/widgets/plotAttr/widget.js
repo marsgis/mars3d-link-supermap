@@ -107,20 +107,20 @@
 
       graphic = this.config.graphic;
       lonlats = this.config.lonlats;
-      this.viewWindow.plotEdit.startEditing(graphic.options, lonlats);
+      this.viewWindow.plotEdit.startEditing({ type: graphic.type, ...graphic.options }, lonlats);
     }
     //更新图上的属性
     updateAttr2map(attr) {
       console.log("更新属性", attr);
 
-      var graphic = this.config.graphic; //当前编辑的graphic
+      let graphic = this.config.graphic; //当前编辑的graphic
       graphic.setOptions(attr);
     }
     //更新坐标
     updatePoints2map(points) {
       console.log("更新坐标", points);
 
-      var graphic = this.config.graphic;
+      let graphic = this.config.graphic;
       graphic.positions = points;
     }
     centerCurrentEntity() {

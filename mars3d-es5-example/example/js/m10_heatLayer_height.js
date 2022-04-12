@@ -52,7 +52,7 @@ function initCharts() {
 
 // chartOne  分类统计
 function initCharts_One(arr) {
-  for (var i = 0, len = arr.length; i < len; i++) {
+  for (let i = 0, len = arr.length; i < len; i++) {
     let item = arr[i];
     let html = `<li>
         <div class="title">${item.name}</div>
@@ -65,7 +65,7 @@ function initCharts_One(arr) {
 //chartTwo  Echart圆形  分类资金来源
 function initCharts_Two(arr) {
   let data = [];
-  for (var i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     let object = {};
     object.name = arr[i].name;
     object.value = arr[i].value;
@@ -78,8 +78,8 @@ function initCharts_Two(arr) {
     };
   }, 200);
 
-  var myChart = echarts.init(document.getElementById("ul_ZJLY"));
-  var option = {
+  let myChart = echarts.init(document.getElementById("ul_ZJLY"));
+  let option = {
     tooltip: {
       trigger: "item",
       formatter: "{b}<br/>{c}",
@@ -149,9 +149,9 @@ function initCharts_Three(arr) {
 
 //项目、占地、资金    按钮点击切换
 function histogram(arr, Word) {
-  var arrName = [];
-  var arrValue = [];
-  for (var i = 0; i < arr.length; i++) {
+  let arrName = [];
+  let arrValue = [];
+  for (let i = 0; i < arr.length; i++) {
     arrName[i] = arr[i].name;
     arrValue[i] = arr[i].value;
   }
@@ -162,8 +162,8 @@ function histogram(arr, Word) {
     };
   }, 200);
 
-  var myChart = echarts.init(document.getElementById("ul_ NDTJ"));
-  var option = {
+  let myChart = echarts.init(document.getElementById("ul_ NDTJ"));
+  let option = {
     //xAxis和yAxis的nameTextStyle不起作用
     // 因此设置了字体的全局样式
     textStyle: {

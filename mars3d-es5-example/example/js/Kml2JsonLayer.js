@@ -36,7 +36,7 @@ class Kml2JsonLayer extends mars3d.layer.GeoJsonLayer {
           }
           this._load_data(data);
         })
-        .otherwise(function (error) {
+        .catch(function (error) {
           this.showError("服务出错", error);
         });
     } else if (this.options.data) {
@@ -48,7 +48,7 @@ class Kml2JsonLayer extends mars3d.layer.GeoJsonLayer {
           }
           this._load_data(data);
         })
-        .otherwise(function (error) {
+        .catch(function (error) {
           this.showError("服务出错", error);
         });
     } else {

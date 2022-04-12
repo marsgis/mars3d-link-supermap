@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 "use script"; //开发环境建议开启严格模式
 
 $(document).ready(function () {

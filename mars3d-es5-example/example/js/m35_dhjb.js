@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 //脚本对象方法
-function initEditorJS() {
+function initEditorJS(map) {
   //特征点：山顶点
-  var workPoint1Sdd = {
+  let workPoint1Sdd = {
     activate: function () {
       JB.showPanel("山顶点");
       //视角定位
@@ -18,7 +19,7 @@ function initEditorJS() {
       workLine1Sjx.clearLine();
       workLine2Sgx.clearLine();
 
-      var arrPoint = [
+      let arrPoint = [
         [113.944168, 36.071057, 536.1],
         [113.939593, 36.072087, 510.42],
         [113.942957, 36.067383, 462.29],
@@ -45,7 +46,7 @@ function initEditorJS() {
   };
 
   //特征点：鞍部点
-  var workPoint2Abd = {
+  let workPoint2Abd = {
     activate: function () {
       JB.showPanel("鞍部点");
       //视角定位
@@ -67,7 +68,7 @@ function initEditorJS() {
         }
       );
 
-      var arrPoint = [
+      let arrPoint = [
         [113.943496, 36.068508, 449.63],
         [113.941962, 36.071444, 481.09],
         [113.948862, 36.071282, 453.99],
@@ -99,13 +100,13 @@ function initEditorJS() {
   };
 
   //特征点：坡度变换点
-  var workPoint3Pdbhd = {
+  let workPoint3Pdbhd = {
     activate: function () {
       JB.showPanel("坡度变换点");
       //视角定位
       map.centerAt({ y: 36.062523, x: 113.946202, z: 1343.59, heading: 353.6, pitch: -42, roll: 0 });
 
-      var arrPoint = [
+      let arrPoint = [
         [113.945927, 36.069593, 431.33],
         [113.94593, 36.073602, 427.86],
         [113.942159, 36.072318, 443.86],
@@ -132,13 +133,13 @@ function initEditorJS() {
   };
 
   //特征点：山脚点
-  var workPoint4Sjd = {
+  let workPoint4Sjd = {
     activate: function () {
       JB.showPanel("山脚点");
       //视角定位
       map.centerAt({ y: 36.05423, x: 113.945328, z: 1087.7, heading: 352.4, pitch: -25.4, roll: 360 });
 
-      var arrPoint = [
+      let arrPoint = [
         [113.944745, 36.063709, 350.32],
         [113.950068, 36.066712, 363.01],
         [113.936588, 36.065365, 351.94],
@@ -164,13 +165,13 @@ function initEditorJS() {
   };
 
   //特征点：山脚坡度变化点
-  var workPoint5Sjpdbhd = {
+  let workPoint5Sjpdbhd = {
     activate: function () {
       JB.showPanel("山脚坡度变换点");
       //视角定位
       map.centerAt({ y: 36.055819, x: 113.950153, z: 696.74, heading: 334.4, pitch: -13.2, roll: 359.9 });
 
-      var arrPoint = [
+      let arrPoint = [
         [113.948382, 36.068049, 414.36],
         [113.938975, 36.06497, 395.87],
         [113.941956, 36.064592, 365.89],
@@ -196,7 +197,7 @@ function initEditorJS() {
   };
 
   //特征点：倾斜变换点
-  var workPoint6Qxbhd = {
+  let workPoint6Qxbhd = {
     activate: function () {
       JB.showPanel("倾斜变换点");
       //视角定位
@@ -209,7 +210,7 @@ function initEditorJS() {
         }
       );
 
-      var arrPoint = [
+      let arrPoint = [
         [113.941119, 36.070139, 415.86],
         [113.945836, 36.069939, 453.99],
         [113.942108, 36.072372, 443.98],
@@ -236,7 +237,7 @@ function initEditorJS() {
   };
 
   //特征线：山脊线
-  var workLine1Sjx = {
+  let workLine1Sjx = {
     activate: function () {
       JB.showPanel("山脊线");
       map.centerAt({
@@ -254,7 +255,7 @@ function initEditorJS() {
       JB.stopRotatePoint();
 
       //添加线
-      var lineArr = [
+      let lineArr = [
         {
           point: [
             [113.944168, 36.071057, 536.1],
@@ -326,8 +327,8 @@ function initEditorJS() {
       this.polyLineLayer = new mars3d.layer.GraphicLayer();
       map.addLayer(this.polyLineLayer);
 
-      for (var i = 0; i < lineArr.length; i++) {
-        var item = lineArr[i];
+      for (let i = 0; i < lineArr.length; i++) {
+        let item = lineArr[i];
 
         let line = new mars3d.graphic.PolylineEntity({
           positions: item.point,
@@ -380,13 +381,13 @@ function initEditorJS() {
   };
 
   //特征线：山谷线
-  var workLine2Sgx = {
+  let workLine2Sgx = {
     activate: function () {
       JB.showPanel("山谷线");
       map.centerAt({ y: 36.05648, x: 113.944653, z: 2092, heading: 354.4, pitch: -44.6 });
 
       //添加线
-      var lineArr = [
+      let lineArr = [
         {
           point: [
             [113.941971, 36.073964, 403.46],
@@ -423,8 +424,8 @@ function initEditorJS() {
       this.polyLineLayer = new mars3d.layer.GraphicLayer();
       map.addLayer(this.polyLineLayer);
 
-      for (var i = 0; i < lineArr.length; i++) {
-        var item = lineArr[i];
+      for (let i = 0; i < lineArr.length; i++) {
+        let item = lineArr[i];
 
         let line = new mars3d.graphic.PolylineEntity({
           positions: item.point,
@@ -485,7 +486,7 @@ function initEditorJS() {
   };
 
   //特征线：俯瞰
-  var workLine3Fk = {
+  let workLine3Fk = {
     activate: function () {
       JB.showPanel("俯瞰");
       map.centerAt({ y: 36.070613, x: 113.943032, z: 3059, heading: 356.6, pitch: -88.9 });
@@ -496,7 +497,7 @@ function initEditorJS() {
   };
 
   //绘制过程：计算通过点
-  var workDgx1Point = {
+  let workDgx1Point = {
     activate: function () {
       JB.showPanel(`等高线计算过程展示 <br />
         <ul class="contentUl">
@@ -509,7 +510,7 @@ function initEditorJS() {
 
       map.centerAt({ y: 36.06874, x: 113.948078, z: 811.62, heading: 292.6, pitch: -39.6 });
 
-      var arrPoint = [
+      let arrPoint = [
         [113.944168, 36.071057, 536.1],
         [113.94405, 36.070572, 519.49],
         [113.943981, 36.070254, 498.84],
@@ -517,7 +518,7 @@ function initEditorJS() {
       ];
       this.pointLayer = createArrPoint(arrPoint);
 
-      var labelText = ["b", "m", "g", "f", "h"];
+      let labelText = ["b", "m", "g", "f", "h"];
       this.pointLayer.eachGraphic((graphic, index) => {
         graphic.setStyle({
           label: {
@@ -562,12 +563,12 @@ function initEditorJS() {
   };
 
   //绘制过程：等高线绘制
-  var workDgx2Line = {
+  let workDgx2Line = {
     activate: function () {
       JB.showPanel(`等高线通过点绘制 <br /><img src="img/jiaoben/dgx3.jpg" style="width:100%;"/>`);
       map.centerAt({ lat: 36.069792, lng: 113.944474, alt: 1708, heading: 357, pitch: -82 });
 
-      var arrPoint = [
+      let arrPoint = [
         [113.946061, 36.070867, 500.37],
         [113.943193, 36.070854, 499.86],
         [113.943335, 36.072232, 500.31],
@@ -669,7 +670,7 @@ function initEditorJS() {
   };
 
   //绘制过程：等高线结果
-  var workDgx3End = {
+  let workDgx3End = {
     activate: function () {
       JB.showPanel("等高线结果");
       map.setCameraView(
@@ -692,7 +693,7 @@ function initEditorJS() {
       workLine1Sjx.clearLine();
       workLine2Sgx.clearLine();
 
-      var contourLine = new mars3d.thing.ContourLine({
+      let contourLine = new mars3d.thing.ContourLine({
         positions: [
           [113.941558, 36.078396, 370.6],
           [113.932244, 36.069158, 376.55],
@@ -720,7 +721,7 @@ function initEditorJS() {
   };
 
   //脚本配置信息（包括顺序、时间、业务对象）
-  var data = [
+  let data = [
     {
       text: "特征点",
       state: {
@@ -815,13 +816,13 @@ function initEditorJS() {
 
 //创建点 公共方法
 function createArrPoint(arrPoint) {
-  var graphicLayer = new mars3d.layer.GraphicLayer();
+  let graphicLayer = new mars3d.layer.GraphicLayer();
   map.addLayer(graphicLayer);
 
-  for (var i = 0; i < arrPoint.length; i++) {
-    var item = arrPoint[i];
+  for (let i = 0; i < arrPoint.length; i++) {
+    let item = arrPoint[i];
 
-    var graphic = new mars3d.graphic.PointEntity({
+    let graphic = new mars3d.graphic.PointEntity({
       position: item,
       style: {
         color: "#ffffff",
@@ -853,14 +854,14 @@ function createArrPoint(arrPoint) {
 
 //创建文本指示  公共方法
 function createArrText(arrPoint, name) {
-  var graphicLayer = new mars3d.layer.GraphicLayer();
+  let graphicLayer = new mars3d.layer.GraphicLayer();
   map.addLayer(graphicLayer);
 
-  for (var i = 0; i < arrPoint.length; i++) {
-    var item = arrPoint[i];
+  for (let i = 0; i < arrPoint.length; i++) {
+    let item = arrPoint[i];
 
     //文字注记
-    var graphic = new mars3d.graphic.DivGraphic({
+    let graphic = new mars3d.graphic.DivGraphic({
       position: item,
       style: {
         html: `<div class="marsImgPanel1">

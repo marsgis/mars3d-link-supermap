@@ -1,7 +1,7 @@
 "use script"; //开发环境建议开启严格模式
 
-var url = "https://api.waqi.info/mapq/bounds/?bounds={RECTANGLE}&inc=placeholders&k={KEY}&_={DATA}";
-var table = [
+let url = "https://api.waqi.info/mapq/bounds/?bounds={RECTANGLE}&inc=placeholders&k={KEY}&_={DATA}";
+let table = [
   { level: "一级（优）", influence: "空气质量令人满意，基本无空气污染", suggestion: "	各类人群可正常活动" },
   {
     level: "二级（良）",
@@ -30,16 +30,16 @@ var table = [
   },
 ];
 
-var xmlHttpRequest;
-var nWidth = 500;
-var currTime;
+let xmlHttpRequest;
+let nWidth = 500;
+let currTime;
 
 onmessage = function (e) {
   let bounds = e.data.bounds;
   currTime = new Date().getTime();
 
-  var strKey = jskey();
-  var nowUrl = url.replace("{RECTANGLE}", bounds).replace("{KEY}", strKey).replace("{DATA}", currTime);
+  let strKey = jskey();
+  let nowUrl = url.replace("{RECTANGLE}", bounds).replace("{KEY}", strKey).replace("{DATA}", currTime);
 
   xmlHttpRequest = new XMLHttpRequest();
 
@@ -55,17 +55,17 @@ onmessage = function (e) {
 
 function callback() {
   if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-    var entityTable = [];
+    let entityTable = [];
     ////////////////////////////////////////////////////
-    var currentData = JSON.parse(xmlHttpRequest.responseText);
-    for (var i = currentData.length - 1; i >= 0; i--) {
-      var item = currentData[i];
-      var aqi = parseInt(item.aqi);
+    let currentData = JSON.parse(xmlHttpRequest.responseText);
+    for (let i = currentData.length - 1; i >= 0; i--) {
+      let item = currentData[i];
+      let aqi = parseInt(item.aqi);
       if (!isNumber(aqi)) {
         continue;
       }
 
-      var level = 0;
+      let level = 0;
       if (aqi > nWidth) {
         level = 5;
         aqi = nWidth - 1;
@@ -83,7 +83,7 @@ function callback() {
         }
       }
 
-      var newItem = {
+      let newItem = {
         ...item,
         aqi: aqi,
         level: table[level].level,
@@ -108,7 +108,7 @@ function isNumber(obj) {
 
 function jskey() {
   return (function () {
-    var u = "";
+    let u = "";
     decodeURIComponent("%603Z3F%7BWS%3A3BSBdIRlJTySXYnmecFR%2CF%7BeSGHhkMh%3E%3E")
       .split("")
       .forEach(function (c) {

@@ -8,7 +8,7 @@ function initEcharts() {
 function initRealPopulation() {
   let realEcharts = echarts.init(document.getElementById("population"));
 
-  var realPopulationOption = {
+  let realPopulationOption = {
     tooltip: {
       trigger: "axis",
       axisPointer: {
@@ -83,7 +83,7 @@ function initRealPopulation() {
 //人口结构
 function initPopulationStructure() {
   let structureEcharts = echarts.init(document.getElementById("structure"));
-  var structureOption = {
+  let structureOption = {
     tooltip: {
       trigger: "item",
     },
@@ -170,7 +170,7 @@ function initPopulationStructure() {
 //人口老龄化分析
 function initAging() {
   let agingEcharts = echarts.init(document.getElementById("agingAnalysis"));
-  var agingOption = {
+  let agingOption = {
     tooltip: {
       trigger: "axis",
       axisPointer: {

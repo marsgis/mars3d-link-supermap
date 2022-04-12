@@ -1,9 +1,10 @@
 {
   "name": "mars3d-es5-example",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Mars3D平台,原生JS版本功能示例",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint ./example*/**/*.{js,html} --fix",
     "serve": "http-server",
     "serve:dist": "http-server ./dist",
     "build": "gulp build",
@@ -30,13 +31,11 @@
     "gulp-concat": "^2.6.1",
     "gulp-header": "^2.0.7",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^7.1.0",
     "gulp-plumber": "^1.2.1",
     "gulp-uglify": "^3.0.2",
     "gulp-utf8-convert": "0.0.7",
     "gulp-util": "^3.0.8",
-    "imagemin-pngquant": "^8.0.0",
-    "mars3d": "^3.2.0",
+    "mars3d": "^3.3.0",
     "prettier": "^2.2.1",
     "uglify-js": "^3.6.0"
   },

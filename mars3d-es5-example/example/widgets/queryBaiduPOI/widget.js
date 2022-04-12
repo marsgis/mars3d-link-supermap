@@ -35,27 +35,27 @@
           return;
         }
 
-        var name;
+        let name;
         if (item.detailUrl) {
           name = '<a href="' + item.detailUrl + '"  target="_black" style="color: #ffffff; ">' + item.name + "</a>";
         } else {
           name = item.name;
         }
 
-        var inHtml = '<div class="mars-popup-titile">' + name + '</div><div class="mars-popup-content" >';
+        let inHtml = '<div class="mars-popup-titile">' + name + '</div><div class="mars-popup-content" >';
 
-        var phone = $.trim(item.tel);
+        let phone = $.trim(item.tel);
         if (phone != "") {
           inHtml += "<div><label>电话</label>" + phone + "</div>";
         }
 
-        var dz = $.trim(item.address);
+        let dz = $.trim(item.address);
         if (dz != "") {
           inHtml += "<div><label>地址</label>" + dz + "</div>";
         }
 
         if (item.type) {
-          var fl = $.trim(item.type);
+          let fl = $.trim(item.type);
           if (fl != "") {
             inHtml += "<div><label>类别</label>" + fl + "</div>";
           }
@@ -75,8 +75,8 @@
       if (opt.type != "append") {
         return;
       }
-      var that = this;
-      var img = $("#map-querybar img");
+      let that = this;
+      let img = $("#map-querybar img");
       img.each((index, item) => {
         $(item).attr("src", this.path + $(item).attr("src"));
       });
@@ -97,7 +97,7 @@
         }
       });
 
-      var timetik = 0;
+      let timetik = 0;
 
       // 搜索框绑定文本框值发生变化,隐藏默认搜索信息栏,显示匹配结果列表
       $("#txt_querypoi").bind("input propertychange", () => {
@@ -106,7 +106,7 @@
           this.hideAllQueryBarView();
           this.clearLayers();
 
-          var queryVal = $.trim($("#txt_querypoi").val());
+          let queryVal = $.trim($("#txt_querypoi").val());
           if (queryVal.length == 0) {
             // 文本框内容为空,显示历史记录
             this.showHistoryList();
@@ -121,7 +121,7 @@
         clearTimeout(timetik);
         this.hideAllQueryBarView();
 
-        var queryVal = $.trim($("#txt_querypoi").val());
+        let queryVal = $.trim($("#txt_querypoi").val());
         this.strartQueryPOI(queryVal, true);
       });
       //绑定回车键
@@ -141,7 +141,16 @@
     activate() {
       this.map.addLayer(this.graphicLayer);
 
-      $(".mars3d-locationbar").append('<div id="queryAddress" class="mars3d-locationbar-content" style="margin-right: 50px;"></div>');
+      // 下侧状态栏提示
+      const locationBar = this.map.controls.locationBar?.container;
+      if (locationBar) {
+        this.queryAddressDOM = mars3d.DomUtil.create(
+          "div",
+          "mars3d-locationbar-content mars3d-locationbar-autohide",
+          this.map.controls.locationBar.container
+        );
+        this.queryAddressDOM.style.marginRight = "50px";
+      }
 
       //单击地图事件
       this.map.on(mars3d.EventType.clickMap, this.onMapClick, this);
@@ -156,7 +165,10 @@
       this.map.off(mars3d.EventType.clickMap, this.onMapClick, this);
       this.map.off(mars3d.EventType.cameraChanged, this.onMapCameraChanged, this);
 
-      $("#queryAddress").remove();
+      if (this.queryAddressDOM) {
+        mars3d.DomUtil.remove(this.queryAddressDOM);
+        delete this.queryAddressDOM;
+      }
 
       this.hideAllQueryBarView();
       this.clearLayers();
@@ -172,7 +184,7 @@
       let radius = this.map.camera.positionCartographic.height; //单位：米
       if (radius > 100000) {
         this.address = null;
-        $("#queryAddress").html("");
+        this.queryAddressDOM.innerHTML = "";
         return;
       }
 
@@ -181,8 +193,7 @@
         success: (result) => {
           // console.log("地址", result);
           this.address = result;
-
-          $("#queryAddress").html("地址：" + result.address);
+          this.queryAddressDOM.innerHTML = "地址：" + result.address;
         },
       });
     }
@@ -220,10 +231,10 @@
         city: this.address?.city,
         location: this.map.getCenter(),
         success: (result) => {
-          var inhtml = "";
-          var pois = result.list;
-          for (var index = 0; index < pois.length; index++) {
-            var name = pois[index].name;
+          let inhtml = "";
+          let pois = result.list;
+          for (let index = 0; index < pois.length; index++) {
+            let name = pois[index].name;
             // var num = pois[index].num;
             // if (num > 0) continue;
 
@@ -257,7 +268,7 @@
 
       //查询外部widget
       if (this.hasExWidget() && queryEx) {
-        var qylist = this.queryExPOI(text);
+        let qylist = this.queryExPOI(text);
         return;
       }
       //查询外部widget
@@ -298,17 +309,17 @@
       }
       this.allpage = Math.ceil(counts / this.pageSize);
 
-      var inhtml = "";
+      let inhtml = "";
       if (counts == 0) {
         inhtml += '<div class="querybar-page"><div class="querybar-fl">没有找到"<strong>' + this.queryText + '</strong>"相关结果</div></div>';
       } else {
         this.objResultData = this.objResultData || {};
-        for (var index = 0; index < data.length; index++) {
-          var item = data[index];
-          var startIdx = (this.thispage - 1) * this.pageSize;
+        for (let index = 0; index < data.length; index++) {
+          let item = data[index];
+          let startIdx = (this.thispage - 1) * this.pageSize;
           item.index = startIdx + (index + 1);
 
-          var _id = index;
+          let _id = index;
 
           inhtml += `<div class="querybar-site" onclick="queryGaodePOIWidget.showDetail('${_id}')">
             <div class="querybar-sitejj">
@@ -322,7 +333,7 @@
         }
 
         //分页信息
-        var _fyhtml;
+        let _fyhtml;
         if (this.allpage > 1) {
           _fyhtml =
             '<div class="querybar-ye querybar-fr">' +
@@ -370,7 +381,7 @@
     }
     //点击单个结果,显示详细
     showDetail(id) {
-      var item = this.objResultData[id];
+      let item = this.objResultData[id];
       this.flyTo(item);
     }
     clearLayers() {
@@ -381,8 +392,8 @@
       this.clearLayers();
 
       arr.forEach((item) => {
-        var jd = Number(item.lng);
-        var wd = Number(item.lat);
+        let jd = Number(item.lng);
+        let wd = Number(item.lat);
         if (isNaN(jd) || isNaN(wd)) {
           return;
         }
@@ -391,7 +402,7 @@
         item.lat = wd;
 
         //添加实体
-        var graphic = new mars3d.graphic.PointEntity({
+        let graphic = new mars3d.graphic.PointEntity({
           position: Cesium.Cartesian3.fromDegrees(jd, wd),
           style: {
             pixelSize: 10,
@@ -429,7 +440,7 @@
       }
     }
     flyTo(item) {
-      var graphic = item._graphic;
+      let graphic = item._graphic;
       if (graphic == null) {
         window.toastr.warning(item.name + " 无经纬度坐标信息！");
         return;
@@ -444,23 +455,23 @@
 
     //===================坐标定位处理========================
     isLonLat(text) {
-      var reg = /^-?((0|1?[0-7]?[0-9]?)(([.][0-9]*)?)|180(([.][0]*)?)),-?((0|[1-8]?[0-9]?)(([.][0-9]*)?)|90(([.][0]*)?))$/; /*定义验证表达式*/
+      let reg = /^-?((0|1?[0-7]?[0-9]?)(([.][0-9]*)?)|180(([.][0]*)?)),-?((0|[1-8]?[0-9]?)(([.][0-9]*)?)|90(([.][0]*)?))$/; /*定义验证表达式*/
       return reg.test(text); /*进行验证*/
     }
     centerAtLonLat(text) {
-      var arr = text.split(",");
+      let arr = text.split(",");
       if (arr.length != 2) {
         return;
       }
 
-      var jd = Number(arr[0]);
-      var wd = Number(arr[1]);
+      let jd = Number(arr[0]);
+      let wd = Number(arr[1]);
       if (isNaN(jd) || isNaN(wd)) {
         return;
       }
 
       //添加实体
-      var graphic = new mars3d.graphic.PointEntity({
+      let graphic = new mars3d.graphic.PointEntity({
         position: Cesium.Cartesian3.fromDegrees(jd, wd),
         style: {
           color: "#3388ff",
@@ -505,9 +516,9 @@
           return;
         }
 
-        var inhtml = "";
-        for (var index = this.arrHistory.length - 1; index >= 0; index--) {
-          var item = this.arrHistory[index];
+        let inhtml = "";
+        for (let index = this.arrHistory.length - 1; index >= 0; index--) {
+          let item = this.arrHistory[index];
           inhtml += "<li><i class='fa fa-history'/><a href=\"javascript:queryBaiduPOIWidget.autoSearch('" + item + "');\">" + item + "</a></li>";
         }
         $("#querybar_ul_history").html(inhtml);
@@ -558,7 +569,7 @@
     }
     //调用外部widget进行查询
     queryExPOI(text) {
-      var layer = this.graphicLayer;
+      let layer = this.graphicLayer;
 
       this.exWidget.strartQueryPOI(text, layer, () => {
         this.strartQueryPOI(text, false);

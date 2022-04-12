@@ -18,6 +18,7 @@ var configLibs = {
     "Cesium-supermap/Widgets/widgets.css", //cesium
     "Cesium-supermap/Cesium.js",
     "mars3d/plugins/compatible/cesium-version.js", //cesium版本兼容处理
+    "mars3d/plugins/compatible/cesium-when.js",
     "turf/turf.min.js",
     "mars3d/mars3d.css", //mars3d
     "mars3d/mars3d.js",
@@ -40,7 +41,7 @@ var configLibs = {
   ],
   "mars3d-heatmap": [
     //heatmap热力图支持插件
-    "mars3d/plugins/heatmap/heatmap.min.js",
+    "mars3d/plugins/heatmap/heatmap.js",
     "mars3d/plugins/heatmap/mars3d-heatmap.js",
   ],
   "mars3d-wind": [
@@ -54,9 +55,9 @@ var configLibs = {
   ],
   "mars3d-widget": [
     //项目widget模块插件
-    "mars3d/plugins/widget/mars3d-widget.css",
     "mars3d/plugins/widget/mars3d-widget.js",
   ],
+
 
   //////////////////////////cesium相关第3方插件////////////////////////
   "cesium-pbf": [
@@ -214,9 +215,6 @@ var configLibs = {
     "admin-lte/css/skins/skin-blue.min.css",
     "admin-lte/js/adminlte.min.js"
   ],
-  'ace': [
-    "ace/ace.js"
-  ],
   'highlight': [
     "highlight/styles/foundation.css",
     "highlight/highlight.pack.js"
@@ -243,6 +241,7 @@ var configLibs = {
     "localforage/localforage.js"
   ],
 }
+
 
 
 //内部处理方法
@@ -292,7 +291,6 @@ var configLibs = {
     if (libpath.lastIndexOf('/') !== libpath.length - 1) {
       libpath += '/'
     }
-
 
     var keys = {}
     for (var i = 0, len = arrInclude.length; i < len; i++) {

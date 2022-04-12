@@ -1,5 +1,5 @@
 ﻿(function () {
-    
+
     var requirejs, require, define;
     (function (undef) {
         var main, req, makeMap, handlers,
@@ -427,7 +427,7 @@
         };
     }());
     /**
-   * 
+   *
    * @namespace Cesium
    */
     //----CesiumMeshVisualizer----
@@ -452,7 +452,7 @@ define('Core/RendererUtils',[],function () {
     */
     function RendererUtils() { }
     /**
-    *使用帧缓冲技术，执行渲染命令，渲染到纹理  
+    *使用帧缓冲技术，执行渲染命令，渲染到纹理
     *@param {Cesium.DrawCommand|Array<Cesium.DrawCommand>}drawCommand 渲染命令（集合）
     *@param {Cesium.FrameState}frameState 帧状态对象，可以从Cesium.Scene中获取
     *@param {Cesium.Texture}outpuTexture 将渲染到的目标纹理对象
@@ -574,7 +574,7 @@ define('Core/Rotation',[],function () {
     *
     *@property {Cesium.Cartesian3}axis 旋转轴
     *@property {Number}angle 旋转角度
-    *@property {Cesium.Event}paramChanged  
+    *@property {Cesium.Event}paramChanged
     *@constructor
     *@memberof Cesium
     */
@@ -615,50 +615,50 @@ define('Core/Rotation',[],function () {
     return Rotation;
 });
 define('Util/CSG',[],function () {
-     
+
     // Constructive Solid Geometry (CSG) is a modeling technique that uses Boolean
     // operations like union and intersection to combine 3D solids. This library
     // implements CSG operations on meshes elegantly and concisely using BSP trees,
     // and is meant to serve as an easily understandable implementation of the
     // algorithm. All edge cases involving overlapping coplanar polygons in both
     // solids are correctly handled.
-    // 
+    //
     // Example usage:
-    // 
+    //
     //     var cube = CSG.cube();
     //     var sphere = CSG.sphere({ radius: 1.3 });
     //     var polygons = cube.subtract(sphere).toPolygons();
-    // 
+    //
     // ## Implementation Details
-    // 
+    //
     // All CSG operations are implemented in terms of two functions, `clipTo()` and
     // `invert()`, which remove parts of a BSP tree inside another BSP tree and swap
     // solid and empty space, respectively. To find the union of `a` and `b`, we
     // want to remove everything in `a` inside `b` and everything in `b` inside `a`,
     // then combine polygons from `a` and `b` into one solid:
-    // 
+    //
     //     a.clipTo(b);
     //     b.clipTo(a);
     //     a.build(b.allPolygons());
-    // 
+    //
     // The only tricky part is handling overlapping coplanar polygons in both trees.
     // The code above keeps both copies, but we need to keep them in one tree and
     // remove them in the other tree. To remove them from `b` we can clip the
     // inverse of `b` against `a`. The code for union now looks like this:
-    // 
+    //
     //     a.clipTo(b);
     //     b.clipTo(a);
     //     b.invert();
     //     b.clipTo(a);
     //     b.invert();
     //     a.build(b.allPolygons());
-    // 
+    //
     // Subtraction and intersection naturally follow from set operations. If
     // union is `A | B`, subtraction is `A - B = ~(~A | B)` and intersection is
     // `A & B = ~(~A | ~B)` where `~` is the complement operator.
-    // 
+    //
     // ## License
-    // 
+    //
     // Copyright (c) 2011 Evan Wallace (http://madebyevan.com/), under the MIT license.
 
     // # class CSG
@@ -676,20 +676,20 @@ define('Util/CSG',[],function () {
     *algorithm. All edge cases involving overlapping coplanar polygons in both<br/>
     *solids are correctly handled.<br/>
     *
-    *@example   
-         
+    *@example
+
         MeshVisualizer = Cesium.MeshVisualizer;
         Mesh = Cesium.Mesh;
         MeshMaterial = Cesium.MeshMaterial;
-        CSG = Cesium.CSG;  
-        GeometryUtils = Cesium.GeometryUtils; 
+        CSG = Cesium.CSG;
+        GeometryUtils = Cesium.GeometryUtils;
          //示例1:
          var cube = CSG.cube();
          var sphere = CSG.sphere({ radius: 1.3 });
          var polygons = cube.subtract(sphere).toPolygons();
 
 
-         //示例2： 
+         //示例2：
         var center = Cesium.Cartesian3.fromDegrees(homePosition[0], homePosition[1], 50000);
         var modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(center);
 
@@ -698,7 +698,7 @@ define('Util/CSG',[],function () {
             up: { z: 1 }
         });
         viewer.scene.primitives.add(meshVisualizer);
-         
+
         var material = new MeshMaterial({
             defaultColor: "rgba(0,0,255,1.0)",
             wireframe: true,
@@ -770,7 +770,7 @@ define('Util/CSG',[],function () {
         this.polygons = [];
     };
 
-    
+
     /**
     *Construct a CSG solid from a list of `CSG.Polygon` instances.
     *@param {Array<Cesium.CSG.Polygon>}
@@ -812,7 +812,7 @@ define('Util/CSG',[],function () {
         *     |    +--+----+   =   |       +----+
         *     +----+--+    |       +----+       |
         *          |   B   |            |       |
-        *          |       |            |       | 
+        *          |       |            |       |
         *          +-------+            +-------+
         *</code></pre>
         * @param {Cesium.CSG}csg
@@ -837,15 +837,15 @@ define('Util/CSG',[],function () {
          *     A.subtract(B)<br/>
          * <br/>
          *<pre><code>
-         *     +-------+            +-------+ 
-         *     |       |            |       | 
-         *     |   A   |            |       | 
-         *     |    +--+----+   =   |    +--+ 
-         *     +----+--+    |       +----+ 
-         *          |   B   | 
-         *          |       | 
-         *          +-------+ 
-         *  
+         *     +-------+            +-------+
+         *     |       |            |       |
+         *     |   A   |            |       |
+         *     |    +--+----+   =   |    +--+
+         *     +----+--+    |       +----+
+         *          |   B   |
+         *          |       |
+         *          +-------+
+         *
          *</code></pre>
          * @param {Cesium.CSG}csg
          * @return {Cesium.CSG}
@@ -871,20 +871,20 @@ define('Util/CSG',[],function () {
          *     A.intersect(B)<br/>
          * <br/>
          *<pre><code>
-         *     +-------+ 
-         *     |       | 
-         *     |   A   | 
-         *     |    +--+----+   =   +--+ 
-         *     +----+--+    |       +--+ 
-         *          |   B   | 
-         *          |       | 
-         *          +-------+ 
-         * 
+         *     +-------+
+         *     |       |
+         *     |   A   |
+         *     |    +--+----+   =   +--+
+         *     +----+--+    |       +--+
+         *          |   B   |
+         *          |       |
+         *          +-------+
+         *
          *</code></pre>
          * @param {Cesium.CSG}csg
          * @return {Cesium.CSG}
          */
-        intersect: function (csg) { 
+        intersect: function (csg) {
             var a = new CSG.Node(this.clone().polygons);
             var b = new CSG.Node(csg.clone().polygons);
             a.invert();
@@ -899,7 +899,7 @@ define('Util/CSG',[],function () {
 
         /**
          * Return a new CSG solid with solid and empty space switched. This solid is
-         * not modified. 
+         * not modified.
          * @return {Cesium.CSG}
          */
         inverse: function () {
@@ -908,14 +908,14 @@ define('Util/CSG',[],function () {
             return csg;
         }
     };
-     
+
     /**
     * Construct an axis-aligned solid cuboid. Optional parameters are `center` and<br/>
     * `radius`, which default to `[0, 0, 0]` and `[1, 1, 1]`. The radius can be<br/>
     * specified using a single number or a list of three numbers, one for each axis.<br/>
-    * 
+    *
     *@example
-    * 
+    *
     *     var cube = CSG.cube({
     *       center: [0, 0, 0],
     *       radius: 1
@@ -955,9 +955,9 @@ define('Util/CSG',[],function () {
     * `slices`, and `stacks`, which default to `[0, 0, 0]`, `1`, `16`, and `8`.<br/>
     * The `slices` and `stacks` parameters control the tessellation along the<br/>
     * longitude and latitude directions.<br/>
-    * 
+    *
     *@example
-    * 
+    *
     *     var sphere = CSG.sphere({
     *       center: [0, 0, 0],
     *       radius: 1,
@@ -1006,9 +1006,9 @@ define('Util/CSG',[],function () {
     * Construct a solid cylinder. Optional parameters are `start`, `end`,<br/>
     * `radius`, and `slices`, which default to `[0, -1, 0]`, `[0, 1, 0]`, `1`, and<br/>
     * `16`. The `slices` parameter controls the tessellation.<br/>
-    * 
+    *
     *@example
-    * 
+    *
     *     var cylinder = CSG.cylinder({
     *       start: [0, -1, 0],
     *       end: [0, 1, 0],
@@ -1020,7 +1020,7 @@ define('Util/CSG',[],function () {
     *@param {Array<Number>|Cesium.CSG.Vector}[options.start=[0, -1, 0]]
     *@param {Array<Number>|Cesium.CSG.Vector}[options.end=[0, -1, 0]]
     *@param {Number}[options.radius=1]
-    *@param {Number}[options.slices=16] 
+    *@param {Number}[options.slices=16]
     *@return {Cesium.CSG}
     */
     CSG.cylinder = function (options) {
@@ -1052,20 +1052,20 @@ define('Util/CSG',[],function () {
         return CSG.fromPolygons(polygons);
     };
 
-    /**     
+    /**
     * class Vector<br/>
     * Represents a 3D vector.
     *@example
-    * 
+    *
     *     new CSG.Vector(1, 2, 3);
     *     new CSG.Vector([1, 2, 3]);
     *     new CSG.Vector({ x: 1, y: 2, z: 3 });
     *
-    *@memberof Cesium.CSG 
+    *@memberof Cesium.CSG
     *
     *@param {Number|Array<Number>|Cesium.CSG.Vector}xOrArrayXYZOrVec
-    *@param {Number}[y] 
-    *@param {Number}[z] 
+    *@param {Number}[y]
+    *@param {Number}[z]
     *
     *@property {Number}x
     *@property {Number}y
@@ -1153,7 +1153,7 @@ define('Util/CSG',[],function () {
             return this.plus(a.minus(this).times(t));
         },
 
-        /** 
+        /**
         *@return {Number}
         */
         length: function () {
@@ -1191,7 +1191,7 @@ define('Util/CSG',[],function () {
     * functions like `CSG.sphere()` can return a smooth vertex normal, but `normal`<br/>
     * is not used anywhere else.<br/>
     *
-    *@memberof Cesium.CSG 
+    *@memberof Cesium.CSG
     *@param {Array<Number>|Cesium.CSG.Vector}pos
     *@param {Array<Number>|Cesium.CSG.Vector}normal
     *
@@ -1225,7 +1225,7 @@ define('Util/CSG',[],function () {
         * Create a new vertex between this vertex and `other` by linearly<br/>
         * interpolating all properties using a parameter of `t`. Subclasses should<br/>
         * override this to interpolate additional properties.
-        * 
+        *
         *@param {Cesium.CSG.Vertex}
         *@param {Number}
         *@return {Cesium.CSG.Vertex}
@@ -1243,7 +1243,7 @@ define('Util/CSG',[],function () {
     *
     * Represents a plane in 3D space.
     *
-    *@memberof Cesium.CSG 
+    *@memberof Cesium.CSG
     *@param {Array<Number>|Cesium.CSG.Vector}normal
     *@param {Number}w
     *
@@ -1283,7 +1283,7 @@ define('Util/CSG',[],function () {
         },
 
         /**
-        * 
+        *
         */
         flip: function () {
             this.normal = this.normal.negated();
@@ -1365,7 +1365,7 @@ define('Util/CSG',[],function () {
     * polygons that are clones of each other or were split from the same polygon.<br/>
     * This can be used to define per-polygon properties (such as surface color).<br/>
     *
-    *@memberof Cesium.CSG 
+    *@memberof Cesium.CSG
     *@param {Array<Cesium.CSG.Vertex>}vertices
     *@param {Boolean}shared
     *
@@ -1390,7 +1390,7 @@ define('Util/CSG',[],function () {
         },
 
         /**
-        * 
+        *
         */
         flip: function () {
             this.vertices.reverse().map(function (v) { v.flip(); });
@@ -1408,10 +1408,10 @@ define('Util/CSG',[],function () {
     * the front and/or back subtrees. This is not a leafy BSP tree since there is<br/>
     * no distinction between internal and leaf nodes.<br/>
     *
-    *@memberof Cesium.CSG 
-    *@param {Array<Cesium.CSG.Polygon>}polygons 
+    *@memberof Cesium.CSG
+    *@param {Array<Cesium.CSG.Polygon>}polygons
     *
-    *@property {Array<Cesium.CSG.Polygon>}polygons  
+    *@property {Array<Cesium.CSG.Polygon>}polygons
     *@property {Cesium.CSG.Plane}plane
     *@property {Cesium.CSG.Plane}front
     *@property {Cesium.CSG.Plane}back
@@ -2048,7 +2048,7 @@ define('Core/GeometryUtils',[
 
     /**
     *合并两个或两个以上图形类型（primitiveType），属性数量、名称以及属性值的类型（GeometryAttribute的componentDatatype、componentsPerAttribute等）都一致的几何体
-    *@param {Array<Cesium.Geometry>}geometries 
+    *@param {Array<Cesium.Geometry>}geometries
     *@return {Cesium.Geometry}
     */
     GeometryUtils.mergeGeometries = function (geometries) {
@@ -2166,7 +2166,7 @@ define('Core/GeometryUtils',[
     /**
     *
     *@param {TypeArray} array
-    *@return {Cesium.ComponentDatatype}  
+    *@return {Cesium.ComponentDatatype}
     */
     GeometryUtils.getAttributeComponentType = function (array) {
 
@@ -2214,7 +2214,7 @@ define('Core/GeometryUtils',[
 
     /**
      *
-     *@param {THREE.BufferGeometry}geometry 
+     *@param {THREE.BufferGeometry}geometry
      *@private
      */
     GeometryUtils.parseBufferGeometry3js = function (geometry) {
@@ -2264,7 +2264,7 @@ define('Core/GeometryUtils',[
     /**
     *
     *@param {THREE.Geometry}geometry3js
-    *@return {Cesium.Geometry} 
+    *@return {Cesium.Geometry}
     */
     GeometryUtils.fromGeometry3js = function (geometry3js) {
 
@@ -2310,7 +2310,7 @@ define('Core/GeometryUtils',[
     /**
     *
     *@param {Cesium.Geometry}geometry
-    *@return {THREE.Geometry} 
+    *@return {THREE.Geometry}
     */
     GeometryUtils.toGeometry3js = function (geometry) {
         if (typeof THREE === 'undefined') {
@@ -2633,7 +2633,7 @@ define('Core/MeshPhongMaterial',[
     phong_vert
     ) {
     /**
-    * 
+    *
     *@constructor
     *@memberof Cesium
     *@extends Cesium.MeshMaterial
@@ -2674,23 +2674,23 @@ define('Core/Mesh',[
     var defaultValue = Cesium.defaultValue;
     /**
     *
-    *@param {Object|geometry}options 
-    *@param {Cesium.Geometry|Cesium.CSG|THREE.Geometry|THREE.BufferGeometry}options.geometry  
-    *@param {Cesium.MeshMaterial}options.material  
-    *@param {Boolean}[options.show=true]  
+    *@param {Object|geometry}options
+    *@param {Cesium.Geometry|Cesium.CSG|THREE.Geometry|THREE.BufferGeometry}options.geometry
+    *@param {Cesium.MeshMaterial}options.material
+    *@param {Boolean}[options.show=true]
     *@param {Cesium.Cartesian3}[options.position]
     *@param {Cesium.Rotation}[options.rotation]
-    *@param {Cesium.Cartesian3}[options.scale]   
+    *@param {Cesium.Cartesian3}[options.scale]
     *@param {Cesium.MeshMaterial}[material]
     *
-    *@property {Cesium.Geometry}geometry  
+    *@property {Cesium.Geometry}geometry
     *@property {Cesium.MeshMaterial}material
-    *@property {Boolean}show  
+    *@property {Boolean}show
     *@property {Cesium.Cartesian3}position
     *@property {Cesium.VolumeRendering.Rotation}rotation
-    *@property {Cesium.Cartesian3}scale   
-    *@property {Boolean}needUpdate 
-    *@property {Cesium.Mesh|Cesium.LOD}parent 
+    *@property {Cesium.Cartesian3}scale
+    *@property {Boolean}needUpdate
+    *@property {Cesium.Mesh|Cesium.LOD}parent
     *
     *@constructor
     *@memberof Cesium
@@ -2792,7 +2792,7 @@ define('Core/Mesh',[
 
 
     /**
-     *  
+     *
      * @callback Cesium.Mesh~TraverseCallback
      * @param {Cesium.Mesh|Cesium.LOD}node
      */
@@ -2898,7 +2898,7 @@ define('Core/Mesh',[
             set: function (val) {
                 if (val.x != this._scale.x || val.y != this._scale.y || val.z != this._scale.z) {
                     this._scale = val;
-                    // this._needsUpdate = true; 
+                    // this._needsUpdate = true;
                     this.modelMatrixNeedsUpdate = true;
                 }
                 this._scale = val;
@@ -3427,7 +3427,7 @@ define('Core/Shaders/ShaderChunk',[
 
     var shadow_vert = "#include <shadowmap_pars_vertex>\nvoid main() {\n\t#include <begin_vertex>\n\t#include <project_vertex>\n\t#include <worldpos_vertex>\n\t#include <shadowmap_vertex>\n}\n";
 
-     
+
 
 
     var ShaderChunk = {
@@ -3581,20 +3581,20 @@ define('Core/FramebufferTexture',[], function () {
     /**
     *帧缓存纹理类，可以将一个mesh渲染到帧缓存并作为纹理提供给其他mesh。<br/>
     *需要配合{@link Cesium.MeshVisualizer}、{@link Cesium.Mesh}、{@link Cesium.MeshMaterial}使用。
-    *@param {Cesium.Mesh}mesh 
+    *@param {Cesium.Mesh}mesh
     *
-    *@property {Cesium.Mesh}mesh 
-    *@property {Cesium.Texture}texture 
+    *@property {Cesium.Mesh}mesh
+    *@property {Cesium.Texture}texture
     *
     *@constructor
     *@memberof Cesium
     *@example
-    
+
         MeshVisualizer = Cesium.MeshVisualizer;
         Mesh = Cesium.Mesh;
-        MeshMaterial = Cesium.MeshMaterial; 
-        FramebufferTexture = Cesium.FramebufferTexture; 
-        Shaders = VolumeRendering.Shaders; 
+        MeshMaterial = Cesium.MeshMaterial;
+        FramebufferTexture = Cesium.FramebufferTexture;
+        Shaders = VolumeRendering.Shaders;
 
         var center2 = Cesium.Cartesian3.fromDegrees(homePosition[0]+3.5, homePosition[1] , 50000);
         var modelMatrix2 = Cesium.Transforms.eastNorthUpToFixedFrame(center2);
@@ -3671,7 +3671,7 @@ define('Core/FramebufferTexture',[], function () {
         meshVisualizer.add(meshSecondPass);
     */
     function FramebufferTexture(mesh,renderTarget) {
-        this.mesh = mesh; 
+        this.mesh = mesh;
         this.texture = renderTarget;
     }
 
@@ -3689,25 +3689,25 @@ define('Core/LOD',[
     var defaultValue = Cesium.defaultValue;
     /**
     *
-    *@param {Object|geometry}options   
-    *@param {Boolean}[options.show=true]  
+    *@param {Object|geometry}options
+    *@param {Boolean}[options.show=true]
     *@param {Cesium.Cartesian3}[options.position]
     *@param {Cesium.Rotation}[options.rotation]
-    *@param {Cesium.Cartesian3}[options.scale]    
-    * 
-    *@property {Boolean}show  
+    *@param {Cesium.Cartesian3}[options.scale]
+    *
+    *@property {Boolean}show
     *@property {Cesium.Cartesian3}position
     *@property {Cesium.Rotation}rotation
-    *@property {Cesium.Cartesian3}scale   
+    *@property {Cesium.Cartesian3}scale
     *@property {Boolean}needUpdate
     *
     *@constructor
     *@memberof Cesium
     *@example
-        
+
         MeshVisualizer = Cesium.MeshVisualizer;
         Mesh = Cesium.Mesh;
-        MeshMaterial = Cesium.MeshMaterial; 
+        MeshMaterial = Cesium.MeshMaterial;
         LOD = Cesium.LOD;
 
         var center = Cesium.Cartesian3.fromDegrees(homePosition[0], homePosition[1], 50000);
@@ -4105,15 +4105,15 @@ define('Core/LOD',[
     return LOD;
 
 });
-define('Core/ArrowGeometry',[ 
+define('Core/ArrowGeometry',[
     'Core/GeometryUtils'
-], function ( 
+], function (
     GeometryUtils
     ) {
 
     /**
     *
-      <pre><code>  
+      <pre><code>
               +            ——
             +   +           |
           +       +     headLength
@@ -4130,18 +4130,18 @@ define('Core/ArrowGeometry',[
             width
 
         </code> </pre>
-    *@param {Object}[options] 
-    *@param {Number}[options.length=50000]   
-    *@param {Number}[options.width=250]   
-    *@param {Number}[options.headLength=5000]   
-    *@param {Number}[options.headWidth=1000]    
-    *@param {Boolean}[options.reverse=false]   
-    * 
-    *@property {Number}length   
-    *@property {Number}width   
-    *@property {Number}headLength   
-    *@property {Number}headWidth   
-    *@property {Boolean}reverse  
+    *@param {Object}[options]
+    *@param {Number}[options.length=50000]
+    *@param {Number}[options.width=250]
+    *@param {Number}[options.headLength=5000]
+    *@param {Number}[options.headWidth=1000]
+    *@param {Boolean}[options.reverse=false]
+    *
+    *@property {Number}length
+    *@property {Number}width
+    *@property {Number}headLength
+    *@property {Number}headWidth
+    *@property {Boolean}reverse
     *
     *@constructor
     *@memberof Cesium
@@ -4199,7 +4199,7 @@ define('Core/PlaneGeometry',[],function () {
 
     /**
     *
-      <pre><code>  
+      <pre><code>
         p1++++++++++++p4
         +          +  +
         +       +     +
@@ -4208,10 +4208,10 @@ define('Core/PlaneGeometry',[],function () {
         + +           +
         p2++++++++++++p3
         </code> </pre>
-    *@param {Object}options 
-    *@param {Array<Number|Cesium.Cartesian3>}options.positions [p1,p2,p3,p4]或者[p1.x,p1.y,p1.z,p2.x,...,p4.z] 
+    *@param {Object}options
+    *@param {Array<Number|Cesium.Cartesian3>}options.positions [p1,p2,p3,p4]或者[p1.x,p1.y,p1.z,p2.x,...,p4.z]
     *
-    *@property {Array<Number|Cesium.Cartesian3>}positions 
+    *@property {Array<Number|Cesium.Cartesian3>}positions
     *
     *@constructor
     *@memberof Cesium
@@ -4290,21 +4290,21 @@ define('Core/ReferenceMesh',[
     var defaultValue = Cesium.defaultValue;
     /**
     *
-    *@param {Object}[options]   
+    *@param {Object}[options]
     *@param {Cesium.ArrowGeometry}[options.axisParameter]
-    *@param {Boolean}[options.show=true]  
+    *@param {Boolean}[options.show=true]
     *@param {Cesium.Cartesian3}[options.position]
     *@param {Cesium.VolumeRendering.Rotation}[options.rotation]
-    *@param {Cesium.Cartesian3}[options.scale]    
-    * 
-    *@property {Boolean}show  
+    *@param {Cesium.Cartesian3}[options.scale]
+    *
+    *@property {Boolean}show
     *@property {Cesium.Cartesian3}position
     *@property {Cesium.Rotation}rotation
-    *@property {Cesium.Cartesian3}scale   
+    *@property {Cesium.Cartesian3}scale
     *@property {Boolean}needUpdate
     *
     *@constructor
-    *@memberof Cesium 
+    *@memberof Cesium
     */
     function ReferenceMesh(options) {
         options = Cesium.defaultValue(options, {});
@@ -5825,10 +5825,10 @@ define('Core/MaterialUtils',[
         var uniforms = {};
         for (var i in uniforms3js) {
             if (uniforms3js.hasOwnProperty(i)) {
-                uniforms[i] = { 
+                uniforms[i] = {
                     value: {}
                 };
-                for (var n in uniforms3js[i]) { 
+                for (var n in uniforms3js[i]) {
                     if (n!=="value") {
                         uniforms[i][n] = uniforms3js[i][n];
                     }
@@ -5839,7 +5839,7 @@ define('Core/MaterialUtils',[
                         default:
                     }
                 }
-               
+
                 bindUniformValue(uniforms[i], uniforms3js[i].value);
             }
         }
@@ -6398,7 +6398,7 @@ define('Core/MeshUtils',[
             position: mesh3js.position,
             scale: mesh3js.scale
         });
-        mesh.quaternion = mesh3js.quaternion; 
+        mesh.quaternion = mesh3js.quaternion;
         return mesh;
     }
     /**
@@ -6434,8 +6434,8 @@ define('Core/ShaderUtils',[ ], function (
     }
 
     if (typeof THREE=='undefined') {
-         
-        return ShaderUtils; 
+
+        return ShaderUtils;
     }
     var shaderIDs = {
         MeshDepthMaterial: 'depth',
@@ -6495,9 +6495,9 @@ define('Core/ShaderUtils',[ ], function (
     sRGBEncoding = THREE.sRGBEncoding;
 
 
-   
 
-   
+
+
     function getTextureEncodingFromMap(map, gammaOverrideLinear) {
 
         var encoding;
@@ -7185,7 +7185,7 @@ define('Core/MeshVisualizer',[
     var computeModelMatrix = new Matrix4();
     var scratchPosition = new Cartesian3();
     var scratchTraverseArgs = {
-        cancelCurrent: false //停止遍历当前节点的所有子节点 
+        cancelCurrent: false //停止遍历当前节点的所有子节点
     };
     Cesium.Cartesian3.prototype.set = function (x, y, z) {
         this.x = x; this.y = y; this.z = z;
@@ -7219,25 +7219,25 @@ define('Core/MeshVisualizer',[
     *@param {Boolean}[options.showReference=true]
     *@param {Cesium.ArrowGeometry}[options.referenceAxisParameter]
     *
-    *@property {Cesium.Matrix4}modelMatrix 
-    *@property {Cesium.Cartesian3}up 
-    *@property {Cesium.Cartesian3}position 
-    *@property {Cesium.Cartesian3}scale 
-    *@property {Cesium.Rotation}rotation 
-    *@property {Boolean}show 
+    *@property {Cesium.Matrix4}modelMatrix
+    *@property {Cesium.Cartesian3}up
+    *@property {Cesium.Cartesian3}position
+    *@property {Cesium.Cartesian3}scale
+    *@property {Cesium.Rotation}rotation
+    *@property {Boolean}show
     *@property {Boolean}showReference
     *@property {Boolean}modelMatrixNeedsUpdate
-    *@property {Cesium.Event}beforeUpdate  
+    *@property {Cesium.Event}beforeUpdate
     *
     *@constructor
     *@memberof Cesium
     *@extends Cesium.Primitive
     *
-    *@example 
-     
+    *@example
+
         MeshVisualizer = Cesium.MeshVisualizer;
         Mesh = Cesium.Mesh;
-        MeshMaterial = Cesium.MeshMaterial; 
+        MeshMaterial = Cesium.MeshMaterial;
         FramebufferTexture = Cesium.FramebufferTexture;
 
         var center = Cesium.Cartesian3.fromDegrees(homePosition[0], homePosition[1], 50000);
@@ -7254,7 +7254,7 @@ define('Core/MeshVisualizer',[
             dimensions: new Cesium.Cartesian3(100000, 50000, 50000),
             vertexFormat: Cesium.VertexFormat.POSITION_ONLY
         }));
-        
+
         var material = new MeshMaterial({
             defaultColor: "rgba(255,0,0,1.0)",
             wireframe: false,
@@ -7272,7 +7272,7 @@ define('Core/MeshVisualizer',[
              vertexFormat: Cesium.VertexFormat.POSITION_ONLY
          });
          sphere = Cesium.SphereGeometry.createGeometry(sphere);
-        
+
          var sphereMesh = new Mesh(sphere, material);
          sphereMesh.position = new Cesium.Cartesian3(100000, 0, 0)
          meshVisualizer.add(sphereMesh);
@@ -7616,10 +7616,10 @@ define('Core/MeshVisualizer',[
         },
 
         /**
-        * 
+        *
         *@param {Cesium.Mesh} mesh
         *@param {Cesium.FrameState} frameState
-        *@return {Cesium.DrawCommand} 
+        *@return {Cesium.DrawCommand}
         *@private
         */
         createDrawCommand: function (mesh, frameState) {
@@ -7696,7 +7696,7 @@ define('Core/MeshVisualizer',[
         /**
         *
         *
-        *@param {THREE.Material}material 
+        *@param {THREE.Material}material
         *@return {Cesium.RenderState}frameState
         *@private
         */
@@ -7749,7 +7749,7 @@ define('Core/MeshVisualizer',[
         /**
         *
         *
-        *@param {THREE.Material}material 
+        *@param {THREE.Material}material
         *@param {Cesium.FrameState}frameState
         *@private
         */
@@ -8032,7 +8032,7 @@ define('Core/MeshVisualizer',[
                                         that._textureCache[item.value] = onTextureImageLoaded(tiffCanvas, item);
                                         callback.isLoading = false;
 
-                                    }).otherwise(function (err) {
+                                    }).catch(function (err) {
                                         console.log(err);
                                     })
 
@@ -8043,7 +8043,7 @@ define('Core/MeshVisualizer',[
                                         }
                                         that._textureCache[item.value] = onTextureImageLoaded(image, item);
                                         callback.isLoading = false;
-                                    }).otherwise(function (err) {
+                                    }).catch(function (err) {
                                         console.log(err);
                                     })
                                 }
@@ -8179,7 +8179,7 @@ define('Core/MeshVisualizer',[
         *@param {Cesium.Geometry} geometry
         *@param {Cesium.Material} material
         *@return {String}
-        *@private  
+        *@private
         */
         getVertexShaderSource: function (geometry, material) {
 
@@ -8269,9 +8269,9 @@ define('Core/MeshVisualizer',[
             }
         },
         /**
-         * 
+         *
          *@param {Cesium.Material} material
-         *@return {String} 
+         *@return {String}
          *@private
          */
         getFragmentShaderSource: function (material) {
@@ -8502,7 +8502,7 @@ define('Core/MeshVisualizer',[
 
         var item = frameBufferTexture;
         if (item instanceof FramebufferTexture) {
-             
+
             item.drawCommands = [];
             MeshVisualizer.traverse(item.mesh, function (mesh) {
                 if (MeshUtils.isMesh3js(mesh)) {
@@ -8587,7 +8587,7 @@ define('Core/MeshVisualizer',[
                             height: drawingBufferHeight,
                             pixelFormat: PixelFormat.RGBA
                         });
-                    } 
+                    }
                     item._notFullScreen = notFullScreen;
                 }
                 mesh._textureCommand.renderState.depthTest.enabled = mesh.depthTest;
@@ -8879,7 +8879,7 @@ define('Core/BasicMeshMaterial',[
                 this.translucent = true;
             }
             withTexture = true;
-            if (!Cesium.defined(this.uniforms.diffuseColorMap.flipY)) { 
+            if (!Cesium.defined(this.uniforms.diffuseColorMap.flipY)) {
                 this.uniforms.diffuseColorMap.flipY = false;
             }
 
@@ -8897,10 +8897,10 @@ define('Core/BasicMeshMaterial',[
             withTexture = false;
         }
 
-        var vertexShaderUri = null;// "texture_normals.vert"; 
+        var vertexShaderUri = null;// "texture_normals.vert";
         var fragmentShaderUri = null;  //"texture_normals.frag";
         if (withTexture && withNormals) {
-            vertexShaderUri = ShaderChunk.texture_normals_vert;// "texture_normals.vert"; 
+            vertexShaderUri = ShaderChunk.texture_normals_vert;// "texture_normals.vert";
             fragmentShaderUri = ShaderChunk.texture_normals_frag;  //"texture_normals.frag";
         } else if (withTexture && !withNormals) {
             vertexShaderUri = ShaderChunk.texture_vert;//"texture.vert";
@@ -8943,7 +8943,7 @@ define('Core/BasicGeometry',[], function () {
     /**
     *
     *@param {Cesium.BasicGeometry}basicGeometry
-    *@return {Cesiumm.Geometry} 
+    *@return {Cesiumm.Geometry}
     */
     BasicGeometry.createGeometry = function (basicGeometry) {
         if (!basicGeometry.positions) {
@@ -9090,14 +9090,14 @@ define('Core/PlaneBufferGeometry',[
             }
 
         }
-  
+
         var geom= BasicGeometry.createGeometry({
             positions: new Float32Array(vertices),
             normals: new Float32Array(normals),
             uvs: new Float32Array(uvs),
             indices: new Int32Array(indices)
         })
-        
+
          return geom;
     }
 
@@ -9114,7 +9114,7 @@ define('Main',[
     'Core/LOD',
     'Core/PlaneGeometry',
     'Core/Rotation',
-    'Core/ReferenceMesh', 
+    'Core/ReferenceMesh',
     'Core/BasicMeshMaterial',
     'Core/BasicGeometry',
     'Core/Shaders/ShaderLib',
@@ -9122,7 +9122,7 @@ define('Main',[
     'Util/CSG',
     'Core/MeshPhongMaterial',
     'Core/MaterialUtils',
-    'Core/ShaderUtils' 
+    'Core/ShaderUtils'
 ], function (
     RendererUtils,
     Mesh,
@@ -9134,7 +9134,7 @@ define('Main',[
     LOD,
     PlaneGeometry,
     Rotation,
-    ReferenceMesh, 
+    ReferenceMesh,
     BasicMeshMaterial,
     BasicGeometry,
     ShaderLib,
@@ -9142,7 +9142,7 @@ define('Main',[
     CSG,
     MeshPhongMaterial,
     MaterialUtils,
-    ShaderUtils 
+    ShaderUtils
   ) {
     if (typeof Cesium==='undefined') {
         Cesium = {};
@@ -9158,14 +9158,14 @@ define('Main',[
     Cesium.LOD = LOD;
     Cesium.PlaneGeometry = PlaneGeometry;
     Cesium.Rotation = Rotation;
-    Cesium.ReferenceMesh = ReferenceMesh; 
+    Cesium.ReferenceMesh = ReferenceMesh;
     Cesium.BasicMeshMaterial = BasicMeshMaterial;
     Cesium.BasicGeometry = BasicGeometry;
     Cesium.PlaneBufferGeometry = PlaneBufferGeometry;
     Cesium.CSG = CSG;
     Cesium.MeshPhongMaterial = MeshPhongMaterial;
     Cesium.MaterialUtils = MaterialUtils;
-    Cesium.ShaderUtils = ShaderUtils; 
+    Cesium.ShaderUtils = ShaderUtils;
     return Cesium;
 });
     require([

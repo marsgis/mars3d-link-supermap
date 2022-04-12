@@ -81,7 +81,7 @@ class Typhoon {
 
   addNameGraphic(firstItem) {
     //[起点]绘制台风起点名字
-    var nameGraphic = new mars3d.graphic.RectanglePrimitive({
+    let nameGraphic = new mars3d.graphic.RectanglePrimitive({
       positions: [
         [firstItem.lon, firstItem.lat],
         [firstItem.lon + 0.7, firstItem.lat - 0.4],
@@ -109,7 +109,7 @@ class Typhoon {
     let endItem = arr[arr.length - 1];
 
     let lastType;
-    var arrPoint = [];
+    let arrPoint = [];
     //路径点
     for (let i = 0, len = arr.length; i < len; i++) {
       let item = arr[i];

@@ -209,6 +209,9 @@ define(['exports'], function (exports) { 'use strict';
     		always: function(onFulfilledOrRejected, onProgress) {
     			return this.then(onFulfilledOrRejected, onFulfilledOrRejected, onProgress);
     		},
+        finally: function (onFulfilledOrRejected, onProgress) {
+          return this.then(onFulfilledOrRejected, onFulfilledOrRejected, onProgress);
+        },
 
     		/**
     		 * Register a rejection handler.  Shortcut for .then(undefined, onRejected)
@@ -218,6 +221,9 @@ define(['exports'], function (exports) { 'use strict';
     		otherwise: function(onRejected) {
     			return this.then(undef, onRejected);
     		},
+        catch: function (onRejected) {
+          return this.then(undef, onRejected);
+        },
 
     		/**
     		 * Shortcut for .then(function() { return value; })

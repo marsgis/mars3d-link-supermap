@@ -1,0 +1,3176 @@
+[
+  {
+    "name": "快速开始",
+    "icon": "fa-globe",
+    "children": [
+      {
+        "name": "创建三维场景",
+        "details": "演示 new mars3d.Map() 构造场景时支持的一些参数",
+        "children": [
+          {
+            "name": "快速创建地球",
+            "thumbnail": "map-create-options.jpg",
+            "main_es5": "map-create-options",
+            "main": "map/create/options"
+          },
+          {
+            "name": "根据配置文件创建地球",
+            "thumbnail": "map-create-json.jpg",
+            "main_es5": "map-create-json",
+            "main": "map/create/json"
+          },
+          {
+            "name": "原生Cesium来创建地球(可与第3方SDK结合使用)",
+            "thumbnail": "map-create-cesium.jpg",
+            "main_es5": "map-create-cesium",
+            "main": "map/create/cesium"
+          },
+          {
+            "name": "UI控件及交互演示样板",
+            "thumbnail": "map-create-ui.jpg",
+            "main_es5": "map-create-ui",
+            "main": "map/create/ui",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "场景参数化",
+        "details": "地图所有参数均可以存储在json或后端服务中",
+        "children": [
+          {
+            "name": "scene 场景参数",
+            "thumbnail": "map-options-scene.jpg",
+            "main_es5": "map-options-scene",
+            "main": "map/options/scene",
+            "vuePanel": true
+          },
+          {
+            "name": "scene.center 默认视角",
+            "thumbnail": "map-options-scene-center.jpg",
+            "main_es5": "map-options-scene-center",
+            "main": "map/options/scene-center",
+            "vuePanel": true
+          },
+          {
+            "name": "terrain 三维地形",
+            "thumbnail": "map-terrain-terrainProvider.jpg",
+            "main_es5": "map-terrain-terrainProvider",
+            "main": "map/terrain/terrainProvider",
+            "vuePanel": true
+          },
+          {
+            "name": "basemaps 瓦片底图",
+            "thumbnail": "map-options-basemaps.jpg",
+            "main_es5": "map-options-basemaps",
+            "main": "map/options/basemaps"
+          },
+          {
+            "name": "layers 叠加图层",
+            "thumbnail": "map-options-layers.jpg",
+            "main_es5": "map-options-layers",
+            "main": "map/options/layers"
+          },
+          {
+            "name": "control 控件",
+            "thumbnail": "map-options-control.jpg",
+            "main_es5": "map-options-control",
+            "main": "map/options/control"
+          },
+          {
+            "name": "多语言支持",
+            "thumbnail": "map-options-lang.jpg",
+            "main_es5": "map-options-lang",
+            "main": "map/options/lang",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "场景基础控制",
+        "children": [
+          {
+            "name": "销毁释放地球",
+            "thumbnail": "map-fun-destroy.jpg",
+            "main_es5": "map-fun-destroy",
+            "main": "map/fun/destroy",
+            "vuePanel": true
+          },
+          {
+            "name": "map相关事件",
+            "thumbnail": "map-other-event.jpg",
+            "main_es5": "map-other-event",
+            "main": "map/other/event",
+            "vuePanel": true
+          },
+          {
+            "name": "离线数据",
+            "thumbnail": "map-other-offline.jpg",
+            "main_es5": "map-other-offline",
+            "main": "map/other/offline",
+            "vuePanel": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "三维地形",
+    "icon": "fa-area-chart",
+    "children": [
+      {
+        "name": "地形图层",
+        "children": [
+          {
+            "name": "地形服务",
+            "thumbnail": "map-terrain-terrainProvider.jpg",
+            "main_es5": "map-terrain-terrainProvider",
+            "main": "map/terrain/terrainProvider",
+            "vuePanel": true
+          },
+          {
+            "name": "天地图地形",
+            "thumbnail": "map-terrain-terrainProvider-tdt.jpg",
+            "main_es5": "map-terrain-terrainProvider-tdt",
+            "main": "map/terrain/terrainProvider-tdt",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-comp","mars3d-tdt"]
+          },
+          {
+            "name": "地形夸张",
+            "thumbnail": "map-terrain-terrainExaggeration.jpg",
+            "main_es5": "map-terrain-terrainExaggeration",
+            "main": "map/terrain/terrainExaggeration",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "地形相关分析",
+        "children": [
+          {
+            "name": "地形开挖",
+            "thumbnail": "thing-terrain-terrainClip.jpg",
+            "main_es5": "thing-terrain-terrainClip",
+            "main": "thing/terrain/terrainClip",
+            "vuePanel": true
+          },
+          {
+            "name": "地形开挖(planes方式)",
+            "thumbnail": "thing-terrain-terrainPlanClip.jpg",
+            "main_es5": "thing-terrain-terrainPlanClip",
+            "main": "thing/terrain/terrainPlanClip",
+            "vuePanel": true
+          },
+          {
+            "name": "等高线",
+            "thumbnail": "thing-terrain-contourLine.jpg",
+            "main_es5": "thing-terrain-contourLine",
+            "main": "thing/terrain/contourLine",
+            "vuePanel": true
+          },
+          {
+            "name": "坡度坡向",
+            "thumbnail": "thing-terrain-slope.jpg",
+            "main_es5": "thing-terrain-slope",
+            "main": "thing/terrain/slope",
+            "vuePanel": true
+          },
+          {
+            "name": "淹没分析（globe材质）",
+            "thumbnail": "thing-terrain-floodByMaterial.jpg",
+            "main_es5": "thing-terrain-floodByMaterial",
+            "main": "thing/terrain/floodByMaterial",
+            "vuePanel": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "瓦片图层",
+    "icon": "fa-photo",
+    "children": [
+      {
+        "name": "在线地图服务",
+        "details": "支持直接加载常用的互联网在线地图服务",
+        "children": [
+          {
+            "name": "天地图",
+            "thumbnail": "layert-online-tdt.jpg",
+            "main_es5": "layert-online-tdt",
+            "main": "layer-tile/online/tdt",
+            "vuePanel": true
+          },
+          {
+            "name": "高德",
+            "thumbnail": "layert-online-gaode.jpg",
+            "main_es5": "layert-online-gaode",
+            "main": "layer-tile/online/gaode",
+            "vuePanel": true
+          },
+          {
+            "name": "腾讯",
+            "thumbnail": "layert-online-tentect.jpg",
+            "main_es5": "layert-online-tentect",
+            "main": "layer-tile/online/tentect",
+            "vuePanel": true
+          },
+          {
+            "name": "百度",
+            "thumbnail": "layert-online-baidu.jpg",
+            "main_es5": "layert-online-baidu",
+            "main": "layer-tile/online/baidu",
+            "vuePanel": true
+          },
+          {
+            "name": "OpenStreetMap（OSM）",
+            "thumbnail": "layert-online-osm.jpg",
+            "main_es5": "layert-online-osm",
+            "main": "layer-tile/online/osm"
+          },
+          {
+            "name": "谷歌【已被封】",
+            "thumbnail": "layert-online-google.jpg",
+            "main_es5": "layert-online-google",
+            "main": "layer-tile/online/google",
+            "vuePanel": true
+          },
+          {
+            "name": "微软Bing",
+            "thumbnail": "layert-online-bing.jpg",
+            "main_es5": "layert-online-bing",
+            "main": "layer-tile/online/bing",
+            "vuePanel": true
+          },
+          {
+            "name": "Mapbox",
+            "thumbnail": "layert-online-mapbox.jpg",
+            "main_es5": "layert-online-mapbox",
+            "main": "layer-tile/online/mapbox",
+            "vuePanel": true
+          },
+          {
+            "name": "ArcGIS Online",
+            "thumbnail": "layert-online-arcgis.jpg",
+            "main_es5": "layert-online-arcgis",
+            "main": "layer-tile/online/arcgis",
+            "vuePanel": true
+          },
+          {
+            "name": "Cesium Ion服务",
+            "thumbnail": "layert-online-ion.jpg",
+            "main_es5": "layert-online-ion",
+            "main": "layer-tile/online/ion",
+            "vuePanel": true
+          },
+          {
+            "name": "Mapbox矢量瓦片(.pbf)",
+            "thumbnail": "layert-online-mvt.jpg",
+            "main_es5": "layert-online-mvt",
+            "main": "layer-tile/online/mvt",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-pbf"]
+          },
+          {
+            "name": "实时交通态势图",
+            "thumbnail": "layert-online-traffic-time.jpg",
+            "main_es5": "layert-online-traffic-time",
+            "main": "layer-tile/online/traffic-time",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "支持的坐标系",
+        "details": "当前平台支持的底图坐标系演示",
+        "children": [
+          {
+            "name": "EPSG3857(Web墨卡托)",
+            "thumbnail": "layert-crs-epsg3857.jpg",
+            "main_es5": "layert-crs-epsg3857",
+            "main": "layer-tile/crs/epsg3857",
+            "vuePanel": true
+          },
+          {
+            "name": "EPSG4326坐标系(WGS84)",
+            "thumbnail": "layert-crs-epsg4326.jpg",
+            "main_es5": "layert-crs-epsg4326",
+            "main": "layer-tile/crs/epsg4326",
+            "vuePanel": true
+          },
+          {
+            "name": "EPSG4490坐标系(大地2000)",
+            "thumbnail": "layert-crs-epsg4490.jpg",
+            "main_es5": "layert-crs-epsg4490",
+            "main": "layer-tile/crs/epsg4490",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "标准瓦片服务",
+        "details": "支持加载在离线或私有环境发布的各种标准服务",
+        "children": [
+          {
+            "name": "image本地单张图片",
+            "thumbnail": "layert-type-image.jpg",
+            "main_es5": "layert-type-image",
+            "main": "layer-tile/type/image",
+            "vuePanel": true
+          },
+          {
+            "name": "image本地单张图片(区域影像)",
+            "thumbnail": "layert-type-image-rectangle.jpg",
+            "main_es5": "layert-type-image-rectangle",
+            "main": "layer-tile/type/image-rectangle"
+          },
+          {
+            "name": "全国温度图(image应用案例)",
+            "thumbnail": "layert-type-image-kriging.jpg",
+            "main_es5": "layert-type-image-kriging",
+            "main": "layer-tile/type/image-kriging",
+            "libs": ["mars3d", "kriging"],
+            "resources": ["krigingConfig.js"]
+          },
+          {
+            "name": "xyz金字塔瓦片",
+            "thumbnail": "layert-type-xyz.jpg",
+            "main_es5": "layert-type-xyz",
+            "main": "layer-tile/type/xyz",
+            "vuePanel": true
+          },
+          {
+            "name": "xyz金字塔瓦片(区域影像)",
+            "thumbnail": "layert-type-xyz-rectangle.jpg",
+            "main_es5": "layert-type-xyz-rectangle",
+            "main": "layer-tile/type/xyz-rectangle"
+          },
+          {
+            "name": "arcgis格式瓦片",
+            "thumbnail": "layert-type-arcgisCache.jpg",
+            "main_es5": "layert-type-arcgisCache",
+            "main": "layer-tile/type/arcgisCache",
+            "vuePanel": true
+          },
+          {
+            "name": "OGC WMS服务",
+            "thumbnail": "layert-type-wms.jpg",
+            "main_es5": "layert-type-wms",
+            "main": "layer-tile/type/wms",
+            "vuePanel": true
+          },
+          {
+            "name": "OGC WMTS服务",
+            "thumbnail": "layert-type-wmts.jpg",
+            "main_es5": "layert-type-wmts",
+            "main": "layer-tile/type/wmts",
+            "vuePanel": true
+          },
+          {
+            "name": "ArcGIS Server服务",
+            "thumbnail": "layert-type-arcgis.jpg",
+            "main_es5": "layert-type-arcgis",
+            "main": "layer-tile/type/arcgis",
+            "vuePanel": true
+          },
+          {
+            "name": "谷歌地球企业版【需部署私服】",
+            "thumbnail": "layert-type-gee.jpg",
+            "main_es5": "layert-type-gee",
+            "main": "layer-tile/type/gee"
+          }
+        ]
+      },
+      {
+        "name": "图层参数及控制",
+        "children": [
+          {
+            "name": "图层管理",
+            "thumbnail": "layert-manage-list.jpg",
+            "main_es5": "layert-manage-list",
+            "main": "layer-tile/manage/list",
+            "vuePanel": true
+          },
+          {
+            "name": "瓦片底图的参数调试",
+            "thumbnail": "layert-manage-edit.jpg",
+            "main_es5": "layert-manage-edit",
+            "main": "layer-tile/manage/edit",
+            "vuePanel": true
+          },
+          {
+            "name": "色彩及透明度属性",
+            "thumbnail": "layert-manage-property.jpg",
+            "main_es5": "layert-manage-property",
+            "main": "layer-tile/manage/property",
+            "vuePanel": true
+          },
+          {
+            "name": "瓦片颜色滤镜",
+            "thumbnail": "layert-manage-filter-color.jpg",
+            "main_es5": "layert-manage-filter-color",
+            "main": "layer-tile/manage/filter-color",
+            "vuePanel": true
+          },
+          {
+            "name": "瓦片加载事件",
+            "thumbnail": "layert-manage-event.jpg",
+            "main_es5": "layert-manage-event",
+            "main": "layer-tile/manage/event",
+            "vuePanel": true
+          },
+          {
+            "name": "动态时序图片(雷达图)",
+            "thumbnail": "layert-manage-tile-alpha.gif",
+            "main_es5": "layert-manage-tile-alpha",
+            "main": "layer-tile/manage/tile-alpha"
+          },
+          {
+            "name": "绘制反选遮罩层",
+            "thumbnail": "layerg-geojson-mask.jpg",
+            "main_es5": "layerg-geojson-mask",
+            "main": "layer-graphic/geojson/mask"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "控件",
+    "icon": "fa-briefcase",
+    "children": [
+      {
+        "name": "Cesium内置控件",
+        "details": "Cesium内置的控件，构造地图时按需传参配置",
+        "children": [
+          {
+            "name": "底图切换控制",
+            "thumbnail": "control-cesium-baseLayerPicker.jpg",
+            "main_es5": "control-cesium-baseLayerPicker",
+            "main": "control/cesium/baseLayerPicker"
+          },
+          {
+            "name": "偏振立体(vr)",
+            "thumbnail": "control-cesium-webvr.jpg",
+            "main_es5": "control-cesium-webvr",
+            "main": "control/cesium/webvr"
+          },
+          {
+            "name": "POI兴趣点搜索(Cesium原生)",
+            "thumbnail": "control-cesium-geocoder.jpg",
+            "main_es5": "control-cesium-geocoder",
+            "main": "control/cesium/geocoder",
+            "resources": ["cesiumControl.css"]
+          }
+        ]
+      },
+      {
+        "name": "内置控件",
+        "details": "Mars3D内置的控件，直接按需调用即可",
+        "children": [
+          {
+            "name": "右键菜单",
+            "thumbnail": "control-inside-contextmenu.jpg",
+            "main_es5": "control-inside-contextmenu",
+            "main": "control/inside/contextmenu",
+            "vuePanel": true
+          },
+          {
+            "name": "Popup鼠标单击信息窗",
+            "thumbnail": "control-inside-popup.jpg",
+            "main_es5": "control-inside-popup",
+            "main": "control/inside/popup",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "Tooltip 鼠标移入信息窗",
+            "thumbnail": "control-inside-tooltip.jpg",
+            "main_es5": "control-inside-tooltip",
+            "main": "control/inside/tooltip",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "SmallTooltip 鼠标小提示窗",
+            "thumbnail": "control-inside-smallTooltip.jpg",
+            "main_es5": "control-inside-smallTooltip",
+            "main": "control/inside/smallTooltip",
+            "vuePanel": true
+          },
+          {
+            "name": "键盘漫游模式",
+            "thumbnail": "control-inside-keyboardRoam.jpg",
+            "main_es5": "control-inside-keyboardRoam",
+            "main": "control/inside/keyboardRoam",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "支持的控件",
+        "children": [
+          {
+            "name": "导航球",
+            "thumbnail": "control-basis-compass.jpg",
+            "main_es5": "control-basis-compass",
+            "main": "control/basis/compass"
+          },
+          {
+            "name": "自定义样式导航球",
+            "thumbnail": "control-basis-compass-custom.jpg",
+            "main_es5": "control-basis-compass-custom",
+            "main": "control/basis/compass-custom",
+            "resources": ["compassCustom.css"]
+          },
+          {
+            "name": "比例尺",
+            "thumbnail": "control-basis-distanceLegend.jpg",
+            "main_es5": "control-basis-distanceLegend",
+            "main": "control/basis/distanceLegend"
+          },
+          {
+            "name": "时钟控制",
+            "thumbnail": "control-basis-clockAnimate.jpg",
+            "main_es5": "control-basis-clockAnimate",
+            "main": "control/basis/clockAnimate",
+            "vuePanel": true
+          },
+          {
+            "name": "下侧状态栏",
+            "thumbnail": "control-basis-locationBar.jpg",
+            "main_es5": "control-basis-locationBar",
+            "main": "control/basis/locationBar"
+          },
+          {
+            "name": "自定义工具栏按钮",
+            "thumbnail": "control-basis-toolButton.jpg",
+            "main_es5": "control-basis-toolButton",
+            "main": "control/basis/toolButton"
+          },
+          {
+            "name": "放大缩小工具栏按钮",
+            "thumbnail": "control-basis-zoom.jpg",
+            "main_es5": "control-basis-zoom",
+            "main": "control/basis/zoom"
+          },
+          {
+            "name": "鼠标按下特效",
+            "thumbnail": "control-basis-mouseDownView.jpg",
+            "main_es5": "control-basis-mouseDownView",
+            "main": "control/basis/mouseDownView"
+          },
+          {
+            "name": "卷帘对比",
+            "thumbnail": "control-basis-mapSplit.jpg",
+            "main_es5": "control-basis-mapSplit",
+            "main": "control/basis/mapSplit"
+          },
+          {
+            "name": "鹰眼地图",
+            "thumbnail": "control-basis-overviewmap.jpg",
+            "main_es5": "control-basis-overviewmap",
+            "main": "control/basis/overviewmap"
+          },
+          {
+            "name": "移动端位置定位",
+            "thumbnail": "control-other-geolocation.jpg",
+            "main_es5": "control-other-geolocation",
+            "main": "control/other/geolocation",
+            "resources": ["https://webapi.amap.com/maps?v=1.4.15&key=ae29a37307840c7ae4a785ac905927e0", "Geolocation.js", "Geolocation.css"]
+          },
+          {
+            "name": "POI兴趣点搜索",
+            "thumbnail": "control-other-poiQueryButton.jpg",
+            "main_es5": "control-other-poiQueryButton",
+            "main": "control/other/poiQueryButton",
+            "resources": ["PoiQueryButton.css", "PoiQueryButton.js"]
+          },
+          {
+            "name": "控件控制(显示及关闭)",
+            "thumbnail": "control-other-display.jpg",
+            "main_es5": "control-other-display",
+            "main": "control/other/display",
+            "vuePanel": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "矢量图层",
+    "icon": "fa-server",
+    "children": [
+      {
+        "name": "基础矢量图层",
+        "children": [
+          {
+            "name": "graphic 数据图层",
+            "thumbnail": "layerg-basis-entity.jpg",
+            "main_es5": "layerg-basis-entity",
+            "main": "layer-graphic/basis/entity",
+            "vuePanel": true
+          },
+          {
+            "name": "DIV 图层",
+            "thumbnail": "graphic-divGraphic-basis.jpg",
+            "main_es5": "graphic-divGraphic-basis",
+            "main": "graphic/divGraphic/basis",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "glTF 小模型图层(简单场景用)",
+            "thumbnail": "layerg-basis-model.jpg",
+            "main_es5": "layerg-basis-model",
+            "main": "layer-graphic/basis/model",
+            "vuePanel": true
+          },
+          {
+            "name": "3D Tiles 三维模型图层",
+            "thumbnail": "layer3d-type-basis.jpg",
+            "main_es5": "layer3d-type-basis",
+            "main": "layer-tileset/type/basis",
+            "vuePanel": true
+          },
+          {
+            "name": "超图S3M三维模型图层",
+            "thumbnail": "layero-s3m-basis.jpg",
+            "main_es5": "layero-s3m-basis",
+            "main": "layer-other/s3m/basis",
+            "libs": ["mars3d","cesium-comp", "mars3d-supermap"],
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "GeoJson矢量图层",
+        "children": [
+          {
+            "name": "GeoJson图层",
+            "thumbnail": "layerg-geojson-basis.jpg",
+            "main_es5": "layerg-geojson-basis",
+            "main": "layer-graphic/geojson/basis",
+            "vuePanel": true
+          },
+          {
+            "name": "KML/KMZ转GeoJson加载",
+            "thumbnail": "layerg-geojson-kml2json.jpg",
+            "main_es5": "layerg-geojson-kml2json",
+            "main": "layer-graphic/geojson/kml2json",
+            "vuePanel": true,
+            "libs": ["mars3d", "kmlGeojson"],
+            "resources": ["Kml2JsonLayer.js"]
+          },
+          {
+            "name": "WKT转GeoJson加载",
+            "thumbnail": "layerg-geojson-wkt.jpg",
+            "main_es5": "layerg-geojson-wkt",
+            "main": "layer-graphic/geojson/wkt",
+            "vuePanel": true,
+            "libs": ["terraformer", "mars3d"]
+          },
+          {
+            "name": "光晕线",
+            "thumbnail": "layerg-geojson-polylineGlow.jpg",
+            "main_es5": "layerg-geojson-polylineGlow",
+            "main": "layer-graphic/geojson/polylineGlow"
+          },
+          {
+            "name": "水域面",
+            "thumbnail": "layerg-geojson-water.gif",
+            "main_es5": "layerg-geojson-water",
+            "main": "layer-graphic/geojson/water",
+            "vuePanel": true
+          },
+          {
+            "name": "建筑物立体面",
+            "thumbnail": "layerg-geojson-buildings.jpg",
+            "main_es5": "layerg-geojson-buildings",
+            "main": "layer-graphic/geojson/buildings",
+            "vuePanel": true,
+            "libs": ["echarts", "mars3d"]
+          },
+          {
+            "name": "渐变行政区域面",
+            "thumbnail": "layerg-geojson-polyGradient.jpg",
+            "main_es5": "layerg-geojson-polyGradient",
+            "main": "layer-graphic/geojson/polyGradient"
+          },
+          {
+            "name": "立体户型图(自定义扩展)",
+            "thumbnail": "layerg-geojson-huxing.jpg",
+            "main_es5": "layerg-geojson-huxing",
+            "main": "layer-graphic/geojson/huxing",
+            "vuePanel": true,
+            "resources": ["HuxingLayer.js"]
+          }
+        ]
+      },
+      {
+        "name": "WFS矢量数据服务",
+        "children": [
+          {
+            "name": "矢量数据Lod加载",
+            "thumbnail": "layerg-wfs-lod.jpg",
+            "main_es5": "layerg-wfs-lod",
+            "main": "layer-graphic/wfs/lod"
+          },
+          {
+            "name": "WFS图层",
+            "thumbnail": "layerg-wfs-geoserver.jpg",
+            "main_es5": "layerg-wfs-geoserver",
+            "main": "layer-graphic/wfs/geoserver",
+            "vuePanel": true
+          },
+          {
+            "name": "ArcGIS Server动态图层",
+            "thumbnail": "layerg-wfs-arcgis-dynamic.jpg",
+            "main_es5": "layerg-wfs-arcgis-dynamic",
+            "main": "layer-graphic/wfs/arcgis-dynamic",
+            "vuePanel": true
+          },
+          {
+            "name": "ArcGIS WFS图层",
+            "thumbnail": "layerg-wfs-arcgis-feature.jpg",
+            "main_es5": "layerg-wfs-arcgis-feature",
+            "main": "layer-graphic/wfs/arcgis-feature",
+            "vuePanel": true
+          },
+          {
+            "name": "ArcGIS WFS图层贴模型",
+            "thumbnail": "layerg-wfs-arcgis-feature-surface.jpg",
+            "main_es5": "layerg-wfs-arcgis-feature-surface",
+            "main": "layer-graphic/wfs/arcgis-feature-surface"
+          },
+          {
+            "name": "高德POI图层",
+            "thumbnail": "layerg-wfs-gaodePOI.jpg",
+            "main_es5": "layerg-wfs-gaodePOI",
+            "main": "layer-graphic/wfs/gaodePOI",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "其他矢量图层",
+        "children": [
+          {
+            "name": "经纬网图层",
+            "thumbnail": "layerg-other-graticule.jpg",
+            "main_es5": "layerg-other-graticule",
+            "main": "layer-graphic/other/graticule"
+          },
+          {
+            "name": "三维地名服务",
+            "thumbnail": "layerg-other-tdtDm.jpg",
+            "main_es5": "layerg-other-tdtDm",
+            "main": "layer-graphic/other/tdtDm",
+            "libs": ["mars3d", "cesium-comp","mars3d-tdt"]
+          },
+          {
+            "name": "矢量瓦片方式加载GeoJson",
+            "thumbnail": "layerg-file-weiVectorTile-geojson.jpg",
+            "main_es5": "layerg-file-weiVectorTile-geojson",
+            "main": "layer-graphic/file/weiVectorTile-geojson",
+            "libs": ["mars3d", "cesium-weiVectorTile"]
+          },
+          {
+            "name": "矢量瓦片方式加载Shp",
+            "thumbnail": "layerg-file-weiVectorTile-shp.jpg",
+            "main_es5": "layerg-file-weiVectorTile-shp",
+            "main": "layer-graphic/file/weiVectorTile-shp",
+            "libs": ["mars3d", "cesium-weiVectorTile"]
+          },
+          {
+            "name": "KML图层(Cesium原生加载)",
+            "thumbnail": "layerg-file-kml.jpg",
+            "main_es5": "layerg-file-kml",
+            "main": "layer-graphic/file/kml",
+            "vuePanel": true
+          },
+          {
+            "name": "CZML图层",
+            "thumbnail": "layerg-file-czml.jpg",
+            "main_es5": "layerg-file-czml",
+            "main": "layer-graphic/file/czml",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-sensorVolumes"]
+          }
+        ]
+      },
+      {
+        "name": "矢量服务查询",
+        "children": [
+          {
+            "name": "ArcGIS Server矢量服务查询",
+            "thumbnail": "query-arcgis.jpg",
+            "main_es5": "query-arcgis",
+            "main": "query/arcgis",
+            "vuePanel": true
+          },
+          {
+            "name": "ArcGIS Server面的查询统计分析",
+            "thumbnail": "query-arcgisPolygon.jpg",
+            "main_es5": "query-arcgisPolygon",
+            "main": "query/arcgisPolygon",
+            "vuePanel": true,
+            "libs": ["mars3d", "echarts"]
+          },
+          {
+            "name": "GeoServer矢量服务查询(OGC WFS)",
+            "thumbnail": "query-geoserver.jpg",
+            "main_es5": "query-geoserver",
+            "main": "query/geoserver",
+            "vuePanel": true
+          },
+          {
+            "name": "高德POI点查询",
+            "thumbnail": "query-gaodePOI.jpg",
+            "main_es5": "query-gaodePOI",
+            "main": "query/gaodePOI",
+            "vuePanel": true
+          },
+          {
+            "name": "高德路径规划查询",
+            "thumbnail": "query-gaodeRoute.jpg",
+            "main_es5": "query-gaodeRoute",
+            "main": "query/gaodeRoute",
+            "vuePanel": true
+          },
+          {
+            "name": "高德路径规划查询(多条)",
+            "thumbnail": "query-gaodeRouteList.jpg",
+            "main_es5": "query-gaodeRouteList",
+            "main": "query/gaodeRouteList",
+            "vuePanel": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "矢量数据",
+    "icon": "fa-puzzle-piece",
+    "children": [
+      {
+        "name": "Entity基础对象",
+        "details": "适用于需要属性机制控制，并且小于一千条数据的加载场景。Entity 支持各种属性、自定义控制及操作，功能强大但渲染效率要弱些。",
+        "children": [
+          {
+            "name": "Label 文字",
+            "thumbnail": "graphic-entity-label.jpg",
+            "main_es5": "graphic-entity-label",
+            "main": "graphic/entity/label",
+            "vuePanel": true
+          },
+          {
+            "name": "文字贴图",
+            "thumbnail": "graphic-entity-textMaterialProperty.jpg",
+            "main_es5": "graphic-entity-textMaterialProperty",
+            "main": "graphic/entity/textMaterialProperty",
+            "vuePanel": true
+          },
+          {
+            "name": "Point 点 ",
+            "thumbnail": "graphic-entity-point.jpg",
+            "main_es5": "graphic-entity-point",
+            "main": "graphic/entity/point",
+            "vuePanel": true
+          },
+          {
+            "name": "Billboard 图标点",
+            "thumbnail": "graphic-entity-billboard.jpg",
+            "main_es5": "graphic-entity-billboard",
+            "main": "graphic/entity/billboard",
+            "vuePanel": true
+          },
+          {
+            "name": "图标点+文字(含聚合)",
+            "thumbnail": "graphic-entity-billboard-clustering.jpg",
+            "main_es5": "graphic-entity-billboard-clustering",
+            "main": "graphic/entity/billboard-clustering",
+            "vuePanel": true
+          },
+          {
+            "name": "Canvas图片点",
+            "thumbnail": "graphic-entity-billboard-canvas.jpg",
+            "main_es5": "graphic-entity-billboard-canvas",
+            "main": "graphic/entity/billboard-canvas",
+            "resources": ["CanvasBillboard.js"]
+          },
+          {
+            "name": "字体图片点",
+            "thumbnail": "graphic-entity-billboard-font.jpg",
+            "main_es5": "graphic-entity-billboard-font",
+            "main": "graphic/entity/billboard-font",
+            "vuePanel": true,
+            "resources": ["/lib/font-awesome/css/font-awesome.min.css", "/lib/dom2img/dom-to-image.js"]
+          },
+          {
+            "name": "Div图片点",
+            "thumbnail": "graphic-entity-billboard-div.jpg",
+            "main_es5": "graphic-entity-billboard-div",
+            "main": "graphic/entity/billboard-div",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css", "/lib/dom2img/dom-to-image.js"]
+          },
+          {
+            "name": "Plane 平面",
+            "thumbnail": "graphic-entity-plane.jpg",
+            "main_es5": "graphic-entity-plane",
+            "main": "graphic/entity/plane",
+            "vuePanel": true
+          },
+          {
+            "name": "Box 盒子",
+            "thumbnail": "graphic-entity-box.jpg",
+            "main_es5": "graphic-entity-box",
+            "main": "graphic/entity/box",
+            "vuePanel": true
+          },
+          {
+            "name": "Circle 圆、圆柱",
+            "thumbnail": "graphic-entity-circle.jpg",
+            "main_es5": "graphic-entity-circle",
+            "main": "graphic/entity/circle",
+            "vuePanel": true
+          },
+          {
+            "name": "Ellipse 椭圆、椭圆柱",
+            "thumbnail": "graphic-entity-ellipse.jpg",
+            "main_es5": "graphic-entity-ellipse",
+            "main": "graphic/entity/ellipse",
+            "vuePanel": true
+          },
+          {
+            "name": "Cylinder 圆锥",
+            "thumbnail": "graphic-entity-cylinder.jpg",
+            "main_es5": "graphic-entity-cylinder",
+            "main": "graphic/entity/cylinder",
+            "vuePanel": true
+          },
+          {
+            "name": "统计柱状图(Cylinder案例)",
+            "thumbnail": "graphic-entity-cylinder-gdp.jpg",
+            "main_es5": "graphic-entity-cylinder-gdp",
+            "main": "graphic/entity/cylinder-gdp",
+            "libs": ["echarts-gl", "mars3d"],
+            "resources": ["cylinderGdp.css"]
+          },
+          {
+            "name": "圆锥追踪体",
+            "thumbnail": "graphic-entity-coneTrack.jpg",
+            "main_es5": "graphic-entity-coneTrack",
+            "main": "graphic/entity/coneTrack",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "Ellipsoid 球、半球、椭球",
+            "thumbnail": "graphic-entity-ellipsoid.jpg",
+            "main_es5": "graphic-entity-ellipsoid",
+            "main": "graphic/entity/ellipsoid",
+            "vuePanel": true
+          },
+          {
+            "name": "半球、雷达范围",
+            "thumbnail": "graphic-entity-ellipsoid-hemi.jpg",
+            "main_es5": "graphic-entity-ellipsoid-hemi",
+            "main": "graphic/entity/ellipsoid-hemi",
+            "vuePanel": true
+          },
+          {
+            "name": "Model 小模型",
+            "thumbnail": "graphic-entity-model.jpg",
+            "main_es5": "graphic-entity-model",
+            "main": "graphic/entity/model",
+            "vuePanel": true
+          },
+          {
+            "name": "点对象动态位置",
+            "thumbnail": "graphic-entity-addDynamicPosition.gif",
+            "main_es5": "graphic-entity-addDynamicPosition",
+            "main": "graphic/entity/addDynamicPosition",
+            "vuePanel": true
+          },
+          {
+            "name": "点对象动态位置贴模型",
+            "thumbnail": "graphic-entity-addDynamicPosition-tileset.gif",
+            "main_es5": "graphic-entity-addDynamicPosition-tileset",
+            "main": "graphic/entity/addDynamicPosition-tileset",
+            "vuePanel": true,
+            "hidden": true
+          },
+          {
+            "name": "Path 轨迹",
+            "thumbnail": "graphic-entity-path.jpg",
+            "main_es5": "graphic-entity-path",
+            "main": "graphic/entity/path",
+            "vuePanel": true
+          },
+          {
+            "name": "无人机飞行轨迹",
+            "thumbnail": "graphic-entity-path-wrj.gif",
+            "main_es5": "graphic-entity-path-wrj",
+            "main": "graphic/entity/path-wrj",
+            "vuePanel": true
+          },
+          {
+            "name": "战机绕圈巡航轨迹",
+            "thumbnail": "graphic-entity-path-zhanji.gif",
+            "main_es5": "graphic-entity-path-zhanji",
+            "main": "graphic/entity/path-zhanji",
+            "vuePanel": true
+          },
+          {
+            "name": "Polyline 线",
+            "thumbnail": "graphic-entity-polyline.jpg",
+            "main_es5": "graphic-entity-polyline",
+            "main": "graphic/entity/polyline",
+            "vuePanel": true
+          },
+          {
+            "name": "曲线",
+            "thumbnail": "graphic-entity-polyline-curve.jpg",
+            "main_es5": "graphic-entity-polyline-curve",
+            "main": "graphic/entity/polyline-curve",
+            "vuePanel": true
+          },
+          {
+            "name": "PolylineVolume 管道线",
+            "thumbnail": "graphic-entity-polylineVolume.jpg",
+            "main_es5": "graphic-entity-polylineVolume",
+            "main": "graphic/entity/polylineVolume",
+            "vuePanel": true
+          },
+          {
+            "name": "Corridor 走廊",
+            "thumbnail": "graphic-entity-corridor.jpg",
+            "main_es5": "graphic-entity-corridor",
+            "main": "graphic/entity/corridor",
+            "vuePanel": true
+          },
+          {
+            "name": "Wall 墙",
+            "thumbnail": "graphic-entity-wall.jpg",
+            "main_es5": "graphic-entity-wall",
+            "main": "graphic/entity/wall",
+            "vuePanel": true
+          },
+          {
+            "name": "Rectangle 矩形",
+            "thumbnail": "graphic-entity-rectangle.jpg",
+            "main_es5": "graphic-entity-rectangle",
+            "main": "graphic/entity/rectangle",
+            "vuePanel": true
+          },
+          {
+            "name": "Polygon 面",
+            "thumbnail": "graphic-entity-polygon.jpg",
+            "main_es5": "graphic-entity-polygon",
+            "main": "graphic/entity/polygon",
+            "vuePanel": true
+          },
+          {
+            "name": "正多边形",
+            "thumbnail": "graphic-entity-polygon-regular.jpg",
+            "main_es5": "graphic-entity-polygon-regular",
+            "main": "graphic/entity/polygon-regular",
+            "vuePanel": true
+          },
+          {
+            "name": "扇形",
+            "thumbnail": "graphic-entity-polygon-sector.jpg",
+            "main_es5": "graphic-entity-polygon-sector",
+            "main": "graphic/entity/polygon-sector",
+            "vuePanel": true
+          },
+          {
+            "name": "Property属性机制演示",
+            "thumbnail": "graphic-entity-property.jpg",
+            "main_es5": "graphic-entity-property",
+            "main": "graphic/entity/property",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "Primitive基础对象",
+        "details": "适用于几千条数据的加载场景。Primitive 是更底层的实现方式，渲染效率更高，但功能性较差。",
+        "children": [
+          {
+            "name": "Label 文字(支持大数据)",
+            "thumbnail": "graphic-primitive-label.jpg",
+            "main_es5": "graphic-primitive-label",
+            "main": "graphic/primitive/label",
+            "vuePanel": true
+          },
+          {
+            "name": "文字贴图",
+            "thumbnail": "graphic-primitive-textMaterial.jpg",
+            "main_es5": "graphic-primitive-textMaterial",
+            "main": "graphic/primitive/textMaterial",
+            "vuePanel": true
+          },
+          {
+            "name": "Point 点(支持大数据)",
+            "thumbnail": "graphic-primitive-point.jpg",
+            "main_es5": "graphic-primitive-point",
+            "main": "graphic/primitive/point",
+            "vuePanel": true
+          },
+          {
+            "name": "危化品扩散效果(大量Point)",
+            "thumbnail": "graphic-primitive-point-lot.jpg",
+            "main_es5": "graphic-primitive-point-lot",
+            "main": "graphic/primitive/point-lot",
+            "vuePanel": true
+          },
+          {
+            "name": "Billboard 图标点(支持大数据)",
+            "thumbnail": "graphic-primitive-billboard.jpg",
+            "main_es5": "graphic-primitive-billboard",
+            "main": "graphic/primitive/billboard",
+            "vuePanel": true
+          },
+          {
+            "name": "AQI空气质量指数(Billboard案例)",
+            "thumbnail": "graphic-primitive-billboard-worker.jpg",
+            "main_es5": "graphic-primitive-billboard-worker",
+            "main": "graphic/primitive/billboard-worker"
+          },
+          {
+            "name": "图标点+文字",
+            "thumbnail": "graphic-primitive-billboard-list.jpg",
+            "main_es5": "graphic-primitive-billboard-list",
+            "main": "graphic/primitive/billboard-list"
+          },
+          {
+            "name": "Plane 平面",
+            "thumbnail": "graphic-primitive-plane.jpg",
+            "main_es5": "graphic-primitive-plane",
+            "main": "graphic/primitive/plane",
+            "vuePanel": true
+          },
+          {
+            "name": "Box 盒子",
+            "thumbnail": "graphic-primitive-box.jpg",
+            "main_es5": "graphic-primitive-box",
+            "main": "graphic/primitive/box",
+            "vuePanel": true
+          },
+          {
+            "name": "Circle 圆、椭圆、圆柱",
+            "thumbnail": "graphic-primitive-circle.jpg",
+            "main_es5": "graphic-primitive-circle",
+            "main": "graphic/primitive/circle",
+            "vuePanel": true
+          },
+          {
+            "name": "Cylinder 圆锥、圆柱",
+            "thumbnail": "graphic-primitive-cylinder.jpg",
+            "main_es5": "graphic-primitive-cylinder",
+            "main": "graphic/primitive/cylinder",
+            "vuePanel": true
+          },
+          {
+            "name": "圆锥追踪体P",
+            "thumbnail": "graphic-primitive-coneTrack.jpg",
+            "main_es5": "graphic-primitive-coneTrack",
+            "main": "graphic/primitive/coneTrack",
+            "vuePanel": true
+          },
+          {
+            "name": "Frustum 四棱锥体",
+            "thumbnail": "graphic-primitive-frustum.jpg",
+            "main_es5": "graphic-primitive-frustum",
+            "main": "graphic/primitive/frustum",
+            "vuePanel": true
+          },
+          {
+            "name": "光锥体",
+            "thumbnail": "graphic-primitive-lightCone.gif",
+            "main_es5": "graphic-primitive-lightCone",
+            "main": "graphic/primitive/lightCone",
+            "vuePanel": true
+          },
+          {
+            "name": "Ellipsoid 球、半球、椭球",
+            "thumbnail": "graphic-primitive-ellipsoid.jpg",
+            "main_es5": "graphic-primitive-ellipsoid",
+            "main": "graphic/primitive/ellipsoid",
+            "vuePanel": true
+          },
+          {
+            "name": "积云",
+            "thumbnail": "graphic-primitive-cloud.jpg",
+            "main_es5": "graphic-primitive-cloud",
+            "main": "graphic/primitive/cloud",
+            "vuePanel": true
+          },
+          {
+            "name": "Model 小模型",
+            "thumbnail": "graphic-primitive-model.jpg",
+            "main_es5": "graphic-primitive-model",
+            "main": "graphic/primitive/model",
+            "vuePanel": true
+          },
+          {
+            "name": "点对象动态位置",
+            "thumbnail": "graphic-primitive-addDynamicPosition.gif",
+            "main_es5": "graphic-primitive-addDynamicPosition",
+            "main": "graphic/primitive/addDynamicPosition",
+            "vuePanel": true
+          },
+          {
+            "name": "点对象动态位置贴模型",
+            "thumbnail": "graphic-primitive-addDynamicPosition-tileset.gif",
+            "main_es5": "graphic-primitive-addDynamicPosition-tileset",
+            "main": "graphic/primitive/addDynamicPosition-tileset",
+            "vuePanel": true,
+            "hidden": true
+          },
+          {
+            "name": "Polyline 线",
+            "thumbnail": "graphic-primitive-polyline.jpg",
+            "main_es5": "graphic-primitive-polyline",
+            "main": "graphic/primitive/polyline",
+            "vuePanel": true
+          },
+          {
+            "name": "公交线",
+            "thumbnail": "graphic-primitive-polyline-setHeight.jpg",
+            "main_es5": "graphic-primitive-polyline-setHeight",
+            "main": "graphic/primitive/polyline-setHeight"
+          },
+          {
+            "name": "一带一路",
+            "thumbnail": "graphic-primitive-polyline-lineFlow-oneBeltOneRoad.jpg",
+            "main_es5": "graphic-primitive-polyline-lineFlow-oneBeltOneRoad",
+            "main": "graphic/primitive/polyline-lineFlow-oneBeltOneRoad",
+            "vuePanel": true
+          },
+          {
+            "name": "城市拓扑连线",
+            "thumbnail": "graphic-primitive-polyline-lineFlow-pulse.jpg",
+            "main_es5": "graphic-primitive-polyline-lineFlow-pulse",
+            "main": "graphic/primitive/polyline-lineFlow-pulse"
+          },
+          {
+            "name": "迁徙效果",
+            "thumbnail": "graphic-primitive-polyline-lineFlow-parabolic.gif",
+            "main_es5": "graphic-primitive-polyline-lineFlow-parabolic",
+            "main": "graphic/primitive/polyline-lineFlow-parabolic",
+            "vuePanel": true
+          },
+          {
+            "name": "柱状线",
+            "thumbnail": "graphic-primitive-polyline-vline.jpg",
+            "main_es5": "graphic-primitive-polyline-vline",
+            "main": "graphic/primitive/polyline-vline",
+            "vuePanel": true
+          },
+          {
+            "name": "高压电线(自动计算线)",
+            "thumbnail": "graphic-primitive-polyline-tower.jpg",
+            "main_es5": "graphic-primitive-polyline-tower",
+            "main": "graphic/primitive/polyline-tower",
+            "vuePanel": true,
+            "libs": ["echarts", "mars3d"]
+          },
+          {
+            "name": "PolylineVolume 管道线",
+            "thumbnail": "graphic-primitive-polylineVolume.jpg",
+            "main_es5": "graphic-primitive-polylineVolume",
+            "main": "graphic/primitive/polylineVolume",
+            "vuePanel": true
+          },
+          {
+            "name": "Corridor 走廊",
+            "thumbnail": "graphic-primitive-corridor.jpg",
+            "main_es5": "graphic-primitive-corridor",
+            "main": "graphic/primitive/corridor",
+            "vuePanel": true
+          },
+          {
+            "name": "动态河流",
+            "thumbnail": "graphic-primitive-dynamicRiver.gif",
+            "main_es5": "graphic-primitive-dynamicRiver",
+            "main": "graphic/primitive/dynamicRiver",
+            "vuePanel": true
+          },
+          {
+            "name": "道路",
+            "thumbnail": "graphic-primitive-road.jpg",
+            "main_es5": "graphic-primitive-road",
+            "main": "graphic/primitive/road",
+            "vuePanel": true
+          },
+          {
+            "name": "Wall 墙",
+            "thumbnail": "graphic-primitive-wall.jpg",
+            "main_es5": "graphic-primitive-wall",
+            "main": "graphic/primitive/wall",
+            "vuePanel": true
+          },
+          {
+            "name": "扩散围墙",
+            "thumbnail": "graphic-primitive-diffuseWall.gif",
+            "main_es5": "graphic-primitive-diffuseWall",
+            "main": "graphic/primitive/diffuseWall",
+            "vuePanel": true
+          },
+          {
+            "name": "走马灯围墙",
+            "thumbnail": "graphic-primitive-scrollWall.gif",
+            "main_es5": "graphic-primitive-scrollWall",
+            "main": "graphic/primitive/scrollWall",
+            "vuePanel": true
+          },
+          {
+            "name": "Rectangle 矩形",
+            "thumbnail": "graphic-primitive-rectangle.jpg",
+            "main_es5": "graphic-primitive-rectangle",
+            "main": "graphic/primitive/rectangle",
+            "vuePanel": true
+          },
+          {
+            "name": "Polygon 面",
+            "thumbnail": "graphic-primitive-polygon.jpg",
+            "main_es5": "graphic-primitive-polygon",
+            "main": "graphic/primitive/polygon",
+            "vuePanel": true
+          },
+          {
+            "name": "水域面",
+            "thumbnail": "graphic-primitive-water.jpg",
+            "main_es5": "graphic-primitive-water",
+            "main": "graphic/primitive/water",
+            "vuePanel": true
+          },
+          {
+            "name": "井",
+            "thumbnail": "graphic-primitive-pit.jpg",
+            "main_es5": "graphic-primitive-pit",
+            "main": "graphic/primitive/pit",
+            "vuePanel": true
+          },
+          {
+            "name": "四面体",
+            "thumbnail": "graphic-primitive-tetraheadron.jpg",
+            "main_es5": "graphic-primitive-tetraheadron",
+            "main": "graphic/primitive/tetraheadron",
+            "vuePanel": false
+          },
+          {
+            "name": "矿区岩层效果(井与开挖的实际应用)",
+            "thumbnail": "thing-terrain-terrainClip-image.jpg",
+            "main_es5": "thing-terrain-terrainClip-image",
+            "main": "thing/terrain/terrainClip-image"
+          }
+        ]
+      },
+      {
+        "name": "Primitive大数据对象",
+        "details": "适用于大数据的加载场景。Primitive合并渲染是支持大数据的加载方式。",
+        "children": [
+          {
+            "name": "FlatBillboard 平面图标",
+            "thumbnail": "graphic-combine-flatBillboard.jpg",
+            "main_es5": "graphic-combine-flatBillboard",
+            "main": "graphic/combine/flatBillboard",
+            "vuePanel": true
+          },
+          {
+            "name": "PlaneCombine 平面",
+            "thumbnail": "graphic-combine-plane.jpg",
+            "main_es5": "graphic-combine-plane",
+            "main": "graphic/combine/plane",
+            "vuePanel": true
+          },
+          {
+            "name": "BoxCombine 盒子",
+            "thumbnail": "graphic-combine-box.jpg",
+            "main_es5": "graphic-combine-box",
+            "main": "graphic/combine/box",
+            "vuePanel": true
+          },
+          {
+            "name": "CircleCombine 圆、椭圆、圆柱",
+            "thumbnail": "graphic-combine-circle.jpg",
+            "main_es5": "graphic-combine-circle",
+            "main": "graphic/combine/circle",
+            "vuePanel": true
+          },
+          {
+            "name": "CylinderCombine 圆锥、圆柱",
+            "thumbnail": "graphic-combine-cylinder.jpg",
+            "main_es5": "graphic-combine-cylinder",
+            "main": "graphic/combine/cylinder",
+            "vuePanel": true
+          },
+          {
+            "name": "FrustumCombine  四棱锥体",
+            "thumbnail": "graphic-combine-frustum.jpg",
+            "main_es5": "graphic-combine-frustum",
+            "main": "graphic/combine/frustum",
+            "vuePanel": true
+          },
+          {
+            "name": "EllipsoidCombine  球、半球、椭球",
+            "thumbnail": "graphic-combine-ellipsoid.jpg",
+            "main_es5": "graphic-combine-ellipsoid",
+            "main": "graphic/combine/ellipsoid",
+            "vuePanel": true
+          },
+          {
+            "name": "ModelCombine 大量模型",
+            "thumbnail": "graphic-combine-model.jpg",
+            "main_es5": "graphic-combine-model",
+            "main": "graphic/combine/model",
+            "vuePanel": true
+          },
+          {
+            "name": "PolylineCombine 大量线",
+            "thumbnail": "graphic-combine-polyline.jpg",
+            "main_es5": "graphic-combine-polyline",
+            "main": "graphic/combine/polyline",
+            "vuePanel": true
+          },
+          {
+            "name": "北京公交线(OD线)",
+            "thumbnail": "graphic-combine-polyline-odline-bus.gif",
+            "main_es5": "graphic-combine-polyline-odline-bus",
+            "main": "graphic/combine/polyline-odline-bus"
+          },
+          {
+            "name": "民航航线(OD线)",
+            "thumbnail": "graphic-combine-polyline-odline-flights.jpg",
+            "main_es5": "graphic-combine-polyline-odline-flights",
+            "main": "graphic/combine/polyline-odline-flights"
+          },
+          {
+            "name": "气象流动线",
+            "thumbnail": "graphic-combine-polyline-lineFlow-wind.gif",
+            "main_es5": "graphic-combine-polyline-lineFlow-wind",
+            "main": "graphic/combine/polyline-lineFlow-wind"
+          },
+          {
+            "name": "竖直飞线",
+            "thumbnail": "graphic-combine-polyline-vline-lineFlow.gif",
+            "main_es5": "graphic-combine-polyline-vline-lineFlow",
+            "main": "graphic/combine/polyline-vline-lineFlow"
+          },
+          {
+            "name": "PolylineVolumeCombine 管道线",
+            "thumbnail": "graphic-combine-polylineVolume.jpg",
+            "main_es5": "graphic-combine-polylineVolume",
+            "main": "graphic/combine/polylineVolume",
+            "vuePanel": true
+          },
+          {
+            "name": "CorridorCombine 走廊",
+            "thumbnail": "graphic-combine-corridor.jpg",
+            "main_es5": "graphic-combine-corridor",
+            "main": "graphic/combine/corridor",
+            "vuePanel": true
+          },
+          {
+            "name": "WallCombine 墙",
+            "thumbnail": "graphic-combine-wall.jpg",
+            "main_es5": "graphic-combine-wall",
+            "main": "graphic/combine/wall",
+            "vuePanel": true
+          },
+          {
+            "name": "RectangleCombine 矩形",
+            "thumbnail": "graphic-combine-rectangle.jpg",
+            "main_es5": "graphic-combine-rectangle",
+            "main": "graphic/combine/rectangle",
+            "vuePanel": true
+          },
+          {
+            "name": "PolygonCombine 大量面",
+            "thumbnail": "graphic-combine-polygon.jpg",
+            "main_es5": "graphic-combine-polygon",
+            "main": "graphic/combine/polygon",
+            "vuePanel": true
+          },
+          {
+            "name": "WaterCombine 大量水面",
+            "thumbnail": "graphic-combine-water.jpg",
+            "main_es5": "graphic-combine-water",
+            "main": "graphic/combine/water",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "DIV矢量对象",
+        "children": [
+          {
+            "name": "DivGraphic 基础对象",
+            "thumbnail": "graphic-divGraphic-basis.jpg",
+            "main_es5": "graphic-divGraphic-basis",
+            "main": "graphic/divGraphic/basis",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "动态效果点(南京高校)",
+            "thumbnail": "graphic-divGraphic-divLightPoint.gif",
+            "main_es5": "graphic-divGraphic-divLightPoint",
+            "main": "graphic/divGraphic/divLightPoint"
+          },
+          {
+            "name": "时序位置坐标",
+            "thumbnail": "graphic-divGraphic-dynamic.jpg",
+            "main_es5": "graphic-divGraphic-dynamic",
+            "main": "graphic/divGraphic/dynamic",
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "标注点样式(油气站)",
+            "thumbnail": "graphic-divGraphic-ident.jpg",
+            "main_es5": "graphic-divGraphic-ident",
+            "main": "graphic/divGraphic/ident",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "饼形图点",
+            "thumbnail": "graphic-divGraphic-echarts-pie.jpg",
+            "main_es5": "graphic-divGraphic-echarts-pie",
+            "main": "graphic/divGraphic/echarts-pie",
+            "libs": ["mars3d", "echarts"]
+          },
+          {
+            "name": "动态水球点",
+            "thumbnail": "graphic-divGraphic-echarts-liqiudfill.jpg",
+            "main_es5": "graphic-divGraphic-echarts-liqiudfill",
+            "main": "graphic/divGraphic/echarts-liqiudfill",
+            "libs": ["echarts-liquidfill", "mars3d"]
+          },
+          {
+            "name": "浮动监控点",
+            "thumbnail": "graphic-divGraphic-video.jpg",
+            "main_es5": "graphic-divGraphic-video",
+            "main": "graphic/divGraphic/video",
+            "vuePanel": true,
+            "resources": ["camera.css", "/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "浮动监控点HLS",
+            "thumbnail": "graphic-divGraphic-video-hls.jpg",
+            "main_es5": "graphic-divGraphic-video-hls",
+            "main": "graphic/divGraphic/video-hls",
+            "libs": ["hls", "mars3d"],
+            "resources": ["camera.css", "/temp/styles/divGraphic.css"],
+            "hidden": true
+          }
+        ]
+      },
+      {
+        "name": "粒子效果对象",
+        "children": [
+          {
+            "name": "粒子效果",
+            "thumbnail": "graphic-particleSystem-basis.jpg",
+            "main_es5": "graphic-particleSystem-basis",
+            "main": "graphic/particleSystem/basis"
+          },
+          {
+            "name": "粒子效果参数调节",
+            "thumbnail": "graphic-particleSystem-style.jpg",
+            "main_es5": "graphic-particleSystem-style",
+            "main": "graphic/particleSystem/style",
+            "vuePanel": true
+          },
+          {
+            "name": "水闸放水效果",
+            "thumbnail": "graphic-particleSystem-water.gif",
+            "main_es5": "graphic-particleSystem-water",
+            "main": "graphic/particleSystem/water",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "视频融合应用",
+        "children": [
+          {
+            "name": "视频点位(Popup展示)",
+            "thumbnail": "graphic-divGraphic-video.jpg",
+            "main_es5": "graphic-divGraphic-video",
+            "main": "graphic/divGraphic/video",
+            "vuePanel": true,
+            "resources": ["camera.css", "/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "视频材质(面状对象)",
+            "thumbnail": "graphic-video-material.jpg",
+            "main_es5": "graphic-video-material",
+            "main": "graphic/video/material",
+            "vuePanel": true
+          },
+          {
+            "name": "视频材质(HLS协议)",
+            "thumbnail": "graphic-video-material-hls.jpg",
+            "main_es5": "graphic-video-material-hls",
+            "main": "graphic/video/material-hls",
+            "vuePanel": true,
+            "libs": ["hls", "mars3d"]
+          },
+          {
+            "name": "视频材质(FLV协议)",
+            "thumbnail": "graphic-video-material-flv.jpg",
+            "main_es5": "graphic-video-material-flv",
+            "main": "graphic/video/material-flv",
+            "vuePanel": true,
+            "libs": ["flv", "mars3d"]
+          },
+          {
+            "name": "视频2D投射",
+            "thumbnail": "graphic-video-video2D.jpg",
+            "main_es5": "graphic-video-video2D",
+            "main": "graphic/video/video2D",
+            "vuePanel": true
+          },
+          {
+            "name": "视频2D投射(HLS协议)",
+            "thumbnail": "graphic-video-video2D-hls.jpg",
+            "main_es5": "graphic-video-video2D-hls",
+            "main": "graphic/video/video2D-hls",
+            "vuePanel": true,
+            "libs": ["hls", "mars3d"]
+          },
+          {
+            "name": "视频2D投射(FLV协议)",
+            "thumbnail": "graphic-video-video2D-flv.jpg",
+            "main_es5": "graphic-video-video2D-flv",
+            "main": "graphic/video/video2D-flv",
+            "vuePanel": true,
+            "libs": ["flv", "mars3d"]
+          },
+          {
+            "name": "视频3D贴物投射",
+            "thumbnail": "graphic-video-video3D.jpg",
+            "main_es5": "graphic-video-video3D",
+            "main": "graphic/video/video3D",
+            "vuePanel": true
+          },
+          {
+            "name": "视频3D贴物投射(HLS协议)",
+            "thumbnail": "graphic-video-video3D-hls.jpg",
+            "main_es5": "graphic-video-video3D-hls",
+            "main": "graphic/video/video3D-hls",
+            "vuePanel": true,
+            "libs": ["hls", "mars3d"]
+          },
+          {
+            "name": "视频3D贴物投射(FLV协议)",
+            "thumbnail": "graphic-video-video3D-flv.jpg",
+            "main_es5": "graphic-video-video3D-flv",
+            "main": "graphic/video/video3D-flv",
+            "vuePanel": true,
+            "libs": ["flv", "mars3d"]
+          }
+        ]
+      },
+      {
+        "name": "卫星场景对象",
+        "children": [
+          {
+            "name": "相控阵雷达范围",
+            "thumbnail": "graphic-space-rectangularSensor.gif",
+            "main_es5": "graphic-space-rectangularSensor",
+            "main": "graphic/space/rectangularSensor",
+            "vuePanel": true
+          },
+          {
+            "name": "CamberRadar 双曲面雷达范围",
+            "thumbnail": "graphic-space-camberRadar.jpg",
+            "main_es5": "graphic-space-camberRadar",
+            "main": "graphic/space/camberRadar",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "ConicSensor 圆椎体(固定竖立朝上)",
+            "thumbnail": "graphic-space-conicSensor-up.jpg",
+            "main_es5": "graphic-space-conicSensor-up",
+            "main": "graphic/space/conicSensor-up",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "ConicSensor 圆椎体(任意方向)",
+            "thumbnail": "graphic-space-conicSensor.jpg",
+            "main_es5": "graphic-space-conicSensor",
+            "main": "graphic/space/conicSensor",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "圆椎体动态展示(ConicSensor应用案例)",
+            "thumbnail": "graphic-space-conicSensor-dynamic.gif",
+            "main_es5": "graphic-space-conicSensor-dynamic",
+            "main": "graphic/space/conicSensor-dynamic",
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "圆椎体追踪目标(ConicSensor应用案例)",
+            "thumbnail": "graphic-space-conicSensor-lookAt.gif",
+            "main_es5": "graphic-space-conicSensor-lookAt",
+            "main": "graphic/space/conicSensor-lookAt",
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "RectSensor 四棱椎体",
+            "thumbnail": "graphic-space-rectSensor.jpg",
+            "main_es5": "graphic-space-rectSensor",
+            "main": "graphic/space/rectSensor",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "四棱椎体追踪目标(RectSensor应用案例)",
+            "thumbnail": "graphic-space-rectSensor-lookAt.jpg",
+            "main_es5": "graphic-space-rectSensor-lookAt",
+            "main": "graphic/space/rectSensor-lookAt",
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "大量四棱椎体(RectSensor应用案例)",
+            "thumbnail": "graphic-space-rectSensor-list.jpg",
+            "main_es5": "graphic-space-rectSensor-list",
+            "main": "graphic/space/rectSensor-list",
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "SatelliteSensor 卫星视锥体",
+            "thumbnail": "graphic-space-satelliteSensor.jpg",
+            "main_es5": "graphic-space-satelliteSensor",
+            "main": "graphic/space/satelliteSensor",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "多卫星视锥体案例",
+            "thumbnail": "graphic-space-satelliteSensor-multi.jpg",
+            "main_es5": "graphic-space-satelliteSensor-multi",
+            "main": "graphic/space/satelliteSensor-multi",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"],
+            "hidden": true
+          },
+          {
+            "name": "卫星视锥体动态展示",
+            "thumbnail": "graphic-space-satelliteSensor-dynamic.gif",
+            "main_es5": "graphic-space-satelliteSensor-dynamic",
+            "main": "graphic/space/satelliteSensor-dynamic",
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "Satellite 卫星综合对象",
+            "thumbnail": "graphic-space-satellite.jpg",
+            "main_es5": "graphic-space-satellite",
+            "main": "graphic/space/satellite",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "Satellite 卫星综合对象(多相机)",
+            "thumbnail": "graphic-space-satellite-coneList.jpg",
+            "main_es5": "graphic-space-satellite-coneList",
+            "main": "graphic/space/satellite-coneList",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "自定义动态位置(Satellite应用案例)",
+            "thumbnail": "graphic-space-satellite-position.jpg",
+            "main_es5": "graphic-space-satellite-position",
+            "main": "graphic/space/satellite-position",
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "卫星过境动态展示(Satellite应用案例)",
+            "thumbnail": "graphic-space-satellite-change.gif",
+            "main_es5": "graphic-space-satellite-change",
+            "main": "graphic/space/satellite-change",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "TLE卫星列表实时展示",
+            "thumbnail": "graphic-space-satellite-list.gif",
+            "main_es5": "graphic-space-satellite-list",
+            "main": "graphic/space/satellite-list",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "TLE外太空物实时展示",
+            "thumbnail": "graphic-space-point.jpg",
+            "main_es5": "graphic-space-point",
+            "main": "graphic/space/point",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "卫星星下点计算",
+            "thumbnail": "graphic-space-getRayEarthPosition.jpg",
+            "main_es5": "graphic-space-getRayEarthPosition",
+            "main": "graphic/space/getRayEarthPosition",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "卫星过境分析",
+            "thumbnail": "graphic-space-tle-getEcfPosition.jpg",
+            "main_es5": "graphic-space-tle-getEcfPosition",
+            "main": "graphic/space/tle-getEcfPosition",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          },
+          {
+            "name": "成像范围计算",
+            "thumbnail": "graphic-space-tle-getPoint.jpg",
+            "main_es5": "graphic-space-tle-getPoint",
+            "main": "graphic/space/tle-getPoint",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          }
+        ]
+      },
+      {
+        "name": "漫游路线对象",
+        "children": [
+          {
+            "name": "空中漫游",
+            "thumbnail": "graphic-roam-air.gif",
+            "main_es5": "graphic-roam-air",
+            "main": "graphic/roam/air",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "室内漫游",
+            "thumbnail": "graphic-roam-indoor.gif",
+            "main_es5": "graphic-roam-indoor",
+            "main": "graphic/roam/indoor",
+            "vuePanel": true
+          },
+          {
+            "name": "行人漫游",
+            "thumbnail": "graphic-roam-walk.gif",
+            "main_es5": "graphic-roam-walk",
+            "main": "graphic/roam/walk",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "贴地表表面漫游",
+            "thumbnail": "graphic-roam-ground.gif",
+            "main_es5": "graphic-roam-ground",
+            "main": "graphic/roam/ground",
+            "vuePanel": true
+          },
+          {
+            "name": "贴模型表面漫游",
+            "thumbnail": "graphic-roam-ground-tileset.gif",
+            "main_es5": "graphic-roam-ground-tileset",
+            "main": "graphic/roam/ground-tileset",
+            "vuePanel": true
+          },
+          {
+            "name": "飞行路线",
+            "thumbnail": "graphic-roam-flight.gif",
+            "main_es5": "graphic-roam-flight",
+            "main": "graphic/roam/flight",
+            "vuePanel": true
+          },
+          {
+            "name": "飞行路线(带投射)",
+            "thumbnail": "graphic-roam-flight-ray.gif",
+            "main_es5": "graphic-roam-flight-ray",
+            "main": "graphic/roam/flight-ray",
+            "vuePanel": true
+          },
+          {
+            "name": "多个飞行路线",
+            "thumbnail": "graphic-roam-flight-multi.jpg",
+            "main_es5": "graphic-roam-flight-multi",
+            "main": "graphic/roam/flight-multi",
+            "vuePanel": true
+          },
+          {
+            "name": "实时动态轨迹路线",
+            "thumbnail": "graphic-roam-dynamicRoamLine.jpg",
+            "main_es5": "graphic-roam-dynamicRoamLine",
+            "main": "graphic/roam/dynamicRoamLine",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "综合应用案例",
+        "children": [
+          {
+            "name": "扫描效果",
+            "thumbnail": "graphic-apply-scanCircle.gif",
+            "main_es5": "graphic-apply-scanCircle",
+            "main": "graphic/apply/scanCircle"
+          },
+          {
+            "name": "卫星成像过程",
+            "thumbnail": "graphic-apply-statelliteFoot.gif",
+            "main_es5": "graphic-apply-statelliteFoot",
+            "main": "graphic/apply/statelliteFoot"
+          },
+          {
+            "name": "行政区数据统计图",
+            "thumbnail": "graphic-apply-quyuNum.jpg",
+            "main_es5": "graphic-apply-quyuNum",
+            "main": "graphic/apply/quyuNum",
+            "resources": ["/temp/styles/UnidreamLED.css"]
+          },
+          {
+            "name": "行政区突出展示",
+            "thumbnail": "graphic-apply-district.jpg",
+            "main_es5": "graphic-apply-district",
+            "main": "graphic/apply/district",
+            "resources": ["district.css"]
+          },
+          {
+            "name": "行政区突出展示2",
+            "thumbnail": "graphic-apply-district2.jpg",
+            "main_es5": "graphic-apply-district2",
+            "main": "graphic/apply/district2",
+            "resources": ["district2.css"]
+          },
+          {
+            "name": "红蓝对抗演习",
+            "thumbnail": "graphic-apply-exercise.jpg",
+            "main_es5": "graphic-apply-exercise",
+            "main": "graphic/apply/exercise"
+          },
+
+          {
+            "name": "台风轨迹",
+            "thumbnail": "graphic-apply-typhoon.jpg",
+            "main_es5": "graphic-apply-typhoon",
+            "main": "graphic/apply/typhoon",
+            "vuePanel": true,
+            "resources": ["Typhoon.js", "typhoon.css"]
+          },
+          {
+            "name": "智慧社区",
+            "thumbnail": "graphic-apply-community.jpg",
+            "main_es5": "graphic-apply-community",
+            "main": "graphic/apply/community"
+          },
+          {
+            "name": "数字城市",
+            "thumbnail": "graphic-apply-digitalCity.jpg",
+            "main_es5": "graphic-apply-digitalCity",
+            "main": "graphic/apply/digitalCity",
+            "resources": ["city.css"]
+          }
+        ]
+      },
+      {
+        "name": "编辑及控制",
+        "details": "绘制及编辑文字、点、线、面、立体等各类数据",
+        "children": [
+          {
+            "name": "图上标绘",
+            "thumbnail": "layerg-draw-draw.jpg",
+            "main_es5": "layerg-draw-draw",
+            "main": "layer-graphic/draw/draw",
+            "vuePanel": true,
+            "libs": ["mars3d", "kmlGeojson", "terraformer"]
+          },
+          {
+            "name": "标绘数据展示(马拉松)",
+            "thumbnail": "layerg-draw-drawRead.jpg",
+            "main_es5": "layerg-draw-drawRead",
+            "main": "layer-graphic/draw/drawRead",
+            "vuePanel": true
+          },
+          {
+            "name": "军事标绘",
+            "thumbnail": "layerg-draw-military.jpg",
+            "main_es5": "layerg-draw-military",
+            "main": "layer-graphic/draw/military",
+            "vuePanel": true
+          },
+          {
+            "name": "框选数据",
+            "thumbnail": "graphic-apply-isInPoly.jpg",
+            "main_es5": "graphic-apply-isInPoly",
+            "main": "graphic/apply/isInPoly",
+            "vuePanel": true
+          },
+          {
+            "name": "线面内插值计算",
+            "thumbnail": "util-polyUtil-interPoly.jpg",
+            "main_es5": "util-polyUtil-interPoly",
+            "main": "util/polyUtil/interPoly",
+            "vuePanel": true
+          },
+          {
+            "name": "图层内数据贴地高度计算",
+            "thumbnail": "layerg-fun-clampToGround.jpg",
+            "main_es5": "layerg-fun-clampToGround",
+            "main": "layer-graphic/fun/clampToGround",
+            "vuePanel": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "gLTF小模型",
+    "icon": "fa-fighter-jet",
+    "children": [
+      {
+        "name": "相关矢量对象",
+        "children": [
+          {
+            "name": "ModelEntity对象",
+            "thumbnail": "graphic-entity-model.jpg",
+            "main_es5": "graphic-entity-model",
+            "main": "graphic/entity/model",
+            "vuePanel": true
+          },
+          {
+            "name": "ModelPrimitive对象",
+            "thumbnail": "graphic-primitive-model.jpg",
+            "main_es5": "graphic-primitive-model",
+            "main": "graphic/primitive/model",
+            "vuePanel": true
+          },
+          {
+            "name": "ModelCombine对象(大数据+合并渲染)",
+            "thumbnail": "graphic-combine-model.jpg",
+            "main_es5": "graphic-combine-model",
+            "main": "graphic/combine/model",
+            "vuePanel": true
+          },
+          {
+            "name": "ModelLayer图层对象(简单场景用)",
+            "thumbnail": "layerg-basis-model.jpg",
+            "main_es5": "layerg-basis-model",
+            "main": "layer-graphic/basis/model",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "gLTF编辑控制",
+        "children": [
+          {
+            "name": "gltf模型标绘(含参数编辑)",
+            "thumbnail": "layerg-draw-draw-model.jpg",
+            "main_es5": "layerg-draw-draw-model",
+            "main": "layer-graphic/draw/draw-model",
+            "vuePanel": true
+          },
+          {
+            "name": "gltf模型库",
+            "thumbnail": "layerg-draw-draw-model-list.jpg",
+            "main_es5": "layerg-draw-draw-model-list",
+            "main": "layer-graphic/draw/draw-model-list",
+            "vuePanel": true
+          },
+          {
+            "name": "gltf模型剖切",
+            "thumbnail": "thing-gltf-modelPlanClip.jpg",
+            "main_es5": "thing-gltf-modelPlanClip",
+            "main": "thing/gltf/modelPlanClip",
+            "vuePanel": true
+          },
+          {
+            "name": "gltf零部件控制(运载火箭)",
+            "thumbnail": "graphic-primitive-model-articulations.jpg",
+            "main_es5": "graphic-primitive-model-articulations",
+            "main": "graphic/primitive/model-articulations",
+            "vuePanel": true
+          },
+          {
+            "name": "模型自旋转",
+            "thumbnail": "graphic-entity-model-rotate.gif",
+            "main_es5": "graphic-entity-model-rotate",
+            "main": "graphic/entity/model-rotate"
+          },
+          {
+            "name": "模型管理(楼栋分层控制)",
+            "thumbnail": "graphic-entity-model-moveTo.gif",
+            "main_es5": "graphic-entity-model-moveTo",
+            "main": "graphic/entity/model-moveTo",
+            "vuePanel": true,
+            "resources": ["FloorGraphic.js"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "3DTiles三维模型",
+    "icon": "fa-building-o",
+    "children": [
+      {
+        "name": "各类3dtiles模型",
+        "children": [
+          {
+            "name": "3dtiles图层",
+            "thumbnail": "layer3d-type-list.jpg",
+            "main_es5": "layer3d-type-list",
+            "main": "layer-tileset/type/list",
+            "vuePanel": true,
+            "resources": ["city.css"]
+          },
+          {
+            "name": "县城城区（倾斜摄影）",
+            "thumbnail": "layer3d-type-basis.jpg",
+            "main_es5": "layer3d-type-basis",
+            "main": "layer-tileset/type/basis",
+            "vuePanel": true,
+            "params": "data=qx-shequ"
+          },
+          {
+            "name": "文庙（倾斜摄影）",
+            "thumbnail": "layer3d-type-simiao.jpg",
+            "main_es5": "layer3d-type-basis",
+            "main": "layer-tileset/type/basis",
+            "vuePanel": true,
+            "params": "data=qx-simiao"
+          },
+          {
+            "name": "高压线塔杆（点云）",
+            "thumbnail": "layer3d-type-ganta.jpg",
+            "main_es5": "layer3d-type-basis",
+            "main": "layer-tileset/type/basis",
+            "vuePanel": true,
+            "params": "data=pnts-ganta"
+          },
+          {
+            "name": "桥梁(BIM建模)",
+            "thumbnail": "layer3d-type-bim-qiaoliang.jpg",
+            "main_es5": "layer3d-type-bim-qiaoliang",
+            "main": "layer-tileset/type/bim-qiaoliang",
+            "vuePanel": true
+          },
+          {
+            "name": "教学楼(BIM建模)",
+            "thumbnail": "layer3d-type-bim-daxue.jpg",
+            "main_es5": "layer3d-type-bim-daxue",
+            "main": "layer-tileset/type/bim-daxue",
+            "vuePanel": true
+          },
+          {
+            "name": "石化厂（人工建模）",
+            "thumbnail": "layer3d-type-shihua.jpg",
+            "main_es5": "layer3d-type-basis",
+            "main": "layer-tileset/type/basis",
+            "vuePanel": true,
+            "params": "data=max-shihua"
+          },
+          {
+            "name": "地下管网（人工建模）",
+            "thumbnail": "layer3d-type-piping.jpg",
+            "main_es5": "layer3d-type-piping",
+            "main": "layer-tileset/type/piping",
+            "vuePanel": true
+          },
+          {
+            "name": "合肥市区（城市白模）",
+            "thumbnail": "layer3d-type-jzw.gif",
+            "main_es5": "layer3d-type-jzw",
+            "main": "layer-tileset/type/jzw",
+            "vuePanel": true
+          },
+          {
+            "name": "全球城市白膜(OSM在线)",
+            "thumbnail": "layer3d-type-osmBuildings.jpg",
+            "main_es5": "layer3d-type-osmBuildings",
+            "main": "layer-tileset/type/osmBuildings",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "三维模型单体化",
+        "children": [
+          {
+            "name": "模型内单体化(人工建模或建筑物)",
+            "thumbnail": "layer3d-monomer-tileset-only.jpg",
+            "main_es5": "layer3d-monomer-tileset-only",
+            "main": "layer-tileset/monomer/tileset-only"
+          },
+          {
+            "name": "classificationType单体化模型(叠加另外1个3dtiles)",
+            "thumbnail": "layer3d-monomer-tileset-classificationType.jpg",
+            "main_es5": "layer3d-monomer-tileset-classificationType",
+            "main": "layer-tileset/monomer/tileset-classificationType",
+            "vuePanel": true
+          },
+          {
+            "name": "分栋矢量单体化(叠加矢量数据)",
+            "thumbnail": "layer3d-monomer-building.jpg",
+            "main_es5": "layer3d-monomer-building",
+            "main": "layer-tileset/monomer/building",
+            "vuePanel": true
+          },
+          {
+            "name": "分栋矢量单体化编辑",
+            "thumbnail": "layer3d-monomer-building-edit.jpg",
+            "main_es5": "layer3d-monomer-building-edit",
+            "main": "layer-tileset/monomer/building-edit",
+            "vuePanel": true
+          },
+          {
+            "name": "分层矢量单体化",
+            "thumbnail": "layer3d-monomer-floor.jpg",
+            "main_es5": "layer3d-monomer-floor",
+            "main": "layer-tileset/monomer/floor",
+            "vuePanel": true
+          },
+          {
+            "name": "分层分户矢量单体化",
+            "thumbnail": "layer3d-monomer-household.jpg",
+            "main_es5": "layer3d-monomer-household",
+            "main": "layer-tileset/monomer/household",
+            "vuePanel": true
+          },
+          {
+            "name": "矢量单体化(叠加WFS服务)",
+            "thumbnail": "layer3d-monomer-wfs.jpg",
+            "main_es5": "layer3d-monomer-wfs",
+            "main": "layer-tileset/monomer/wfs"
+          }
+        ]
+      },
+      {
+        "name": "样式及效果设置",
+        "children": [
+          {
+            "name": "建筑物样式",
+            "thumbnail": "layer3d-style-basis.jpg",
+            "main_es5": "layer3d-style-basis",
+            "main": "layer-tileset/style/basis",
+            "vuePanel": true
+          },
+          {
+            "name": "单击查看分户",
+            "thumbnail": "layer3d-style-max-fcfh.jpg",
+            "main_es5": "layer3d-style-max-fcfh",
+            "main": "layer-tileset/style/max-fcfh"
+          },
+          {
+            "name": "BIM分层展示",
+            "thumbnail": "layer3d-style-bim-floor.jpg",
+            "main_es5": "layer3d-style-bim-floor",
+            "main": "layer-tileset/style/bim-floor",
+            "vuePanel": true
+          },
+          {
+            "name": "自定义Shader",
+            "thumbnail": "layer3d-style-customShader.jpg",
+            "main_es5": "layer3d-style-customShader",
+            "main": "layer-tileset/style/customShader",
+            "vuePanel": true
+          },
+          {
+            "name": "自定义BIM属性及样式 Demo",
+            "thumbnail": "layer3d-style-custom-style.jpg",
+            "main_es5": "layer3d-style-custom-style",
+            "main": "layer-tileset/style/custom-style"
+          }
+        ]
+      },
+      {
+        "name": "模型编辑控制",
+        "children": [
+          {
+            "name": "3dtiles模型位置及参数编辑",
+            "thumbnail": "layer3d-manager-edit.jpg",
+            "main_es5": "layer3d-manager-edit",
+            "main": "layer-tileset/manager/edit",
+            "vuePanel": true,
+            "resources": ["TilesEditor.js"]
+          },
+          {
+            "name": "模型位置XYZ平移(不贴球面)",
+            "thumbnail": "layer3d-manager-move.jpg",
+            "main_es5": "layer3d-manager-move",
+            "main": "layer-tileset/manager/move",
+            "vuePanel": true
+          },
+          {
+            "name": "单模型场景(无地球)",
+            "thumbnail": "layer3d-manager-oneself.jpg",
+            "main_es5": "layer3d-manager-oneself",
+            "main": "layer-tileset/manager/oneself",
+            "vuePanel": true
+          },
+          {
+            "name": "单模型场景2(无地球)",
+            "thumbnail": "layer3d-manager-oneself2.jpg",
+            "main_es5": "layer3d-manager-oneself2",
+            "main": "layer-tileset/manager/oneself2",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "模型相关分析",
+        "children": [
+          {
+            "name": "模型Plan剖切(BIM)",
+            "thumbnail": "thing-tileset-tilesetPlanClip.jpg",
+            "main_es5": "thing-tileset-tilesetPlanClip",
+            "main": "thing/tileset/tilesetPlanClip",
+            "vuePanel": true
+          },
+          {
+            "name": "模型Plan剖切(倾斜摄影)",
+            "thumbnail": "thing-tileset-tilesetPlanClip-qx.jpg",
+            "main_es5": "thing-tileset-tilesetPlanClip-qx",
+            "main": "thing/tileset/tilesetPlanClip-qx",
+            "vuePanel": true
+          },
+          {
+            "name": "模型Box盒子裁剪",
+            "thumbnail": "thing-tileset-tilesetBoxClip.jpg",
+            "main_es5": "thing-tileset-tilesetBoxClip",
+            "main": "thing/tileset/tilesetBoxClip",
+            "vuePanel": true
+          },
+          {
+            "name": "模型压平",
+            "thumbnail": "thing-tileset-tilesetFlat.jpg",
+            "main_es5": "thing-tileset-tilesetFlat",
+            "main": "thing/tileset/tilesetFlat",
+            "vuePanel": true
+          },
+          {
+            "name": "模型裁剪开挖",
+            "thumbnail": "thing-tileset-tilesetClip.jpg",
+            "main_es5": "thing-tileset-tilesetClip",
+            "main": "thing/tileset/tilesetClip",
+            "vuePanel": true
+          },
+          {
+            "name": "模型淹没分析",
+            "thumbnail": "thing-tileset-tilesetFlood.jpg",
+            "main_es5": "thing-tileset-tilesetFlood",
+            "main": "thing/tileset/tilesetFlood",
+            "vuePanel": true
+          },
+          {
+            "name": "限高分析",
+            "thumbnail": "thing-tileset-limitHeight.jpg",
+            "main_es5": "thing-tileset-limitHeight",
+            "main": "thing/tileset/limitHeight",
+            "vuePanel": true
+          },
+          {
+            "name": "模型热力图",
+            "thumbnail": "layero-heatmap-heatLayer-tileset.jpg",
+            "main_es5": "layero-heatmap-heatLayer-tileset",
+            "main": "layer-other/heatmap/heatLayer-tileset",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-heatmap"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "地球场景控制",
+    "icon": "fa-cubes",
+    "children": [
+      {
+        "name": "视图切换和对比",
+        "children": [
+          {
+            "name": "二维三维视图切换",
+            "thumbnail": "map-options-scene-sceneMode.jpg",
+            "main_es5": "map-options-scene-sceneMode",
+            "main": "map/options/scene-sceneMode",
+            "vuePanel": true
+          },
+          {
+            "name": "双屏对比",
+            "thumbnail": "map-double-compare.jpg",
+            "main_es5": "map-double-compare",
+            "main": "map/double/compare",
+            "resources": ["map.css"]
+          },
+          {
+            "name": "二三维联动(与leaflet)",
+            "thumbnail": "map-double-leaflet.jpg",
+            "main_es5": "map-double-leaflet",
+            "main": "map/double/leaflet",
+            "vuePanel": true,
+            "libs": ["mars2d", "mars3d"],
+            "resources": ["map.css"]
+          },
+          {
+            "name": "二三维联动(与openlayers)",
+            "thumbnail": "map-double-openlayers.jpg",
+            "main_es5": "map-double-openlayers",
+            "main": "map/double/openlayers",
+            "libs": ["olcesium", "mars3d"],
+            "resources": ["map.css"]
+          },
+          {
+            "name": "街景联动",
+            "thumbnail": "map-double-streetview.jpg",
+            "main_es5": "map-double-streetview",
+            "main": "map/double/streetview",
+            "vuePanel": true,
+            "resources": ["map.css"]
+          }
+        ]
+      },
+      {
+        "name": "场景背景控制",
+        "children": [
+          {
+            "name": "场景出图(导出图片)",
+            "thumbnail": "map-fun-expImage.jpg",
+            "main_es5": "map-fun-expImage",
+            "main": "map/fun/expImage",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css", "/lib/dom2img/dom-to-image.js"]
+          },
+          {
+            "name": "自定义空间背景图",
+            "thumbnail": "map-other-backgroundImg.jpg",
+            "main_es5": "map-other-backgroundImg",
+            "main": "map/other/backgroundImg",
+            "vuePanel": true,
+            "resources": ["background.css"]
+          },
+          {
+            "name": "自定义天空盒",
+            "thumbnail": "map-property-skybox.jpg",
+            "main_es5": "map-property-skybox",
+            "main": "map/property/skybox",
+            "vuePanel": true
+          },
+          {
+            "name": "近地天空盒",
+            "thumbnail": "map-property-skybox-nearground.jpg",
+            "main_es5": "map-property-skybox-nearground",
+            "main": "map/property/skybox-nearground",
+            "vuePanel": true
+          },
+          {
+            "name": "DIV蒙板遮盖",
+            "thumbnail": "map-other-mask-div.jpg",
+            "main_es5": "map-other-mask-div",
+            "main": "map/other/mask-div"
+          }
+        ]
+      },
+      {
+        "name": "相机及视角控制",
+        "children": [
+          {
+            "name": "视角书签",
+            "thumbnail": "map-fun-bookmark.jpg",
+            "main_es5": "map-fun-bookmark",
+            "main": "map/fun/bookmark",
+            "vuePanel": true
+          },
+          {
+            "name": "开场动画",
+            "thumbnail": "map-fun-openFlyAnimation.gif",
+            "main_es5": "map-fun-openFlyAnimation",
+            "main": "map/fun/openFlyAnimation",
+            "vuePanel": true
+          },
+          {
+            "name": "旋转的地球",
+            "thumbnail": "map-fun-earth-rotate.gif",
+            "main_es5": "map-fun-earth-rotate",
+            "main": "map/fun/earth-rotate",
+            "vuePanel": true
+          },
+          {
+            "name": "视点飞行",
+            "thumbnail": "map-fun-setCameraViewList.jpg",
+            "main_es5": "map-fun-setCameraViewList",
+            "main": "map/fun/setCameraViewList"
+          },
+          {
+            "name": "绕点环绕飞行",
+            "thumbnail": "thing-camera-rotatePoint.gif",
+            "main_es5": "thing-camera-rotatePoint",
+            "main": "thing/camera/rotatePoint",
+            "vuePanel": true
+          },
+          {
+            "name": "原地四周旋转",
+            "thumbnail": "thing-camera-rotateOut.gif",
+            "main_es5": "thing-camera-rotateOut",
+            "main": "thing/camera/rotateOut",
+            "vuePanel": true
+          },
+          {
+            "name": "第一人称贴地漫游",
+            "thumbnail": "thing-camera-firstPersonRoam.jpg",
+            "main_es5": "thing-camera-firstPersonRoam",
+            "main": "thing/camera/firstPersonRoam",
+            "vuePanel": true
+          },
+          {
+            "name": "视角历史记录",
+            "thumbnail": "thing-camera-cameraHistory.jpg",
+            "main_es5": "thing-camera-cameraHistory",
+            "main": "thing/camera/cameraHistory",
+            "vuePanel": true
+          },
+          {
+            "name": "限定视角范围",
+            "thumbnail": "thing-camera-cameraHistory-limit.jpg",
+            "main_es5": "thing-camera-cameraHistory-limit",
+            "main": "thing/camera/cameraHistory-limit",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "鼠标交互控制",
+        "children": [
+          {
+            "name": "鼠标中右键互换(操作习惯)",
+            "thumbnail": "map-fun-changeMouseModel.jpg",
+            "main_es5": "map-fun-changeMouseModel",
+            "main": "map/fun/changeMouseModel",
+            "vuePanel": true
+          },
+          {
+            "name": "街景操作习惯",
+            "thumbnail": "thing-camera-streetView.jpg",
+            "main_es5": "thing-camera-streetView",
+            "main": "thing/camera/streetView",
+            "vuePanel": true
+          },
+          {
+            "name": "坐标拾取和转换",
+            "thumbnail": "util-pointTrans-selectPoint.jpg",
+            "main_es5": "util-pointTrans-selectPoint",
+            "main": "util/pointTrans/selectPoint",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "各种特效",
+        "children": [
+          {
+            "name": "雾天气",
+            "thumbnail": "effect-fog.jpg",
+            "main_es5": "effect-fog",
+            "main": "effect/fog",
+            "vuePanel": true
+          },
+          {
+            "name": "雨天气",
+            "thumbnail": "effect-rain.jpg",
+            "main_es5": "effect-rain",
+            "main": "effect/rain",
+            "vuePanel": true
+          },
+          {
+            "name": "雪天气",
+            "thumbnail": "effect-snow.gif",
+            "main_es5": "effect-snow",
+            "main": "effect/snow",
+            "vuePanel": true
+          },
+          {
+            "name": "云图",
+            "thumbnail": "graphic-entity-rectangle-cloud.jpg",
+            "main_es5": "graphic-entity-rectangle-cloud",
+            "main": "graphic/entity/rectangle-cloud"
+          },
+          {
+            "name": "水面倒影 Demo",
+            "thumbnail": "effect-inverted.jpg",
+            "main_es5": "effect-inverted",
+            "main": "effect/inverted"
+          },
+          {
+            "name": "对象描边",
+            "thumbnail": "effect-outlineEffect.jpg",
+            "main_es5": "effect-outlineEffect",
+            "main": "effect/outlineEffect"
+          },
+          {
+            "name": "泛光特效",
+            "thumbnail": "effect-bloom.jpg",
+            "main_es5": "effect-bloom",
+            "main": "effect/bloom",
+            "vuePanel": true
+          },
+          {
+            "name": "亮度效果",
+            "thumbnail": "effect-brightness.jpg",
+            "main_es5": "effect-brightness",
+            "main": "effect/brightness",
+            "vuePanel": true
+          },
+          {
+            "name": "夜视效果",
+            "thumbnail": "effect-nightVision.jpg",
+            "main_es5": "effect-nightVision",
+            "main": "effect/nightVision",
+            "vuePanel": true
+          },
+          {
+            "name": "黑白效果",
+            "thumbnail": "effect-blackAndWhite.jpg",
+            "main_es5": "effect-blackAndWhite",
+            "main": "effect/blackAndWhite",
+            "vuePanel": true
+          },
+          {
+            "name": "马赛克效果",
+            "thumbnail": "effect-mosaic.jpg",
+            "main_es5": "effect-mosaic",
+            "main": "effect/mosaic",
+            "vuePanel": true
+          },
+          {
+            "name": "景深效果",
+            "thumbnail": "effect-depthOfField.jpg",
+            "main_es5": "effect-depthOfField",
+            "main": "effect/depthOfField",
+            "vuePanel": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "空间分析",
+    "icon": "fa-futbol-o",
+    "children": [
+      {
+        "name": "综合空间分析",
+        "children": [
+          {
+            "name": "量算 (长度、面积、高度、角度)",
+            "thumbnail": "thing-analysis-measure.jpg",
+            "main_es5": "thing-analysis-measure",
+            "main": "thing/analysis/measure",
+            "vuePanel": true
+          },
+          {
+            "name": "剖面分析",
+            "thumbnail": "thing-analysis-measure-section.jpg",
+            "main_es5": "thing-analysis-measure-section",
+            "main": "thing/analysis/measure-section",
+            "vuePanel": true
+          },
+          {
+            "name": "方量分析(体积)",
+            "thumbnail": "thing-analysis-measure-volume.jpg",
+            "main_es5": "thing-analysis-measure-volume",
+            "main": "thing/analysis/measure-volume",
+            "vuePanel": true
+          },
+          {
+            "name": "通视分析",
+            "thumbnail": "thing-analysis-sightline.jpg",
+            "main_es5": "thing-analysis-sightline",
+            "main": "thing/analysis/sightline",
+            "vuePanel": true
+          },
+          {
+            "name": "通视地形精确分析",
+            "thumbnail": "thing-analysis-sightline-terrain.jpg",
+            "main_es5": "thing-analysis-sightline-terrain",
+            "main": "thing/analysis/sightline-terrain",
+            "vuePanel": true,
+            "hidden": true
+          },
+          {
+            "name": "缓冲分析",
+            "thumbnail": "thirdParty-turf-buffer.jpg",
+            "main_es5": "thirdParty-turf-buffer",
+            "main": "thirdParty/turf/buffer",
+            "vuePanel": true
+          },
+          {
+            "name": "可视域分析",
+            "thumbnail": "graphic-custom-viewShed.jpg",
+            "main_es5": "graphic-custom-viewShed",
+            "main": "graphic/custom/viewShed",
+            "vuePanel": true
+          },
+          {
+            "name": "地表透明(地下模式)",
+            "thumbnail": "thing-analysis-underground.gif",
+            "main_es5": "thing-analysis-underground",
+            "main": "thing/analysis/underground",
+            "vuePanel": true
+          },
+          {
+            "name": "日照分析",
+            "thumbnail": "thing-analysis-shadows.gif",
+            "main_es5": "thing-analysis-shadows",
+            "main": "thing/analysis/shadows",
+            "vuePanel": true
+          },
+          {
+            "name": "天际线描边",
+            "thumbnail": "thing-analysis-skyline.jpg",
+            "main_es5": "thing-analysis-skyline",
+            "main": "thing/analysis/skyline",
+            "vuePanel": true
+          },
+          {
+            "name": "淹没分析(矢量面)",
+            "thumbnail": "thing-terrain-floodByGraphic.jpg",
+            "main_es5": "thing-terrain-floodByGraphic",
+            "main": "thing/terrain/floodByGraphic",
+            "vuePanel": true
+          }
+        ]
+      },
+      {
+        "name": "GIS客户端分析",
+        "children": [
+          {
+            "name": "生成随机数据(点线面)",
+            "thumbnail": "thirdParty-turf-random.jpg",
+            "main_es5": "thirdParty-turf-random",
+            "main": "thirdParty/turf/random",
+            "vuePanel": true
+          },
+          {
+            "name": "生成网格",
+            "thumbnail": "thirdParty-turf-grid.jpg",
+            "main_es5": "thirdParty-turf-grid",
+            "main": "thirdParty/turf/grid",
+            "vuePanel": true
+          },
+          {
+            "name": "点相关计算",
+            "thumbnail": "thirdParty-turf-points.jpg",
+            "main_es5": "thirdParty-turf-points",
+            "main": "thirdParty/turf/points",
+            "vuePanel": true
+          },
+          {
+            "name": "最近点分析",
+            "thumbnail": "thirdParty-turf-nearestPoint.jpg",
+            "main_es5": "thirdParty-turf-nearestPoint",
+            "main": "thirdParty/turf/nearestPoint",
+            "vuePanel": true
+          },
+          {
+            "name": "线相关计算",
+            "thumbnail": "thirdParty-turf-line.jpg",
+            "main_es5": "thirdParty-turf-line",
+            "main": "thirdParty/turf/line",
+            "vuePanel": true
+          },
+          {
+            "name": "线求交",
+            "thumbnail": "thirdParty-turf-lineIntersect.jpg",
+            "main_es5": "thirdParty-turf-lineIntersect",
+            "main": "thirdParty/turf/lineIntersect",
+            "vuePanel": true
+          },
+          {
+            "name": "线上最近点",
+            "thumbnail": "thirdParty-turf-nearestPointOnLine.jpg",
+            "main_es5": "thirdParty-turf-nearestPointOnLine",
+            "main": "thirdParty/turf/nearestPointOnLine",
+            "vuePanel": true
+          },
+          {
+            "name": "最短路径",
+            "thumbnail": "thirdParty-turf-shortestPath.jpg",
+            "main_es5": "thirdParty-turf-shortestPath",
+            "main": "thirdParty/turf/shortestPath",
+            "vuePanel": true
+          },
+          {
+            "name": "面相关计算",
+            "thumbnail": "thirdParty-turf-polygon.jpg",
+            "main_es5": "thirdParty-turf-polygon",
+            "main": "thirdParty/turf/polygon",
+            "vuePanel": true
+          },
+          {
+            "name": "面求交",
+            "thumbnail": "thirdParty-turf-intersect.jpg",
+            "main_es5": "thirdParty-turf-intersect",
+            "main": "thirdParty/turf/intersect",
+            "vuePanel": true
+          },
+          {
+            "name": "面切割",
+            "thumbnail": "thirdParty-turf-polygonClip.jpg",
+            "main_es5": "thirdParty-turf-polygonClip",
+            "main": "thirdParty/turf/polygonClip",
+            "vuePanel": true
+          },
+          {
+            "name": "等值面",
+            "thumbnail": "thirdParty-turf-isobands.jpg",
+            "main_es5": "thirdParty-turf-isobands",
+            "main": "thirdParty/turf/isobands"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "可视化",
+    "icon": "fa-street-view",
+    "children": [
+      {
+        "name": "普通可视化",
+        "children": [
+          {
+            "name": "贴地热力图",
+            "thumbnail": "layero-heatmap-heatLayer.jpg",
+            "main_es5": "layero-heatmap-heatLayer",
+            "main": "layer-other/heatmap/heatLayer",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-heatmap"]
+          },
+          {
+            "name": "高度热力图",
+            "thumbnail": "layero-heatmap-heatLayer-height.jpg",
+            "main_es5": "layero-heatmap-heatLayer-height",
+            "main": "layer-other/heatmap/heatLayer-height",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-heatmap"]
+          },
+          {
+            "name": "立体曲面热力图",
+            "thumbnail": "layero-heatmap-heatLayer-arc.jpg",
+            "main_es5": "layero-heatmap-heatLayer-arc",
+            "main": "layer-other/heatmap/heatLayer-arc",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-heatmap"]
+          },
+          {
+            "name": "风向图",
+            "thumbnail": "layero-weather-wind.gif",
+            "main_es5": "layero-weather-wind",
+            "main": "layer-other/weather/wind",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-wind"]
+          },
+          {
+            "name": "风向图(canvas方式)",
+            "thumbnail": "layero-weather-canvasWind.gif",
+            "main_es5": "layero-weather-canvasWind",
+            "main": "layer-other/weather/canvasWind",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-wind"]
+          }
+        ]
+      },
+      {
+        "name": "MapV支持",
+        "children": [
+          {
+            "name": "蜂巢图",
+            "thumbnail": "layero-mapv-point-honeycomb.jpg",
+            "main_es5": "layero-mapv-point-honeycomb",
+            "main": "layer-other/mapv/point-honeycomb",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "方格图",
+            "thumbnail": "layero-mapv-point-grid.jpg",
+            "main_es5": "layero-mapv-point-grid",
+            "main": "layer-other/mapv/point-grid",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "动态点",
+            "thumbnail": "layero-mapv-point-simple-animation.gif",
+            "main_es5": "layero-mapv-point-simple-animation",
+            "main": "layer-other/mapv/point-simple-animation",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "多层点(全国抖音用户态势)",
+            "thumbnail": "layero-mapv-point-simple-multi.gif",
+            "main_es5": "layero-mapv-point-simple-multi",
+            "main": "layer-other/mapv/point-simple-multi",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "简单线",
+            "thumbnail": "layero-mapv-polyline-simple.jpg",
+            "main_es5": "layero-mapv-polyline-simple",
+            "main": "layer-other/mapv/polyline-simple",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "强度线",
+            "thumbnail": "layero-mapv-polyline-intensity.jpg",
+            "main_es5": "layero-mapv-polyline-intensity",
+            "main": "layer-other/mapv/polyline-intensity",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "动态线",
+            "thumbnail": "layero-mapv-polyline-intensity-animation.gif",
+            "main_es5": "layero-mapv-polyline-intensity-animation",
+            "main": "layer-other/mapv/polyline-intensity-animation",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "出租车轨迹态势图",
+            "thumbnail": "layero-mapv-polyline-lighter.gif",
+            "main_es5": "layero-mapv-polyline-lighter",
+            "main": "layer-other/mapv/polyline-lighter",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "强边界图",
+            "thumbnail": "layero-mapv-polyline-fbundling.jpg",
+            "main_es5": "layero-mapv-polyline-fbundling",
+            "main": "layer-other/mapv/polyline-fbundling",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "合肥建筑物",
+            "thumbnail": "layero-mapv-polygon-simple.jpg",
+            "main_es5": "layero-mapv-polygon-simple",
+            "main": "layer-other/mapv/polygon-simple",
+            "libs": ["mars3d", "mars3d-mapv"]
+          },
+          {
+            "name": "迁徙图综合展示",
+            "thumbnail": "layero-mapv-qianxi.gif",
+            "main_es5": "layero-mapv-qianxi",
+            "main": "layer-other/mapv/qianxi",
+            "libs": ["mars3d", "mars3d-mapv"]
+          }
+        ]
+      },
+      {
+        "name": "ECharts支持",
+        "children": [
+          {
+            "name": "动态散点图 全省经济指标",
+            "thumbnail": "layero-echarts-effectScatter-anhui.gif",
+            "main_es5": "layero-echarts-effectScatter-anhui",
+            "main": "layer-other/echarts/effectScatter-anhui",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "动态散点图 全国城市GDP态势",
+            "thumbnail": "layero-echarts-effectScatter-gdp.jpg",
+            "main_es5": "layero-echarts-effectScatter-gdp",
+            "main": "layer-other/echarts/effectScatter-gdp",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "散点图 城市空气质量",
+            "thumbnail": "layero-echarts-scatter-pm25.jpg",
+            "main_es5": "layero-echarts-scatter-pm25",
+            "main": "layer-other/echarts/scatter-pm25",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "北京病人就诊流向图",
+            "thumbnail": "layero-echarts-lines-liuchu.gif",
+            "main_es5": "layero-echarts-lines-liuchu",
+            "main": "layer-other/echarts/lines-liuchu",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "北京航班流向图",
+            "thumbnail": "layero-echarts-lines-hanban.gif",
+            "main_es5": "layero-echarts-lines-hanban",
+            "main": "layer-other/echarts/lines-hanban",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "EasyOP集群分布图",
+            "thumbnail": "layero-echarts-lines-fenbu.gif",
+            "main_es5": "layero-echarts-lines-fenbu",
+            "main": "layer-other/echarts/lines-fenbu",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "物流运输图",
+            "thumbnail": "layero-echarts-lines-wuliu.gif",
+            "main_es5": "layero-echarts-lines-wuliu",
+            "main": "layer-other/echarts/lines-wuliu",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "人口迁徙图",
+            "thumbnail": "layero-echarts-lines-qianxi.gif",
+            "main_es5": "layero-echarts-lines-qianxi",
+            "main": "layer-other/echarts/lines-qianxi",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "城市流向效果",
+            "thumbnail": "layero-echarts-lines-flow.gif",
+            "main_es5": "layero-echarts-lines-flow",
+            "main": "layer-other/echarts/lines-flow",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "航班动态效果",
+            "thumbnail": "layero-echarts-lines-flight.jpg",
+            "main_es5": "layero-echarts-lines-flight",
+            "main": "layer-other/echarts/lines-flight",
+            "libs": ["mars3d", "mars3d-echarts"]
+          },
+          {
+            "name": "道路拥堵图",
+            "thumbnail": "layero-echarts-lines-road.jpg",
+            "main_es5": "layero-echarts-lines-road",
+            "main": "layer-other/echarts/lines-road",
+            "libs": ["mars3d", "mars3d-echarts"]
+          }
+        ]
+      },
+      {
+        "name": "Three.js支持",
+        "children": [
+          {
+            "name": "集成Demo",
+            "thumbnail": "thirdParty-threejs-demo.jpg",
+            "main_es5": "thirdParty-threejs-demo",
+            "main": "thirdParty/threejs/demo",
+            "libs": ["mars3d", "three"],
+            "resources": ["ThreeLayer.js"]
+          }
+        ]
+      },
+      {
+        "name": "ammo物理引擎支持",
+        "children": [
+          {
+            "name": "车辆运动",
+            "thumbnail": "thirdParty-ammo-vehicle.gif",
+            "main_es5": "thirdParty-ammo-vehicle",
+            "main": "thirdParty/ammo/vehicle",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-meshVisualizer"]
+          },
+          {
+            "name": "转动（旗子）",
+            "thumbnail": "thirdParty-ammo-turnCloth.jpg",
+            "main_es5": "thirdParty-ammo-turnCloth",
+            "main": "thirdParty/ammo/turnCloth",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-meshVisualizer"]
+          },
+          {
+            "name": "转动（球）",
+            "thumbnail": "thirdParty-ammo-turnRope.jpg",
+            "main_es5": "thirdParty-ammo-turnRope",
+            "main": "thirdParty/ammo/turnRope",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-meshVisualizer"]
+          },
+          {
+            "name": "撞击（软体）",
+            "thumbnail": "thirdParty-ammo-softbodyVolume.jpg",
+            "main_es5": "thirdParty-ammo-softbodyVolume",
+            "main": "thirdParty/ammo/softbodyVolume",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-meshVisualizer"]
+          },
+          {
+            "name": "撞击（断裂体）",
+            "thumbnail": "thirdParty-ammo-convexBreak.jpg",
+            "main_es5": "thirdParty-ammo-convexBreak",
+            "main": "thirdParty/ammo/convexBreak",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-meshVisualizer"]
+          }
+        ]
+      },
+      {
+        "name": "虚拟仿真",
+        "children": [
+          {
+            "name": "动画脚本演示",
+            "thumbnail": "graphic-apply-steps.jpg",
+            "main_es5": "graphic-apply-steps",
+            "main": "graphic/apply/steps",
+            "vuePanel": true,
+            "resources": ["/temp/styles/divGraphic.css"]
+          },
+          {
+            "name": "无人机航拍过程",
+            "thumbnail": "graphic-apply-plane.gif",
+            "main_es5": "graphic-apply-plane",
+            "main": "graphic/apply/plane"
+          },
+          {
+            "name": "铁路仿真",
+            "thumbnail": "graphic-apply-railway.gif",
+            "main_es5": "graphic-apply-railway",
+            "main": "graphic/apply/railway",
+            "vuePanel": true
+          },
+          {
+            "name": "船舶模拟",
+            "thumbnail": "layerg-file-czml-chuanbo.gif",
+            "main_es5": "layerg-file-czml",
+            "main": "layer-graphic/file/czml",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-sensorVolumes"],
+            "params": "data=chuanbo"
+          },
+          {
+            "name": "飞机模拟",
+            "thumbnail": "layerg-file-czml-feiji.gif",
+            "main_es5": "layerg-file-czml",
+            "main": "layer-graphic/file/czml",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-sensorVolumes"],
+            "params": "data=feiji"
+          },
+          {
+            "name": "火箭发射过程",
+            "thumbnail": "layerg-file-czml-huojian.gif",
+            "main_es5": "layerg-file-czml",
+            "main": "layer-graphic/file/czml",
+            "vuePanel": true,
+            "libs": ["mars3d", "cesium-sensorVolumes"],
+            "params": "data=huojian"
+          },
+          {
+            "name": "多卫星TLE实时展示",
+            "thumbnail": "graphic-space-satellite-list.gif",
+            "main_es5": "graphic-space-satellite-list",
+            "main": "graphic/space/satellite-list",
+            "vuePanel": true,
+            "libs": ["mars3d", "mars3d-space"]
+          }
+        ]
+      }
+    ]
+  }
+]
