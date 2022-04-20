@@ -141,11 +141,17 @@
             color: "#ffff00",
             opacity: 0.4,
 
-            label: { text: "鼠标移入会高亮" },
+            label: {
+              text: "鼠标移入会高亮",
+              pixelOffsetY: -30,
+              font_size: 18,
+              color: "#ffffff",
+            },
             //高亮时的样式（默认为鼠标移入，也可以指定type:'click'单击高亮），构造后也可以openHighlight、closeHighlight方法来手动调用
             highlight: {
               // type: mars3d.EventType.click,
               opacity: 0.8,
+              label: { font_size: 20, color: "#ff0000" },
             },
           },
         });

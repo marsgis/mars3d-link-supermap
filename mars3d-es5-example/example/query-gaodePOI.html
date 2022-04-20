@@ -353,18 +353,25 @@
           return;
         }
         haoutil.loading.show();
-        console.log(queryOptions);
+
         lastQueryOptions = {
           ...queryOptions,
           count: 25, //count 每页数量
           text: queryVal,
           success: function (res) {
             $("#resultView").show();
+            if (!res.list.length) {
+              haoutil.loading.close();
+              return;
+            }
             let data = res.list;
+
             bootstrapList = bootstrapList.concat(data);
             $table.bootstrapTable("append", data);
+
             $("#count").html(bootstrapList.length);
             $("#allcount").html(res.allcount);
+
             if (bootstrapList.length >= res.allcount || res.allcount < 25 || data.length == 0) {
               $("#loadMore").hide();
             } else {

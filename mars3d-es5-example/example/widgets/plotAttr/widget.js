@@ -107,7 +107,11 @@
 
       graphic = this.config.graphic;
       lonlats = this.config.lonlats;
-      this.viewWindow.plotEdit.startEditing({ type: graphic.type, ...graphic.options }, lonlats);
+
+      let config = { type: graphic.type, ...graphic.options };
+      console.log("开始编辑属性", config);
+
+      this.viewWindow.plotEdit.startEditing(config, lonlats);
     }
     //更新图上的属性
     updateAttr2map(attr) {

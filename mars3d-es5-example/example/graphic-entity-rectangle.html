@@ -86,7 +86,7 @@
       }
 
       function addGraphic_a1(graphicLayer) {
-        let primitive = new mars3d.graphic.RectanglePrimitive({
+        let primitive = new mars3d.graphic.RectangleEntity({
           positions: [
             [117.220337, 31.786107],
             [117.278695, 31.832987],
@@ -114,7 +114,7 @@
 
       //图片材质
       function addGraphic_a2(graphicLayer) {
-        let primitive = new mars3d.graphic.RectanglePrimitive({
+        let primitive = new mars3d.graphic.RectangleEntity({
           positions: [
             [117.337109, 31.881802],
             [117.377109, 31.941802],
@@ -131,7 +131,7 @@
       }
 
       function addGraphic_a3(graphicLayer) {
-        let primitive = new mars3d.graphic.RectanglePrimitive({
+        let primitive = new mars3d.graphic.RectangleEntity({
           positions: [
             [117.172852, 31.872736, 33.69],
             [117.251461, 31.956011, 26.44],
@@ -141,11 +141,17 @@
             color: "#ffff00",
             opacity: 0.4,
 
-            label: { text: "鼠标移入会高亮" },
+            label: {
+              text: "鼠标移入会高亮",
+              pixelOffsetY: -30,
+              font_size: 18,
+              color: "#ffffff",
+            },
             //高亮时的样式（默认为鼠标移入，也可以指定type:'click'单击高亮），构造后也可以openHighlight、closeHighlight方法来手动调用
             highlight: {
               // type: mars3d.EventType.click,
               opacity: 0.8,
+              label: { font_size: 20, color: "#ff0000" },
             },
           },
         });
@@ -154,7 +160,7 @@
 
       //图片材质
       function addGraphic_a4(graphicLayer) {
-        let primitive = new mars3d.graphic.RectanglePrimitive({
+        let primitive = new mars3d.graphic.RectangleEntity({
           positions: [
             [117.353356, 31.82899, 10.7],
             [117.449547, 31.776242, 11.8],
@@ -170,7 +176,7 @@
         graphicLayer.addGraphic(primitive); //primitive.addTo(graphicLayer)  //另外一种写法
       }
 
-//在图层级处理一些事物
+      //在图层级处理一些事物
       function initLayerManager(graphicLayer) {
         //在layer上绑定监听事件
         graphicLayer.on(mars3d.EventType.click, function (event) {
@@ -514,14 +520,14 @@
         //绑定Popup
 
         let inthtml = `<table style="width: auto;">
-                <tr>
-                  <th scope="col" colspan="2" style="text-align:center;font-size:15px;">我是graphic上绑定的Popup </th>
-                </tr>
-                <tr>
-                  <td>提示：</td>
-                  <td>这只是测试信息，可以任意html</td>
-                </tr>
-              </table>`;
+                      <tr>
+                        <th scope="col" colspan="2" style="text-align:center;font-size:15px;">我是graphic上绑定的Popup </th>
+                      </tr>
+                      <tr>
+                        <td>提示：</td>
+                        <td>这只是测试信息，可以任意html</td>
+                      </tr>
+                    </table>`;
         graphic.bindPopup(inthtml).openPopup();
 
         //绑定右键菜单
@@ -558,7 +564,6 @@
         let height = haoutil.math.random(1000, 9000);
         return new mars3d.LngLatPoint(jd, wd, height);
       }
-        </script>
-
+    </script>
   </body>
 </html>

@@ -95,6 +95,10 @@
         //创建三维地球场景
         let map = new mars3d.Map("mars3dContainer", mapOptions);
 
+        map.on(mars3d.EventType.terrainLoadSuccess, function (e) {
+          console.log("地形加载完成", e);
+        });
+
         //方式2：在创建地球后更新terrainProvider(用 mars3d.layer.createTerrainProvider工厂方法创建)[目前1个球只支持1个地形服务]
         map.terrainProvider = mars3d.LayerUtil.createTerrainProvider({
           url: "//data.mars3d.cn/terrain",

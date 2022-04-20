@@ -2,7 +2,7 @@
  * Mars3D三维可视化平台  mars3d
  *
  * 版本信息：v3.3.5
- * 编译日期：2022-04-12 09:03:20
+ * 编译日期：2022-04-18 17:39:29
  * 版权所有：Copyright by 火星科技  http://mars3d.cn
  * 使用单位：免费公开版 ，2022-02-01
  */
@@ -15,6 +15,9 @@
   padding: 0;
   overflow: hidden;
   position: relative;
+}
+.cesium-viewer .cesium-widget-credits {
+  display: none;
 }
 /**右键菜单*/
 .mars3d-contextmenu {

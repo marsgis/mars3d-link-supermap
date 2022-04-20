@@ -264,6 +264,10 @@
           },
         });
         graphicLayer.addGraphic(graphic);
+
+        graphic.on(mars3d.EventType.load, function (e) {
+          console.log("汽车模型加载完成", e);
+        });
       }
 
       function addGraphic_04(graphicLayer) {

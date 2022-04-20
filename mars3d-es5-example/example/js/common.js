@@ -6,7 +6,7 @@ if (!mars3d.Util.webglreport()) {
 }
 //读取 config.json 配置文件
 let configUrl = "../config/config.json";
-let result = mars3d.Util.fetchJson({ url: configUrl })
+mars3d.Util.fetchJson({ url: configUrl })
   .then(function (json) {
     //构建地图
     window.initMap(json.map3d);

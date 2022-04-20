@@ -127,7 +127,9 @@ var plotEdit = {
         }
         let attrName = edit.name;
         let attrVal = attr.style[attrName] ?? edit.defval;
-        attr.style[attrName] = attrVal;
+        if (!edit.isImpact) {
+          attr.style[attrName] = attrVal;
+        }
 
         //贴地对象
         if (attr.style["clampToGround"]) {
@@ -488,7 +490,7 @@ var plotEdit = {
         inHtml = '<select id="' + parname + attrName + '" class="mp_select"    data-value="' + attrVal + '" >';
         for (let jj = 0; jj < edit.data.length; jj++) {
           let temp = edit.data[jj];
-          inHtml += '<option value="' + temp.value + '">' + temp.text + "</option>";
+          inHtml += '<option value="' + temp.value + '">' + temp.label + "</option>";
         }
         inHtml += "</select>";
 

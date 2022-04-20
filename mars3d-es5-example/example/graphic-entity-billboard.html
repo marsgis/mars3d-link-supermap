@@ -620,29 +620,6 @@
         ]);
       }
 
-      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
-      let timeTik;
-      function startEditing(graphic) {
-        clearTimeout(timeTik);
-
-        let plotAttr = mars3d.widget.getClass("widgets/plotAttr/widget.js");
-        if (plotAttr && plotAttr.isActivate) {
-          plotAttr.startEditing(graphic, graphic.coordinates);
-        } else {
-          mars3d.widget.activate({
-            map: map,
-            uri: "widgets/plotAttr/widget.js",
-            name: "属性编辑",
-            graphic: graphic,
-            lonlats: graphic.coordinates,
-          });
-        }
-      }
-      function stopEditing() {
-        timeTik = setTimeout(function () {
-          mars3d.widget.disable("widgets/plotAttr/widget.js");
-        }, 200);
-      }
       //也可以在单个Graphic上做个性化管理及绑定操作
       function initGraphicManager(graphic) {
         //3.在graphic上绑定监听事件
@@ -706,6 +683,31 @@
         let height = haoutil.math.random(1000, 9000);
         return new mars3d.LngLatPoint(jd, wd, height);
       }
+
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
+      let timeTik;
+      function startEditing(graphic) {
+        clearTimeout(timeTik);
+
+        let plotAttr = mars3d.widget.getClass("widgets/plotAttr/widget.js");
+        if (plotAttr && plotAttr.isActivate) {
+          plotAttr.startEditing(graphic, graphic.coordinates);
+        } else {
+          mars3d.widget.activate({
+            map: map,
+            uri: "widgets/plotAttr/widget.js",
+            name: "属性编辑",
+            graphic: graphic,
+            lonlats: graphic.coordinates,
+          });
+        }
+      }
+      function stopEditing() {
+        timeTik = setTimeout(function () {
+          mars3d.widget.disable("widgets/plotAttr/widget.js");
+        }, 200);
+      }
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
     </script>
   </body>
 </html>

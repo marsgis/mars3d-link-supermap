@@ -25,7 +25,7 @@
       type="text/javascript"
       src="../lib/include-lib.js"
       libpath="../lib/"
-      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,bootstrap-slider,layer,haoutil,mars3d"
+      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,bootstrap-slider,layer,haoutil,mars3d,mars3d-widget"
     ></script>
 
     <link href="css/style.css" rel="stylesheet" />
@@ -107,6 +107,21 @@
           hasEdit: true,
         });
         map.addLayer(graphicLayer);
+
+        graphicLayer.on(
+          [mars3d.EventType.editStart, mars3d.EventType.editMovePoint, mars3d.EventType.editAddPoint, mars3d.EventType.editRemovePoint],
+          function (e) {
+            console.log("开始编辑", e);
+
+            startEditing(e.graphic);
+          }
+        );
+
+        graphicLayer.on([mars3d.EventType.editStop, mars3d.EventType.removeGraphic], function (e) {
+          console.log("停止编辑", e);
+
+          stopEditing();
+        });
 
         //材质对象
         textMaterialProperty = mars3d.MaterialUtil.createMaterialProperty(mars3d.MaterialType.Text, {
@@ -217,6 +232,7 @@
             strokeWidth: 2,
             strokeColor: "#ffffff",
             rotationDegree: 163,
+            stRotationDegree: 163,
 
             //高亮时的样式（默认为鼠标移入，也可以指定type:'click'单击高亮），构造后也可以openHighlight、closeHighlight方法来手动调用
             highlight: {
@@ -239,6 +255,7 @@
           style: {
             material: textMaterialProperty,
             rotationDegree: 163,
+            stRotationDegree: 163,
           },
         });
         graphicLayer.addGraphic(rectangleEntity);
@@ -314,6 +331,31 @@
       function removeAll() {
         graphicLayer.clear();
       }
+
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
+      let timeTik;
+      function startEditing(graphic) {
+        clearTimeout(timeTik);
+
+        let plotAttr = mars3d.widget.getClass("widgets/plotAttr/widget.js");
+        if (plotAttr && plotAttr.isActivate) {
+          plotAttr.startEditing(graphic, graphic.coordinates);
+        } else {
+          mars3d.widget.activate({
+            map: map,
+            uri: "widgets/plotAttr/widget.js",
+            name: "属性编辑",
+            graphic: graphic,
+            lonlats: graphic.coordinates,
+          });
+        }
+      }
+      function stopEditing() {
+        timeTik = setTimeout(function () {
+          mars3d.widget.disable("widgets/plotAttr/widget.js");
+        }, 200);
+      }
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
     </script>
   </body>
 </html>

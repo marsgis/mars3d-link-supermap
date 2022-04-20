@@ -86,6 +86,119 @@
   border-right: 3px solid yellow;
 }
 
+/**************** 蓝色科技感文本面板 ****************/
+.mars-spot {
+  background-image: url("../img/marker/circleBlue.png");
+  position: absolute;
+  background-repeat: no-repeat;
+  user-select: none;
+  z-index: 100000;
+  width: 70px;
+  height: 44px;
+  background-size: cover;
+  bottom: -80px;
+  left: -30px;
+  cursor: default;
+}
+
+.mars-spot:hover {
+  background-image: url("../img/marker/circleYellow.png");
+}
+
+.mars-spot:hover .mars-spot-board{
+  background-image: url("../img/marker/divYellow.png");
+}
+
+.mars-spot:hover .mars-spot-line{
+  background: linear-gradient(180deg, #ff6b04, transparent);
+}
+
+.mars-spot:hover .mars-spot-line:before{
+  background: linear-gradient(180deg, #ff6b04, transparent);
+}
+
+.mars-spot:hover .mars-spot-line:after{
+  background: linear-gradient(180deg, #ff6b04, transparent);
+}
+
+  .mars-spot-board {
+    background-image: url("../img/marker/divBlue.png");
+    top: -165px;
+    transform: translateX(-30%);
+    width: 180px;
+    height: 52px;
+    padding: 15px 0;
+    background-position: 50%;
+    background-size: contain;
+    cursor: pointer;
+    position: absolute;
+    background-repeat: no-repeat;
+  }
+
+  .mars-spot-board:hover {
+    background-image: url("../img/marker/divYellow.png");
+
+  }
+
+  .mars-spot-board:hover+.mars-spot-line{
+    background: linear-gradient(180deg, #ff6b04, transparent);
+  }
+
+  .mars-spot-board:hover+.mars-spot-line:before{
+    background: linear-gradient(180deg, #ff6b04, transparent);
+  }
+
+  .mars-spot-board:hover+.mars-spot-line:after{
+    background: linear-gradient(180deg, #ff6b04, transparent);
+  }
+
+  .mars-spot-line {
+    position: absolute;
+    top: -108px;
+    left: 35px;
+    width: 2px;
+    height: 140px;
+    background: linear-gradient(180deg, #38c9ff, transparent);
+  }
+
+  .mars-spot-line:hover {
+    background: linear-gradient(180deg, #ff6b04, transparent);
+  }
+
+  .mars-spot-line:before {
+      height: 40%;
+      left: 6px;
+      animation: rise 3s linear 2s infinite;
+      -webkit-animation: rise 3s linear 2s infinite;
+      content: "";
+      display: block;
+      width: 1px;
+      background: linear-gradient(180deg, #38c9ff, transparent);
+      position: absolute;
+      cursor: pointer;
+    }
+
+  .mars-spot-line:after {
+      content: "";
+      display: block;
+      width: 1px;
+      background: linear-gradient(180deg, #38c9ff, transparent);
+      position: absolute;
+      cursor: pointer;
+      height: 60%;
+      left: -5px;
+      animation: rise 3s linear infinite;
+      -webkit-animation: rise 3s linear infinite;
+    }
+    .mars-spot-board h5{
+      width: 100%;
+      text-align: center;
+      line-height: 24px;
+      color: #beedff;
+      font-size: 16px;
+      margin: 0;
+    }
+
 /**************** 一个简洁文本面板,中间竖直连线 ****************/
 .marsGreenGradientPnl {
   width: 100px;
@@ -501,5 +614,44 @@
     opacity: 1;
     transform-origin: 0% 100%;
     transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0.1;
+    transform: translate(0, 100%);
+  }
+  5% {
+    opacity: 0.3;
+    transform: translate(0, 95%);
+  }
+  10% {
+    opacity: 0.6;
+    transform: translate(0, 90%);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(0, 85%);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(0, 25%);
+  }
+  80% {
+    opacity: 0.7;
+    transform: translate(0, 20%);
+  }
+  90% {
+    opacity: 0.3;
+    transform: translate(0, 10%);
+  }
+  95% {
+    opacity: 0.2;
+    transform: translate(0, 5%);
+  }
+  100% {
+    opacity: 0.1;
+    transform: translate(0, 0);
   }
 }

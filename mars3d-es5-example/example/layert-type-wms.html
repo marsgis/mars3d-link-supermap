@@ -101,6 +101,61 @@
               url: "//data.mars3d.cn/file/img/world/world.jpg",
             },
           ],
+          layers: [
+            {
+              name: "合肥市",
+              type: "geojson",
+              url: "//data.mars3d.cn/file/geojson/areas/340100_full.json",
+              allowDrillPick: true, //允许穿透，wms可以正常popup
+              symbol: {
+                styleOptions: {
+                  fill: true,
+                  color: "#ffffff",
+                  opacity: 0.1,
+                  distanceDisplayCondition: true,
+                  distanceDisplayCondition_far: 500000,
+                  distanceDisplayCondition_near: 0,
+                  outline: true,
+                  outlineStyle: {
+                    color: "#FED976",
+                    width: 3,
+                    opacity: 1,
+                  },
+                  label: {
+                    //面中心点，显示文字的配置
+                    text: "{name}", //对应的属性名称
+                    opacity: 1,
+                    font_size: 40,
+                    color: "#ffffff",
+
+                    font_family: "楷体",
+                    outline: true,
+                    outlineColor: "#000000",
+                    outlineWidth: 3,
+
+                    background: false,
+                    backgroundColor: "#000000",
+                    backgroundOpacity: 0.1,
+
+                    font_weight: "normal",
+                    font_style: "normal",
+
+                    scaleByDistance: true,
+                    scaleByDistance_far: 20000000,
+                    scaleByDistance_farValue: 0.1,
+                    scaleByDistance_near: 1000,
+                    scaleByDistance_nearValue: 1,
+
+                    distanceDisplayCondition: true,
+                    distanceDisplayCondition_far: 200000,
+                    distanceDisplayCondition_near: 0,
+                    visibleDepth: false,
+                  },
+                },
+              },
+              show: true,
+            },
+          ],
         });
       }
 
