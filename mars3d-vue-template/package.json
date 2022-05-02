@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "mars3d": "^3.3.5",
-    "mars3d-supermap": "^3.3.5",
+    "mars3d": "^3.3.7",
+    "mars3d-supermap": "^3.3.7",
     "vue": "^3.2.25"
   },
   "devDependencies": {

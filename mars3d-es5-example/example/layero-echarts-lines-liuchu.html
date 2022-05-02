@@ -62,6 +62,10 @@
         let options = getEchartsOption();
         let echartsLayer = new mars3d.layer.EchartsLayer(options);
         map.addLayer(echartsLayer);
+
+        $(window).resize(function () {
+          echartsLayer.resize();
+        });
       }
 
       function getEchartsOption() {

@@ -88,6 +88,7 @@
         addGraphic_a7(graphicLayer);
         addGraphic_a8(graphicLayer);
         addGraphic_a9(graphicLayer);
+        addGraphic_a10(graphicLayer);
       }
 
       function addGraphic_a1(graphicLayer) {
@@ -317,6 +318,64 @@
           .catch(function (error) {
             console.log("加载JSON出错", error);
           });
+      }
+
+      // 注册自定义材质 多张图片的流动
+      const MultiLineFlowType = "MultiLineFlow";
+      mars3d.MaterialUtil.register(MultiLineFlowType, {
+        fabric: {
+          uniforms: {
+            color: Cesium.Color.BLUE,
+            image: Cesium.Material.DefaultImageId,
+            image2: Cesium.Material.DefaultImageId,
+            image3: Cesium.Material.DefaultImageId,
+            speed: 1.0,
+            segment: 6.0,
+            glow: 1.0,
+          },
+          source: ` float times;
+        czm_material czm_getMaterial(czm_materialInput materialInput)
+        {
+            czm_material material = czm_getDefaultMaterial(materialInput);
+            vec2 vUv = materialInput.st;
+            float time2 = czm_frameNumber / 100.0;
+            times = speed * time2;
+
+            vec4 colorb =texture2D(image2,vec2(vUv.s,vUv.t));
+            vec4 colora = texture2D(image,vec2(fract(vUv.s * segment ),fract(vUv.t-times)));
+            vec4 colorc= texture2D(image3,vec2(vUv.s,vUv.t));
+            material.alpha = colorb.a + colora.a + colorc.a;
+            material.diffuse = colorb.rgb + colora.rgb * colorc.rgb * color.rgb * glow;
+            return material;
+        }`,
+        },
+        translucent: true,
+      });
+
+      function addGraphic_a10(graphicLayer) {
+        let primitive = new mars3d.graphic.WallPrimitive({
+          positions: [
+            [116.3276413111182, 39.97525059831918, 300],
+            [116.3472101327403, 39.97522724648338, 300],
+            [116.34806237767485, 39.96620796962048, 300],
+            [116.32819206587719, 39.96625296791392, 300],
+            [116.3276413111182, 39.97525059831918, 300],
+          ],
+          style: {
+            closure: true,
+            diffHeight: 500,
+            material: mars3d.MaterialUtil.createMaterial(MultiLineFlowType, {
+              color: new Cesium.Color(0.0, 0.8, 0.8, 0.8),
+              image: "img/textures/flow-wall-1.png",
+              image2: "img/textures/flow-wall-2.png",
+              image3: "img/textures/flow-wall-3.png",
+              speed: 1.0,
+              segment: 6.0,
+              glow: 1.0,
+            }),
+          },
+        });
+        graphicLayer.addGraphic(primitive);
       }
 
       //在图层级处理一些事物

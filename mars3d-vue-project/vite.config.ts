@@ -24,8 +24,10 @@ export default ({ mode }: ConfigEnv) => {
     define: {
       "process.env": {
         mode: mode,
-        BASE_URL: ENV.VITE_BASE_URL
-      }
+        BASE_URL: ENV.VITE_BASE_URL,
+        API_BASE: ENV.VITE_API_BASE
+      },
+      buildTime: new Date()
     },
     resolve: {
       alias: {

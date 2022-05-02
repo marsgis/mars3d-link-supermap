@@ -125,6 +125,7 @@
           [108.959106, 34.21953, 398.1],
         ]);
 
+        let positions;
         $("#btnDraw").click(function () {
           map.graphicLayer.clear();
           map.graphicLayer.startDraw({
@@ -135,7 +136,7 @@
             },
             success: function (graphic) {
               //绘制成功后回调
-              let positions = graphic.positionsShow;
+              positions = graphic.positionsShow;
               map.graphicLayer.clear();
 
               addTestLine(positions);
@@ -158,7 +159,7 @@
             },
             success: function (graphic) {
               //绘制成功后回调
-              let positions = graphic.getOutlinePositions(false);
+              positions = graphic.getOutlinePositions(false);
               map.graphicLayer.clear();
 
               addTestLine(positions);
@@ -174,7 +175,7 @@
         $("#chkShowLine").change(function () {
           let val = $(this).is(":checked");
           if (val) {
-            //
+            addTestLine(positions);
           } else {
             map.graphicLayer.clear();
           }

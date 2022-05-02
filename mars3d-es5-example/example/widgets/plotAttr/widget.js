@@ -113,12 +113,12 @@
 
       this.viewWindow.plotEdit.startEditing(config, lonlats);
     }
-    //更新图上的属性
-    updateAttr2map(attr) {
-      console.log("更新属性", attr);
 
-      let graphic = this.config.graphic; //当前编辑的graphic
-      graphic.setOptions(attr);
+    //更新样式
+    updateStyle2map(style) {
+      console.log("更新style样式", style);
+      let graphic = this.config.graphic;
+      graphic.style = style;
     }
     //更新坐标
     updatePoints2map(points) {
@@ -126,6 +126,11 @@
 
       let graphic = this.config.graphic;
       graphic.positions = points;
+    }
+    //更新属性
+    updateAttr2map(attr) {
+      let graphic = this.config.graphic;
+      graphic.attr = attr;
     }
     centerCurrentEntity() {
       let graphic = this.config.graphic;

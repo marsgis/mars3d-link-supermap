@@ -105,22 +105,24 @@
       // eslint-disable-next-line no-undef
       btnbar.init([
         {
-          name: "公司简介",
+          name: "公司官网",
           click: function () {
+            location.href = "http://mars3d.cn/";
             haoutil.msg("你单击了功能按钮-公司简介");
           },
         },
         {
-          name: "公司产品",
-          click: function () {
-            haoutil.msg("你单击了功能按钮-公司产品");
-          },
-        },
-
-        {
           name: "公司项目",
           click: function () {
+            location.href = "http://mars3d.cn/template.html";
             haoutil.msg("你单击了功能按钮-公司项目");
+          },
+        },
+        {
+          name: "开发教程",
+          click: function () {
+            location.href = "http://mars3d.cn/doc.html";
+            haoutil.msg("你单击了功能按钮-公司产品");
           },
         },
       ]);

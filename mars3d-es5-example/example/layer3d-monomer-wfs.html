@@ -71,6 +71,12 @@
         });
         map.addLayer(tilesetLayer);
 
+        map.on(mars3d.EventType.load, () => {
+          addWfsLayer();
+        });
+      }
+
+      function addWfsLayer() {
         //单体化图层【支持geoserver的wfs服务配置dth属性】
         let wfsLayer = new mars3d.layer.WfsLayer({
           name: "建筑物面",

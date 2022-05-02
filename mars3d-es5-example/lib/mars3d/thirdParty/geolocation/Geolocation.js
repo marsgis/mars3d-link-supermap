@@ -4,7 +4,7 @@
  */
 (function () {
   //采用高德地图定位的算法，参考帮助文档：https://lbs.amap.com/api/javascript-api/guide/services/geolocation
-  document.write('<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=ae29a37307840c7ae4a785ac905927e0"></script>');
+  document.write('<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=616e615727a1134331ff9459856653f1"></script>');
 
   class Geolocation extends mars3d.control.ToolButton {
     /**

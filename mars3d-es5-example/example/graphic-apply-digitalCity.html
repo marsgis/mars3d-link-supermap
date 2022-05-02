@@ -272,55 +272,57 @@
         graphicLayer.addGraphic(scanCircle);
 
         // 远眺的线 ,数据获取的pointArr
-        mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/geojson/shanghai-point.json" }).then((res) => {
-          let pointArr = [];
-          res.features
-            .forEach((obj) => {
+        mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/geojson/shanghai-point.json" })
+          .then((res) => {
+            let pointArr = [];
+            res.features.forEach((obj) => {
+              console.log(obj);
               pointArr.push({
                 name: obj.properties.Name,
                 point: obj.geometry.coordinates,
               });
-            })
-            .catch(function (error) {
-              console.log("加载JSON出错", error);
             });
-          let lineMaterial = mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.ODLine, {
-            color: new Cesium.Color(1, 1, 1),
-            bgColor: new Cesium.Color(0.1, 0.7, 0.5, 0.4),
-            speed: 5 + 1.0 * Math.random(),
-            startTime: Math.random(),
+
+            let lineMaterial = mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.ODLine, {
+              color: new Cesium.Color(1, 1, 1),
+              bgColor: new Cesium.Color(0.1, 0.7, 0.5, 0.4),
+              speed: 5 + 1.0 * Math.random(),
+              startTime: Math.random(),
+            });
+
+            for (let i = 0, len = pointArr.length; i < len; i++) {
+              let item = pointArr[i];
+
+              let color = ["#ffff00", "#81d8ff", "#fff9ed"];
+              let thisPoint = Cesium.Cartesian3.fromDegrees(item.point[0], item.point[1], 1);
+              let positions = mars3d.PolyUtil.getLinkedPointList(center, thisPoint, 40000, 100); //计算曲线点
+
+              let primitive = new mars3d.graphic.PolylinePrimitive({
+                positions: positions,
+                style: {
+                  width: 4,
+                  material: lineMaterial, //动画线材质
+                },
+              });
+              primitive.bindPopup(item.name);
+              graphicLayer.addGraphic(primitive);
+
+              // 圆椎体
+              let coneGlow = new mars3d.graphic.LightCone({
+                position: Cesium.Cartesian3.fromDegrees(item.point[0], item.point[1], 10),
+                style: {
+                  radius: 10,
+                  height: 200,
+                  color: color[i % color.length],
+                },
+                popup: item.name,
+              });
+              graphicLayer.addGraphic(coneGlow);
+            }
+          })
+          .catch(function (error) {
+            console.log("加载JSON出错", error);
           });
-
-          for (let i = 0, len = pointArr.length; i < len; i++) {
-            let item = pointArr[i];
-
-            let color = ["#ffff00", "#81d8ff", "#fff9ed"];
-            let thisPoint = Cesium.Cartesian3.fromDegrees(item.point[0], item.point[1], 1);
-            let positions = mars3d.PolyUtil.getLinkedPointList(center, thisPoint, 40000, 100); //计算曲线点
-
-            let primitive = new mars3d.graphic.PolylinePrimitive({
-              positions: positions,
-              style: {
-                width: 4,
-                material: lineMaterial, //动画线材质
-              },
-            });
-            primitive.bindPopup(item.name);
-            graphicLayer.addGraphic(primitive);
-
-            // 圆椎体
-            let coneGlow = new mars3d.graphic.LightCone({
-              position: Cesium.Cartesian3.fromDegrees(item.point[0], item.point[1], 10),
-              style: {
-                radius: 10,
-                height: 200,
-                color: color[i % color.length],
-              },
-              popup: item.name,
-            });
-            graphicLayer.addGraphic(coneGlow);
-          }
-        });
 
         //竖直飞线
         let arrData = [];

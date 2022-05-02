@@ -2,8 +2,8 @@
 /**
  * Mars3D三维可视化平台  mars3d
  *
- * 版本信息：v3.3.5
- * 编译日期：2022-04-18 17:39:29
+ * 版本信息：v3.3.7
+ * 编译日期：2022-05-02 10:58:41
  * 版权所有：Copyright by 火星科技  http://mars3d.cn
  * 使用单位：免费公开版 ，2022-02-01
  */
@@ -974,6 +974,13 @@ declare namespace MaterialType {
      */
     const LineTrail: string;
     /**
+     * 线状: 泛光线 材质
+     * @property [color = Cesium.Color.ORANGE] - 泛光颜色
+     * @property [glow = 1.0] - 泛光强度
+     * @property [speed = 5.0] - 速度，值越大越快
+     */
+    const LineBloom: string;
+    /**
      * 墙体:  走马灯围墙 材质
      * @property [image] - 背景图片URL
      * @property [color = new Cesium.Color(1.0, 0.0, 0.0, 0.7)] - 颜色
@@ -1083,6 +1090,20 @@ declare namespace MaterialType {
      */
     const PolyWood: string;
     /**
+     * 面状: 霓虹灯材质
+     * @property [color = new Cesium.Color(2, 1, 0.0, 0.8)] - 颜色
+     * @property [repeat = 30] - 圈数量
+     * @property [frameRate = 60] - 每秒刷新次数
+     */
+    const NeonLight: string;
+    /**
+     * 通用：水面材质 带蓝色光线波纹的
+     * @property [specularMap] - 单一通道纹理用来指示水域的面积。
+     * @property [normalMap] - 水正常扰动的法线图。
+     * @property [alpha = 0.2] - 透明度
+     */
+    const WaterLight: string;
+    /**
      * 球体: 电弧球体效果  材质
      * @property [color = new Cesium.Color(0.0, 1.0, 1.0, 0.7)] - 颜色
      * @property [speed = 5.0] - 速度，值越大越快
@@ -1101,6 +1122,7 @@ declare namespace MaterialType {
      * @property [frameRate = 60] - 每秒刷新次数
      */
     const CylinderWave: string;
+    const DigitalFlow: string;
 }
 
 /**
@@ -1196,15 +1218,30 @@ declare namespace Token {
      */
     const ion: string;
     /**
+     * 更新Cesium官方的Ion服务key
+     * @param item - token值
+     */
+    function updateIon(item: string): void;
+    /**
      * mapbox地图key，
      * 官网：{@link https://account.mapbox.com}
      */
     const mapbox: string;
     /**
+     * 更新mapbox地图key
+     * @param item - token值
+     */
+    function updateMapbox(item: string): void;
+    /**
      * 微软Bing地图key，
      * 官网： {@link https://www.bingmapsportal.com/Application}
      */
     const bing: string;
+    /**
+     * 更新微软Bing地图key
+     * @param item - token值
+     */
+    function updateBing(item: string): void;
     /**
      * 天地图key数组，
      * 官网： {@link https://console.tianditu.gov.cn/api/key}
@@ -1215,6 +1252,11 @@ declare namespace Token {
      */
     const tianditu: string;
     /**
+     * 更新天地图key
+     * @param item - token值
+     */
+    function updateTianditu(item: string | string[]): void;
+    /**
      * 高德key数组，
      * 官网： {@link https://console.amap.com/dev/key/app}
      */
@@ -1224,6 +1266,11 @@ declare namespace Token {
      */
     const gaode: string;
     /**
+     * 更新高德key
+     * @param item - token值
+     */
+    function updateGaode(item: string | string[]): void;
+    /**
      * 百度key数组，
      * 官网： {@link http://lbsyun.baidu.com/apiconsole/key#/home}
      */
@@ -1232,6 +1279,29 @@ declare namespace Token {
      * 百度key，
      */
     const baidu: string;
+    /**
+     * 更新百度key
+     * @param item - token值
+     */
+    function updateBaidu(item: string | string[]): void;
+    /**
+     * 更新所有SDK涉及的第3放Token值（如果具体使用类中传入时，已传入值优先）
+     * @param token - 集合
+     * @param [token.tianditu] - 天地图
+     * @param [token.gaode] - 高德
+     * @param [token.baidu] - 百度
+     * @param [token.ion] - Ion服务
+     * @param [token.mapbox] - mapbox地图
+     * @param [token.bing] - 微软Bing地图
+     */
+    function updateAll(token: {
+        tianditu?: string | string[];
+        gaode?: string | string[];
+        baidu?: string | string[];
+        ion?: string;
+        mapbox?: string;
+        bing?: string;
+    }): void;
 }
 
 /**
@@ -2014,7 +2084,7 @@ declare class BaseThing extends BaseClass {
  * 天空盒子是用真正的赤道平均春分点(TEME)轴定义的。仅在3D中支持。当转换为2D或哥伦布视图时，天空盒会淡出。
  * 天空盒子的大小不能超过{@link Cesium.Scene#maximumCubeMapSize}。
  * @example
- * scene.skyBox = new mars3d.GroundSkyBox({
+ * map.scene.skyBox = new mars3d.GroundSkyBox({
  *   sources : {
  *     positiveX : 'skybox_px.png',
  *     negativeX : 'skybox_nx.png',
@@ -2046,6 +2116,90 @@ declare class GroundSkyBox extends Cesium.SkyBox {
         };
         show?: boolean;
     });
+}
+
+/**
+ * Thing对象(如特效、分析、管理类等)组，可以用于将多个Thing对象组合起来方便控制
+ * @param [options] - 参数对象，包括以下：
+ * @param [options.things] - 子Thing对象数组
+ * @param [options.id = uuid()] - 对象的id标识
+ * @param [options.enabled = true] - 对象的启用状态
+ * @param [options.eventParent] - 指定的事件冒泡对象，默认为map对象，false时不冒泡
+ */
+declare class GroupThing extends BaseThing {
+    constructor(options?: {
+        things?: any;
+        id?: string | number;
+        enabled?: boolean;
+        eventParent?: BaseClass | boolean;
+    });
+    /**
+     * 子Thing对象对象数组
+     */
+    readonly arrThing: BaseThing[];
+    /**
+     * 是否空组 ，空组目前就Thing对象管理用于Thing对象分组节点（虚拟节点）。
+     */
+    readonly hasEmptyGroup: boolean;
+    /**
+     * 是否有子Thing对象
+     */
+    readonly hasChildThing: boolean;
+    /**
+     * 子Thing对象的个数
+     */
+    readonly length: number;
+    /**
+     * 添加所有子对象到map上
+     * @returns 当前对象本身，可以链式调用
+     */
+    addChildsToMap(): GroupThing;
+    /**
+     * 将所有子对象从map中移除
+     * @returns 当前对象本身，可以链式调用
+     */
+    removeMapChilds(): GroupThing;
+    /**
+     * 添加子Thing对象，并绑定关联关系。
+     * @param childthing - 子Thing对象对象
+     * @returns 当前对象本身，可以链式调用
+     */
+    addThing(childthing: BaseThing): GroupThing;
+    /**
+     * 移除子Thing对象，并解除关联关系。
+     * @param childthing - 子Thing对象对象
+     * @returns 当前对象本身，可以链式调用
+     */
+    removeThing(childthing: BaseThing): GroupThing;
+    /**
+     * 遍历每一个子Thing对象并将其作为参数传递给回调函数
+     * @param method - 回调方法
+     * @param context - 侦听器的上下文(this关键字将指向的对象)。
+     * @returns 当前对象本身,可以链式调用
+     */
+    eachThing(method: (...params: any[]) => any, context: any): GroupThing;
+    /**
+     * 获取所有内置子Thing对象对象
+     * @returns 所有子Thing对象对象
+     */
+    getThings(): BaseThing[];
+    /**
+     * 获取地图所有的子Thing对象对象(包括pid和id关联的Thing对象)
+     * @returns 所有子Thing对象对象
+     */
+    getInMapChilds(): BaseThing[];
+    /**
+     * 根据ID或取Thing对象
+     * @param id - Thing对象id或uuid
+     * @returns Thing对象对象
+     */
+    getThingById(id: string | number): BaseThing | any;
+    /**
+     * 销毁当前对象
+     * @param [noDel = false] - false:会自动delete释放所有属性，true：不delete绑定的变量
+     * @returns 无
+     */
+    destroy(noDel?: boolean): void;
 }
 
 /**
@@ -2220,6 +2374,97 @@ declare class LocalWorldTransform {
 }
 
 /**
+ * 3个天空盒（可以平滑过度）, 在场景周围绘制星星等太空背景。
+ * 天空盒子是用真正的赤道平均春分点(TEME)轴定义的。仅在3D中支持。当转换为2D或哥伦布视图时，天空盒会淡出。
+ * 天空盒子的大小不能超过{@link Cesium.Scene#maximumCubeMapSize}。
+ * @example
+ * map.scene.skyBox = new mars3d.MultipleSkyBox({
+ *     sources: {
+ *       positiveX: "./img/skybox/1/px.png",
+ *       negativeX: "./img/skybox/1/nx.png",
+ *       positiveY: "./img/skybox/1/pz.png",
+ *       negativeY: "./img/skybox/1/nz.png",
+ *       positiveZ: "./img/skybox/1/py.png",
+ *       negativeZ: "./img/skybox/1/ny.png",
+ *     },
+ *     sources2: {
+ *       positiveX: "./img/skybox/2/px.png",
+ *       negativeX: "./img/skybox/2/nx.png",
+ *       positiveY: "./img/skybox/2/pz.png",
+ *       negativeY: "./img/skybox/2/nz.png",
+ *       positiveZ: "./img/skybox/2/py.png",
+ *       negativeZ: "./img/skybox/2/ny.png",
+ *     },
+ *     sources3: {
+ *       positiveX: "./img/skybox/3/px.png",
+ *       negativeX: "./img/skybox/3/nx.png",
+ *       positiveY: "./img/skybox/3/pz.png",
+ *       negativeY: "./img/skybox/3/nz.png",
+ *       positiveZ: "./img/skybox/3/py.png",
+ *       negativeZ: "./img/skybox/3/ny.png",
+ *     },
+ *   });
+ * @param options - 对象，具有以下属性:
+ * @param [options.sources] - 天空盒的6个立方体映射面的图片url
+ * @param [options.sources.positiveX] - 映射面的图片url
+ * @param [options.sources.negativeX] - 映射面的图片url
+ * @param [options.sources.positiveY] - 映射面的图片url
+ * @param [options.sources.negativeY] - 映射面的图片url
+ * @param [options.sources.positiveZ] - 映射面的图片url
+ * @param [options.sources.negativeZ] - 映射面的图片url
+ * @param [options.sources2] - 天空盒的6个立方体映射面的图片url
+ * @param [options.sources2.positiveX] - 映射面的图片url
+ * @param [options.sources2.negativeX] - 映射面的图片url
+ * @param [options.sources2.positiveY] - 映射面的图片url
+ * @param [options.sources2.negativeY] - 映射面的图片url
+ * @param [options.sources2.positiveZ] - 映射面的图片url
+ * @param [options.sources2.negativeZ] - 映射面的图片url
+ * @param [options.sources3] - 天空盒的6个立方体映射面的图片url
+ * @param [options.sources3.positiveX] - 映射面的图片url
+ * @param [options.sources3.negativeX] - 映射面的图片url
+ * @param [options.sources3.positiveY] - 映射面的图片url
+ * @param [options.sources3.negativeY] - 映射面的图片url
+ * @param [options.sources3.positiveZ] - 映射面的图片url
+ * @param [options.sources3.negativeZ] - 映射面的图片url
+ * @param [options.select = 0.0] - 当前选择生效的天空盒，取值范围：0.0-2.0 , 当为 0 时显示sources、为 1 时显示sources2、为 2 时显示sources3，中间值过渡
+ * @param [options.show = true] - 是否显示
+ */
+declare class MultipleSkyBox extends Cesium.SkyBox {
+    constructor(options: {
+        sources?: {
+            positiveX?: string;
+            negativeX?: string;
+            positiveY?: string;
+            negativeY?: string;
+            positiveZ?: string;
+            negativeZ?: string;
+        };
+        sources2?: {
+            positiveX?: string;
+            negativeX?: string;
+            positiveY?: string;
+            negativeY?: string;
+            positiveZ?: string;
+            negativeZ?: string;
+        };
+        sources3?: {
+            positiveX?: string;
+            negativeX?: string;
+            positiveY?: string;
+            negativeY?: string;
+            positiveZ?: string;
+            negativeZ?: string;
+        };
+        select?: number;
+        show?: boolean;
+    });
+    /**
+     * 当前选择生效的天空盒，取值范围：0.0-2.0, 当为 0 时显示sources、为 1 时显示sources2、为 2 时显示sources3，中间值过渡
+     */
+    select: number;
+}
+
+/**
  * 特效 基类
  * @param [options] - 参数对象，包括以下：
  * @param [options.id = uuid()] - 对象的id标识
@@ -2310,6 +2555,51 @@ declare class BloomEffect extends BaseEffect {
      * 步长,是下一个texel的距离
      */
     stepSize: number;
+}
+
+/**
+ * 选中对象的 泛光效果。
+ * @param [options] - 参数对象
+ * @param [options.eventType = "click"] - 高亮触发的事件类型，默认为单击。可选值：单击、鼠标移入,false时不内部控制
+ * @param [options.color = Cesium.Color.WHITE] - 泛光颜色
+ * @param [options.contrast = 128] - 对比度,取值范围[-255.0,255.0]
+ * @param [options.brightness = -0.3] - 亮度, 将输入纹理的RGB值转换为色相、饱和度和亮度(HSB)，然后将该值添加到亮度中。
+ * @param [options.blurSamples = 32] - 模糊样本
+ * @param [options.delta = 1.0] - 增量
+ * @param [options.sigma = 3.78] - delta和sigma用于计算高斯滤波器的权值。方程是 <code>exp((-0.5 * delta * delta) / (sigma * sigma))</code>。
+ * @param [options.stepSize = 5.0] - 步长,是下一个texel的距离
+ * @param [options.ratio = 2.0] - 亮度增强比例
+ * @param [options.threshold = 0.0] - 亮度阈值
+ * @param [options.smoothWidth = 0.01] - 亮度光滑的宽度
+ * @param [options.enabled = true] - 对象的启用状态
+ */
+declare class BloomTargetEffect extends BaseEffect {
+    constructor(options?: {
+        eventType?: EventType | boolean;
+        color?: Cesium.Color;
+        contrast?: number;
+        brightness?: number;
+        blurSamples?: number;
+        delta?: number;
+        sigma?: number;
+        stepSize?: number;
+        ratio?: number;
+        threshold?: number;
+        smoothWidth?: number;
+        enabled?: boolean;
+    });
+    /**
+     * 发光颜色
+     */
+    color: Cesium.Color;
+    /**
+     * 高亮触发的事件类型，默认为单击。
+     */
+    eventType: EventType | string;
+    /**
+     * 选中对象
+     */
+    selected: any | any | undefined;
 }
 
 /**
@@ -5885,7 +6175,7 @@ declare class BasePointEntity extends BaseEntity {
      * 按Cesium.CallbackProperty的方式 更新坐标（更加平滑）
      * @param position - 坐标
      */
-    setCallbackPosition(position: Cesium.Cartesian3): void;
+    setCallbackPosition(position: string | any[] | any | Cesium.Cartesian3 | any): void;
     /**
      * 显示隐藏状态
      */
@@ -6031,7 +6321,7 @@ declare class BasePolyEntity extends BaseEntity {
      * 按Cesium.CallbackProperty的方式 更新坐标集合（更加平滑）
      * @param positions - 坐标数组
      */
-    setCallbackPositions(positions: Cesium.Cartesian3[]): void;
+    setCallbackPositions(positions: string[] | any[][] | LngLatPoint[]): void;
 }
 
 declare namespace BillboardEntity {
@@ -6342,6 +6632,235 @@ declare class BoxEntity extends BasePointEntity {
      * @returns 矢量对象
      */
     static fromDraw(layer: GraphicLayer, options: any): BoxEntity;
+}
+
+declare namespace LabelEntity {
+    /**
+     * Canvas 文本点（label转图片） 支持的样式信息
+     * @property [text = "文字"] - 文本内容，换行可以用换行符'\n'。
+     * @property [scale = 1.0] - 指定缩放比例。
+     * @property [horizontalOrigin] - 横向方向的定位
+     * @property [verticalOrigin] - 垂直方向的定位
+     * @property [font_family = "楷体"] - 字体 ,可选项：微软雅黑,宋体,楷体,隶书,黑体 等
+     * @property [font_size = 30] - 字体大小
+     * @property [font_weight = "normal"] - 是否加粗 ,可选项：bold (解释：是),normal (解释：否),
+     * @property [font_style = "normal"] - 是否斜体 ,可选项：italic (解释：是),normal (解释：否),
+     * @property [font = '30px normal normal 楷体'] - 上叙4个属性的一次性指定CSS字体的属性。
+     * @property [textBaseline = 'bottom'] - 文本的基线。
+     * @property [fill = true] - 是否填充
+     * @property [color = "#ffffff"] - 文本颜色
+     * @property [opacity = 1.0] - 透明度，取值范围：0.0-1.0
+     * @property [stroke = false] - 是否衬色
+     * @property [strokeColor = "#000000"] - 衬色颜色
+     * @property [strokeWidth = 2.0] - 衬色宽度
+     * @property [outlineColor = "#000000"] - 矩形边框的颜色。
+     * @property [outlineWidth = 0.0] - 边框的宽度
+     * @property [background = false] - 是否背景
+     * @property [backgroundColor = "#000000"] - 背景颜色
+     * @property [backgroundPadding = 0] - 背景内边距，指定文字与填充边界内容之间的空间(以像素为单位)。
+     * @property [hasPixelOffset = false] - 是否存在偏移量
+     * @property [pixelOffsetX = 0] - 横向偏移像素
+     * @property [pixelOffsetY = 0] - 纵向偏移像素
+     * @property [pixelOffset = Cartesian2.ZERO] - 指定像素偏移量。
+     * @property [scaleByDistance = false] - 是否按视距缩放 或 设定基于与相机的距离设置比例。
+     * @property [scaleByDistance_far = 1000000] - 上限
+     * @property [scaleByDistance_farValue = 0.1] - 比例值
+     * @property [scaleByDistance_near = 1000] - 下限
+     * @property [scaleByDistance_nearValue = 1] - 比例值
+     * @property [distanceDisplayCondition = false] - 是否按视距显示 或 指定此框将显示在与摄像机的多大距离。
+     * @property [distanceDisplayCondition_far = 100000] - 最大距离
+     * @property [distanceDisplayCondition_near = 0] - 最小距离
+     * @property [clampToGround = false] - 是否贴地
+     * @property [heightReference = Cesium.HeightReference.NONE] - 指定高度相对于什么的属性。
+     * @property [visibleDepth = true] - 是否被遮挡
+     * @property [disableDepthTestDistance] - 指定从相机到禁用深度测试的距离。
+     * @property [translucencyByDistance] - 用于基于与相机的距离设置半透明度。
+     * @property [setHeight] - 指定坐标高度值（常用于图层中配置）,也支持字符串模版配置
+     * @property [addHeight] - 在现有坐标基础上增加的高度值（常用于图层中配置）,也支持字符串模版配置
+     */
+    type StyleOptions = {
+        text?: string;
+        scale?: number;
+        horizontalOrigin?: Cesium.HorizontalOrigin;
+        verticalOrigin?: Cesium.VerticalOrigin;
+        font_family?: string;
+        font_size?: number;
+        font_weight?: string;
+        font_style?: string;
+        font?: string;
+        textBaseline?: string;
+        fill?: boolean;
+        color?: string | Cesium.Color;
+        opacity?: number;
+        stroke?: boolean;
+        strokeColor?: string | Cesium.Color;
+        strokeWidth?: number;
+        outlineColor?: string | Cesium.Color;
+        outlineWidth?: number;
+        background?: boolean;
+        backgroundColor?: string | Cesium.Color;
+        backgroundPadding?: number;
+        hasPixelOffset?: boolean;
+        pixelOffsetX?: number;
+        pixelOffsetY?: number;
+        pixelOffset?: Cesium.Cartesian2 | number[];
+        scaleByDistance?: boolean | Cesium.NearFarScalar;
+        scaleByDistance_far?: number;
+        scaleByDistance_farValue?: number;
+        scaleByDistance_near?: number;
+        scaleByDistance_nearValue?: number;
+        distanceDisplayCondition?: boolean | Cesium.DistanceDisplayCondition;
+        distanceDisplayCondition_far?: number;
+        distanceDisplayCondition_near?: number;
+        clampToGround?: boolean;
+        heightReference?: Cesium.HeightReference;
+        visibleDepth?: boolean;
+        disableDepthTestDistance?: number;
+        translucencyByDistance?: Cesium.NearFarScalar;
+        setHeight?: number | string;
+        addHeight?: number | string;
+    };
+    /**
+     * Canvas 文本点（label转图片） 支持的样式信息
+     * @property [text = "文字"] - 文本内容，换行可以用换行符'\n'。
+     * @property [scale = 1.0] - 指定缩放比例。
+     * @property [horizontalOrigin] - 横向方向的定位
+     * @property [verticalOrigin] - 垂直方向的定位
+     * @property [font_family = "楷体"] - 字体 ,可选项：微软雅黑,宋体,楷体,隶书,黑体 等
+     * @property [font_size = 30] - 字体大小
+     * @property [font_weight = "normal"] - 是否加粗 ,可选项：bold (解释：是),normal (解释：否),
+     * @property [font_style = "normal"] - 是否斜体 ,可选项：italic (解释：是),normal (解释：否),
+     * @property [font = '30px normal normal 楷体'] - 上叙4个属性的一次性指定CSS字体的属性。
+     * @property [textBaseline = 'bottom'] - 文本的基线。
+     * @property [fill = true] - 是否填充
+     * @property [color = "#ffffff"] - 文本颜色
+     * @property [opacity = 1.0] - 透明度，取值范围：0.0-1.0
+     * @property [stroke = false] - 是否衬色
+     * @property [strokeColor = "#000000"] - 衬色颜色
+     * @property [strokeWidth = 2.0] - 衬色宽度
+     * @property [outlineColor = "#000000"] - 矩形边框的颜色。
+     * @property [outlineWidth = 0.0] - 边框的宽度
+     * @property [background = false] - 是否背景
+     * @property [backgroundColor = "#000000"] - 背景颜色
+     * @property [backgroundPadding = 0] - 背景内边距，指定文字与填充边界内容之间的空间(以像素为单位)。
+     * @property [hasPixelOffset = false] - 是否存在偏移量
+     * @property [pixelOffsetX = 0] - 横向偏移像素
+     * @property [pixelOffsetY = 0] - 纵向偏移像素
+     * @property [pixelOffset = Cartesian2.ZERO] - 指定像素偏移量。
+     * @property [scaleByDistance = false] - 是否按视距缩放 或 设定基于与相机的距离设置比例。
+     * @property [scaleByDistance_far = 1000000] - 上限
+     * @property [scaleByDistance_farValue = 0.1] - 比例值
+     * @property [scaleByDistance_near = 1000] - 下限
+     * @property [scaleByDistance_nearValue = 1] - 比例值
+     * @property [distanceDisplayCondition = false] - 是否按视距显示 或 指定此框将显示在与摄像机的多大距离。
+     * @property [distanceDisplayCondition_far = 100000] - 最大距离
+     * @property [distanceDisplayCondition_near = 0] - 最小距离
+     * @property [clampToGround = false] - 是否贴地
+     * @property [heightReference = Cesium.HeightReference.NONE] - 指定高度相对于什么的属性。
+     * @property [visibleDepth = true] - 是否被遮挡
+     * @property [disableDepthTestDistance] - 指定从相机到禁用深度测试的距离。
+     * @property [translucencyByDistance] - 用于基于与相机的距离设置半透明度。
+     * @property [setHeight] - 指定坐标高度值（常用于图层中配置）,也支持字符串模版配置
+     * @property [addHeight] - 在现有坐标基础上增加的高度值（常用于图层中配置）,也支持字符串模版配置
+     */
+    type StyleOptions = {
+        text?: string;
+        scale?: number;
+        horizontalOrigin?: Cesium.HorizontalOrigin;
+        verticalOrigin?: Cesium.VerticalOrigin;
+        font_family?: string;
+        font_size?: number;
+        font_weight?: string;
+        font_style?: string;
+        font?: string;
+        textBaseline?: string;
+        fill?: boolean;
+        color?: string | Cesium.Color;
+        opacity?: number;
+        stroke?: boolean;
+        strokeColor?: string | Cesium.Color;
+        strokeWidth?: number;
+        outlineColor?: string | Cesium.Color;
+        outlineWidth?: number;
+        background?: boolean;
+        backgroundColor?: string | Cesium.Color;
+        backgroundPadding?: number;
+        hasPixelOffset?: boolean;
+        pixelOffsetX?: number;
+        pixelOffsetY?: number;
+        pixelOffset?: Cesium.Cartesian2 | number[];
+        scaleByDistance?: boolean | Cesium.NearFarScalar;
+        scaleByDistance_far?: number;
+        scaleByDistance_farValue?: number;
+        scaleByDistance_near?: number;
+        scaleByDistance_nearValue?: number;
+        distanceDisplayCondition?: boolean | Cesium.DistanceDisplayCondition;
+        distanceDisplayCondition_far?: number;
+        distanceDisplayCondition_near?: number;
+        clampToGround?: boolean;
+        heightReference?: Cesium.HeightReference;
+        visibleDepth?: boolean;
+        disableDepthTestDistance?: number;
+        translucencyByDistance?: Cesium.NearFarScalar;
+        setHeight?: number | string;
+        addHeight?: number | string;
+    };
+}
+
+/**
+ * Canvas 文本点（label转图片）
+ * @param options - 参数对象，包括以下：
+ * @param options.position - 坐标位置
+ * @param options.style - 样式信息
+ * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
+ * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
+ * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
+ * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
+ * @param [options.parent] - 要与此实体关联的父实体。
+ * @param [options.onBeforeCreate] - 在 new Cesium.Entity(addattr) 前的回调方法，可以对addattr做额外个性化处理。
+ * @param [options.drawShow = true] - 绘制时，是否自动隐藏entity，可避免拾取坐标存在问题。
+ * @param [options.addHeight] - 在绘制时，在绘制点的基础上增加的高度值
+ * @param [options.popup] - 绑定的popup弹窗值，也可以bindPopup方法绑定
+ * @param [options.popupOptions] - popup弹窗时的配置参数，也支持如pointerEvents等{@link Popup}构造参数
+ * @param [options.tooltip] - 绑定的tooltip弹窗值，也可以bindTooltip方法绑
+ * @param [options.tooltipOptions] - tooltip弹窗时的配置参数，也支持如pointerEvents等{@link Tooltip}构造参数
+ * @param [options.contextmenuItems] - 当矢量数据支持右键菜单时，也可以bindContextMenu方法绑定
+ * @param [options.id = uuid()] - 矢量数据id标识
+ * @param [options.name = ''] - 矢量数据名称
+ * @param [options.show = true] - 矢量数据是否显示
+ * @param [options.eventParent] - 指定的事件冒泡对象，默认为所加入的图层对象，false时不冒泡事件
+ * @param [options.allowDrillPick] - 是否允许鼠标穿透拾取
+ */
+declare class CanvasLabelEntity extends BasePointEntity {
+    constructor(options: {
+        position: LngLatPoint | Cesium.Cartesian3 | Cesium.PositionProperty | number[] | string;
+        style: LabelEntity.StyleOptions;
+        attr?: any;
+        availability?: Cesium.TimeIntervalCollection;
+        description?: Cesium.Property | string;
+        viewFrom?: Cesium.Property;
+        parent?: Cesium.Entity;
+        onBeforeCreate?: (...params: any[]) => any;
+        drawShow?: boolean;
+        addHeight?: number;
+        popup?: string | any[] | ((...params: any[]) => any);
+        popupOptions?: Popup.StyleOptions;
+        tooltip?: string | any[] | ((...params: any[]) => any);
+        tooltipOptions?: Tooltip.StyleOptions;
+        contextmenuItems?: any;
+        id?: string | number;
+        name?: string;
+        show?: boolean;
+        eventParent?: BaseClass | boolean;
+        allowDrillPick?: boolean | ((...params: any[]) => any);
+    });
+    /**
+     * 通过标绘 来创建矢量对象
+     * @param layer - 图层
+     * @param options - 矢量对象的构造参数
+     * @returns 矢量对象
+     */
+    static fromDraw(layer: GraphicLayer, options: any): CanvasLabelEntity;
 }
 
 declare namespace CircleEntity {
@@ -7792,96 +8311,6 @@ declare class FontBillboardEntity extends BasePointEntity {
     static fromDraw(layer: GraphicLayer, options: any): FontBillboardEntity;
 }
 
-declare namespace LabelEntity {
-    /**
-     * 文本点 支持的样式信息
-     * @property [text = "文字"] - 文本内容，换行可以用换行符'\n'。
-     * @property [scale = 1.0] - 指定缩放比例。
-     * @property [horizontalOrigin] - 横向方向的定位
-     * @property [verticalOrigin] - 垂直方向的定位
-     * @property [font_family = "楷体"] - 字体 ,可选项：微软雅黑,宋体,楷体,隶书,黑体 等
-     * @property [font_size = 30] - 字体大小
-     * @property [font_weight = "normal"] - 是否加粗 ,可选项：bold (解释：是),normal (解释：否),
-     * @property [font_style = "normal"] - 是否斜体 ,可选项：italic (解释：是),normal (解释：否),
-     * @property [font = '30px normal normal 楷体'] - 上叙4个属性的一次性指定CSS字体的属性。
-     * @property [fill = true] - 是否填充
-     * @property [color = "#ffffff"] - 文本颜色
-     * @property [opacity = 1.0] - 透明度，取值范围：0.0-1.0
-     * @property [outline = false] - 是否衬色
-     * @property [outlineColor = "#000000"] - 衬色颜色
-     * @property [outlineOpacity = 0.6] - 衬色透明度
-     * @property [outlineWidth = 2.0] - 衬色宽度
-     * @property [background = false] - 是否背景
-     * @property [backgroundColor = "#000000"] - 背景颜色
-     * @property [backgroundOpacity = 0.5] - 背景透明度
-     * @property [backgroundPadding = new Cesium.Cartesian2(7, 5)] - 背景内边距，指定文字与填充边界内容之间的空间(以像素为单位)。
-     * @property [hasPixelOffset = false] - 是否存在偏移量
-     * @property [pixelOffsetX = 0] - 横向偏移像素
-     * @property [pixelOffsetY = 0] - 纵向偏移像素
-     * @property [pixelOffset = Cartesian2.ZERO] - A {@link Cartesian2} Property specifying the pixel offset.
-     * @property [pixelOffsetScaleByDistance] - A {@link NearFarScalar} Property used to set pixelOffset based on distance from the camera.
-     * @property [eyeOffset = Cartesian3.ZERO] - A {@link Cartesian3} Property specifying the eye offset.
-     * @property [scaleByDistance = false] - 是否按视距缩放 或 设定基于与相机的距离设置比例。
-     * @property [scaleByDistance_far = 1000000] - 上限
-     * @property [scaleByDistance_farValue = 0.1] - 比例值
-     * @property [scaleByDistance_near = 1000] - 下限
-     * @property [scaleByDistance_nearValue = 1] - 比例值
-     * @property [distanceDisplayCondition = false] - 是否按视距显示 或 指定此框将显示在与摄像机的多大距离。
-     * @property [distanceDisplayCondition_far = 100000] - 最大距离
-     * @property [distanceDisplayCondition_near = 0] - 最小距离
-     * @property [clampToGround = false] - 是否贴地
-     * @property [heightReference = Cesium.HeightReference.NONE] - 指定高度相对于什么的属性。
-     * @property [visibleDepth = true] - 是否被遮挡
-     * @property [disableDepthTestDistance] - 指定从相机到禁用深度测试的距离。
-     * @property [translucencyByDistance] - 用于基于与相机的距离设置半透明度。
-     * @property [setHeight] - 指定坐标高度值（常用于图层中配置）,也支持字符串模版配置
-     * @property [addHeight] - 在现有坐标基础上增加的高度值（常用于图层中配置）,也支持字符串模版配置
-     */
-    type StyleOptions = {
-        text?: string;
-        scale?: number;
-        horizontalOrigin?: Cesium.HorizontalOrigin;
-        verticalOrigin?: Cesium.VerticalOrigin;
-        font_family?: string;
-        font_size?: number;
-        font_weight?: string;
-        font_style?: string;
-        font?: string;
-        fill?: boolean;
-        color?: string | Cesium.Color;
-        opacity?: number;
-        outline?: boolean;
-        outlineColor?: string | Cesium.Color;
-        outlineOpacity?: number;
-        outlineWidth?: number;
-        background?: boolean;
-        backgroundColor?: string | Cesium.Color;
-        backgroundOpacity?: number;
-        backgroundPadding?: number | Cesium.Cartesian2;
-        hasPixelOffset?: boolean;
-        pixelOffsetX?: number;
-        pixelOffsetY?: number;
-        pixelOffset?: Cesium.Cartesian2 | number[];
-        pixelOffsetScaleByDistance?: Cesium.NearFarScalar;
-        eyeOffset?: Cesium.Cartesian3;
-        scaleByDistance?: boolean | Cesium.NearFarScalar;
-        scaleByDistance_far?: number;
-        scaleByDistance_farValue?: number;
-        scaleByDistance_near?: number;
-        scaleByDistance_nearValue?: number;
-        distanceDisplayCondition?: boolean | Cesium.DistanceDisplayCondition;
-        distanceDisplayCondition_far?: number;
-        distanceDisplayCondition_near?: number;
-        clampToGround?: boolean;
-        heightReference?: Cesium.HeightReference;
-        visibleDepth?: boolean;
-        disableDepthTestDistance?: number;
-        translucencyByDistance?: Cesium.NearFarScalar;
-        setHeight?: number | string;
-        addHeight?: number | string;
-    };
-}
-
 /**
  * 文字  Entity对象
  * @param options - 参数对象，包括以下：
@@ -8453,7 +8882,7 @@ declare namespace PlaneEntity {
         dimensions_x?: number;
         dimensions_y?: number;
         plane?: Cesium.Plane;
-        plane_normal?: string;
+        plane_normal?: string | Cesium.Cartesian3;
         plane_distance?: number;
         heading?: number;
         pitch?: number;
@@ -8871,7 +9300,7 @@ declare class PolygonEntity extends BasePolyEntity {
      * 按Cesium.CallbackProperty的方式 更新坐标集合（更加平滑）
      * @param positions - 坐标数组
      */
-    setCallbackPositions(positions: Cesium.Cartesian3[]): void;
+    setCallbackPositions(positions: string[] | any[][] | LngLatPoint[]): void;
 }
 
 declare namespace PolylineEntity {
@@ -10728,6 +11157,8 @@ declare class StraightArrow extends PolygonEntity {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.angleDecimal = 1] - 显示的 角度值 文本中保留的小数位
+ * @param [options.decimal = 2] - 显示的 距离值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -10756,6 +11187,8 @@ declare class AngleMeasure extends PolylineEntity {
         style: PolylineEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        angleDecimal?: number;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -10805,6 +11238,7 @@ declare class AngleMeasure extends PolylineEntity {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 面积值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -10833,6 +11267,7 @@ declare class AreaMeasure extends PolygonEntity {
         style: PolygonEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -10888,6 +11323,7 @@ declare class AreaMeasure extends PolygonEntity {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 面积值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -10916,6 +11352,7 @@ declare class AreaSurfaceMeasure extends AreaMeasure {
         style: PolygonEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -10955,6 +11392,7 @@ declare class AreaSurfaceMeasure extends AreaMeasure {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 距离值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -10983,6 +11421,7 @@ declare class DistanceMeasure extends PolylineEntity {
         style: PolylineEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -11032,6 +11471,7 @@ declare class DistanceMeasure extends PolylineEntity {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 距离值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -11060,6 +11500,7 @@ declare class DistanceSurfaceMeasure extends DistanceMeasure {
         style: PolylineEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -11099,6 +11540,7 @@ declare class DistanceSurfaceMeasure extends DistanceMeasure {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 距离和高度值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -11127,6 +11569,7 @@ declare class HeightMeasure extends PolylineEntity {
         style: PolylineEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -11176,6 +11619,7 @@ declare class HeightMeasure extends PolylineEntity {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 距离和高度值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -11204,6 +11648,7 @@ declare class HeightTriangleMeasure extends HeightMeasure {
         style: PolylineEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -11306,6 +11751,7 @@ declare class PointMeasure extends PointEntity {
  * @param options.style - 样式信息
  * @param [options.attr] - 附件的属性信息，可以任意附加属性，导出geojson或json时会自动处理导出。
  * @param [options.label] - 测量结果文本的样式
+ * @param [options.decimal = 2] - 显示的 距离值 文本中保留的小数位
  * @param [options.availability] - 与该对象关联的可用性(如果有的话)。
  * @param [options.description] - 指定此实体的HTML描述的字符串属性（infoBox中展示）。
  * @param [options.viewFrom] - 观察这个物体时建议的初始偏移量。
@@ -11334,6 +11780,7 @@ declare class SectionMeasure extends DistanceMeasure {
         style: PolylineEntity.StyleOptions;
         attr?: any;
         label?: LabelEntity.StyleOptions;
+        decimal?: number;
         availability?: Cesium.TimeIntervalCollection;
         description?: Cesium.Property | string;
         viewFrom?: Cesium.Property;
@@ -11385,6 +11832,7 @@ declare class SectionMeasure extends DistanceMeasure {
  * @param [options.heightLabel = true] - 是否显示各边界点高度值文本
  * @param [options.offsetLabel = false] - 是否显示各边界点高度差文本
  * @param [options.labelHeight] - 各边界点高度结果文本的样式
+ * @param [options.decimal = 2] - 显示的 数值 文本中保留的小数位
  * @param [options.has3dtiles] - 是否在3dtiles模型上分析（模型分析较慢，按需开启）,默认内部根据点的位置自动判断（但可能不准）
  * @param [options.id = uuid()] - 矢量数据id标识
  * @param [options.name = ''] - 矢量数据名称
@@ -11407,6 +11855,7 @@ declare class VolumeMeasure extends AreaMeasure {
         heightLabel?: boolean;
         offsetLabel?: boolean;
         labelHeight?: LabelEntity.StyleOptions;
+        decimal?: number;
         has3dtiles?: boolean;
         id?: string | number;
         name?: string;
@@ -13441,9 +13890,6 @@ declare namespace ModelPrimitive {
      * @property [addHeight] - 在现有坐标基础上增加的高度值（常用于图层中配置）,也支持字符串模版配置
      * @property [highlight] - 鼠标移入或单击(type:'click')后的对应高亮的部分样式，创建Graphic后也可以openHighlight、closeHighlight方法来手动调用
      * @property [label] - 支持附带文字的显示
-     * @param [options.maxCacheCount = 50] - 当使用addDynamicPosition设置为动画轨迹位置时，保留的坐标点数量
-     * @param [options.forwardExtrapolationType = Cesium.ExtrapolationType.NONE] - 当使用addDynamicPosition设置为动画轨迹位置时，在任何可用坐标之后一次请求值时要执行的推断类型，默认为最后一个坐标位置。
-     * @param [options.backwardExtrapolationType = Cesium.ExtrapolationType.NONE] - 当使用addDynamicPosition设置为动画轨迹位置时， 在任何可用坐标之前一次请求值时要执行的推断类型，默认为第一个坐标位置。
      */
     type StyleOptions = {
         url?: string | Cesium.Resource;
@@ -13747,7 +14193,7 @@ declare namespace PlanePrimitive {
         dimensions?: Cesium.Cartesian2;
         dimensions_x?: number;
         dimensions_y?: number;
-        plane_normal?: string;
+        plane_normal?: string | Cesium.Cartesian3;
         heading?: number;
         pitch?: number;
         roll?: number;
@@ -18406,8 +18852,12 @@ declare namespace TilesetLayer {
  * 3dtiles 三维模型图层。
  * @param options - 参数对象， 构造参数建议从{@link http://mars3d.cn/editor.html?id=layer-tileset/manager/edit|模型编辑页面}设置后保存参数后拷贝json参数即可。参数包括以下：
  * @param options.url - tileset的主JSON文件的 url
- * @param [options.maximumScreenSpaceError = 16] - 用于驱动细化细节级别的最大屏幕空间错误。数值加大，能让最终成像变模糊
- * @param [options.maximumMemoryUsage = 512] - 数据集可以使用的最大内存量(以MB计)。这个参数默认是512，也即是当几何体和纹理资源大于512MB的时候，Cesium就会淘汰掉当前帧中没有visited的所有块，这个值其实很小，也是cesium为了避免资源占用过高的一个保障，不过上述我们也估算过最差情况下，没有做纹理crn压缩的情况下，这个值很容易被超过，导致很多人误以为cesium的淘汰没有效果。这个值如果设置的过小，导致cesium几乎每帧都在尝试淘汰数据，增加了遍历的时间，也同时增加了崩溃的风险。这个值如果设置的过大，cesium的淘汰机制失效，那么容易导致显存超过显卡内存，也会导致崩溃。 这个值应该处于最差视角下资源占用 和 显存最大量之间。结论：这个参数要根据当前显卡显存来配置，如果我们场景只显示这一个模型数据，这个可以设置到显存的50 % 左右，比如我的显存是6G，这个可以设置到3000左右。那么既保证不超过显存限制，又可以最大利用显存缓存，配合crn压缩之后，这个几乎可以保证你第二次查看模型同一位置的时候，看不到加载过程，非常棒。
+ * @param [options.maximumScreenSpaceError = 16] - 用于驱动细化细节级别的最大屏幕空间错误。可以简单理解为：数值加大，能让最终成像变模糊。
+ * @param [options.maximumMemoryUsage = 512] - 数据集可以使用的最大内存量(以MB计)，这个参数要根据当前客户端显卡显存来配置，如果我们场景只显示这一个模型数据，这个可以设置到显存的50% 左右，比如我的显存是4G，这个可以设置到2048左右。那么既保证不超过显存限制，又可以最大利用显存缓存。<br />
+ * 解释：
+ * 这个参数默认是512，也即是当几何体和纹理资源大于512MB的时候，cesium就会淘汰掉当前帧中没有visited的所有块，这个值其实很小，也是cesium为了避免资源占用过高的一个保障.<br />
+ * 这个值如果设置的过小，导致cesium几乎每帧都在尝试淘汰数据，增加了遍历的时间，也同时增加了崩溃的风险。<br />
+ * 这个值如果设置的过大，cesium的淘汰机制失效，那么容易导致显存超过显卡内存，也会导致崩溃。 这个值应该处于最差视角下资源占用 和 显存最大量之间。<br />
  * @param [options.position] - 自定义新的中心点位置（移动模型）
  * @param options.position.lng - 经度值, 180 - 180
  * @param options.position.lat - 纬度值, -90 - 90
@@ -19020,6 +19470,16 @@ declare class GroupLayer extends BaseGraphicLayer {
      */
     zIndex: number;
     /**
+     * 添加所有子图层到map上
+     * @returns 当前对象本身，可以链式调用
+     */
+    addChildsToMap(): GroupLayer;
+    /**
+     * 将所有子图层从map中移除
+     * @returns 当前对象本身，可以链式调用
+     */
+    removeMapChilds(): GroupLayer;
+    /**
      * 添加子图层，并绑定关联关系。
      * @param childlayer - 子图层对象
      * @returns 当前对象本身，可以链式调用
@@ -19047,7 +19507,7 @@ declare class GroupLayer extends BaseGraphicLayer {
      * 获取地图所有的子图层对象(包括pid和id关联的图层)
      * @returns 所有子图层对象
      */
-    getChildLayers(): BaseLayer[] | GraphicLayer[];
+    getInMapChilds(): BaseLayer[] | GraphicLayer[];
     /**
      * 根据ID或取图层
      * @param id - 图层id或uuid
@@ -19297,7 +19757,7 @@ declare namespace ArcGisLayer {
  * @param options.rectangle.ymax - 最大纬度值, -90 至 90
  * @param [options.bbox] - bbox规范的瓦片数据的矩形区域范围,与rectangle二选一即可。
  * @param [options.zIndex] - 控制图层的叠加层次，默认按加载的顺序进行叠加，但也可以自定义叠加顺序，数字大的在上面(只对同类型图层间有效)。
- * @param [options.crs = CRS.EPSG:3857] - 瓦片数据的坐标系信息，默认为墨卡托投影
+ * @param [options.crs = CRS.EPSG4326] - 瓦片数据的坐标系信息，默认为墨卡托投影
  * @param [options.chinaCRS] - 标识瓦片的国内坐标系（用于自动纠偏或加偏），自动将瓦片转为map对应的chinaCRS类型坐标系。
  * @param [options.enablePickFeatures = true] - 如果为true，则请求 单击坐标处服务中对应的矢量数据 并尝试解释响应中包含的功能。为false时不去服务请求。
  * @param [options.graphicConver] - 单击获取到的数据进行按需筛选解析，大数据解析很卡，可以设定阀值屏蔽大数据，避免卡顿，number类型时代表字符串长度值。
@@ -19416,6 +19876,10 @@ declare class ArcGisLayer extends BaseTileLayer {
         flyTo?: boolean;
     });
     /**
+     * 坐标系
+     */
+    readonly crs: CRS | string;
+    /**
      * 是否存在Popup绑定
      * @returns 是否存在Popup绑定
      */
@@ -19449,6 +19913,12 @@ declare class ArcGisLayer extends BaseTileLayer {
      * @returns 创建完成的 ImageryProvider 对象
      */
     _createImageryProvider(options?: any): Cesium.UrlTemplateImageryProvider | any;
+    /**
+     * 对象添加到地图上的创建钩子方法，
+     * 每次add时都会调用
+     * @returns 无
+     */
+    _addedHook(): void;
 }
 
 /**
@@ -19889,6 +20359,10 @@ declare class BaseTileLayer extends BaseLayer {
      * 瓦片图层对应的内部ImageryProvider对象
      */
     readonly imageryProvider: Cesium.ImageryProvider;
+    /**
+     * 坐标系
+     */
+    readonly crs: CRS | string;
     /**
      * 透明度，同opacity。从0.0到1.0。
      */
@@ -21292,6 +21766,7 @@ declare class OsmLayer extends BaseTileLayer {
  *     <li><code>ter_z</code>: 地形渲染图注记</li>
  * </ul>
  * @param [options.key = mars3d.Token.tiandituArr] - 天地图服务Token，可以自行注册官网： {@link https://console.tianditu.gov.cn/api/key}
+ * @param [options.url] - 服务URL地址，同xyz服务
  * @param [options.minimumLevel = 0] - 瓦片所支持的最低层级，如果数据没有第0层，该参数必须配置,当地图小于该级别时，平台不去请求服务数据。
  * @param [options.maximumLevel] - 瓦片所支持的最大层级,大于该层级时会显示上一层拉伸后的瓦片，当地图大于该级别时，平台不去请求服务数据。
  * @param [options.minimumTerrainLevel] - 展示影像图层的最小地形细节级别，小于该级别时，平台不显示影像数据。
@@ -21347,6 +21822,7 @@ declare class TdtLayer extends BaseTileLayer {
     constructor(options?: {
         layer?: string;
         key?: string[];
+        url?: string;
         minimumLevel?: number;
         maximumLevel?: number;
         minimumTerrainLevel?: number;
@@ -22458,7 +22934,7 @@ declare namespace Map {
      * @property extent.ymin - 最小纬度值, -90 至 90
      * @property extent.ymax - 最大纬度值, -90 至 90
      * @property [removeDblClick = false] - 是否移除Cesium默认的双击事件
-     * @property [ionToken = null] - Cesium Ion服务的 Token令牌
+     * @property [ionToken] - Cesium Ion服务的 Token令牌
      * @property [resolutionScale = 1.0] - 获取或设置渲染分辨率的缩放比例。小于1.0的值可以改善性能不佳的设备上的性能，而值大于1.0则将以更高的速度呈现分辨率，然后缩小比例，从而提高视觉保真度。例如，如果窗口小部件的尺寸为640x480，则将此值设置为0.5将导致场景以320x240渲染，然后在设置时按比例放大设置为2.0将导致场景以1280x960渲染，然后按比例缩小。
      *
      * 以下是Cesium.Scene对象相关参数
@@ -22607,9 +23083,11 @@ declare namespace Map {
      * @property [infoBox = true] - 是否显示 点击要素之后显示的信息
      * @property [selectionIndicator = true] - 选择模型时，是否显示绿色框
      * @property [animation = true] - 是否创建 左下角仪表动画面板
+     * @property [animationTicks] - 左下角仪表动画面板 的可选步长
      * @property [timeline = true] - 是否创建 下侧时间线控件面板
      * @property [baseLayerPicker = true] - 是否显示 basemaps底图切换按钮
      * @property [fullscreenButton = true] - 是否显示 全屏按钮
+     * @property [fullscreenElement = document.body] - 当按下全屏按钮时，要置于全屏模式的元素或id。
      * @property [vrButton = false] - 是否显示 右下角vr虚拟现实按钮
      * @property [geocoder = true] - 是否显示 地名查找控件按钮
      * @property [homeButton = true] - 是否显示  视角复位按钮
@@ -22635,9 +23113,11 @@ declare namespace Map {
         infoBox?: boolean;
         selectionIndicator?: boolean;
         animation?: boolean;
+        animationTicks?: number[];
         timeline?: boolean;
         baseLayerPicker?: boolean;
         fullscreenButton?: boolean;
+        fullscreenElement?: Element | string;
         vrButton?: boolean;
         geocoder?: boolean | Cesium.GeocoderService[];
         homeButton?: boolean;
@@ -22743,6 +23223,23 @@ declare namespace Map {
         tooltip?: any;
         tooltipOptions?: Tooltip.StyleOptions;
         多个参数?: any;
+    };
+    /**
+     * 覆盖SDK内的{@link Token}所有第3方Token默认值
+     * @property [tianditu] - 天地图
+     * @property [gaode] - 高德
+     * @property [baidu] - 百度
+     * @property [ion] - Ion服务
+     * @property [mapbox] - mapbox地图
+     * @property [bing] - 微软Bing地图
+     */
+    type tokenOptions = {
+        tianditu?: string | string[];
+        gaode?: string | string[];
+        baidu?: string | string[];
+        ion?: string;
+        mapbox?: string;
+        bing?: string;
     };
     /**
      * Map支持的{@link EventType}事件类型
@@ -22864,6 +23361,7 @@ declare namespace Map {
  * @param [options.chinaCRS = ChinaCRS.WGS84] - 标识当前三维场景的国内坐标系（用于部分图层内对比判断来自动纠偏或加偏）
  * @param [options.lang] - 使用的语言（如中文、英文等）。
  * @param [options.templateValues] - 图层中统一的url模版，比如可以将服务url前缀统一使用模板，方便修改或动态配置。
+ * @param [options.token] - 覆盖SDK内的{@link Token}所有第3方Token默认值
  */
 declare class Map extends BaseClass {
     constructor(id: string | Cesium.Viewer, options?: {
@@ -22877,6 +23375,7 @@ declare class Map extends BaseClass {
         chinaCRS?: ChinaCRS;
         lang?: LangType;
         templateValues?: any;
+        token?: Map.tokenOptions;
     });
     /**
      * 当前类的构造参数
@@ -24213,6 +24712,42 @@ declare class LineTrailMaterialProperty extends BaseMaterialProperty {
 }
 
 /**
+ * 面状: 霓虹灯材质
+ * @param [options] - 参数对象，包括以下：
+ * @param [options.color = "#9b08fd"] - 颜色
+ * @param [options.speed = 2] - 速度，值越大越快
+ */
+declare class NeonLightMaterialProperty extends BaseMaterialProperty {
+    constructor(options?: {
+        color?: string | Cesium.Color;
+        speed?: number;
+    });
+    /**
+     * 获取 材质名称
+     * @param [time] - 检索值的时间。
+     * @returns 材质名称
+     */
+    getType(time?: Cesium.JulianDate): string;
+    /**
+     * 获取所提供时间的属性值。
+     * @param [time] - 检索值的时间。
+     * @param [result] - 用于存储值的对象，如果省略，则创建并返回一个新的实例。
+     * @returns 修改的result参数或一个新的实例(如果没有提供result参数)。
+     */
+    getValue(time?: Cesium.JulianDate, result?: any): any;
+    /**
+     * 将此属性与提供的属性进行比较并返回, 如果两者相等返回true，否则为false
+     * @param [other] - 比较的对象
+     * @returns 两者是同一个对象
+     */
+    equals(other?: Cesium.Property): boolean;
+    /**
+     * 颜色
+     */
+    color: Cesium.Color;
+}
+
+/**
  * 线状 OD线效果 材质
  * @param [options] - 参数对象，包括以下：
  * @param [options.color = 随机色] - 运动对象的颜色
@@ -24781,6 +25316,31 @@ declare class EchartsLayer extends BaseLayer {
     getRectangle(options?: {
         isFormat?: boolean;
     }): Cesium.Rectangle | any;
+    /**
+     * 绑定事件处理函数,
+     * @param eventName - 事件名称，全小写，例如'click'，'mousemove', 'legendselected' ,可以参考[echarts官网说明]{@link https://echarts.apache.org/zh/api.html#echartsInstance.on}
+     * @param callback - 绑定的监听器回调方法
+     * @param [context] - 侦听器的上下文(this关键字将指向的对象)。
+     * @returns 当前对象本身,可以链式调用
+     */
+    on(eventName: string, callback: (...params: any[]) => any, context?: any): EchartsLayer;
+    /**
+     * 带条件的绑定事件处理函数
+     * @param eventName - 事件名称，全小写，例如'click'，'mousemove', 'legendselected'
+     * @param query - 可选的过滤条件，能够只在指定的组件或者元素上进行响应。可以参考[echarts官网说明]{@link https://echarts.apache.org/zh/api.html#echartsInstance.on}
+     * @param callback - 绑定的监听器回调方法
+     * @param [context] - 侦听器的上下文(this关键字将指向的对象)
+     * @returns 当前对象本身,可以链式调用
+     */
+    onByQuery(eventName: string, query: string | any, callback: (...params: any[]) => any, context?: any): EchartsLayer;
+    /**
+     * 解除绑定指定类型事件监听器
+     * @param eventName - 事件名称，全小写，例如'click'，'mousemove', 'legendselected'
+     * @param [callback] - 绑定的监听器回调方法,未传值时解绑所有指定类型对应事件
+     * @param [context] - 侦听器的上下文(this关键字将指向的对象)。
+     * @returns 当前对象本身,可以链式调用
+     */
+    off(eventName: string, callback?: (...params: any[]) => any, context?: any): EchartsLayer;
 }
 
 /**
@@ -24910,7 +25470,6 @@ declare class HeatLayer extends BaseLayer {
  * @param [options.depthTest = true] - 是否进行计算深度判断，在地球背面或被遮挡时不显示（大数据时，需要关闭）
  * @param [options.fixedHeight = 0] - 点的固定的海拔高度
  * @param [options.clampToGround = false] - 点是否贴地
- * @param [options.pointerEvents = false] - 图层是否可以进行鼠标交互，为false时可以穿透操作及缩放地图
  * @param [options.多个参数] - 支持mapv本身所有drawOptions图层样式参数，具体查阅 [mapv库drawOptions文档]{@link https://github.com/huiyan-fe/mapv/wiki/%E7%B1%BB%E5%8F%82%E8%80%83} ，也可以 [在线编辑图层样式]{@link https://mapv.baidu.com/editor/}
  * @param [options.id = uuid()] - 图层id标识
  * @param [options.pid = -1] - 图层父级的id，一般图层管理中使用
@@ -24933,7 +25492,6 @@ declare class MapVLayer extends BaseLayer {
         depthTest?: boolean;
         fixedHeight?: number;
         clampToGround?: boolean;
-        pointerEvents?: boolean;
         多个参数?: any;
         id?: string | number;
         pid?: string | number;
@@ -24954,10 +25512,6 @@ declare class MapVLayer extends BaseLayer {
      * 图层对应的Canvas对象
      */
     readonly canvas: HTMLCanvasElement;
-    /**
-     * 是否可以鼠标交互，为false时可以穿透操作及缩放地图，但无法进行鼠标交互及触发相关事件。true时无法缩放地球，但可以使用mapv相关的事件或toolitp等。
-     */
-    pointerEvents: boolean;
     /**
      * 新增mapv数据
      * @param dataSet - mapv.DataSet数据集,可以参考[ MapV数据集对象说明]{@link https://github.com/huiyan-fe/mapv/blob/master/src/data/DataSet.md}
@@ -25005,6 +25559,21 @@ declare class MapVLayer extends BaseLayer {
     getRectangle(options?: {
         isFormat?: boolean;
     }): Cesium.Rectangle | any;
+    /**
+     * 绑定事件处理函数,
+     * @param eventName - 事件名称，全小写，例如'click'，'mouseMove'
+     * @param callback - 绑定的监听器回调方法
+     * @param [context] - 侦听器的上下文(this关键字将指向的对象)。
+     * @returns 当前对象本身,可以链式调用
+     */
+    on(eventName: string, callback: (...params: any[]) => any, context?: any): EchartsLayer;
+    /**
+     * 解除绑定指定类型事件监听器
+     * @param eventName - 事件名称，全小写，例如'click'，'mouseMove'
+     * @param [callback] - 绑定的监听器回调方法,未传值时解绑所有指定类型对应事件
+     * @returns 当前对象本身,可以链式调用
+     */
+    off(eventName: string, callback?: (...params: any[]) => any): EchartsLayer;
     /**
      * 从地图上移除，同map.removeThing
      * @param [destroy] - 是否调用destroy释放
@@ -27941,6 +28510,7 @@ declare class Measure extends BaseThing {
      * @param [options.maxPointNum = 9999] - 绘制时，最多允许点的个数
      * @param [options.addHeight] - 在绘制时，在绘制点的基础上增加的高度值
      * @param [options.showAddText = true] - 是否显示每一段的增加部分距离，如（+10.1km）
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 长度测量控制类 对象
      */
     distance(options?: {
@@ -27949,6 +28519,7 @@ declare class Measure extends BaseThing {
         maxPointNum?: number;
         addHeight?: number;
         showAddText?: boolean;
+        decimal?: number;
     }): Promise<DistanceMeasure | any>;
     /**
      * 测量 贴地长度
@@ -27960,6 +28531,7 @@ declare class Measure extends BaseThing {
      * @param [options.showAddText = true] - 是否显示每一段的增加部分距离，如（+10.1km）
      * @param [options.splitNum = 100] - 插值数，将线段分割的个数
      * @param [options.has3dtiles = auto] - 是否在3dtiles模型上分析（模型分析较慢，按需开启）,默认内部根据点的位置自动判断（但可能不准）
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 贴地长度测量控制类 对象
      */
     distanceSurface(options?: {
@@ -27970,6 +28542,7 @@ declare class Measure extends BaseThing {
         showAddText?: boolean;
         splitNum?: number;
         has3dtiles?: boolean;
+        decimal?: number;
     }): Promise<DistanceSurfaceMeasure | any>;
     /**
      * 剖面分析，测量线插值点的高程数据
@@ -27980,6 +28553,7 @@ declare class Measure extends BaseThing {
      * @param [options.addHeight] - 在绘制时，在绘制点的基础上增加的高度值
      * @param [options.splitNum = 200] - 插值数，将线段分割的个数
      * @param [options.has3dtiles = auto] - 是否在3dtiles模型上分析（模型分析较慢，按需开启）,默认内部根据点的位置自动判断（但可能不准）
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 剖面分析控制类矢量对象
      */
     section(options?: {
@@ -27989,17 +28563,20 @@ declare class Measure extends BaseThing {
         addHeight?: number;
         splitNum?: number;
         has3dtiles?: boolean;
+        decimal?: number;
     }): Promise<SectionMeasure | any>;
     /**
      * 面积测量（水平面）
      * @param [options] - 控制参数
      * @param [options.style] - 面的样式
      * @param [options.unit = 'auto'] - 计量单位,{@link MeasureUtil#formatArea}可选值：auto、m、km、mu、ha 。auto时根据面积值自动选用k或km
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 面积测量控制类 对象
      */
     area(options?: {
         style?: PolygonEntity.StyleOptions;
         unit?: string;
+        decimal?: number;
     }): Promise<AreaMeasure | any>;
     /**
      * 贴地面积测量
@@ -28008,6 +28585,7 @@ declare class Measure extends BaseThing {
      * @param [options.unit = 'auto'] - 计量单位,{@link MeasureUtil#formatArea}可选值：auto、m、km、mu、ha 。auto时根据面积值自动选用k或km
      * @param [options.splitNum = 10] - 插值数，将面分割的网格数
      * @param [options.has3dtiles = auto] - 是否在3dtiles模型上分析（模型分析较慢，按需开启）,默认内部根据点的位置自动判断（但可能不准）
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 面积测量控制类 对象
      */
     areaSurface(options?: {
@@ -28015,6 +28593,7 @@ declare class Measure extends BaseThing {
         unit?: string;
         splitNum?: number;
         has3dtiles?: boolean;
+        decimal?: number;
     }): Promise<AreaSurfaceMeasure | any>;
     /**
      * 体积测量（方量分析）
@@ -28031,6 +28610,7 @@ declare class Measure extends BaseThing {
      * @param [options.showArea = true] - 是否显示横切面积
      * @param [options.polygonWall] - 围合的墙样式
      * @param [options.labelHeight] - 各边界点高度结果文本的样式
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 体积测量控制类 对象
      */
     volume(options?: {
@@ -28046,17 +28626,20 @@ declare class Measure extends BaseThing {
         showArea?: boolean;
         polygonWall?: PolygonEntity.StyleOptions;
         labelHeight?: LabelEntity.StyleOptions;
+        decimal?: number;
     }): Promise<VolumeMeasure | any>;
     /**
      * 高度测量
      * @param [options] - 控制参数
      * @param [options.style] - 路线的样式
      * @param [options.unit = 'auto'] - 计量单位,{@link MeasureUtil#formatDistance}可选值：auto、m、km、mile、zhang 。auto时根据距离值自动选用k或km
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 高度测量 对象
      */
     height(options?: {
         style?: PolylineEntity.StyleOptions;
         unit?: string;
+        decimal?: number;
     }): Promise<HeightMeasure | any>;
     /**
      * 三角高度测量，
@@ -28064,20 +28647,26 @@ declare class Measure extends BaseThing {
      * @param [options] - 控制参数
      * @param [options.style] - 路线的样式
      * @param [options.unit = 'auto'] - 计量单位,{@link MeasureUtil#formatDistance}可选值：auto、m、km、mile、zhang 。auto时根据距离值自动选用k或km
+     * @param [options.decimal = 2] - 显示的文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 三角高度测量控制类 对象
      */
     heightTriangle(options?: {
         style?: PolylineEntity.StyleOptions;
         unit?: string;
+        decimal?: number;
     }): Promise<HeightTriangleMeasure | any>;
     /**
      * 角度测量
      * @param [options] - 控制参数
      * @param [options.style] - 路线的样式，默认为箭头线
+     * @param [options.angleDecimal = 1] - 显示的 角度值 文本中保留的小数位
+     * @param [options.decimal = 2] - 显示的 距离值 文本中保留的小数位
      * @returns 绘制创建完成的Promise，返回 角度测量控制类 对象
      */
     angle(options?: {
         style?: PolylineEntity.StyleOptions;
+        angleDecimal?: number;
+        decimal?: number;
     }): Promise<AngleMeasure | any>;
     /**
      * 坐标测量
@@ -29499,7 +30088,7 @@ declare class TilesetFlat extends TilesetEditBase {
      */
     addArea(positions: string[] | any[][] | LngLatPoint[] | Cesium.Cartesian3[], options?: {
         height?: any;
-    }): any;
+    }): Promise<any>;
     /**
      * 根据id获取区域对象
      * @param id - id值
@@ -30742,27 +31331,45 @@ declare namespace MeasureUtil {
     /**
      * 格式化显示距离值, 可指定单位
      * @param val - 距离值，米
-     * @param [unit = 'auto'] - 计量单位, 可选值：auto、m、km、mile、zhang 。auto时根据距离值自动选用k或km
-     * @param [lang = 0] - 使用的语言
+     * @param [options] - 参数：
+     * @param [options.unit = 'auto'] - 计量单位, 可选值：auto、m、km、mile、zhang 。auto时根据距离值自动选用k或km
+     * @param [options.lang = 0] - 使用的语言
+     * @param [options.decimal = 2] - 保留的小数位
      * @returns 带单位的格式化距离值字符串，如：20.17 米
      */
-    function formatDistance(val: number, unit?: string, lang?: LangType): string;
+    function formatDistance(val: number, options?: {
+        unit?: string;
+        lang?: LangType;
+        decimal?: number;
+    }): string;
     /**
      * 格式化显示面积值, 可指定单位
      * @param val - 面积值，平方米
-     * @param [unit = 'auto'] - 计量单位，可选值：auto、m、km、mu、ha 。auto时根据面积值自动选用m或km
-     * @param [lang = 0] - 使用的语言
+     * @param [options] - 参数：
+     * @param [options.unit = 'auto'] - 计量单位，可选值：auto、m、km、mu、ha 。auto时根据面积值自动选用m或km
+     * @param [options.lang = 0] - 使用的语言
+     * @param [options.decimal = 2] - 保留的小数位
      * @returns 带单位的格式化面积值字符串，如：20.21 平方公里
      */
-    function formatArea(val: number, unit?: string, lang?: LangType): string;
+    function formatArea(val: number, options?: {
+        unit?: string;
+        lang?: LangType;
+        decimal?: number;
+    }): string;
     /**
      * 格式化显示体积值, 可指定单位
      * @param val - 体积值，立方米
-     * @param [unit = 'auto'] - 计量单位，当前无用，备用参数
-     * @param [lang = 0] - 使用的语言
+     * @param [options] - 参数：
+     * @param [options.unit = 'auto'] - 计量单位，当前无用，备用参数
+     * @param [options.lang = 0] - 使用的语言
+     * @param [options.decimal = 2] - 保留的小数位
      * @returns 带单位的格式化体积值字符串，如：20.21 方
      */
-    function formatVolume(val: number, unit?: string, lang?: LangType): string;
+    function formatVolume(val: number, options?: {
+        unit?: string;
+        lang?: LangType;
+        decimal?: number;
+    }): string;
 }
 
 /**
@@ -32017,14 +32624,14 @@ declare namespace Util {
      */
     function isPCBroswer(): boolean;
     /**
-     * 执行alert弹窗
+     * 执行alert弹窗（手动单击确定关闭窗口）
      * @param msg - 弹窗内的内容
      * @param title - 弹窗的标题
      * @returns 无
      */
     function alert(msg: string, title: string): void;
     /**
-     * 执行msg提示窗
+     * 执行msg提示窗（自动消失）
      * @param msg - 弹窗内的内容
      * @returns 无
      */

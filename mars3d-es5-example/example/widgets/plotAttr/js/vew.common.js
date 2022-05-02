@@ -27,7 +27,7 @@ $(function () {
 //     $("#tab_plot").click();
 // }
 
-let storageName = "mars3d_plotAttr";
+var storageName = "mars3d_plotAttr";
 
 function tab2attr() {
   // $("#tab_attr").removeClass('disabled');

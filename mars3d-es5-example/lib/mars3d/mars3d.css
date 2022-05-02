@@ -1,8 +1,8 @@
 /**
  * Mars3D三维可视化平台  mars3d
  *
- * 版本信息：v3.3.5
- * 编译日期：2022-04-18 17:39:29
+ * 版本信息：v3.3.7
+ * 编译日期：2022-05-02 10:58:41
  * 版权所有：Copyright by 火星科技  http://mars3d.cn
  * 使用单位：免费公开版 ，2022-02-01
  */
@@ -16,8 +16,11 @@
   overflow: hidden;
   position: relative;
 }
-.cesium-viewer .cesium-widget-credits {
+.mars3d-container .cesium-widget-credits {
   display: none;
+}
+.mars3d-container .mars3d-vrButton {
+  right: auto !important;
 }
 /**右键菜单*/
 .mars3d-contextmenu {
@@ -479,6 +482,12 @@
   border-radius: 2px;
   margin: -2px;
   box-sizing: content-box;
+}
+.mars3d-divBillboardEntity {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 /**内置的DivGraphic通用样式【动画点】*/
 .mars3d-animation-point,

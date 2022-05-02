@@ -54,8 +54,6 @@
       </div>
     </div>
 
-
-
     <script src="./js/common.js"></script>
     <script type="text/javascript">
       "use script"; //开发环境建议开启严格模式
@@ -138,10 +136,18 @@
             radii: new Cesium.Cartesian3(2000.0, 2000.0, 2000.0),
             maximumConeDegree: 90,
             material: mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.EllipsoidElectric, {
-              color: Cesium.Color.GREEN,
+              color: new Cesium.Color(0.0, 1.0, 0.0, 1.0),
               speed: 5.0,
             }),
           },
+          translucent: false, // 半透明
+          renderState: {
+            blending: Cesium.BlendingState.PRE_MULTIPLIED_ALPHA_BLEND, // 渲染策略 覆盖默认渲染
+            depthTest: { enabled: true },
+            depthMask: true,
+          },
+          asynchronous: false,
+          attr: { remark: "示例3" },
         });
         graphicLayer.addGraphic(graphic); //还可以另外一种写法: graphic.addTo(graphicLayer)
       }
@@ -408,7 +414,7 @@
         graphicLayer.addGraphic(graphicWai);
       }
 
-//在图层级处理一些事物
+      //在图层级处理一些事物
       function initLayerManager(graphicLayer) {
         //在layer上绑定监听事件
         graphicLayer.on(mars3d.EventType.click, function (event) {
@@ -796,6 +802,6 @@
         let height = haoutil.math.random(1000, 9000);
         return new mars3d.LngLatPoint(jd, wd, height);
       }
-        </script>
+    </script>
   </body>
 </html>

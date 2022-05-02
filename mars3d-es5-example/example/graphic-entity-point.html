@@ -24,7 +24,7 @@
       type="text/javascript"
       src="../lib/include-lib.js"
       libpath="../lib/"
-      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,layer,haoutil,mars3d"
+      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,layer,haoutil,mars3d,mars3d-widget"
     ></script>
 
     <link href="css/style.css" rel="stylesheet" />
@@ -78,8 +78,6 @@
     <!-- 切换视角到模型或地形（山区）的快捷按钮 -->
     <script type="text/javascript" src="js/center_terrain_3dtiles.js"></script>
 
-
-
     <script src="./js/common.js"></script>
     <script type="text/javascript">
       "use script"; //开发环境建议开启严格模式
@@ -96,6 +94,28 @@
         //创建矢量数据图层
         let graphicLayer = new mars3d.layer.GraphicLayer();
         map.addLayer(graphicLayer);
+
+        //创建完成，事件监听
+        graphicLayer.on(mars3d.EventType.drawCreated, function (e) {
+          let graphic = e.graphic;
+          if (!graphicLayer.isContinued) {
+            startEditing(graphic);
+          }
+        });
+
+        //编辑修改了模型
+        graphicLayer.on(
+          [mars3d.EventType.editStart, mars3d.EventType.editMovePoint, mars3d.EventType.editStyle, mars3d.EventType.editRemovePoint],
+          function (e) {
+            let graphic = e.graphic;
+            startEditing(graphic);
+          }
+        );
+
+        //停止编辑修改模型
+        graphicLayer.on([mars3d.EventType.editStop, mars3d.EventType.removeGraphic], function (e) {
+          stopEditing();
+        });
 
         //图层管理的相关处理
         initLayerManager(graphicLayer);
@@ -222,7 +242,7 @@
         graphicLayer.addGraphic(graphic);
       }
 
-//在图层级处理一些事物
+      //在图层级处理一些事物
       function initLayerManager(graphicLayer) {
         //在layer上绑定监听事件
         graphicLayer.on(mars3d.EventType.click, function (event) {
@@ -610,6 +630,38 @@
         let height = haoutil.math.random(1000, 9000);
         return new mars3d.LngLatPoint(jd, wd, height);
       }
-        </script>
+
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
+      let timeTik;
+
+      function startEditing(graphic) {
+        clearTimeout(timeTik);
+
+        if (!graphic._conventStyleJson) {
+          graphic.options.style = graphic.toJSON().style; //因为示例中的样式可能有复杂对象，需要转为单个json简单对象
+          graphic._conventStyleJson = true; //只处理一次
+        }
+
+        let plotAttr = mars3d.widget.getClass("widgets/plotAttr/widget.js");
+        if (plotAttr && plotAttr.isActivate) {
+          plotAttr.startEditing(graphic, graphic.coordinates);
+        } else {
+          mars3d.widget.activate({
+            map: map,
+            uri: "widgets/plotAttr/widget.js",
+            name: "属性编辑",
+            graphic: graphic,
+            lonlats: graphic.coordinates,
+          });
+        }
+      }
+
+      function stopEditing() {
+        timeTik = setTimeout(function () {
+          mars3d.widget.disable("widgets/plotAttr/widget.js");
+        }, 200);
+      }
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
+    </script>
   </body>
 </html>

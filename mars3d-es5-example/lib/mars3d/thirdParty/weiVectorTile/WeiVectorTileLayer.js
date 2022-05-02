@@ -1,5 +1,4 @@
 //按mars3d规范，将CesiumVectorTile封装下
-//CesiumVectorTile的API文档，解压Document.rar后参考 Document/Cesium.VectorTileImageryProvider.html
 
 ;(function (window) {
   class WeiVectorTileLayer extends mars3d.layer.BaseTileLayer {
@@ -9,7 +8,7 @@
     }
   }
   function createImageryProvider(options) {
-    return new Cesium.VectorTileImageryProvider(options)
+    return new CesiumVectorTile.VectorTileImageryProvider(options) //CesiumVectorTile.js中
   }
   WeiVectorTileLayer.createImageryProvider = createImageryProvider
 

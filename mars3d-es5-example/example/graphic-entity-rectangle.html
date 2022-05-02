@@ -24,7 +24,7 @@
       type="text/javascript"
       src="../lib/include-lib.js"
       libpath="../lib/"
-      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,layer,haoutil,mars3d"
+      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,layer,haoutil,mars3d,mars3d-widget"
     ></script>
 
     <link href="css/style.css" rel="stylesheet" />
@@ -52,6 +52,24 @@
           <label for="chkContextMenu"> 右键菜单绑定 </label>
         </div>
       </div>
+      <div>
+        数据维护：
+        <input id="btnStartDraw" type="button" class="btn btn-primary" value="绘制矩形" title="在图上绘制新增一个矢量数据" />
+        <input id="btnStartDrawHeight" type="button" class="btn btn-primary" value="立体矩形" title="在图上绘制新增一个矢量数据" />
+        <div class="checkbox checkbox-primary checkbox-inline">
+          <input id="chkHasEdit" class="styled" type="checkbox" />
+          <label for="chkHasEdit"> 是否编辑 </label>
+        </div>
+      </div>
+
+      <div>
+        数据管理：
+        <input type="button" class="btn btn-primary" value="清除" id="btnClear" />
+        <input id="btnExpFile" type="button" class="btn btn-primary" value="保存GeoJSON" title="保存为GeoJSON文件" />
+        <input id="btnImpFile" type="button" class="btn btn-primary" value="打开GeoJSON" title="打开之前保存的GeoJSON文件" />
+
+        <input id="input_draw_file" type="file" accept=".json,.geojson" style="display: none" />
+      </div>
     </div>
 
     <script src="./js/common.js"></script>
@@ -59,7 +77,7 @@
       "use script"; //开发环境建议开启严格模式
 
       var map;
-
+      let graphicLayer;
       function initMap(options) {
         //合并属性参数，可覆盖config.json中的对应配置
         let mapOptions = mars3d.Util.merge(options, {
@@ -72,8 +90,30 @@
         map = new mars3d.Map("mars3dContainer", mapOptions);
 
         //创建Graphic图层
-        let graphicLayer = new mars3d.layer.GraphicLayer();
+        graphicLayer = new mars3d.layer.GraphicLayer();
         map.addLayer(graphicLayer);
+
+        //创建完成，事件监听
+        graphicLayer.on(mars3d.EventType.drawCreated, function (e) {
+          let graphic = e.graphic;
+          if (!graphicLayer.isContinued) {
+            startEditing(graphic);
+          }
+        });
+
+        //编辑修改了模型
+        graphicLayer.on(
+          [mars3d.EventType.editStart, mars3d.EventType.editMovePoint, mars3d.EventType.editStyle, mars3d.EventType.editRemovePoint],
+          function (e) {
+            let graphic = e.graphic;
+            startEditing(graphic);
+          }
+        );
+
+        //停止编辑修改模型
+        graphicLayer.on([mars3d.EventType.editStop, mars3d.EventType.removeGraphic], function (e) {
+          stopEditing();
+        });
 
         //图层管理的相关处理
         initLayerManager(graphicLayer);
@@ -223,6 +263,49 @@
           } else {
             graphicLayer.unbindContextMenu(true);
           }
+        });
+
+        //新增绘制
+        $("#btnStartDraw").click(function () {
+          //开始绘制
+          graphicLayer.startDraw({
+            type: "rectangle",
+            // maxPointNum: 2, //可以限定最大点数，2个点绘制后自动结束
+            style: {
+              color: "#ffff00",
+              opacity: 0.6,
+              outline: true,
+              outlineWidth: 3,
+              outlineColor: "#ffffff",
+              label: {
+                text: "我是火星科技",
+                font_size: 18,
+                color: "#ffffff",
+                distanceDisplayCondition: true,
+                distanceDisplayCondition_far: 500000,
+                distanceDisplayCondition_near: 0,
+              },
+            },
+            success: function (graphic) {
+              console.log("绘制完成", graphic);
+            },
+          });
+        });
+
+        //新增绘制
+        $("#btnStartDrawHeight").click(function () {
+          //开始绘制
+          graphicLayer.startDraw({
+            type: "rectangle",
+            style: {
+              color: "#00ff00",
+              opacity: 0.5,
+              diffHeight: 600,
+            },
+            success: function (graphic) {
+              console.log("绘制完成", graphic);
+            },
+          });
         });
 
         $("#chkHasEdit").change(function () {
@@ -564,6 +647,38 @@
         let height = haoutil.math.random(1000, 9000);
         return new mars3d.LngLatPoint(jd, wd, height);
       }
+
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
+      let timeTik;
+
+      function startEditing(graphic) {
+        clearTimeout(timeTik);
+
+        if (!graphic._conventStyleJson) {
+          graphic.options.style = graphic.toJSON().style; //因为示例中的样式可能有复杂对象，需要转为单个json简单对象
+          graphic._conventStyleJson = true; //只处理一次
+        }
+
+        let plotAttr = mars3d.widget.getClass("widgets/plotAttr/widget.js");
+        if (plotAttr && plotAttr.isActivate) {
+          plotAttr.startEditing(graphic, graphic.coordinates);
+        } else {
+          mars3d.widget.activate({
+            map: map,
+            uri: "widgets/plotAttr/widget.js",
+            name: "属性编辑",
+            graphic: graphic,
+            lonlats: graphic.coordinates,
+          });
+        }
+      }
+
+      function stopEditing() {
+        timeTik = setTimeout(function () {
+          mars3d.widget.disable("widgets/plotAttr/widget.js");
+        }, 200);
+      }
+      //附加：激活属性编辑widget【非必需，可以注释该方法内部代码】
     </script>
   </body>
 </html>

@@ -26,10 +26,11 @@
       type="text/javascript"
       src="../lib/include-lib.js"
       libpath="../lib/"
-      include="jquery,font-awesome,bootstrap,layer,haoutil,mars3d"
+      include="jquery,font-awesome,bootstrap,bootstrap-checkbox,layer,haoutil,mars3d"
     ></script>
 
     <link href="css/style.css" rel="stylesheet" />
+    <link href="css/divGraphic.css" rel="stylesheet" />
   </head>
 
   <body class="dark">
@@ -37,6 +38,28 @@
     <div id="mask" class="signmask" onclick="removeMask()"></div>
 
     <div id="mars3dContainer" class="mars3d-container"></div>
+
+    <div class="infoview">
+      <div>
+        图层状态：
+        <div class="checkbox checkbox-primary checkbox-inline">
+          <input id="chkShow" class="styled" type="checkbox" checked />
+          <label for="chkShow"> 显示隐藏 </label>
+        </div>
+        <div class="checkbox checkbox-primary checkbox-inline">
+          <input id="chkPopup" class="styled" type="checkbox" />
+          <label for="chkPopup"> Popup绑定 </label>
+        </div>
+        <div class="checkbox checkbox-primary checkbox-inline">
+          <input id="chkTooltip" class="styled" type="checkbox" />
+          <label for="chkTooltip"> Tooltip绑定 </label>
+        </div>
+        <div class="checkbox checkbox-primary checkbox-inline">
+          <input id="chkContextMenu" class="styled" type="checkbox" />
+          <label for="chkContextMenu"> 右键菜单绑定 </label>
+        </div>
+      </div>
+    </div>
 
     <script src="./js/common.js"></script>
     <script type="text/javascript">
@@ -92,6 +115,117 @@
           // },
         });
         map.addLayer(layer);
+
+        $("#chkShow").change(function () {
+          let val = $(this).is(":checked");
+
+          layer.show = val; //显示隐藏
+        });
+
+        $("#chkPopup").change(function () {
+          let val = $(this).is(":checked");
+
+          if (val) {
+            bindLayerPopup(layer);
+          } else {
+            layer.unbindPopup();
+          }
+        });
+
+        //可在图层上绑定tooltip,对所有加到这个图层的矢量数据都生效
+        $("#chkTooltip").change(function () {
+          let val = $(this).is(":checked");
+          if (val) {
+            layer.bindTooltip("我是layer上绑定的Tooltip");
+          } else {
+            layer.unbindTooltip();
+          }
+        });
+
+        //可在图层绑定右键菜单,对所有加到这个图层的矢量数据都生效
+        // bindLayerContextMenu(graphicLayer);
+        $("#chkContextMenu").change(function () {
+          let val = $(this).is(":checked");
+          if (val) {
+            bindLayerContextMenu(layer);
+          } else {
+            layer.unbindContextMenu(true);
+          }
+        });
+      }
+
+      function bindLayerPopup(graphicLayer) {
+        graphicLayer.bindPopup(function (event) {
+          let attr = event.graphic?.attr || {};
+          attr.test1 = "测试属性";
+          // attr["视频"] = `<video src='//data.mars3d.cn/file/video/lukou.mp4' controls autoplay style="width: 300px;" ></video>`;
+
+          return mars3d.Util.getTemplateHtml({ title: "layer上绑定的Popup", template: "all", attr: attr });
+        });
+      }
+
+      function bindLayerContextMenu(graphicLayer) {
+        graphicLayer.bindContextMenu([
+          {
+            text: "开始编辑对象",
+            iconCls: "fa fa-edit",
+            show: function (e) {
+              let graphic = e.graphic;
+              if (!graphic || !graphic.startEditing) {
+                return false;
+              }
+              return !graphic.isEditing;
+            },
+            callback: function (e) {
+              let graphic = e.graphic;
+              if (!graphic) {
+                return false;
+              }
+              if (graphic) {
+                graphicLayer.startEditing(graphic);
+              }
+            },
+          },
+          {
+            text: "停止编辑对象",
+            iconCls: "fa fa-edit",
+            show: function (e) {
+              let graphic = e.graphic;
+              if (!graphic) {
+                return false;
+              }
+              return graphic.isEditing;
+            },
+            callback: function (e) {
+              let graphic = e.graphic;
+              if (!graphic) {
+                return false;
+              }
+              if (graphic) {
+                graphicLayer.stopEditing(graphic);
+              }
+            },
+          },
+          {
+            text: "删除对象",
+            iconCls: "fa fa-trash-o",
+            show: (event) => {
+              let graphic = event.graphic;
+              if (!graphic || graphic.isDestroy) {
+                return false;
+              } else {
+                return true;
+              }
+            },
+            callback: function (e) {
+              let graphic = e.graphic;
+              if (!graphic) {
+                return;
+              }
+              graphicLayer.removeGraphic(graphic);
+            },
+          },
+        ]);
       }
     </script>
   </body>

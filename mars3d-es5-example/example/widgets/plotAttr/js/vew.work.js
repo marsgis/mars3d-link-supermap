@@ -127,6 +127,7 @@ var plotEdit = {
         }
         let attrName = edit.name;
         let attrVal = attr.style[attrName] ?? edit.defval;
+
         if (!edit.isImpact) {
           attr.style[attrName] = attrVal;
         }
@@ -685,7 +686,13 @@ var plotEdit = {
         newAttr.attr[attrName] = attrVal;
         break;
     }
-    thisWidget.updateAttr2map(newAttr);
+
+    if (newAttr.style) {
+      thisWidget.updateStyle2map(newAttr.style);
+    } else if (newAttr.attr) {
+      thisWidget.updateAttr2map(newAttr.attr);
+    }
+
     return true;
   },
 };

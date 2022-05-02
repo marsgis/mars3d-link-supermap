@@ -49,6 +49,10 @@
         let mapOptions = mars3d.Util.merge(options, {
           scene: {
             center: { lat: 29.205394, lng: 106.530809, alt: 32195, heading: 2, pitch: -44 },
+            showSun: false,
+            showMoon: false,
+            showSkyBox: false,
+            showSkyAtmosphere: false,
           },
           baseLayerPicker: false,
         });
@@ -57,14 +61,6 @@
         map = new mars3d.Map("mars3dContainer", mapOptions);
 
         map.basemap = 2017; //蓝色底图
-
-        //调节场景环境
-        map.scene.globe.globeAlpha = 0.001;
-        map.scene.undergroundMode = true;
-        map.scene.sun.show = false;
-        map.scene.moon.show = false;
-        map.scene.skyBox.show = false;
-        map.scene.skyAtmosphere.show = false;
 
         //geojson图层
         let geoJsonLayer1 = new mars3d.layer.GeoJsonLayer({

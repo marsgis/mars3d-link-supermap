@@ -25,7 +25,7 @@
       type="text/javascript"
       src="../lib/include-lib.js"
       libpath="../lib/"
-      include="jquery,font-awesome,bootstrap,layer,haoutil,mars3d"
+      include="jquery,font-awesome,bootstrap,layer,haoutil,mars3d,mars3d-widget"
     ></script>
 
     <link href="css/style.css" rel="stylesheet" />
@@ -72,6 +72,17 @@
               show: true,
             },
           ],
+        });
+        //poi查询栏
+        activatePOIQuery(map);
+      }
+
+      //附加：激活POI查询widget，用于在底图上叠加显示数据
+      function activatePOIQuery(map) {
+        mars3d.widget.activate({
+          map: map,
+          name: "POI查询",
+          uri: "widgets/queryGaodePOI/widget.js",
         });
       }
     </script>

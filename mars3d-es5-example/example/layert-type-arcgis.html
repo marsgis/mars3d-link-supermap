@@ -165,6 +165,8 @@
             },
           ],
         });
+
+        addLayer();
       }
 
       //叠加的图层
@@ -179,10 +181,10 @@
           url: "//server.mars3d.cn/arcgis/rest/services/mars/guihua/MapServer",
           // layerDefs: `{ 0: "用地编号 = 'R2'" }`,
 
-          // url: '//server.mars3d.cn/arcgis/rest/services/crs/ssjzw4326/MapServer',
-          // url: '//server.mars3d.cn/arcgis/rest/services/crs/ssjzw4490/MapServer', //大地2000地理坐标系
-          // url: '//server.mars3d.cn/arcgis/rest/services/crs/ssjzw4548/MapServer', //大地2000高斯投影坐标系
-          // url: '//server.mars3d.cn/arcgis/rest/services/crs/ssjzw2000/MapServer',  //大地2000高斯投影坐标系
+          // url: "//server.mars3d.cn/arcgis/rest/services/crs/ssjzw4326/MapServer",
+          // url: "//server.mars3d.cn/arcgis/rest/services/crs/ssjzw4490/MapServer", //大地2000地理坐标系
+          // url: "//server.mars3d.cn/arcgis/rest/services/crs/ssjzw4548/MapServer", //大地2000高斯投影坐标系
+          // url: "//server.mars3d.cn/arcgis/rest/services/crs/ssjzw2000/MapServer", //大地2000高斯投影坐标系
           // usePreCachedTilesIfAvailable: false, //大地2000高斯投影坐标系时，如果是瓦片，请打开此参数
           highlight: {
             clampToGround: true,
@@ -200,8 +202,8 @@
         map.addLayer(arcGisLayer);
 
         //绑定事件
-        arcGisLayer.on(mars3d.EventType.loadConfig, function (event) {
-          console.log("加载完成服务信息", event);
+        arcGisLayer.on(mars3d.EventType.load, function (event) {
+          console.log("图层加载完成", event);
         });
 
         arcGisLayer.on(mars3d.EventType.click, function (event) {

@@ -98,6 +98,8 @@
       <input type="button" class="btn btn-primary" value="仅3D" onclick="mapManager.viewTo3d();" />
     </div>
 
+    <div id="tipView" class="info-tips">(1) 三维事件目前监听不灵敏，视角同步不够平滑。</div>
+
     <script src="./js/common.js"></script>
     <script type="text/javascript">
       "use script"; //开发环境建议开启严格模式
@@ -142,6 +144,7 @@
         },
         bind3D: function (map3d) {
           this.map3d = map3d;
+          map3d.camera.percentageChanged = 0.01;
           this.bind3dEvent();
           this._map_extentChangeHandler();
         },

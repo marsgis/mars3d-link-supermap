@@ -679,6 +679,11 @@
       function startEditing(graphic) {
         clearTimeout(timeTik);
 
+        if (!graphic._conventStyleJson) {
+          graphic.options.style = graphic.toJSON().style; //因为示例中的样式可能有复杂对象，需要转为单个json简单对象
+          graphic._conventStyleJson = true; //只处理一次
+        }
+
         let plotAttr = mars3d.widget.getClass("widgets/plotAttr/widget.js");
         if (plotAttr && plotAttr.isActivate) {
           plotAttr.startEditing(graphic, graphic.coordinates);

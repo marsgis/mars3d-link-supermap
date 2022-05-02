@@ -287,7 +287,7 @@
 
         mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/tle.json" })
           .then(function (arr) {
-            initData(arr);
+            initData(arr.list);
           })
           .catch(function (error) {
             console.log("加载JSON出错", error);

@@ -53,7 +53,7 @@
       <input type="button" class="btn btn-primary" value="单体化面" onclick="showDantihuaDemo()" />
     </div>
 
-    <div class="infoview" style="overflow: auto; right: 5px; left: auto; top: 80px; max-height:88%">
+    <div class="infoview" style="overflow: auto; right: 5px; left: auto; top: 80px; max-height: 88%">
       <ul id="treeOverlays" class="ztree"></ul>
     </div>
 
@@ -205,7 +205,7 @@
           name: "全国省界",
           url: "//data.mars3d.cn/file/geojson/areas/100000_full.json",
           symbol: {
-            type: "polylineCombine",
+            type: "polylineP", //polylineCombine，material添加材质方法不同
             styleOptions: {
               width: 2,
               material: mars3d.MaterialUtil.createMaterial(mars3d.MaterialType.LineFlow, {
@@ -216,6 +216,7 @@
               }),
               label: {
                 text: "{name}",
+                position: "{center}", //省会位置center
                 font_size: 30,
                 color: "#ffffff",
                 outline: true,
@@ -228,8 +229,6 @@
                 distanceDisplayCondition: true,
                 distanceDisplayCondition_far: 12000000,
                 distanceDisplayCondition_near: 0,
-
-                position: "{center}", //省会位置center
                 setHeight: 10000,
               },
             },

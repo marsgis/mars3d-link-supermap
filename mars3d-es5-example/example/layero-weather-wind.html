@@ -78,6 +78,7 @@
           dropRateBump: 0.01,
           speedFactor: 0.2,
           lineWidth: 4.0,
+          lineColor: "#FF0000",
         });
         map.addLayer(windLayer);
 
@@ -86,21 +87,26 @@
         });
 
         //参数调整面板
-        function onParticleSystemOptionsChange() {
-          windLayer.setOptions();
+        function onParticleSystemOptionsChange(key, e) {
+          const style = {};
+          style[key] = e;
+          windLayer.setOptions(style);
         }
 
         // eslint-disable-next-line no-undef
         let gui = new dat.GUI({
           autoPlace: false,
         });
-        gui.add(windLayer, "particlesNumber", 1, 256 * 256, 1).onFinishChange(onParticleSystemOptionsChange);
-        gui.add(windLayer, "fixedHeight", 1, 10000, 1).onFinishChange(onParticleSystemOptionsChange);
-        gui.add(windLayer, "fadeOpacity", 0.9, 0.999, 0.001).onFinishChange(onParticleSystemOptionsChange);
-        gui.add(windLayer, "dropRate", 0.0, 0.1).onFinishChange(onParticleSystemOptionsChange);
-        gui.add(windLayer, "dropRateBump", 0, 0.2).onFinishChange(onParticleSystemOptionsChange);
-        gui.add(windLayer, "speedFactor", 0.05, 1).onFinishChange(onParticleSystemOptionsChange);
-        gui.add(windLayer, "lineWidth", 0.01, 16.0).onFinishChange(onParticleSystemOptionsChange);
+        gui.add(windLayer, "particlesNumber", 1, 256 * 256, 1).onFinishChange((e) => onParticleSystemOptionsChange("particlesNumber", e));
+        gui.add(windLayer, "fixedHeight", 1, 10000, 1).onFinishChange((e) => onParticleSystemOptionsChange("fixedHeight", e));
+        gui.add(windLayer, "fadeOpacity", 0.9, 0.999, 0.001).onFinishChange((e) => onParticleSystemOptionsChange("fadeOpacity", e));
+        gui.add(windLayer, "dropRate", 0.0, 0.1).onFinishChange((e) => onParticleSystemOptionsChange("dropRate", e));
+        gui.add(windLayer, "dropRateBump", 0, 0.2).onFinishChange((e) => onParticleSystemOptionsChange("dropRateBump", e));
+        gui.add(windLayer, "speedFactor", 0.05, 1).onFinishChange((e) => onParticleSystemOptionsChange("speedFactor", e));
+        gui.add(windLayer, "lineWidth", 0.01, 16.0).onFinishChange((e) => onParticleSystemOptionsChange("lineWidth", e));
+        gui.addColor(windLayer, "lineColor").onFinishChange((color) => {
+          windLayer.colors = [color];
+        });
 
         gui.domElement.classList.add("infoview");
         document.body.appendChild(gui.domElement);
