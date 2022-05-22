@@ -105,6 +105,8 @@ npm run serve
 
 ```
 npm run build
+
+npm run serve:dist  //测试dist运行状态
 ```
 
 ## 运行效果
