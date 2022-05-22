@@ -72,7 +72,7 @@
  不是所有功能都可以正常用，因为：
 
 - 使用的是超图版Cesium，所以mars3d-cesium的所有修改都无效，影响到wfs、模型编辑、地形编辑等功能(可以用超图的相关API来替代实现)
-- 超图Cesium修改了地球的默认参数，造成3dtiles加载位置偏差很大。
+- 超图Cesium修改了地球的半径参数(Cesium.Ellipsoid.WGS84值不同，原生Cesium是椭球，超图是圆球)，造成3dtiles加载位置偏差很大。
 
 
 
