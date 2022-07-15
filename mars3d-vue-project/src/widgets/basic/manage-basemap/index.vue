@@ -1,5 +1,5 @@
 <template>
-  <mars-dialog title="底图" :width="380" :position="{ top: 50, right: 10 }">
+  <mars-dialog title="底图" :width="380" :position="{ top: 60, right: 10 }">
     <ul class="basemap">
       <li v-for="(item, i) in baseMaps" :key="i" class="basemap-card" :class="{ 'active-card': active === item.uuid }" @click="changeBaseMaps(item)">
         <div><img class="icon" :src="`${item.options.icon || 'img/basemaps/bingAerial.png'}`" /></div>
@@ -7,7 +7,7 @@
       </li>
     </ul>
     <template #footer>
-      <a-switch v-model:checked="chkHasTerrain" @change="changeTerrain" />
+      <mars-switch v-model:checked="chkHasTerrain" @change="changeTerrain" />
       <span class="f-ml">显示地形</span>
     </template>
   </mars-dialog>

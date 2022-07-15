@@ -1,0 +1,40 @@
+.mars3d-camera-content {
+  /* 防止下面的line一直随img动画 */
+  height: 30px;
+}
+.mars3d-camera-img {
+  width: 30px;
+  height: 30px;
+  animation: cameraMove 1s linear infinite alternate;
+  -webkit-animation: cameraMove 1s linear infinite alternate;
+}
+@keyframes cameraMove {
+  from {
+    margin-top: 20px;
+  }
+  to {
+    margin-top: 0px;
+  }
+}
+@-webkit-keyframes cameraMove {
+  from {
+    margin-top: 20px;
+  }
+  to {
+    margin-top: 0px;
+  }
+}
+.mars3d-camera-line {
+  height: 120px;
+  width: 5px;
+  margin-top: 20px;
+  border-left: 3px dashed #5b8fee;
+  margin-left: calc(50% - 1px);
+}
+.mars3d-camera-point {
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: calc(50% - 3px);
+  background-color: #5b8fee;
+}

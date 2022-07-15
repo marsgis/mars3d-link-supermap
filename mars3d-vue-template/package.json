@@ -1,6 +1,6 @@
 {
   "name": "mars3d-vue-template",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Mars3D平台,Vue最简项目模版",
   "main": "index.js",
   "scripts": {
@@ -10,26 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "mars3d": "^3.3.7",
-    "mars3d-supermap": "^3.3.7",
-    "vue": "^3.2.25"
+    "mars3d": "^3.4.0",
+    "mars3d-supermap": "^3.4.0",
+    "vue": "^3.2.27"
   },
   "devDependencies": {
     "@types/node": "^17.0.13",
-    "@vitejs/plugin-vue": "^2.0.0",
-    "fs-extra": "^10.0.0",
-    "rollup-plugin-external-globals": "^0.6.1",
-    "serve-static": "^1.14.2",
+    "@vitejs/plugin-vue": "^2.0.0", 
+    "less": "^4.1.2",
     "typescript": "^4.4.4",
-    "vite": "^2.7.2",
+    "vite": "^2.9.14",
     "vue-tsc": "^0.29.8"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marsgis/mars3d-vue-template/.git"
+    "url": "https://github.com/marsgis/mars3d-vue-template.git"
   },
   "bugs": {
-    "url": "https://github.com/marsgis/mars3d-vue-template//issues",
+    "url": "https://github.com/marsgis/mars3d-vue-template/issues",
     "email": "wh@marsgis.cn"
   },
   "keywords": [

@@ -1,0 +1,13 @@
+.toolButton-selected{
+
+  width: 32px;
+  height: 32px;
+  /* border: solid 2px white; */
+  background-color: aqua !important;
+  /* border-radius: 30px; */
+  -webkit-box-shadow: 0 0 10px rgb(244, 250, 250);
+
+
+}
+
+

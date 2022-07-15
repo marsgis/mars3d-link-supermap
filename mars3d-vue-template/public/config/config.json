@@ -45,11 +45,11 @@
       "geocoder": false,
       "selectionIndicator": false,
 
-      "defaultContextMenu": true,
+      "contextmenu": { "hasDefault": true },
       "zoom": { "insertIndex": 1 },
       "distanceLegend": { "left": "100px", "bottom": "2px" },
       "locationBar": {
-        "fps": true,
+        "fps": false,
         "crs": "CGCS2000_GK_Zone_3",
         "crsDecimal": 0,
         "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div class='hide1000'>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div class='hide700'>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div class='hide700'>视高：{cameraHeight}米</div>"
@@ -71,7 +71,7 @@
         "id": 2021,
         "pid": 10,
         "name": "天地图影像",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/tdt_img.png",
+        "icon": "img/basemaps/tdt_img.png",
         "type": "group",
         "layers": [
           { "name": "底图", "type": "tdt", "layer": "img_d" },
@@ -82,7 +82,7 @@
       {
         "pid": 10,
         "name": "天地图电子",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/tdt_vec.png",
+        "icon": "img/basemaps/tdt_vec.png",
         "type": "group",
         "layers": [
           { "name": "底图", "type": "tdt", "layer": "vec_d" },
@@ -93,7 +93,7 @@
         "pid": 10,
         "name": "高德影像",
         "type": "group",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/gaode_img.png",
+        "icon": "img/basemaps/gaode_img.png",
         "layers": [
           { "name": "底图", "type": "gaode", "layer": "img_d" },
           { "name": "注记", "type": "gaode", "layer": "img_z" }
@@ -103,14 +103,14 @@
         "pid": 10,
         "name": "高德电子",
         "type": "gaode",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/gaode_vec.png",
+        "icon": "img/basemaps/gaode_vec.png",
         "layer": "vec"
       },
       {
         "pid": 10,
         "name": "百度影像",
         "type": "group",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/bd-img.png",
+        "icon": "img/basemaps/bd-img.png",
         "layers": [
           { "name": "底图", "type": "baidu", "layer": "img_d" },
           { "name": "注记", "type": "baidu", "layer": "img_z" }
@@ -119,14 +119,14 @@
       {
         "pid": 10,
         "name": "百度电子",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/bd-vec.png",
+        "icon": "img/basemaps/bd-vec.png",
         "type": "baidu",
         "layer": "vec"
       },
       {
         "pid": 10,
         "name": "腾讯影像",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/gaode_img.png",
+        "icon": "img/basemaps/tencent_img.png",
         "type": "group",
         "layers": [
           { "name": "底图", "type": "tencent", "layer": "img_d" },
@@ -136,14 +136,14 @@
       {
         "pid": 10,
         "name": "腾讯电子",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/gaode_vec.png",
+        "icon": "img/basemaps/tencent_vec.png",
         "type": "tencent",
         "layer": "vec"
       },
       {
         "pid": 10,
         "name": "ArcGIS影像",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/esriWorldImagery.png",
+        "icon": "img/basemaps/esriWorldImagery.png",
         "type": "xyz",
         "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         "enablePickFeatures": false
@@ -151,7 +151,7 @@
       {
         "pid": 10,
         "name": "微软影像",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/bingAerial.png",
+        "icon": "img/basemaps/bingAerial.png",
         "type": "bing",
         "layer": "Aerial"
       },
@@ -159,7 +159,7 @@
         "pid": 10,
         "name": "OSM地图",
         "type": "xyz",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/osm.png",
+        "icon": "img/basemaps/osm.png",
         "url": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         "subdomains": "abc"
       },
@@ -167,7 +167,7 @@
         "id": 2017,
         "pid": 10,
         "name": "蓝色底图",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/bd-c-midnight.png",
+        "icon": "img/basemaps/bd-c-midnight.png",
         "type": "xyz",
         "url": "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
         "chinaCRS": "GCJ02",
@@ -176,7 +176,7 @@
       {
         "pid": 10,
         "name": "黑色底图",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/bd-c-dark.png",
+        "icon": "img/basemaps/bd-c-dark.png",
         "type": "tencent",
         "layer": "custom",
         "style": "4"
@@ -194,7 +194,7 @@
         "pid": 10,
         "name": "离线地图 (供参考)",
         "type": "group",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/google_img.png",
+        "icon": "img/basemaps/google_img.png",
         "layers": [
           {
             "name": "全球",
@@ -226,7 +226,7 @@
       {
         "pid": 10,
         "name": "单张图片 (本地离线)",
-        "icon": "https://muyao1987.gitee.io/cdn/mars3d.cn/img/basemaps/offline.png",
+        "icon": "img/basemaps/offline.png",
         "type": "image",
         "url": "//data.mars3d.cn/file/img/world/world.jpg"
       }
@@ -413,18 +413,17 @@
         "onWidget": "layer-picture-guihua"
       },
       { "id": 30, "name": "矢量数据", "type": "group" },
-      { "id": 3040, "pid": 30, "name": "平台标绘JSON", "type": "group" },
+      { "id": 3030, "pid": 30, "name": "GeoJSON数据", "type": "group" },
       {
         "id": 303011,
-        "pid": 3040,
+        "pid": 3030,
         "type": "geojson",
-        "name": "示例数据",
+        "name": "平台标绘",
         "url": "{dataServer}/file/geojson/mars3d-draw.json",
         "popup": "{type}{name}",
         "show": false,
         "flyTo": true
       },
-      { "id": 3030, "pid": 30, "name": "GeoJSON数据", "type": "group" },
       {
         "pid": 3030,
         "type": "geojson",
@@ -483,10 +482,11 @@
           "type": "polygon",
           "styleOptions": {
             "materialType": "PolyGradient",
-            "color": "rgb(15,176,255)",
-            "opacity": 0.7,
-            "alphaPower": 1.3,
-            "diffHeight": "{gdp}",
+            "materialOptions": {
+              "color": "rgb(15,176,255)",
+              "opacity": 0.7,
+              "alphaPower": 1.3
+            },
             "label": {
               "text": "{name}",
               "opacity": 1,
@@ -549,8 +549,7 @@
         "url": "{dataServer}/file/geojson/xizangyakou.json",
         "symbol": {
           "styleOptions": {
-            "image": "img/marker/mark1.png",
-            "scale": 1,
+            "image": "img/marker/mark-red.png",
             "scaleByDistance": true,
             "scaleByDistance_far": 5000000,
             "scaleByDistance_farValue": 0.5,
@@ -593,7 +592,7 @@
         "url": "{dataServer}/file/geojson/hfty-point.json",
         "symbol": {
           "styleOptions": {
-            "image": "img/marker/mark1.png",
+            "image": "img/marker/mark-red.png",
             "scale": 1,
             "scaleByDistance": true,
             "scaleByDistance_far": 20000,
@@ -659,7 +658,8 @@
         "name": "汽车",
         "url": "{dataServer}/file/czml/car.czml",
         "center": { "lat": 40.894745, "lng": 121.920252, "alt": 904, "heading": 64, "pitch": -67 },
-         "radio": true,
+        "onWidget": "control-clock",
+        "radio": true,
         "flyTo": true
       },
       {
@@ -669,6 +669,7 @@
         "name": "飞行编队",
         "url": "{dataServer}/file/czml/flight.czml",
         "popup": "all",
+        "onWidget": "control-clock",
         "radio": true,
         "flyTo": true
       },
@@ -679,6 +680,7 @@
         "name": "船舶编队",
         "url": "{dataServer}/file/czml/ship.czml",
         "popup": "all",
+        "onWidget": "control-clock",
         "radio": true,
         "flyTo": true
       },
@@ -702,21 +704,38 @@
       { "id": 2010, "pid": 20, "name": "gltf模型", "type": "group" },
       {
         "pid": 2010,
-        "type": "gltf",
+        "type": "graphic",
         "name": "风力发电机",
-        "url": "{dataServer}/gltf/mars/fengche.gltf",
-        "position": { "lng": 117.219071, "lat": 31.828783, "alt": 39.87 },
-        "style": { "scale": 50, "heading": -93 },
+        "data": [
+          {
+            "type": "modelP",
+            "position": [117.219071, 31.828783, 39.87],
+            "style": {
+              "url": "//data.mars3d.cn/gltf/mars/fengche.gltf",
+              "scale": 50,
+              "heading": -93
+            }
+          }
+        ],
         "popup": "示例信息，这是一个风力发电机",
         "center": { "lat": 31.821083, "lng": 117.21832, "alt": 832.64, "heading": 2.3, "pitch": -39.2 }
       },
       {
         "pid": 2010,
-        "type": "gltf",
+        "type": "graphic",
         "name": "起重车",
-        "url": "{dataServer}/gltf/mars/qzcar/GKZY_anim.gltf",
-        "position": { "lng": 117.217458, "lat": 31.815349, "alt": 35.03 },
-        "style": { "scale": 2, "heading": -95, "clampToGround": true },
+        "data": [
+          {
+            "type": "modelP",
+            "position": [117.217458, 31.815349, 35.03],
+            "style": {
+              "url": "//data.mars3d.cn/gltf/mars/qzcar/GKZY_anim.gltf",
+              "scale": 2,
+              "heading": -95,
+              "clampToGround": true
+            }
+          }
+        ],
         "center": { "lat": 31.815363, "lng": 117.215958, "alt": 107.35, "heading": 90.7, "pitch": -26.1 }
       },
 

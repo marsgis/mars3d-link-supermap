@@ -63,7 +63,7 @@ export default ({ mode }: ConfigEnv) => {
       sourcemap: false,
       // 自定义rollup-commonjs插件选项
       commonjsOptions: {
-        include: /node_modules|src\/common/
+        include: /node_modules|packages|src\/common\/store/
       },
       // 自定义底层的 Rollup 打包配置
       rollupOptions: {
