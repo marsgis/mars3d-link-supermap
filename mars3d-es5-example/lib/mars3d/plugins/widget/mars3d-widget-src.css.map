@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://mars3dWidget/./src/theme/widget.scss"],"names":[],"mappings":";;;;;;;AAAA,kBAAkB,cAAc,kBAAkB,YAAY,SAAS,UAAU,YAAY,aAAa,sBAAsB","file":"mars3d-widget-src.css","sourcesContent":[".mars3d-widgetbar{margin:0 auto;position:absolute;bottom:30px;left:20%;width:60%;height:auto;z-index:1987}.mars3d-widgetbar .fa{margin-right:5px}\n"],"sourceRoot":""}
