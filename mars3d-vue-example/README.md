@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://muyao1987.gitee.io/cdn/mars3d.cn/logo.png" width="300px" />
+<img src="//mars3d.cn/logo.png" width="300px" />
 </p>
 
 <p align="center">基于 Vue3.x 的 Mars3D🌎功能示例项目 </p>
@@ -115,8 +115,8 @@ npm run serve:dist  //测试dist运行状态
 
 ### 运行效果  
  [在线体验](http://mars3d.cn/example.html?type=vue)  
-
- ![image](https://muyao1987.gitee.io/cdn/mars3d.cn/xm/example/1.jpg)
+ 
+ ![image](http://marsgis.cn/img/project/mars3d-doc/example1.jpg)
 
 
  
