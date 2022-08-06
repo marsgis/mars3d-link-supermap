@@ -41,12 +41,15 @@
 ### 方式1：原生Cesium库+s3m插件
  mars3d(含Cesium) + s3m独立插件 + mars3d-supermap，需要引入的资源为：
 ```js
-"mars3d": [
-  "Cesium/Widgets/widgets.css", //原生Cesium
-  "Cesium/Cesium.js",
+"mars3d": [    
+  "Cesium-supermap/Widgets/widgets.css", //cesium
+  "Cesium-supermap/Cesium.js",
+  "mars3d/plugins/compatible/cesium-version.js", //cesium版本兼容处理
+  "mars3d/plugins/compatible/cesium-when.js",
   "turf/turf.min.js",
   "mars3d/mars3d.css", //mars3d
   "mars3d/mars3d.js",
+  
   "mars3d/plugins/supermap/SuperMap3D.js", //s3m支持原生cesium的独立插件，参考 https://github.com/SuperMap/iClient3D-for-WebGL
   "mars3d/plugins/supermap/mars3d-supermap.js",//mars3d-supermap简化调用封装
 ],
@@ -65,9 +68,11 @@
   "Cesium-supermap/Widgets/widgets.css", //超图版本Cesium 
   "Cesium-supermap/Cesium.js",
   "mars3d/plugins/compatible/cesium-version.js", //cesium版本兼容处理
+  "mars3d/plugins/compatible/cesium-when.js",
   "turf/turf.min.js",
   "mars3d/mars3d.css", //mars3d
   "mars3d/mars3d.js",
+
   "mars3d/plugins/supermap/mars3d-supermap.js",//mars3d-supermap简化调用封装
 ],
 ```
