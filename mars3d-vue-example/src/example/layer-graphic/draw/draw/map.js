@@ -184,7 +184,8 @@ export function drawPolyline(clampToGround) {
     style: {
       color: clampToGround ? "#ffff00" : "#3388ff",
       width: 3,
-      clampToGround: clampToGround
+      clampToGround: clampToGround,
+      clampToS3M:clampToGround
     }
   })
   // .then(() => {
@@ -202,7 +203,8 @@ export function drawPolygon(clampToGround) {
       outline: true,
       outlineColor: "#ffffff",
       outlineWidth: 2.0,
-      clampToGround: clampToGround
+      clampToGround: clampToGround,
+      clampToS3M:clampToGround
     }
   })
 }
@@ -213,7 +215,8 @@ export function drawCurve(clampToGround) {
     style: {
       color: clampToGround ? "#ffff00" : "#3388ff",
       width: 3,
-      clampToGround: clampToGround
+      clampToGround: clampToGround,
+      clampToS3M:clampToGround
     }
   })
 }
@@ -225,7 +228,8 @@ export function drawCorridor(clampToGround) {
       color: clampToGround ? "#ffff00" : "#3388ff",
       opacity: 0.6,
       width: 500,
-      clampToGround: clampToGround
+      clampToGround: clampToGround,
+      clampToS3M:clampToGround
     }
   })
 }
@@ -239,7 +243,8 @@ export function drawEllipse(clampToGround) {
       outline: true,
       outlineColor: "#ffffff",
       outlineWidth: 2.0,
-      clampToGround: clampToGround
+      clampToGround: clampToGround,
+      clampToS3M:clampToGround
     }
   })
 }
@@ -253,7 +258,8 @@ export function drawRectangle(clampToGround) {
       outline: true,
       outlineColor: "#ffffff",
       outlineWidth: 2.0,
-      clampToGround: clampToGround
+      clampToGround: clampToGround,
+      clampToS3M:clampToGround
     }
   })
 }
