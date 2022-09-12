@@ -205,7 +205,8 @@ export function drawPolygon(clampToGround) {
       outlineWidth: 2.0,
       clampToGround: clampToGround,
       clampToS3M:clampToGround
-    }
+    },
+    clampToS3M:clampToGround
   })
 }
 
