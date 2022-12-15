@@ -37,6 +37,10 @@ export function onMounted(mapInstance) {
     console.log(`地图所有图层加载完成`)
   })
 
+  map.on(mars3d.EventType.keyup, function (e) {
+    console.log("按下了键盘", e)
+  })
+
   // on绑定事件
   map.on(mars3d.EventType.cameraChanged, this.map_cameraChangedHandler, this)
   map.on(mars3d.EventType.click, this.map_clickHandler, this)

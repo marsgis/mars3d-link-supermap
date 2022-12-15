@@ -19,6 +19,8 @@ export function onMounted(mapInstance) {
   map = mapInstance // 记录map
   // map.basemap = 2017 // 蓝色底图
 
+  globalNotify("已知问题提示", `纬度跨度超过一个城市时，会出现偏移情况(墨卡托投影造成的，暂未找到合适解决方式)。`)
+
   mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/heat-fuzhou.json" })
     .then(function (result) {
       const arrPoints = []

@@ -26,6 +26,10 @@ const formState = reactive<FormState>({
   isPause: false
 })
 
+mapWork.eventTarget.on("endRoam", () => {
+  udpateState()
+})
+
 // 按钮事件
 const btnStart = () => {
   mapWork.fixedRoute.start() // 启动漫游

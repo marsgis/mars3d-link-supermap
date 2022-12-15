@@ -20,22 +20,18 @@ export const mapOptions = {
  * @returns {void} 无
  */
 export function onMounted(mapInstance) {
-  map = mapInstance // 记录map
+  map = mapInstance // 记录map // 创建矢量数据图层
 
-  // 创建矢量数据图层
   graphicLayer = new mars3d.layer.GraphicLayer()
-  map.addLayer(graphicLayer)
+  map.addLayer(graphicLayer) // 在layer上绑定监听事件
 
-  // 在layer上绑定监听事件
   graphicLayer.on(mars3d.EventType.click, function (event) {
     const pickedItem = event.pickedObject?.data
     console.log("单击了合并对象中的单个值为", pickedItem)
   })
 
-  bindLayerPopup() // 在图层上绑定popup,对所有加到这个图层的矢量数据都生效
-
-  // 加一些演示数据
-  addDemoGraphic1()
+  bindLayerPopup() // 在图层上绑定popup,对所有加到这个图层的矢量数据都生效 // 加一些演示数据
+  // addDemoGraphic1()
 }
 
 /**
@@ -64,18 +60,16 @@ export function addDemoGraphic1() {
       }
     })
 
-    globalMsg("共加载" + arr.length + "个面")
+    globalMsg("共加载" + arr.length + "个面") // 多个面对象的合并渲染。
 
-    // 多个面对象的合并渲染。
     const graphic = new mars3d.graphic.PolygonCombine({
-      instances: arr,
-      // 公共样式
+      instances: arr, // 公共样式
       style: {
         outline: true,
-        outlineColor: "#ffffff"
-      },
+        outlineColor: "#ffffff",
+        clampToGround: true
+      }, // 高亮时的样式
 
-      // 高亮时的样式
       highlight: {
         type: mars3d.EventType.click,
         color: Cesium.Color.YELLOW.withAlpha(0.9)
@@ -107,16 +101,15 @@ export function addRandomGraphicByCount(count) {
     arrData.push({
       positions: [pt1, pt2, pt3, pt4, pt5],
       style: {
-        color: Cesium.Color.fromRandom({ alpha: 0.6 })
+        color: Cesium.Color.fromRandom({ alpha: 0.6 }),
+        clampToGround: true
       },
       attr: { index: index }
     })
-  }
+  } // 多个面对象的合并渲染。
 
-  // 多个面对象的合并渲染。
   const graphic = new mars3d.graphic.PolygonCombine({
-    instances: arrData,
-    // 高亮时的样式
+    instances: arrData, // 高亮时的样式
     highlight: {
       type: mars3d.EventType.click,
       color: Cesium.Color.YELLOW.withAlpha(0.9)

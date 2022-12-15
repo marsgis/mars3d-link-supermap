@@ -7,7 +7,7 @@ export let fixedRoute
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
   scene: {
-    center: { lat: 31.824632, lng: 117.215713, alt: 1333, heading: 355, pitch: -54 }
+    center: { lat: 31.824853, lng: 117.221414, alt: 1452, heading: 355, pitch: -54 }
   },
   control: {
     clockAnimate: true, // 时钟动画控制(左下角)
@@ -46,6 +46,8 @@ function addGraphicLayer() {
     name: "步行路线",
     frameRate: 1,
     speed: 40,
+    // autoStop: true, // 到达终点自动停止
+    clockLoop: true, // 循环播放
     positions: [
       [117.220356, 31.833959, 43.67],
       [117.220361, 31.835111, 44.36],
@@ -100,6 +102,7 @@ function addGraphicLayer() {
   })
   fixedRoute.on(mars3d.EventType.end, function (event) {
     console.log("漫游结束", event)
+    eventTarget.fire("endRoam")
   })
 
   // 不贴地时，直接开始

@@ -61,9 +61,7 @@ export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
-  globalNotify("已知问题提示", `按国家测绘主管部门的通知,  目前国家相关部门对未经审核批准的谷歌等地图做了封锁及下架，目前谷歌地图服务暂不可用`)
-
-
+  globalNotify("已知问题提示", `目前国家国家测绘主管部门对未经审核批准的谷歌等地图做了屏蔽封锁,目前谷歌地图服务暂不可用，需翻墙使用。`)
 }
 
 /**

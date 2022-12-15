@@ -22,7 +22,7 @@ export const mapOptions = {
   control: {
     clockAnimate: true, // 时钟动画控制(左下角)
     timeline: true, // 是否显示时间线控件
-    compass: { top: "10px", left: "5px" }
+    compass: { top: "50px", left: "5px" }
   },
   terrain: false
 }

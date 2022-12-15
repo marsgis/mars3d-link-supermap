@@ -17,7 +17,7 @@ export function onMounted(mapInstance) {
 
   // 基于polygon矢量面抬高模拟，只支持单个区域
   floodByGraphic = new mars3d.thing.FloodByGraphic({
-    perPositionHeight: true,
+    // perPositionHeight: true, // 是否每个分析点高度都不一样
     style: {
       color: "#007be6",
       opacity: 0.5,

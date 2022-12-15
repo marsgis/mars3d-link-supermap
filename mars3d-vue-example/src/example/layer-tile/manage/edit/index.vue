@@ -1,7 +1,7 @@
 <template>
   <mars-dialog :visible="true" right="10" top="10">
     <div class="edit-contain">
-      <mars-gui :options="options" ref="marsGuiRef"></mars-gui>
+      <mars-gui :options="options" :labelCol="7" ref="marsGuiRef"></mars-gui>
       <div class="f-tac load-button">
         <a-space>
           <mars-button size="middle" @click="loadCoverage">{{ loadCoverageText }}</mars-button>
@@ -17,7 +17,6 @@ import { reactive, ref, onMounted, h } from "vue"
 import * as mapWork from "./map.js"
 import type { GuiItem } from "@mars/components/mars-ui/mars-gui"
 import MarsButton from "@mars/components/mars-ui/mars-button/index.vue"
-import { stringify } from "querystring"
 
 const marsGuiRef = ref()
 const options: GuiItem[] = [

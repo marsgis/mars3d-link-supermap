@@ -33,14 +33,9 @@ export const mapOptions = {
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
-  // 修改已有地图为50%
+  // // 修改已有地图为50%
   const mapOld = document.getElementById("centerDiv3D")
   mapOld.style.width = "50%"
-
-  const centerDivEx = mars3d.DomUtil.create("div", "", document.body)
-  centerDivEx.setAttribute("id", "centerDivEx")
-  const sourceContainer = mars3d.DomUtil.create("div", "mars3d-container", centerDivEx)
-  sourceContainer.setAttribute("id", "mars3dContainerEx")
 
   // 获取原来地图的参数
   const mapOptions2 = map.getCurrentOptions() // map.getOptions()
@@ -58,25 +53,14 @@ export function onMounted(mapInstance) {
   }
   console.log("分屏地图配置", mapOptions2)
 
-  mapEx = new mars3d.Map(sourceContainer, mapOptions2)
-  mapEx.basemap = "天地图电子"
-
-  // 场景模式(2D/3D/哥伦布)变换完成
-  map.on(mars3d.EventType.morphComplete, function (event) {
-    if (map.scene.mode === Cesium.SceneMode.SCENE2D) {
-      mapEx.scene.screenSpaceCameraController.enableTilt = false
-    } else {
-      mapEx.scene.screenSpaceCameraController.enableTilt = true
-    }
+  const mapSplit = new mars3d.control.MapCompare({
+    ...mapOptions2,
+    parentContainer: document.body
   })
+  map.addControl(mapSplit)
 
-  map.on(mars3d.EventType.cameraChanged, _map_extentChangeHandler)
-  map.camera.percentageChanged = 0.01
-
-  mapEx.on(mars3d.EventType.cameraChanged, _mapEx_extentChangeHandler)
-  mapEx.camera.percentageChanged = 0.01
-
-  _map_extentChangeHandler()
+  // 修改对比地图
+  mapSplit.mapEx.basemap = "天地图电子"
 }
 
 /**
@@ -85,24 +69,4 @@ export function onMounted(mapInstance) {
  */
 export function onUnmounted() {
   map = null
-}
-
-function _map_extentChangeHandler(e) {
-  mapEx.off(mars3d.EventType.cameraChanged, _mapEx_extentChangeHandler)
-
-  updateView(map, mapEx)
-  mapEx.on(mars3d.EventType.cameraChanged, _mapEx_extentChangeHandler)
-}
-
-function _mapEx_extentChangeHandler(e) {
-  map.off(mars3d.EventType.cameraChanged, _map_extentChangeHandler)
-
-  updateView(mapEx, map)
-  map.on(mars3d.EventType.cameraChanged, _map_extentChangeHandler)
-}
-
-// “变化屏”mapChange变化，将“被更新屏”mapUpdate同步更新
-function updateView(mapChange, mapUpdate) {
-  const view = mapChange.getCameraView()
-  mapUpdate.setCameraView(view, { duration: 0 })
 }

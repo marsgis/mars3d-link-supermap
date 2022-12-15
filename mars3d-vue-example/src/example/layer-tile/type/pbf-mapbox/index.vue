@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import { onMounted } from "vue"
-import { useWidget } from "@mars/widgets/common/store/widget"
+<template>
+  <mars-dialog :visible="true" right="10" top="10" width="300">
+    <tile-layer-state />
+  </mars-dialog>
+</template>
 
-const { activate } = useWidget()
-onMounted(() => {
-  activate("query-poi")
-})
+<script setup lang="ts">
+import TileLayerState from "@mars/components/mars-sample/tile-layer-state.vue"
 </script>

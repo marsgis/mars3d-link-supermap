@@ -162,6 +162,7 @@ function addDemoGraphic3() {
       materialOptions: {
         image: "img/textures/fence.png",
         color: "#ffff00",
+        mixt: true,
         speed: 10, // 速度，建议取值范围1-100
         axisY: true
       }

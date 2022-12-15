@@ -110,13 +110,14 @@ function addGraphicLayer() {
   satelliteSensor.trackedEntity = graphic // 本身跟随卫星
 
   // 地面站 展示
-  const localStart = Cesium.Cartesian3.fromDegrees(109.51856, 18.258736, 2)
+  const localStart = Cesium.Cartesian3.fromDegrees(109.51856, 18.258736, 2000)
   const conicSensor = new mars3d.graphic.ConicSensor({
     position: localStart,
     style: {
       angle: 5, // 雷达最小扫描仰角
       length: 2500000,
-      color: Cesium.Color.fromBytes(255, 0, 0, 85)
+      color: Cesium.Color.fromBytes(255, 0, 0, 85),
+      rayEllipsoid: true
     }
   })
   graphicLayer.addGraphic(conicSensor)

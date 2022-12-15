@@ -139,7 +139,7 @@ function addSatellite() {
 }
 
 export function btnAdd(data) {
-  const weixin = map.graphicLayer.getGraphicByAttr("name", "GAOFEN 1")
+  const weixin = map.graphicLayer.getGraphicByAttr("GAOFEN 1", "name")
   const startTime = data.startTime
   const endTime = data.endTime
   const areaColor = data.areaColor
@@ -165,7 +165,7 @@ export function changeColorOpacity(data) {
 }
 
 export function changeAngle(val) {
-  const weixin = map.graphicLayer.getGraphicByAttr("name", "GAOFEN 1")
+  const weixin = map.graphicLayer.getGraphicByAttr("GAOFEN 1", "name")
   if (val) {
     weixin.angle1 = val
   }

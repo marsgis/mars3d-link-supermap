@@ -2,6 +2,7 @@ import * as mars3d from "mars3d"
 
 export let map // mars3d.Map三维地图对象
 export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出事件到面板中
+let graphicLayer
 
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
@@ -25,6 +26,10 @@ export function onMounted(mapInstance) {
   map = mapInstance // 记录map
   map.toolbar.style.bottom = "55px" // 修改toolbar控件的样式
 
+  // 创建矢量数据图层
+  graphicLayer = new mars3d.layer.GraphicLayer()
+  map.addLayer(graphicLayer)
+
   addGraphicLayer()
 }
 
@@ -37,10 +42,6 @@ export function onUnmounted() {
 }
 
 function addGraphicLayer() {
-  // 创建矢量数据图层
-  const graphicLayer = new mars3d.layer.GraphicLayer()
-  map.addLayer(graphicLayer)
-
   const fixedRoute = new mars3d.graphic.FixedRoute({
     name: "贴地表表面漫游",
     speed: 160,
@@ -68,7 +69,7 @@ function addGraphicLayer() {
     model: {
       url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
       heading: 90,
-      noPitchRoll: true,
+      mergeOrientation: true, // 用于设置模型不是标准的方向时的纠偏处理,在orientation基础的方式值上加上设置是heading值
       minimumPixelSize: 50
     },
     polyline: {
@@ -77,6 +78,17 @@ function addGraphicLayer() {
     }
   })
   graphicLayer.addGraphic(fixedRoute)
+
+  map.on(mars3d.EventType.keydown, function (event) {
+    // 空格 切换暂停/继续
+    if (event.keyCode === 32) {
+      if (fixedRoute.isPause) {
+        fixedRoute.proceed()
+      } else {
+        fixedRoute.pause()
+      }
+    }
+  })
 
   // 绑定popup
   bindPopup(fixedRoute)
@@ -172,7 +184,7 @@ function addParticleSystem(property) {
     },
     attr: { remark: "车辆尾气" }
   })
-  map.graphicLayer.addGraphic(particleSystem)
+  graphicLayer.addGraphic(particleSystem)
 }
 
 // ui层使用

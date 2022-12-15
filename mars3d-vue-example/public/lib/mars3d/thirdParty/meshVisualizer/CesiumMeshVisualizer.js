@@ -1,4 +1,7 @@
-﻿(function () {
+﻿// import * as mars3d from "mars3d"
+// const Cesium = mars3d.Cesium
+
+(function () {
 
     var requirejs, require, define;
     (function (undef) {
@@ -9183,14 +9186,3 @@ define('Main',[
     }, undefined, true);
 
 })();
-if (typeof define === "function") {
-    define(function () {
-        var newLib = Cesium;
-        Cesium = undefined;
-        return newLib;
-    });
-} else if (typeof module === "undefined") {
-    window.Cesium = Cesium;
-} else {
-    module.exports = Cesium;
-}

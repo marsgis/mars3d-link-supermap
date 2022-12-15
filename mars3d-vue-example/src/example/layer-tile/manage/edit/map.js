@@ -188,3 +188,10 @@ export function creatHRectangleEntity(item) {
 export const saveParams = (updateValue) => {
   mars3d.Util.downloadFile("瓦片图层参数.json", JSON.stringify({ ...updateValue, center: map.getCameraView() }))
 }
+
+export function removeTileLayer () {
+  if (tileLayer) {
+    map.removeLayer(tileLayer, true)
+    tileLayer = null
+  }
+}

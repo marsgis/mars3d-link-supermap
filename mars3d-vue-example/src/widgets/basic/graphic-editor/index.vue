@@ -46,7 +46,10 @@ if (currentWidget) {
 
 // 监听到矢量数据发生变化
 function updataLayer() {
-  layerName.value = graphic._layer.name
+  if (!graphic) {
+    return
+  }
+  layerName.value = graphic._layer.name || ""
   graphicType.value = graphic.type
   customType.value = currentWidget.data.styleType || graphic.options.styleType
 

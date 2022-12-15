@@ -523,9 +523,14 @@
             "main": "control/basis/zoom"
           },
           {
-            "name": "鼠标按下特效",
+            "name": "鼠标滚轮特效",
             "thumbnail": "control-basis-mouseDownView.jpg",
             "main": "control/basis/mouseDownView"
+          },
+          {
+            "name": "双屏对比",
+            "thumbnail": "map-double-compare.jpg",
+            "main": "map/double/compare"
           },
           {
             "name": "卷帘对比",
@@ -611,21 +616,6 @@
             "hasPannel": true
           },
           {
-            "name": "KML/KMZ转GeoJson加载",
-            "thumbnail": "layerg-geojson-kml2json.jpg",
-            "main": "layer-graphic/geojson/kml2json",
-            "hasPannel": true,
-            "libs": ["mars3d", "kmlGeojson"],
-            "resources": ["Kml2JsonLayer.js"]
-          },
-          {
-            "name": "WKT转GeoJson加载",
-            "thumbnail": "layerg-geojson-wkt.jpg",
-            "main": "layer-graphic/geojson/wkt",
-            "hasPannel": true,
-            "libs": ["terraformer", "mars3d"]
-          },
-          {
             "name": "光晕线",
             "thumbnail": "layerg-geojson-polylineGlow.jpg",
             "main": "layer-graphic/geojson/polylineGlow"
@@ -654,6 +644,22 @@
             "main": "layer-graphic/geojson/huxing",
             "hasPannel": true,
             "resources": ["HuxingLayer.js"]
+          },
+
+          {
+            "name": "KML/KMZ转GeoJson加载",
+            "thumbnail": "layerg-geojson-kml2json.jpg",
+            "main": "layer-graphic/geojson/kml2json",
+            "hasPannel": true,
+            "libs": ["mars3d", "kmlGeojson"],
+            "resources": ["Kml2JsonLayer.js"]
+          },
+          {
+            "name": "WKT转GeoJson加载",
+            "thumbnail": "layerg-geojson-wkt.jpg",
+            "main": "layer-graphic/geojson/wkt",
+            "hasPannel": true,
+            "libs": ["terraformer", "mars3d"]
           }
         ]
       },
@@ -761,6 +767,18 @@
             "hasPannel": true
           },
           {
+            "name": "天地图POI点查询",
+            "thumbnail": "query-tdtPOI.jpg",
+            "main": "query/tdtPOI",
+            "hasPannel": true
+          },
+          {
+            "name": "百度POI点查询",
+            "thumbnail": "query-baiduPOI.jpg",
+            "main": "query/baiduPOI",
+            "hasPannel": true
+          },
+          {
             "name": "高德POI点查询",
             "thumbnail": "query-gaodePOI.jpg",
             "main": "query/gaodePOI",
@@ -818,7 +836,8 @@
             "name": "Billboard 图标点",
             "thumbnail": "graphic-entity-billboard.jpg",
             "main": "graphic/entity/billboard",
-            "hasPannel": true
+            "hasPannel": true,
+            "resources": ["/lib/dom2img/gifler.min.js"]
           },
           {
             "name": "图标点+文字(含聚合)",
@@ -907,6 +926,7 @@
             "name": "Model 小模型",
             "thumbnail": "graphic-entity-model.jpg",
             "main": "graphic/entity/model",
+            "params": "data=gltf",
             "hasPannel": true
           },
           {
@@ -1110,6 +1130,7 @@
             "name": "Model 小模型",
             "thumbnail": "graphic-primitive-model.jpg",
             "main": "graphic/primitive/model",
+            "params": "data=gltf",
             "hasPannel": true
           },
           {
@@ -1295,6 +1316,7 @@
             "name": "ModelCombine 大量模型",
             "thumbnail": "graphic-combine-model.jpg",
             "main": "graphic/combine/model",
+            "params": "data=gltf",
             "hasPannel": true
           },
           {
@@ -1684,6 +1706,7 @@
             "thumbnail": "graphic-space-satellite-list.gif",
             "main": "graphic/space/satellite-list",
             "hasPannel": true,
+            "params": "data=satellite-list",
             "libs": ["mars3d", "mars3d-space"]
           },
           {
@@ -2000,6 +2023,12 @@
             "hasPannel": true
           },
           {
+            "name": "分层分户矢量单体化编辑",
+            "thumbnail": "layer3d-monomer-household-edit.jpg",
+            "main": "layer-tileset/monomer/household-edit",
+            "hasPannel": true
+          },
+          {
             "name": "矢量单体化(叠加WFS服务)",
             "thumbnail": "layer3d-monomer-wfs.jpg",
             "main": "layer-tileset/monomer/wfs"
@@ -2027,15 +2056,20 @@
             "hasPannel": true
           },
           {
-            "name": "自定义Shader",
-            "thumbnail": "layer3d-style-customShader.jpg",
-            "main": "layer-tileset/style/customShader",
-            "hasPannel": true
+            "name": "BIM进度展示",
+            "thumbnail": "layer3d-style-progress.jpg",
+            "main": "layer-tileset/style/progress"
           },
           {
             "name": "自定义BIM属性及样式 Demo",
             "thumbnail": "layer3d-style-custom-style.jpg",
             "main": "layer-tileset/style/custom-style"
+          },
+          {
+            "name": "自定义Shader",
+            "thumbnail": "layer3d-style-customShader.jpg",
+            "main": "layer-tileset/style/customShader",
+            "hasPannel": true
           }
         ]
       },
@@ -2140,8 +2174,7 @@
           {
             "name": "双屏对比",
             "thumbnail": "map-double-compare.jpg",
-            "main": "map/double/compare",
-            "resources": ["map.css"]
+            "main": "map/double/compare"
           },
           {
             "name": "二三维联动(与leaflet)",
@@ -2226,7 +2259,7 @@
           },
           {
             "name": "视点飞行",
-            "thumbnail": "map-fun-setCameraViewList.jpg",
+            "thumbnail": "map-fun-setCameraViewList.gif",
             "main": "map/fun/setCameraViewList"
           },
           {
@@ -2295,7 +2328,7 @@
           },
           {
             "name": "雨天气",
-            "thumbnail": "effect-rain.jpg",
+            "thumbnail": "effect-rain.gif",
             "main": "effect/rain",
             "hasPannel": true
           },
@@ -2307,7 +2340,7 @@
           },
           {
             "name": "云图",
-            "thumbnail": "graphic-entity-rectangle-cloud.jpg",
+            "thumbnail": "graphic-entity-rectangle-cloud.gif",
             "main": "graphic/entity/rectangle-cloud"
           },
           {
@@ -2376,7 +2409,8 @@
             "name": "量算 (长度、面积、高度、角度)",
             "thumbnail": "thing-analysis-measure.jpg",
             "main": "thing/analysis/measure",
-            "hasPannel": true
+            "hasPannel": true,
+            "resources": ["/temp/css/divGraphic.css"]
           },
           {
             "name": "剖面分析",
@@ -2435,7 +2469,7 @@
           },
           {
             "name": "淹没分析(矢量面)",
-            "thumbnail": "thing-terrain-floodByGraphic.jpg",
+            "thumbnail": "thing-terrain-floodByGraphic.gif",
             "main": "thing/terrain/floodByGraphic",
             "hasPannel": true
           }
@@ -2736,13 +2770,13 @@
           },
           {
             "name": "转动（旗子）",
-            "thumbnail": "thirdParty-ammo-turnCloth.jpg",
+            "thumbnail": "thirdParty-ammo-turnCloth.gif",
             "main": "thirdParty/ammo/turnCloth",
             "libs": ["mars3d", "cesium-meshVisualizer"]
           },
           {
             "name": "转动（球）",
-            "thumbnail": "thirdParty-ammo-turnRope.jpg",
+            "thumbnail": "thirdParty-ammo-turnRope.gif",
             "main": "thirdParty/ammo/turnRope",
             "libs": ["mars3d", "cesium-meshVisualizer"]
           },
@@ -2754,7 +2788,7 @@
           },
           {
             "name": "撞击（断裂体）",
-            "thumbnail": "thirdParty-ammo-convexBreak.jpg",
+            "thumbnail": "thirdParty-ammo-convexBreak.gif",
             "main": "thirdParty/ammo/convexBreak",
             "libs": ["mars3d", "cesium-meshVisualizer"]
           }

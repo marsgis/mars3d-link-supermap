@@ -39,7 +39,8 @@ let contourLine
 export function workPoint1Sdd() {
   clearPoint()
   clearLine()
-  map.centerAt({ y: 36.061395, x: 113.94298, alt: 1903, heading: 0, pitch: -57.5 })
+  map.setCameraView({ lat: 36.061395, lng: 113.94298, alt: 1903, heading: 0, pitch: -57.5 })
+
   const arrPoint = [
     [113.944168, 36.071057, 536.1],
     [113.939593, 36.072087, 510.42],
@@ -56,11 +57,11 @@ export function workPoint2Abd() {
   clearPoint()
   clearLine()
   // 视角定位
-  map.centerAt(
+  map.setCameraView(
     {
-      y: 36.06062,
-      x: 113.942836,
-      z: 1351,
+      lat: 36.06062,
+      lng: 113.942836,
+      alt: 1351,
       heading: 0,
       pitch: -43.5
     },
@@ -88,7 +89,7 @@ export function workPoint3Pdbhd() {
   clearPoint()
   clearLine()
   // 视角定位
-  map.centerAt({ y: 36.062523, x: 113.946202, z: 1343.59, heading: 353.6, pitch: -42, roll: 0 })
+  map.setCameraView({ lat: 36.062523, lng: 113.946202, alt: 1343.59, heading: 353.6, pitch: -42, roll: 0 })
 
   const arrPoint = [
     [113.945927, 36.069593, 431.33],
@@ -105,7 +106,7 @@ export function workPoint4Sjd() {
   clearPoint()
   clearLine()
   // 视角定位
-  map.centerAt({ y: 36.05423, x: 113.945328, z: 1087.7, heading: 352.4, pitch: -25.4, roll: 360 })
+  map.setCameraView({ lat: 36.05423, lng: 113.945328, alt: 1087.7, heading: 352.4, pitch: -25.4, roll: 0 })
 
   const arrPoint = [
     [113.944745, 36.063709, 350.32],
@@ -121,7 +122,7 @@ export function workPoint5Sjpdbhd() {
   clearPoint()
   clearLine()
   // 视角定位
-  map.centerAt({ y: 36.055819, x: 113.950153, z: 696.74, heading: 334.4, pitch: -13.2, roll: 359.9 })
+  map.setCameraView({ lat: 36.055819, lng: 113.950153, alt: 696.74, heading: 334.4, pitch: -13.2, roll: 359.9 })
 
   const arrPoint = [
     [113.948382, 36.068049, 414.36],
@@ -137,8 +138,8 @@ export function workPoint6Qxbhd() {
   clearPoint()
   clearLine()
   // 视角定位
-  map.centerAt(
-    { y: 36.064181, x: 113.94491, z: 1139.24, heading: 352.6, pitch: -41.2, roll: 360 },
+  map.setCameraView(
+    { lat: 36.064181, lng: 113.94491, alt: 1139.24, heading: 352.6, pitch: -41.2, roll: 0 },
     {
       complete: function () {
         startRotatePoint()
@@ -159,10 +160,10 @@ export function workPoint6Qxbhd() {
 // 特征线：山脊线
 export function workLine1Sjx() {
   clearPoint()
-  map.centerAt({
-    y: 36.05982,
-    x: 113.943515,
-    z: 1534.08,
+  map.setCameraView({
+    lat: 36.05982,
+    lng: 113.943515,
+    alt: 1534.08,
     heading: 354.6,
     pitch: -46.1,
     roll: 0
@@ -274,7 +275,7 @@ export function workLine1Sjx() {
 // 特征线：山谷线
 export function workLine2Sgx() {
   clearPoint()
-  map.centerAt({ y: 36.05648, x: 113.944653, z: 2092, heading: 354.4, pitch: -44.6 })
+  map.setCameraView({ lat: 36.05648, lng: 113.944653, alt: 2092, heading: 354.4, pitch: -44.6 })
 
   // 添加线
   const lineArr = [
@@ -350,13 +351,13 @@ export function workLine2Sgx() {
 // 特征线：俯瞰
 export function workLine3Fk() {
   clearPoint()
-  map.centerAt({ y: 36.070613, x: 113.943032, z: 3059, heading: 0.6, pitch: -88.9 })
+  map.setCameraView({ lat: 36.070613, lng: 113.943032, alt: 3059, heading: 0.6, pitch: -88.9 })
 }
 
 // 绘制过程：计算通过点
 export function workDgx1Point() {
   clearPoint()
-  map.centerAt({ y: 36.06874, x: 113.948078, z: 811.62, heading: 292.6, pitch: -39.6 })
+  map.setCameraView({ lat: 36.06874, lng: 113.948078, alt: 811.62, heading: 292.6, pitch: -39.6 })
 
   const arrPoint = [
     [113.944168, 36.071057, 536.1],
@@ -401,7 +402,7 @@ export function workDgx1Point() {
 // 绘制过程：等高线绘制
 export function workDgx2Line() {
   clearPoint()
-  map.centerAt({ lat: 36.069792, lng: 113.944474, alt: 1708, heading: 357, pitch: -82 })
+  map.setCameraView({ lat: 36.069792, lng: 113.944474, alt: 1708, heading: 357, pitch: -82 })
 
   const arrPoint = [
     [113.946061, 36.070867, 500.37],
@@ -491,7 +492,7 @@ export function workDgx2Line() {
 export function workDgx3End() {
   clearPoint()
   map.setCameraView(
-    { y: 36.064736, x: 113.935567, z: 1276.68, heading: 52.4, pitch: -44.5, roll: 0, duration: 3 },
+    { lat: 36.064736, lng: 113.935567, alt: 1276.68, heading: 52.4, pitch: -44.5, roll: 0, duration: 3 },
     {
       complete() {
         startRotatePoint(new Cesium.Cartesian3.fromDegrees(113.942685, 36.07012, 461.53))

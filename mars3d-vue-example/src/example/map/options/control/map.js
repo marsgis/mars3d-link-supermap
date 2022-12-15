@@ -22,8 +22,9 @@ function initMap() {
       timeline: true, // 时间线
 
       // 以下是mars3d.control定义的控件
-      contextmenu: { hasDefault: true }, // 右键菜单
+      contextmenu: { hasDefault: true },
       mouseDownView: true,
+      zoom: { insertIndex: 1 },
       compass: { top: "10px", left: "5px" },
       distanceLegend: { left: "100px", bottom: "2px" }
     },
@@ -46,4 +47,6 @@ function initMap() {
       "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div>海拔：{alt}米</div> <div>层级：{level}</div><div>方向：{heading}度</div> <div>俯仰角：{pitch}度</div><div>视高：{cameraHeight}米</div>"
   })
   map.addControl(locationBar)
+
+  console.log("地图上已有控件", map.controls)
 }

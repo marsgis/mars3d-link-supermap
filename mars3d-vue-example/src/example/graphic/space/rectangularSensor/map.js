@@ -58,13 +58,11 @@ export function addDemoGraphic1() {
       xHalfAngleDegree: 50, // 传感器水平半角
       yHalfAngleDegree: 50, // 传感器垂直半角
 
-      color: "#00ffff",
-      opacity: 0.4,
+      color: "rgba(0,255,255,0.4)",
       lineColor: "#ffffff", // 线的颜色
 
       showScanPlane: true, // 是否显示扫描面
-      scanPlaneColor: "#00ffff",
-      scanPlaneOpacity: 0.9,
+      scanPlaneColor: "rgba(0,255,255,0.9)",
       scanPlaneMode: "vertical", // 扫描面模式 垂直vertical/水平horizontal
       scanPlaneRate: 3, // 扫描速率,
       depthTest: true
@@ -121,13 +119,11 @@ export function startDrawGraphic() {
       xHalfAngleDegree: 50, // 传感器水平半角
       yHalfAngleDegree: 50, // 传感器垂直半角
 
-      color: "#00ffff",
-      opacity: 0.4,
+      color: "rgba(0,255,255,0.4)",
       lineColor: "#ffffff", // 线的颜色
 
       showScanPlane: true, // 是否显示扫描面
-      scanPlaneColor: "#00ffff",
-      scanPlaneOpacity: 0.9,
+      scanPlaneColor: "rgba(0,255,255,0.9)",
       scanPlaneMode: "vertical", // 扫描面模式 垂直vertical/水平horizontal
       scanPlaneRate: 3, // 扫描速率,
       depthTest: true

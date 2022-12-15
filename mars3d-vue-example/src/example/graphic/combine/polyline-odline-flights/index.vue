@@ -1,27 +1,27 @@
 <template>
   <mars-dialog :visible="true" right="10" top="10" width="360">
-    <div class="chart">
-      <div class="chartOne" id="chartOne">
-        <h6>航线条数</h6>
+    <!-- <div class="chart"></div> -->
+    <div class="chartOne" id="chartOne">
+      <h6>航线条数</h6>
 
-        <div class="hx">
-          <div class="_item_row _item_full_box_width justify-between">
-            <mars-icon icon="airplane" :width="30" class="icon" />
-            <div class="row1_right">
-              <div class="right_title">{{ guonei }}(条)</div>
-              <div class="right_sub_title">国内航班</div>
-            </div>
+      <div class="hx">
+        <div class="_item_row _item_full_box_width justify-between">
+          <mars-icon icon="airplane" :width="30" class="icon" />
+          <div class="row1_right">
+            <div class="right_title">{{ guonei }}(条)</div>
+            <div class="right_sub_title">国内航班</div>
+          </div>
 
-            <mars-icon icon="take-off" :width="35" class="icon" />
-            <airplane theme="outline" size="43" fill="#333" />
-            <div class="row1_right">
-              <div class="right_title">{{ guoji }}(条)</div>
-              <div class="right_sub_title">国际航班</div>
-            </div>
+          <mars-icon icon="take-off" :width="35" class="icon" />
+          <airplane theme="outline" size="43" fill="#333" />
+          <div class="row1_right">
+            <div class="right_title">{{ guoji }}(条)</div>
+            <div class="right_sub_title">国际航班</div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="chartTwo" id="chartTwo">
       <h6>国内机场航线数</h6>
       <div id="ul_GNHX" class="chartTwo_ulgnhx"></div>
@@ -180,6 +180,7 @@ function initCharts_Three() {
     margin-top: 5px;
     width: 10px;
     height: 5px;
+    color: white;
   }
   .chartTwo .chartTwo_ulgnhx,
   .chartThree_ulhbtj {
@@ -190,11 +191,11 @@ function initCharts_Three() {
     font-size: 15px;
   }
   .chartTwo_ulgnhx,
-  chartThree_ulhbtj {
+  .chartThree_ulhbtj {
     width: 84%;
     height: 90%;
     position: absolute;
-    left: 13%;
+    left: 8%;
     bottom: 5px;
   }
 }

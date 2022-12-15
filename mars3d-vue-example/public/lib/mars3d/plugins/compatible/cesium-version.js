@@ -1,4 +1,6 @@
 // 兼容不同版本cesium，补充官方删除更改的方法或类名 by mars3d.cn
+// import * as mars3d from "mars3d"
+// const Cesium = mars3d.Cesium
 
 // 兼容1.96（2022-08-01）删除的方法
 if (!Cesium.Cesium3DTileFeature.prototype.getPropertyNames) {

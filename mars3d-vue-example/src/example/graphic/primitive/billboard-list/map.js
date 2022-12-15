@@ -18,64 +18,56 @@ export const mapOptions = {
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
-  // 创建矢量数据图层
-  const graphicLayer = new mars3d.layer.GraphicLayer()
-  map.addLayer(graphicLayer)
+  // 创建矢量数据图层（业务数据图层）
+  const busineDataLayer = new mars3d.layer.BusineDataLayer({
+    url: "//data.mars3d.cn/file/apidemo/mudi-all.json",
+    dataColumn: "data", // 数据接口中对应列表所在的取值字段名
+    lngColumn: "lng",
+    latColumn: "lat",
+    altColumn: "z",
+    symbol: {
+      type: "billboardP", // 对应是 mars3d.graphic.BillboardPrimitive
+      styleOptions: {
+        image: "img/marker/mark-blue.png",
+        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 8.0e6, 0.2),
+        label: {
+          text: "{text}",
+          font_size: 17,
+          color: Cesium.Color.AZURE,
+          outline: true,
+          outlineColor: Cesium.Color.BLACK,
+          outlineWidth: 2,
+          horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          pixelOffset: new Cesium.Cartesian2(15, 0), // 偏移量
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 90000)
+        }
+      }
+    }
+  })
+  map.addLayer(busineDataLayer)
 
-  // 访问后端接口，取数据
-  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/mudi-all.json" })
-    .then(function (res) {
-      createGraphics(graphicLayer, res.data)
-    })
-    .catch(function (error) {
-      console.log("加载JSON出错", error)
-    })
-}
-
-/**
- * 释放当前地图业务的生命周期函数
- * @returns {void} 无
- */
-export function onUnmounted() {
-  map = null
-}
-
-function createGraphics(graphicLayer, arr) {
-  graphicLayer.bindPopup(function (event) {
-    const item = event.graphic.attr
+  busineDataLayer.bindPopup(function (event) {
+    const item = event.graphic?.attr
     if (!item) {
       return false
     }
-    const inthtml = `<table style="width: auto;">
-                  <tr>
-                    <th scope="col" colspan="2" style="text-align:center;font-size:15px;">${item.text} </th>
-                  </tr>
-                  <tr>
-                    <td>省：</td>
-                    <td>${item.province}</td>
-                  </tr>
-                  <tr>
-                    <td>市：</td>
-                    <td>${item.city}</td>
-                  </tr>
-                  <tr>
-                    <td>县/区：</td>
-                    <td>${item.district}</td>
-                  </tr>
-                  <tr>
-                    <td>地址：</td>
-                    <td>${item.address}</td>
-                  </tr>
-                  <tr>
-                    <td>视频：</td>
-                    <td><video src='http://data.mars3d.cn/file/video/lukou.mp4' controls autoplay style="width: 300px;" ></video></td>
-                  </tr>
-                </table>`
+    const inthtml = `
+      <table style="width: auto;">
+        <tr><th scope="col" colspan="2" style="text-align:center;font-size:15px;">${item.text} </th> </tr>
+        <tr> <td>省：</td> <td>${item.province}</td></tr>
+        <tr> <td>市：</td> <td>${item.city}</td></tr>
+        <tr><td>县/区：</td> <td>${item.district}</td> </tr>
+        <tr><td>地址：</td> <td>${item.address}</td> </tr>
+        <tr> <td>视频：</td><td><video src='http://data.mars3d.cn/file/video/lukou.mp4' controls autoplay style="width: 300px;" ></video></td></tr>
+      </table>`
     return inthtml
   })
 
   // 单击事件
-  graphicLayer.on(mars3d.EventType.click, function (event) {
+  busineDataLayer.on(mars3d.EventType.click, function (event) {
     console.log("你单击了", event)
 
     if (map.camera.positionCartographic.height > 90000) {
@@ -90,33 +82,12 @@ function createGraphics(graphicLayer, arr) {
       })
     }
   })
+}
 
-  for (let i = 0, len = arr.length; i < len; i++) {
-    const item = arr[i]
-    const position = Cesium.Cartesian3.fromDegrees(+item.lng, +item.lat, item.z || 0)
-
-    const graphic = new mars3d.graphic.BillboardPrimitive({
-      position: position,
-      style: {
-        image: "img/marker/mark-blue.png",
-        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        scaleByDistance: new Cesium.NearFarScalar(1.5e2, 1.0, 8.0e6, 0.2),
-        label: {
-          text: item.text,
-          font_size: 17,
-          color: Cesium.Color.AZURE,
-          outline: true,
-          outlineColor: Cesium.Color.BLACK,
-          outlineWidth: 2,
-          horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          pixelOffset: new Cesium.Cartesian2(15, 0), // 偏移量
-          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 90000)
-        }
-      },
-      attr: item
-    })
-    graphicLayer.addGraphic(graphic)
-  }
+/**
+ * 释放当前地图业务的生命周期函数
+ * @returns {void} 无
+ */
+export function onUnmounted() {
+  map = null
 }

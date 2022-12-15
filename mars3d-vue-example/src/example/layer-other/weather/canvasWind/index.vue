@@ -11,14 +11,14 @@
     <div class="f-mb">
       <a-space>
         <span>粒子个数:</span>
-        <mars-slider v-model:value="formState.count" @change="changeCount" :min="1000" :max="90000" :step="1" />
+        <mars-slider v-model:value="formState.count" @change="changeCount" :min="1000" :max="9000" :step="1" />
       </a-space>
     </div>
 
     <div class="f-mb">
       <a-space>
         <span>存活时间:</span>
-        <mars-slider v-model:value="formState.age" @change="changeAge" :min="10" :max="500" :step="1" />
+        <mars-slider v-model:value="formState.age" @change="changeAge" :min="10" :max="150" :step="1" />
       </a-space>
     </div>
 
@@ -32,7 +32,7 @@
     <div class="f-mb">
       <a-space>
         <span>线宽度:</span>
-        <mars-slider v-model:value="formState.linewidth" @change="changeLinewidth" :min="1" :max="10" :step="0.1" />
+        <mars-slider v-model:value="formState.linewidth" @change="changeLinewidth" :min="1" :max="6" :step="0.1" />
       </a-space>
     </div>
 
@@ -60,8 +60,8 @@ interface FormState {
 
 const formState: UnwrapRef<FormState> = reactive({
   count: 4096,
-  age: 60,
-  speed: 10,
+  age: 120,
+  speed: 60,
   linewidth: 1,
   color: "#4696db"
 })

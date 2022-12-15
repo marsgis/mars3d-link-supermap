@@ -63,15 +63,18 @@ function showWindLine(arr) {
     features: pointGrid
   }
 
-  // 插值
+  // 如果下面没有展示，可能是数据精度不够，可以取消下面注释，对数据插值。
+  // turf.interpolate() 提供了基于 IDW（反距离权重）算法的将数据插值为格点的方法。
+  // 插值的精度是由第二个参数与 interpolate_options.units 共同决定的，单位支持 degrees, radians, miles, or kilometers，
+  // IDW 要为每个格点计算所有散点的权重，计算规模是 (散点数 * 格点数)，所以要在精度与性能间做好平衡。
+
   // points = turf.interpolate(points, 10, {
   //   gridType: 'point', // 'square' | 'point' | 'hex' | 'triangle'
   //   property: 'speed',
   //   units: 'kilometers', // degrees, radians, miles, or kilometers
   //   weight: 1
   // })
-  // 适当降低插值结果的精度便于显示
-  // points.features.map((i) => (i.properties.speed = Number(i.properties.speed.toFixed(2))))
+  // points.features.map((i) => (i.properties.speed = Number(i.properties.speed.toFixed(2)))) // 适当降低插值结果的精度便于显示
 
   // 等值面
   const geojsonPoly = turf.isobands(points, breaks, {

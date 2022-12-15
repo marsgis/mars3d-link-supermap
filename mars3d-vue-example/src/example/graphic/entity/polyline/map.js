@@ -46,6 +46,8 @@ export function onMounted(mapInstance) {
   addDemoGraphic12(graphicLayer)
   addDemoGraphic13(graphicLayer)
   addDemoGraphic14(graphicLayer)
+  addDemoGraphic15(graphicLayer)
+  addDemoGraphic16(graphicLayer)
 }
 
 /**
@@ -282,9 +284,9 @@ function addDemoGraphic7(graphicLayer) {
       // 动画线材质
       materialType: mars3d.MaterialType.LineFlow,
       materialOptions: {
+        image: "img/textures/line-gradual.png",
         color: "#66bd63",
         repeat: new Cesium.Cartesian2(2.0, 1.0),
-        image: "img/textures/line-gradual.png",
         speed: 25
       }
     },
@@ -305,8 +307,9 @@ function addDemoGraphic8(graphicLayer) {
       // 动画线材质
       materialType: mars3d.MaterialType.LineFlow,
       materialOptions: {
-        color: "#1a9850",
         image: "img/textures/line-arrow-blue.png",
+        color: "#1a9850",
+        mixt: true,
         speed: 20,
         repeat: new Cesium.Cartesian2(5, 1)
       }
@@ -441,6 +444,62 @@ function addDemoGraphic14(graphicLayer) {
     attr: { remark: "示例14" }
   })
   graphicLayer.addGraphic(graphic)
+}
+
+function addDemoGraphic15(graphicLayer) {
+  const positions = [
+    [117.225254, 31.743174, 22.5],
+    [117.333836, 31.743008, 7.4],
+    [117.333411, 31.715264, 2.7],
+    [117.31401, 31.715658, 4.3],
+    [117.314371, 31.727136, 5.4],
+    [117.297682, 31.727056, 7.2],
+    [117.296586, 31.692789, 3.4],
+    [117.279685, 31.693365, 7.1],
+    [117.280136, 31.726877, 11.4],
+    [117.225741, 31.726757, 20.2],
+    [117.225387, 31.743153, 22.5]
+  ]
+
+  const graphic = new mars3d.graphic.PolylineEntity({
+    positions: mars3d.PolyUtil.interLine(positions, { minDistance: "auto" }), // 切分坐标，使流动材质均匀些
+    style: {
+      width: 7,
+      materialType: mars3d.MaterialType.LineFlow,
+      materialOptions: {
+        image: "/img/textures/line-interval.png",
+        axisY: false,
+        repeat: new Cesium.Cartesian2(10.0, 1.0),
+        color: "#ffffff",
+        speed: 10
+      }
+    },
+    attr: { remark: "示例15" }
+  })
+  graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)
+}
+
+function addDemoGraphic16(graphicLayer) {
+  const graphic = new mars3d.graphic.PolylineEntity({
+    positions: [
+      [116.929192, 31.891959, 32.8],
+      [116.960064, 31.883802, 35.7],
+      [116.948047, 31.868749, 33.7]
+    ],
+    style: {
+      width: 3,
+      color: "#ff0000"
+    },
+    attr: { remark: "示例16" }
+  })
+  graphicLayer.addGraphic(graphic)
+
+  // 动态平滑追加点
+  const positions_draw = graphic.setCallbackPositions() // 切换坐标为动态回调模式
+  setInterval(() => {
+    const position = new mars3d.LngLatPoint(116.979661 + Math.random() * 0.01, 31.863542 + Math.random() * 0.01, 38).toCartesian()
+    positions_draw.push(position) // 追加点
+  }, 3000)
 }
 
 // 生成演示数据(测试数据量)

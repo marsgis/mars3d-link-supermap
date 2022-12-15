@@ -17,7 +17,8 @@ export const mapOptions = {
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
-  start(1)
+
+  showImages()
 }
 
 /**
@@ -28,10 +29,8 @@ export function onUnmounted() {
   map = null
 }
 
-let step = 0
-let arrTileLayer
-
-function start(time) {
+// ImageLayer的方式
+function showImages() {
   const urlArr = [
     "//data.mars3d.cn/file/img/radar/201906211112.PNG",
     "//data.mars3d.cn/file/img/radar/201906211124.PNG",
@@ -40,7 +39,7 @@ function start(time) {
     "//data.mars3d.cn/file/img/radar/201906211142.PNG"
   ]
 
-  const arr = []
+  const arrTileLayer = []
   for (let i = 0, len = urlArr.length; i < len; i++) {
     const tileLayer = new mars3d.layer.ImageLayer({
       url: urlArr[i],
@@ -48,39 +47,99 @@ function start(time) {
       alpha: 0
     })
     map.addLayer(tileLayer)
-    arr.push(tileLayer)
+    arrTileLayer.push(tileLayer)
   }
 
-  arrTileLayer = arr
-  step = 0
-  changeRadarAlpha(time)
-}
+  let step = 0
+  const alphaStep = 0.01
+  let idxTimer
 
-let idxTimer
-const alphaStep = 0.01
-
-function changeRadarAlpha(time) {
-  if (step > arrTileLayer.length - 1) {
-    step = 0
-    arrTileLayer[arrTileLayer.length - 1].alpha = 0
-  }
-  const layer1 = arrTileLayer[step]
-  const layer2 = arrTileLayer[step + 1]
-  if (!layer1 || !layer2) {
-    return
-  }
-  layer1.alpha = 1
-  layer2.alpha = 0
-
-  clearInterval(idxTimer)
-  idxTimer = window.setInterval(function () {
-    layer1.alpha -= alphaStep
-    layer2.alpha += alphaStep
-
-    if (layer1.alpha < alphaStep) {
-      layer1.alpha = 0
-      step++
-      changeRadarAlpha(time)
+  function changeRadarAlpha(time) {
+    if (step > arrTileLayer.length - 1) {
+      step = 0
+      arrTileLayer[arrTileLayer.length - 1].alpha = 0
     }
-  }, time * 1000 * alphaStep)
+    const layer1 = arrTileLayer[step]
+    const layer2 = arrTileLayer[step + 1]
+    if (!layer1 || !layer2) {
+      return
+    }
+    layer1.alpha = 1
+    layer2.alpha = 0
+
+    clearInterval(idxTimer)
+    idxTimer = window.setInterval(function () {
+      layer1.alpha -= alphaStep
+      layer2.alpha += alphaStep
+
+      if (layer1.alpha < alphaStep) {
+        layer1.alpha = 0
+        step++
+        changeRadarAlpha(time)
+      }
+    }, time * 1000 * alphaStep)
+  }
+
+  changeRadarAlpha(1)
 }
+
+//  RectangleEntity的方式
+// function showImages2() {
+//   const urlArr = [
+//     "//data.mars3d.cn/file/img/radar/201906211112.PNG",
+//     "//data.mars3d.cn/file/img/radar/201906211124.PNG",
+//     "//data.mars3d.cn/file/img/radar/201906211130.PNG",
+//     "//data.mars3d.cn/file/img/radar/201906211136.PNG",
+//     "//data.mars3d.cn/file/img/radar/201906211142.PNG"
+//   ]
+//   const arrMaterial = []
+//   for (let i = 0, len = urlArr.length; i < len; i++) {
+//     const material = new mars3d.material.Image2MaterialProperty({
+//       image: urlArr[i],
+//       opacity: 0.0
+//     })
+//     const graphic = new mars3d.graphic.RectangleEntity({
+//       positions: [
+//         [73.16895, 13.2023],
+//         [134.86816, 55.11485]
+//       ],
+//       style: {
+//         material: material,
+//         clampToGround: true
+//       }
+//     })
+//     map.graphicLayer.addGraphic(graphic)
+//     arrMaterial.push(material)
+//   }
+
+//   let step = 0
+//   const alphaStep = 0.01
+//   let idxTimer
+//   function changeRadarAlpha(time) {
+//     if (step > arrMaterial.length - 1) {
+//       step = 0
+//       arrMaterial[arrMaterial.length - 1].alpha = 0
+//     }
+//     const material1 = arrMaterial[step]
+//     const material2 = arrMaterial[step + 1]
+//     if (!material1 || !material2) {
+//       return
+//     }
+//     material1.opacity = 1
+//     material2.opacity = 0
+
+//     clearInterval(idxTimer)
+//     idxTimer = window.setInterval(function () {
+//       material1.opacity -= alphaStep
+//       material2.opacity += alphaStep
+
+//       if (material1.opacity < alphaStep) {
+//         material1.opacity = 0
+//         step++
+//         changeRadarAlpha(time)
+//       }
+//     }, time * 1000 * alphaStep)
+//   }
+
+//   changeRadarAlpha(1)
+// }

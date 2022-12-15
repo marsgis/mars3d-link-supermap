@@ -24,7 +24,6 @@ export const mapOptions = {
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
-
   globalNotify("已知问题提示", `(1) SatelliteSensor性能比较差，后期会尝试优化，非投射需求时建议用conicSensor或rectSensor`)
 
   // 创建矢量数据图层
@@ -84,6 +83,7 @@ export function addDemoGraphic1(sensorParams) {
     reverse: reverse
   })
   graphicLayer.addGraphic(satelliteSensor)
+  eventTarget.fire("addTableData", { graphicLayer })
 }
 
 // 生成演示数据(测试数据量)

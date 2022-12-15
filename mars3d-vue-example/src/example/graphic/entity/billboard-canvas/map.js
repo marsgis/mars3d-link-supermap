@@ -36,6 +36,13 @@ export function onMounted(mapInstance) {
   graphicLayer = new mars3d.layer.GraphicLayer()
   map.addLayer(graphicLayer)
 
+  // 随机更新文本
+  setInterval(() => {
+    graphicLayer.eachGraphic((graphic) => {
+      graphic.text = random(0, 100) // 更新文本
+    })
+  }, 2000)
+
   addDemoGraphic1(graphicLayer)
 }
 
@@ -75,17 +82,6 @@ function addDemoGraphic1(graphicLayer) {
     })
     graphicLayer.addGraphic(graphic)
   }
-
-  // 随机更新文本
-  const graphics = graphicLayer.getGraphics()
-  setInterval(() => {
-    graphics.forEach((graphic) => {
-      graphic.text = random(0, 100) // 更新文本
-    })
-  }, 1000)
-}
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 // 生成演示数据(测试数据量)
@@ -107,13 +103,13 @@ export function addRandomGraphicByCount(count) {
         text: 18,
         scale: 0.4,
         horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 900000)
       },
       attr: { index: index }
     })
     graphicLayer.addGraphic(graphic)
   }
-
 
   graphicLayer.enabledEvent = true // 恢复事件
   return result.points.length
@@ -125,10 +121,14 @@ export function startDrawGraphic() {
     type: "canvasBillboard",
     style: {
       text: 18,
+      scale: 0.4,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-      scaleByDistance: new Cesium.NearFarScalar(800, 0.4, 1200, 0.2),
-      distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 10000)
+      distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 900000)
     }
   })
+}
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
 }

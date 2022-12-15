@@ -77,14 +77,21 @@ export function bindLayerDemo() {
       return attr.type + " 我是layer上绑定的Popup" + new Date().toLocaleTimeString()
 
       // return new Promise((resolve) => {
-      //   //这里可以进行后端接口请求数据，setTimeout测试异步
+      //   // 这里可以进行后端接口请求数据，setTimeout测试异步
       //   setTimeout(() => {
-      //     resolve("Promise异步回调显示的弹窗内容信息");
-      //   }, 2000);
-      // });
+      //     resolve("Promise异步回调显示的弹窗内容信息")
+      //   }, 2000)
+      // })
     },
     { timeRender: true, closeButton: false } // timeRender实时刷新
   )
+
+  // geoJsonLayer.on(mars3d.EventType.click, function (event) {
+  //   setTimeout(() => {
+  //     const popup = event.graphic.getPopup()
+  //     console.log("测试获取popup", popup)
+  //   }, 1000)
+  // })
 
   geoJsonLayer.on(mars3d.EventType.popupOpen, function (event) {
     const container = event.container // popup对应的DOM
@@ -209,7 +216,6 @@ export function bindGraphicDemo1() {
     console.log("移除了popup", container)
   })
 
-
   // 绑定Popup
   graphic.bindPopup(getInnerHtml).openPopup()
 }
@@ -268,7 +274,7 @@ export function bindGraphicDemo2() {
   })
 
   // 绑定Popup
-  graphic.bindPopup(innerHtml, { offsetY: -30 }).openPopup()
+  graphic.bindPopup(innerHtml, { offsetY: -30, closeOnClick: false, autoClose: false }).openPopup()
 }
 
 // 只是为了演示，可以单击详情

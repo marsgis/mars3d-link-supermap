@@ -31,9 +31,11 @@ export function onMounted(mapInstance) {
     click: () => {
       hasSelected = !hasSelected
       if (hasSelected) {
+        // toolButton.setIcon("img/icon/good.svg")
         mars3d.DomUtil.addClass(toolButton.container, "toolButton-selected")
         globalMsg("选中了 示例按钮bookmark，回调中想干啥就干啥~")
       } else {
+        // toolButton.setIcon("img/icon/bookmark-one.svg")
         mars3d.DomUtil.removeClass(toolButton.container, "toolButton-selected")
         globalMsg("取消选中了 示例按钮bookmark，回调中想干啥就干啥~")
       }

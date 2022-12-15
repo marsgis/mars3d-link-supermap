@@ -68,7 +68,7 @@ export function onUnmounted() {
   map = null
 }
 
-// let hlsUrl = "http://ivi.bupt.edu.cn/hls/cctv13.m3u8";
+// const hlsUrl = "http://ivi.bupt.edu.cn/hls/cctv13.m3u8"
 // const hlsUrl = "http://playertest.longtailvideo.com/adaptive/bipbop/gear4/prog_index.m3u8"
 const hlsUrl = "http://1252093142.vod2.myqcloud.com/4704461fvodcq1252093142/f865d8a05285890787810776469/playlist.f3.m3u8"
 
@@ -85,7 +85,7 @@ function addRandomGraphicByCount(graphicLayer, position) {
       offsetX: -16,
       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 100000)
     },
-    popup: `<video id="videoHLS"  muted="muted" autoplay="autoplay" loop="loop" crossorigin="" controls="">
+    popup: `<video style="width: 200px;height:100px;" id="videoHLS"  muted="muted" autoplay="autoplay" loop="loop" crossorigin="" controls="">
               </video>`,
     popupOptions: {
       offsetY: -170, // 显示Popup的偏移值，是DivGraphic本身的像素高度值

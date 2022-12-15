@@ -9,7 +9,7 @@ let videoGraphic
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
   scene: {
-    center: { lat: 28.44134, lng: 119.482687, alt: 199, heading: 227, pitch: -28 }
+    center: { lat: 28.441852, lng: 119.481567, alt: 241, heading: 174, pitch: -35 }
   }
 }
 
@@ -61,6 +61,13 @@ export function onUnmounted() {
 }
 
 function createVideoDom() {
+  //   <video id="trailer" muted="" autoplay="" loop="" crossorigin="" controls="">
+  //   <source src="https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.webm" type="video/webm">
+  //   <source src="https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.mp4" type="video/mp4">
+  //   <source src="https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.mov" type="video/quicktime">
+  //   Your browser does not support the <code>video</code> element.
+  // </video>
+
   videoElement = mars3d.DomUtil.create("video", "", document.body)
   videoElement.setAttribute("muted", "muted")
   videoElement.setAttribute("autoplay", "autoplay")
@@ -69,9 +76,21 @@ function createVideoDom() {
   videoElement.setAttribute("controls", "")
   videoElement.style.display = "none"
 
-  const sourceContainer = mars3d.DomUtil.create("source", "", videoElement)
-  sourceContainer.setAttribute("src", "//data.mars3d.cn/file/video/lukou.mp4")
-  sourceContainer.setAttribute("type", "video/mp4")
+  // const mp4Source = mars3d.DomUtil.create("source", "", videoElement)
+  // mp4Source.setAttribute("src", "//data.mars3d.cn/file/video/lukou.mp4")
+  // mp4Source.setAttribute("type", "video/mp4")
+
+  const webmSource = mars3d.DomUtil.create("source", "", videoElement)
+  webmSource.setAttribute("src", "https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.webm")
+  webmSource.setAttribute("type", "video/webm")
+
+  const mp4Source = mars3d.DomUtil.create("source", "", videoElement)
+  mp4Source.setAttribute("src", "https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.mp4")
+  mp4Source.setAttribute("type", "video/mp4")
+
+  const quicktimeSource = mars3d.DomUtil.create("source", "", videoElement)
+  quicktimeSource.setAttribute("src", "https://cesium.com/public/SandcastleSampleData/big-buck-bunny_trailer.mov")
+  quicktimeSource.setAttribute("type", "video/quicktime")
 
   // 可以使视频元素与Cesium的模拟时钟同步
   const synchronizer = new Cesium.VideoSynchronizer({
@@ -120,16 +139,16 @@ function addDemoGraphic1() {
 function addDemoGraphic2() {
   const graphic = new mars3d.graphic.PolygonEntity({
     positions: [
-      [119.481749, 28.440171],
-      [119.481385, 28.440457],
-      [119.481911, 28.44094],
-      [119.482254, 28.440653]
+      [119.481749, 28.440171, 130],
+      [119.481385, 28.440457, 130],
+      [119.481911, 28.44094, 130],
+      [119.482254, 28.440653, 130]
     ],
     styleType: "video", // 属性编辑框使用
     style: {
       material: videoElement,
-      stRotationDegree: 130, // 视频旋转角度
-      clampToGround: true
+      stRotationDegree: 90 // 视频旋转角度
+      // clampToGround: true
     },
     attr: { remark: "示例2" }
   })

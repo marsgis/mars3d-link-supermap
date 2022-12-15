@@ -157,7 +157,7 @@
       },
       {
         "pid": 10,
-        "name": "OSM地图",
+        "name": "OSM地图(暂不可用)",
         "type": "xyz",
         "icon": "/img/basemaps/osm.png",
         "url": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -180,15 +180,6 @@
         "type": "tencent",
         "layer": "custom",
         "style": "4"
-      },
-      {
-        "pid": 10,
-        "name": "灰色底图",
-        "icon": "img/basemaps/bd-c-grayscale.png",
-        "type": "mapbox",
-        "username": "marsgis",
-        "styleId": "cki0a92b123qo1aluk0e5v7sb",
-        "scaleFactor": true
       },
       {
         "pid": 10,
@@ -361,7 +352,7 @@
         "highlight": { "type": "polyline", "color": "#2deaf7", "width": 4, "clampToGround": true },
         "center": { "lat": 31.814176, "lng": 117.225362, "alt": 5105.3, "heading": 359.2, "pitch": -83.1 },
         "popup": "all",
-        "onWidget": "widgets/manageLayers-tuli/heatmap.js",
+        "onWidget": "layer-picture-heatmap",
         "mapSplit": false
       },
       {
@@ -383,7 +374,7 @@
         },
         "center": { "lat": 31.816951, "lng": 117.22898, "alt": 2916.7, "heading": 0.3, "pitch": -78.8 },
         "popup": "名称：{NAME}<br />层数：{floor}",
-        "onWidget": "widgets/manageLayers-tuli/heatmap.js"
+        "onWidget": "layer-picture-heatmap"
       },
       {
         "id": 401087,
@@ -410,7 +401,7 @@
           { "type": "html", "html": "<div style='text-align: right;color: #ff0000;padding-right: 10px;'>数据仅供参考</div>" }
         ],
         "popupNoTitle": true,
-        "onWidget": "widgets/manageLayers-tuli/guihua.js"
+        "onWidget": "layer-picture-guihua"
       },
       { "id": 30, "name": "矢量数据", "type": "group" },
       { "id": 3030, "pid": 30, "name": "GeoJSON数据", "type": "group" },
@@ -658,6 +649,7 @@
         "name": "汽车",
         "url": "{dataServer}/file/czml/car.czml",
         "center": { "lat": 40.894745, "lng": 121.920252, "alt": 904, "heading": 64, "pitch": -67 },
+        "onWidget": "control-clock",
         "radio": true,
         "flyTo": true
       },
@@ -668,6 +660,7 @@
         "name": "飞行编队",
         "url": "{dataServer}/file/czml/flight.czml",
         "popup": "all",
+        "onWidget": "control-clock",
         "radio": true,
         "flyTo": true
       },
@@ -678,6 +671,7 @@
         "name": "船舶编队",
         "url": "{dataServer}/file/czml/ship.czml",
         "popup": "all",
+        "onWidget": "control-clock",
         "radio": true,
         "flyTo": true
       },
@@ -720,13 +714,13 @@
       {
         "pid": 2010,
         "type": "graphic",
-        "name": "起重车",
+        "name": "警车",
         "data": [
           {
             "type": "modelP",
             "position": [117.217458, 31.815349, 35.03],
             "style": {
-              "url": "//data.mars3d.cn/gltf/mars/qzcar/GKZY_anim.gltf",
+              "url": "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
               "scale": 2,
               "heading": -95,
               "clampToGround": true
@@ -737,19 +731,19 @@
       },
 
       {
-        "id": 50,
+        "id": 950,
         "name": "超图瓦片服务",
         "type": "group"
       },
       {
-        "pid": 50,
+        "pid": 950,
         "name": "超图底图",
         "type": "supermap_img",
         "icon": "img/basemaps/google_img.png",
         "url": "http://www.supermapol.com/realspace/services/map-China600/rest/maps/China600"
       },
       {
-        "pid": 50,
+        "pid": 950,
         "name": "超图影像图",
         "type": "supermap_img",
         "url": "http://www.supermapol.com/realspace/services/3D-dixingyingxiang/rest/realspace/datas/MosaicResult",
@@ -765,7 +759,7 @@
         "transparentBackColorTolerance": 0.1
       },
       {
-        "pid": 50,
+        "pid": 950,
         "name": "超图矢量瓦片",
         "type": "supermap_mvt",
         "url": "http://www.supermapol.com/realspace/services/map-mvt-JingJinDiQuDiTu/restjsr/v1/vectortile/maps/%E4%BA%AC%E6%B4%A5%E5%9C%B0%E5%8C%BA%E5%9C%B0%E5%9B%BE",
@@ -773,12 +767,12 @@
         "show": false
       },
       {
-        "id": 60,
+        "id": 960,
         "name": "超图S3M服务",
         "type": "group"
       },
       {
-        "pid": 60,
+        "pid": 960,
         "name": "香港科技园",
         "type": "supermap_s3m",
         "url": "https://www.supermapol.com/realspace/services/3D-yanmofenxi/rest/realspace/datas/sci_park/config",
@@ -797,7 +791,7 @@
         }
       },
       {
-        "pid": 60,
+        "pid": 960,
         "name": "BIM",
         "type": "supermap_s3m",
         "url": "http://www.supermapol.com/realspace/services/3D-BIMbuilding/rest/realspace/datas/BIMbuilding/config",
@@ -817,7 +811,7 @@
       },
 
       {
-        "pid": 60,
+        "pid": 960,
         "name": "CBD",
         "type": "supermap_s3m",
         "url": "http://support.supermap.com.cn:8090/iserver/services/3D-CBD/rest/realspace",
@@ -835,7 +829,7 @@
         }
       },
       {
-        "pid": 60,
+        "pid": 960,
         "name": "鸟巢",
         "type": "supermap_s3m",
         "url": "http://www.supermapol.com/realspace/services/3D-NewOlympicGreen/rest/realspace",

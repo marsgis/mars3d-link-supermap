@@ -56,6 +56,26 @@ export function onMounted(mapInstance) {
   })
 
   queryGaodePOI = new mars3d.query.GaodePOI()
+
+  // 右键菜单
+  const defaultContextmenuItems = map.getDefaultContextMenu()
+  defaultContextmenuItems.push({
+    text: "查看此处地址",
+    icon: "fa fa-eye",
+    show: function (e) {
+      return Cesium.defined(e.cartesian)
+    },
+    callback: (e) => {
+      queryGaodePOI.getAddress({
+        location: e.cartesian,
+        success: (result) => {
+          console.log("根据经纬度坐标获取地址，逆地理编码", result)
+          globalAlert(result.address)
+        }
+      })
+    }
+  })
+  map.bindContextMenu(defaultContextmenuItems)
 }
 
 /**
@@ -147,7 +167,8 @@ function loadData(queryOptions, text) {
       hideLoading()
     },
     error: function (msg) {
-      globalAlert(msg).hideLoading()
+      hideLoading()
+      globalAlert(msg)
     }
   }
   queryGaodePOI.query(lastQueryOptions)

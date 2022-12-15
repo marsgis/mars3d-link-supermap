@@ -1,8 +1,8 @@
 /**
  * Mars3D三维可视化平台  mars3d
  *
- * 版本信息：v3.4.0
- * 编译日期：2022-07-14 09:44:55
+ * 版本信息：v3.4.18
+ * 编译日期：2022-12-13 20:24:33
  * 版权所有：Copyright by 火星科技  http://mars3d.cn
  * 使用单位：免费公开版 ，2022-06-01
  */
@@ -224,7 +224,7 @@
 }
 .mars3d-clockAnimate .mars3d-clockAnimate-speed ::-webkit-outer-spin-button,
 .mars3d-clockAnimate .mars3d-clockAnimate-speed input::-webkit-inner-spin-button {
-  -webkit-appearance: none !important;
+  appearance: none !important;
   margin: 0;
 }
 .mars3d-compass {
@@ -356,17 +356,28 @@
   position: absolute;
   left: -15px;
   top: calc(50% - 15px);
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: #f0eeee;
   border-radius: 50%;
   text-align: center;
-  line-height: 36px;
+  line-height: 40px;
   padding: 2px;
   border: 1px solid lightgrey;
 }
 .mars3d-slider .slider-splitter:hover {
   cursor: ew-resize;
+}
+.mars3d-mapCompare {
+  position: absolute;
+  left: auto;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 /**滚轮样式*/
 .mars3d-mousedownview {
@@ -921,13 +932,15 @@
 }
 .mars3d-template-content input {
   color: #ffffff;
-  background-color: rgba(63, 72, 84, 0.9);
+  background-color: transparent;
+  padding: 4px 5px;
   border-width: 1px;
   border-style: solid;
 }
 .mars3d-template-content textarea {
   color: #ffffff;
-  background-color: rgba(63, 72, 84, 0.9);
+  background-color: transparent;
+  padding: 4px 5px;
   border-width: 1px;
   border-style: solid;
   height: 60px;

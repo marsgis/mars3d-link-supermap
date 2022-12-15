@@ -111,6 +111,12 @@ export function setMoelStyle(style) {
   fixedRoute.model.setStyle(style)
 }
 
+export function clearMoelPitchRoll () {
+  fixedRoute.model.style.pitch = undefined
+  fixedRoute.model.style.roll = undefined
+}
+
+
 export function clearGroundLayer() {
   groundLayer.clear()
 }

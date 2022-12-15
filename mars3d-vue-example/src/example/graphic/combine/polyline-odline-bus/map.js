@@ -40,7 +40,7 @@ export function onMounted(mapInstance) {
     return mars3d.Util.getTemplateHtml({ title: "矢量图层", template: "all", attr: attr })
   })
 
-  Cesium.Resource.fetchJson("//data.mars3d.cn/file/apidemo/bjgj.json").then(function (data) {
+  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/bjgj.json" }).then(function (data) {
     const busLines = []
     data.forEach(function (busLine, idx) {
       let prevPt

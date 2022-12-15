@@ -30,6 +30,57 @@ export function onMounted(mapInstance) {
   graphicLayer = new mars3d.layer.GraphicLayer()
   map.addLayer(graphicLayer)
 
+  addDemoGraphic1()
+  addDemoGraphic2()
+}
+
+/**
+ * 释放当前地图业务的生命周期函数
+ * @returns {void} 无
+ */
+export function onUnmounted() {
+  map = null
+}
+
+export function addDemoGraphic1() {
+  const radarParsms = {
+    outerRadius: 2000,
+    innerRadius: 500,
+    headingValue: 0,
+    pitchValue: 0,
+    rollValue: 0,
+    startFovH: 180,
+    endFovH: -180,
+    startFovV: 0,
+    endFovV: 90,
+    areaColor: "rgba(255,0,0,0.5)"
+  }
+
+  const camberRadar = new mars3d.graphic.CamberRadar({
+    position: [117.170264, 31.840312, 363],
+    name: "雷达模型",
+    style: {
+      color: "#ff0000",
+      opacity: 0.5,
+      outline: true,
+      outlineColor: "#ffffff",
+      segmentH: 50,
+      radius: radarParsms.outerRadius,
+      startRadius: radarParsms.innerRadius,
+      heading: radarParsms.headingValue,
+      pitch: radarParsms.pitchValue,
+      roll: radarParsms.rollValue,
+      startFovH: radarParsms.startFovH,
+      endFovH: radarParsms.endFovH,
+      startFovV: radarParsms.startFovV,
+      endFovV: radarParsms.endFovV,
+      flat: true
+    }
+  })
+  graphicLayer.addGraphic(camberRadar)
+}
+
+function addDemoGraphic2() {
   // 加个模型
   const graphic = new mars3d.graphic.ModelEntity({
     name: "地面站模型",
@@ -42,40 +93,6 @@ export function onMounted(mapInstance) {
     }
   })
   graphicLayer.addGraphic(graphic)
-}
-
-/**
- * 释放当前地图业务的生命周期函数
- * @returns {void} 无
- */
-export function onUnmounted() {
-  map = null
-}
-
-export function addDemoGraphic1(radarParsms) {
-
-
-  const camberRadar = new mars3d.graphic.CamberRadar({
-    position: [117.170264, 31.840312, 363],
-    style: {
-      color: "#ff0000",
-      opacity: 0.5,
-      outline: true,
-      outlineColor: "#ffffff",
-      segmentH: 50,
-      radius: radarParsms.outerRadius,
-      startRadius: radarParsms.innerRadius,
-      heading: radarParsms.headingValue,
-      pitch: radarParsms.pitchValue,
-      roll: radarParsms.rollValue,
-      startFovH: Cesium.Math.toRadians(radarParsms.startFovH),
-      endFovH: Cesium.Math.toRadians(radarParsms.endFovH),
-      startFovV: Cesium.Math.toRadians(radarParsms.startFovV),
-      endFovV: Cesium.Math.toRadians(radarParsms.endFovV),
-      flat: true
-    }
-  })
-  graphicLayer.addGraphic(camberRadar)
 }
 
 // 生成演示数据(测试数据量)
@@ -101,10 +118,10 @@ export function addRandomGraphicByCount(count) {
         segmentH: 50,
         radius: result.radius,
         startRadius: result.radius * 0.3,
-        startFovH: Cesium.Math.toRadians(180),
-        endFovH: Cesium.Math.toRadians(-180),
-        startFovV: Cesium.Math.toRadians(0),
-        endFovV: Cesium.Math.toRadians(90)
+        startFovH: 180,
+        endFovH: -180,
+        startFovV: 0,
+        endFovV: 90
       },
       attr: { index: index }
     })
@@ -127,10 +144,10 @@ export function startDrawGraphic() {
       segmentH: 50,
       radius: 2000,
       startRadius: 800,
-      startFovH: Cesium.Math.toRadians(180),
-      endFovH: Cesium.Math.toRadians(-180),
-      startFovV: Cesium.Math.toRadians(0),
-      endFovV: Cesium.Math.toRadians(90)
+      startFovH: 180,
+      endFovH: -180,
+      startFovV: 0,
+      endFovV: 90
     }
   })
 }
@@ -183,28 +200,28 @@ export function innerRadiusChange(val) {
 export function startFovHChange(value) {
   const camberRadar = getLastGraphic()
   if (camberRadar) {
-    camberRadar.startFovH = Cesium.Math.toRadians(value)
+    camberRadar.startFovH = value
   }
 }
 
 export function endFovHChange(value) {
   const camberRadar = getLastGraphic()
   if (camberRadar) {
-    camberRadar.endFovH = Cesium.Math.toRadians(value)
+    camberRadar.endFovH = value
   }
 }
 
 export function startFovVChange(value) {
   const camberRadar = getLastGraphic()
   if (camberRadar) {
-    camberRadar.startFovV = Cesium.Math.toRadians(value)
+    camberRadar.startFovV = value
   }
 }
 
 export function endFovVChange(value) {
   const camberRadar = getLastGraphic()
   if (camberRadar) {
-    camberRadar.endFovV = Cesium.Math.toRadians(value)
+    camberRadar.endFovV = value
   }
 }
 

@@ -295,6 +295,68 @@ export function bindLayerContextMenu() {
         }
       }
     },
+
+    {
+      text: "启用按轴平移",
+      icon: "fa fa-pencil",
+      show: (event) => {
+        const graphic = event.graphic
+        if (!graphic || !graphic.hasEdit || !graphic.isEditing) {
+          return false
+        }
+        return !graphic.editing?.hasMoveMatrix
+      },
+      callback: (event) => {
+        const graphic = event.graphic
+        graphic.editing.startMoveMatrix(event.graphic, event)
+      }
+    },
+    {
+      text: "停止按轴平移",
+      icon: "fa fa-pencil",
+      show: (event) => {
+        const graphic = event.graphic
+        if (!graphic || !graphic.hasEdit || !graphic.isEditing) {
+          return false
+        }
+        return graphic.editing?.hasMoveMatrix
+      },
+      callback: (event) => {
+        const graphic = event.graphic
+        graphic.editing.stopMoveMatrix()
+      }
+    },
+    {
+      text: "启用按轴旋转",
+      icon: "fa fa-bullseye",
+      show: (event) => {
+        const graphic = event.graphic
+        if (!graphic || !graphic.hasEdit || !graphic.isEditing) {
+          return false
+        }
+        return !graphic.editing?.hasRotateMatrix
+      },
+      callback: (event) => {
+        const graphic = event.graphic
+        graphic.editing.startRotateMatrix(event.graphic, event)
+      }
+    },
+    {
+      text: "停止按轴旋转",
+      icon: "fa fa-bullseye",
+      show: (event) => {
+        const graphic = event.graphic
+        if (!graphic || !graphic.hasEdit || !graphic.isEditing) {
+          return false
+        }
+        return graphic.editing?.hasRotateMatrix
+      },
+      callback: (event) => {
+        const graphic = event.graphic
+        graphic.editing.stopRotateMatrix()
+      }
+    },
+
     {
       text: "删除对象",
       icon: "fa fa-trash-o",

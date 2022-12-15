@@ -34,6 +34,7 @@ export function onMounted(mapInstance) {
   // 加一些演示数据
   addDemoGraphic1(graphicLayer)
   addDemoGraphic2(graphicLayer)
+  addDemoGraphic2_1(graphicLayer)
   addDemoGraphic3(graphicLayer)
   addDemoGraphic4(graphicLayer)
   addDemoGraphic5(graphicLayer)
@@ -156,6 +157,26 @@ function addDemoGraphic2(graphicLayer) {
       }
     },
     attr: { remark: "示例2" }
+  })
+  graphicLayer.addGraphic(graphic)
+}
+
+function addDemoGraphic2_1(graphicLayer) {
+  const graphic = new mars3d.graphic.PolylinePrimitive({
+    positions: [
+      [117.13312, 31.877271, 37.6],
+      [117.18517, 31.876315, 25.6],
+      [117.24824, 31.87394, 22.9]
+    ],
+    style: {
+      width: 4,
+      materialType: mars3d.MaterialType.LineDotDash, // 点划线 虚线
+      materialOptions: {
+        color: "#00ffff",
+        dashLength: 50
+      }
+    },
+    attr: { remark: "示例2-1" }
   })
   graphicLayer.addGraphic(graphic)
 }

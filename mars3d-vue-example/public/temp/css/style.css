@@ -166,7 +166,7 @@ html {
   vertical-align: middle;
 }
 
-.cesium-viewer-toolbar > .cesium-toolbar-button,
+.cesium-viewer-toolbar>.cesium-toolbar-button,
 .cesium-navigationHelpButton-wrapper,
 .cesium-viewer-geocoderContainer {
   margin-bottom: 5px;
@@ -205,10 +205,12 @@ html {
   left: 40px;
   transform-origin: left bottom;
 }
+
 .cesium-navigation-help-instructions,
 .cesium-navigation-button {
   background-color: rgba(23, 49, 71, 0.8);
 }
+
 .cesium-navigation-button-selected,
 .cesium-navigation-button-unselected:hover {
   background-color: rgba(23, 49, 71, 1);
@@ -241,7 +243,7 @@ html {
 }
 
 .cesium-viewer-geocoderContainer .cesium-geocoder-input:focus {
-  background-color: rgba(63, 72, 84, 0.9);
+  background-color: var(--mars-bg-base, rgba(63, 72, 84, 0.9));
 }
 
 .cesium-viewer-geocoderContainer .search-results {
@@ -251,7 +253,7 @@ html {
 /**cesium info信息框*/
 .cesium-infoBox {
   top: 50px;
-  background: rgba(63, 72, 84, 0.9);
+  background: var(--mars-bg-base, rgba(63, 72, 84, 0.9));
 }
 
 .cesium-infoBox-title {
@@ -276,6 +278,7 @@ html {
   left: 10px;
   right: auto;
 }
+
 .cesium-cesiumInspector {
   background-color: rgba(23, 49, 71, 0.8);
 }
@@ -284,68 +287,85 @@ html {
 .mars3d-compass .mars3d-compass-outer {
   fill: rgba(23, 49, 71, 0.8);
 }
+
 .mars3d-contextmenu-ul,
 .mars3d-sub-menu {
   background-color: rgba(23, 49, 71, 0.8);
 }
-.mars3d-contextmenu-ul > li > a:hover,
-.mars3d-sub-menu > li > a:hover,
-.mars3d-contextmenu-ul > li > a:focus,
-.mars3d-sub-menu > li > a:focus,
-.mars3d-contextmenu-ul > li > .active,
-.mars3d-sub-menu > li > .active {
-  background-color: #3ea6ff;
+
+.mars3d-contextmenu-ul>li>a:hover,
+.mars3d-sub-menu>li>a:hover,
+.mars3d-contextmenu-ul>li>a:focus,
+.mars3d-sub-menu>li>a:focus,
+.mars3d-contextmenu-ul>li>.active,
+.mars3d-sub-menu>li>.active {
+  background-color:var(--mars-hover-btn-bg,#3ea6ff);
 }
-.mars3d-contextmenu-ul > .active > a,
-.mars3d-sub-menu > .active > a,
-.mars3d-contextmenu-ul > .active > a:hover,
-.mars3d-sub-menu > .active > a:hover,
-.mars3d-contextmenu-ul > .active > a:focus,
-.mars3d-sub-menu > .active > a:focus {
-  background-color: #3ea6ff;
+
+.mars3d-contextmenu-ul>.active>a,
+.mars3d-sub-menu>.active>a,
+.mars3d-contextmenu-ul>.active>a:hover,
+.mars3d-sub-menu>.active>a:hover,
+.mars3d-contextmenu-ul>.active>a:focus,
+.mars3d-sub-menu>.active>a:focus {
+  background-color: var(--mars-hover-btn-bg,#3ea6ff);
 }
+
 /* Popup样式*/
 .mars3d-popup-color {
-  color: #ffffff;
+  color: var(--mars-text-color, #ffffff);
 }
+
 .mars3d-popup-background {
-  background: rgba(23, 49, 71, 0.8);
+  background: var(--mars-bg-base, rgba(63, 72, 84, 0.9));
 }
 
 .mars3d-tooltip {
-  background: rgba(23, 49, 71, 0.8);
-  border: 1px solid rgba(23, 49, 71, 0.8);
+  color: var(--mars-text-color, #ffffff);
+  background: var(--mars-bg-base, rgba(63, 72, 84, 0.9));
+  border: 1px solid var(--mars-bg-base, rgba(63, 72, 84, 0.9));
 }
+
 .mars3d-tooltip-top:before {
-  border-top-color: rgba(23, 49, 71, 0.8);
+  border-top-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
 }
+
 .mars3d-tooltip-bottom:before {
-  border-bottom-color: rgba(23, 49, 71, 0.8);
+  border-bottom-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
 }
+
 .mars3d-tooltip-left:before {
-  border-left-color: rgba(23, 49, 71, 0.8);
+  border-left-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
 }
+
 .mars3d-tooltip-right:before {
-  border-right-color: rgba(23, 49, 71, 0.8);
+  border-right-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
 }
 
 .mars3d-template-content label {
   padding-right: 6px;
 }
+
 .mars3d-template-titile {
-  border-bottom: 1px solid #3ea6ff;
+  color: var(--mars-base-color, #ffffff);
+  border-bottom: 1px solid var(--mars-hover-btn-bg, #3ea6ff)
 }
+
 .mars3d-template-titile a {
   font-size: 16px;
+  color: var(--mars-msg-title-color, #c7d3dd)
 }
+
 .mars3d-popup-btn-custom {
   padding: 3px 10px;
   border: 1px solid #209ffd;
   background: #209ffd1c;
 }
+
 .mars3d-popup-content {
   margin: 15px;
 }
+
 .mars3d-divGraphic:hover {
   z-index: 999 !important;
 }

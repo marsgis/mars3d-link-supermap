@@ -41,7 +41,7 @@
     <div v-show="isShow">
       <div class="f-mb">
         <a-space>
-          <span class="mars-pannel-item-label">高度选择</span>
+          <span>高度选择</span>
           <a-slider
             tooltipPlacement="bottom"
             v-model:value="formState.height"
@@ -54,7 +54,11 @@
       </div>
 
       <div class="f-mb">
-        <span>当前高度:{{ formState.height }}</span>
+        <a-space>
+        <span>当前高度</span>
+        <span>{{ formState.height }}</span>
+      </a-space>
+
       </div>
 
       <div class="f-tac">

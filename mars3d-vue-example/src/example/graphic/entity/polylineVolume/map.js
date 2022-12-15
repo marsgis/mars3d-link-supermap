@@ -73,7 +73,10 @@ function addDemoGraphic1(graphicLayer) {
     ],
     style: {
       shape: "pipeline",
-      radius: 80,
+      radius: 50,
+      thicknes: 10,
+      startAngle: 0,
+      endAngle: 180, // 拱形半圆管道
       color: "#3388ff",
       opacity: 0.6
     },
@@ -208,6 +211,7 @@ function addDemoGraphic4(graphicLayer) {
     style: {
       shape: "star",
       radius: 80,
+      slices: 5, // 角的个数
       cornerType: Cesium.CornerType.MITERED,
       color: "#ffff00",
       opacity: 0.4
@@ -227,8 +231,11 @@ function addDemoGraphic5(graphicLayer) {
     style: {
       shape: "pipeline",
       radius: 80,
-      color: "#0000ff",
-      opacity: 0.9
+      slices: 4, // 方形管道
+      startAngle: 45,
+      color: "#989898",
+      outline: true,
+      outlineColor: "#D7D7D7"
     },
     attr: { remark: "示例5" }
   })

@@ -1,6 +1,7 @@
 import * as mars3d from "mars3d"
 
 export let map // mars3d.Map三维地图对象
+
 let tiles3dLayer
 let brightnessEffect
 let bloomEffect
@@ -64,13 +65,18 @@ export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
-
   map.basemap = 2017 // 切换到蓝色底图
 
+  // 固定光照时间
+  map.clock.currentTime = Cesium.JulianDate.fromDate(new Date("2022-11-01 12:00:00"))
+  // map.clock.shouldAnimate = false
+
+  // 固定光照方向
   map.scene.light = new Cesium.DirectionalLight({
     direction: map.scene.camera.direction
   })
-  map.on(mars3d.EventType.cameraMoveEnd, function (event) {
+  map.camera.percentageChanged = 0.001
+  map.on(mars3d.EventType.cameraChanged, function (event) {
     map.scene.light.direction = map.scene.camera.direction
   })
 
@@ -79,9 +85,9 @@ export function onMounted(mapInstance) {
   })
   map.addEffect(bloomEffect)
 
-  setStyleDef()
-
   addbrightnessEffect(1.5)
+
+  setStyleDef()
 }
 
 /**

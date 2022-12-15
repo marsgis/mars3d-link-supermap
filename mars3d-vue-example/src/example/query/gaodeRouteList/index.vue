@@ -28,7 +28,7 @@
         </a-space>
       </div>
 
-      <div v-show="dataSource.length > 0">
+      <div class="f-mt" v-show="dataSource.length > 0">
         <mars-table
           :pagination="false"
           :dataSource="dataSource"
@@ -115,6 +115,7 @@ const startPoint = async () => {
 
 // 终点POI
 const endPoint = () => {
+  dataSource.value = []
   mapWork.endPoint()
 }
 

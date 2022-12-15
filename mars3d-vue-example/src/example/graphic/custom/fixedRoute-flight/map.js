@@ -175,6 +175,7 @@ function addGraphicLayer() {
 
   // ui面板信息展示
   fixedRoute.on(mars3d.EventType.change, (event) => {
+    // console.log("change", event)
     eventTarget.fire("roamLineChange", event)
   })
 
@@ -187,6 +188,8 @@ function addGraphicLayer() {
     map.controls.timeline.zoomTo(fixedRoute.startTime, fixedRoute.stopTime)
   }
 }
+
+
 
 // 改变视角模式
 export function updateCameraSetting(data) {

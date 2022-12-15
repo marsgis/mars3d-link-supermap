@@ -14,6 +14,27 @@
           <div v-for="(item, index) in cameraData" :key="index">
             <mars-button :title="item.title" @click="item.callback">{{ item.name }}</mars-button>
           </div>
+
+          <a-form :label-col="{ span: 6 }" :wrapper-col="{ span: 18 }">
+            <a-form-item label="经度值">
+              <mars-input v-model:value="inputObj.lng" />
+            </a-form-item>
+            <a-form-item label="纬度值">
+              <mars-input v-model:value="inputObj.lat" />
+            </a-form-item>
+            <a-form-item label="高度值">
+              <mars-input v-model:value="inputObj.alt" />
+            </a-form-item>
+            <a-form-item label="方向角">
+              <mars-input v-model:value="inputObj.heading" />
+            </a-form-item>
+            <a-form-item label="俯仰角">
+              <mars-input v-model:value="inputObj.pitch" />
+            </a-form-item>
+            <a-form-item label="翻滚角">
+              <mars-input v-model:value="inputObj.roll" />
+            </a-form-item>
+          </a-form>
         </a-space>
       </a-collapse-panel>
     </a-collapse>
@@ -21,14 +42,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, markRaw } from "vue"
+import { ref, onMounted } from "vue"
 import * as mapWork from "./map.js"
 
 const activeKey = ref(["1", "2", "3"])
 
+const inputObj = ref({
+  lng: 0,
+  lat: 0,
+  alt: 0,
+  heading: 0,
+  pitch: 0,
+  roll: 0
+})
+
 onMounted(() => {
+  inputObj.value = mapWork.map.getCameraView()
+  inputObj.value.roll = 0
+
   mapWork.map.on("cameraChanged", function (event) {
-    console.log("视角发送了变化", mapWork.map.getCameraView())
+    inputObj.value = mapWork.map.getCameraView({ simplify: false })
   })
 })
 

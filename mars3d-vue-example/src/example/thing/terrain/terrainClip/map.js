@@ -82,7 +82,7 @@ export function btnDrawExtent(isShow) {
       const positions = graphic.getOutlinePositions(false)
       map.graphicLayer.clear()
 
-      console.log(JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 打印下边界
+      console.log(JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 打印下边界
 
       // 挖地区域
       const areaItem = terrainClip.addArea(positions)
@@ -104,7 +104,7 @@ export function btnDraw(isShow) {
       const positions = graphic.positionsShow
       map.graphicLayer.clear()
 
-      console.log(JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 打印下边界
+      console.log(JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 打印下边界
 
       const areaItem = terrainClip.addArea(positions)
       addTableItem(areaItem, isShow)

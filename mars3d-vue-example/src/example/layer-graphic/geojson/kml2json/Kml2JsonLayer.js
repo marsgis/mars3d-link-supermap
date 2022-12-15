@@ -2,7 +2,7 @@
 
 /**
  * 通过转geojson方式 加载kml和kmz文件。
- * kgUtil使用需要引入 ../lib/kml/kml-geojson.js文件
+ * kgUtil使用需要引入 ../lib/geojson/kml-geojson.js文件
  */
 class Kml2JsonLayer extends mars3d.layer.GeoJsonLayer {
   /**
@@ -39,7 +39,7 @@ class Kml2JsonLayer extends mars3d.layer.GeoJsonLayer {
           this._load_data(data)
         })
         .catch(function (error) {
-          this.showError("服务出错", error)
+          console.error("服务出错", error)
         })
     } else if (this.options.data) {
       kgUtil
@@ -51,7 +51,7 @@ class Kml2JsonLayer extends mars3d.layer.GeoJsonLayer {
           this._load_data(data)
         })
         .catch(function (error) {
-          this.showError("服务出错", error)
+          console.error("服务出错", error)
         })
     } else {
       if (newOptions) {

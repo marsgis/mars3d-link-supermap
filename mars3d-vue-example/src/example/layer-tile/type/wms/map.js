@@ -89,7 +89,75 @@ export function addTileLayer() {
       }
     },
     popup: "all",
+    // popupOptions: {
+    //   autoClose: false,
+    //   closeOnClick: false,
+    //   checkData: function (attr, graphic) {
+    //     if (Cesium.defined(attr.OBJECTID)) {
+    //       return graphic.attr.OBJECTID === attr.OBJECTID
+    //     }
+    //     if (Cesium.defined(attr.NAME)) {
+    //       return graphic.attr.NAME === attr.NAME
+    //     }
+    //     return false
+    //   }
+    // },
     flyTo: true
+  })
+  map.addLayer(tileLayer)
+
+  // 单击事件
+  tileLayer.on(mars3d.EventType.loadConfig, function (event) {
+    console.log("加载了GetCapabilities", event)
+  })
+  tileLayer.on(mars3d.EventType.click, function (event) {
+    console.log("单击了矢量数据，共" + event.features.length + "条", event)
+  })
+}
+
+export function addTileLayer2() {
+  removeTileLayer()
+
+  // 方式2：在创建地球后调用addLayer添加图层(直接new对应type类型的图层类)
+  tileLayer = new mars3d.layer.WmsLayer({
+    url: "https://localhost/geoserver/wms",
+    layers: "sz_building:building_plat",
+    parameters: {
+      tiled: true,
+      VERSION: "1.1.1",
+      transparent: true,
+      FORMAT: "image/png"
+    },
+    getFeatureInfoParameters: {
+      feature_count: 10,
+      INFO_FORMAT: "text/plain"
+    },
+    // 不支持json格式的wms服务时，可以自定义方法解析数据
+    featureToGraphic: (feature, event) => {
+      const data = feature.data
+
+      // 自行加解析data的代码，下面是测试演示
+      const attr = {}
+      attr["名称"] = "皇岗村文化广场及音乐喷水泉"
+      attr["街道名称"] = "福田街道"
+      attr["社区名称"] = "皇岗社区"
+
+      // 返回graphic对应的构造参数
+      return {
+        type: "point",
+        position: event.cartesian,
+        style: {
+          color: "#ff0000",
+          pixelSize: 10,
+          outlineColor: "#ffffff",
+          outlineWidth: 2
+        },
+        attr: attr
+      }
+    },
+    popup: "all",
+    flyTo: true,
+    show: true
   })
   map.addLayer(tileLayer)
 

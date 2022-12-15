@@ -1,7 +1,7 @@
 import * as mars3d from "mars3d"
 
 export let map // mars3d.Map三维地图对象
-let tilesetPlanClip
+let tilesetLayer
 
 /**
  * 初始化地图业务，生命周期钩子函数（必须）
@@ -15,7 +15,7 @@ export function onMounted(mapInstance) {
   globalNotify("已知问题提示", `因为使用clippingPlanes接口，绘制面时，有些绘制的角度存在效果不对`)
 
   // 加模型
-  const tilesetLayer = new mars3d.layer.TilesetLayer({
+  tilesetLayer = new mars3d.layer.TilesetLayer({
     name: "县城社区",
     url: "//data.mars3d.cn/3dtiles/qx-shequ/tileset.json",
     position: { alt: 11.5 },
@@ -27,18 +27,25 @@ export function onMounted(mapInstance) {
     cullWithChildrenBounds: false,
     luminanceAtZenith: 0.6,
     center: { lat: 28.440675, lng: 119.487735, alt: 639, heading: 269, pitch: -38 },
+
+    // 可传入TilesetPlanClip构造参数，下面是演示裁剪区域
+    planClip: {
+      positions: [
+        [119.481231, 28.440357, 0],
+        [119.481998, 28.441117, 0],
+        [119.482421, 28.440803, 0],
+        [119.481627, 28.439996, 0]
+      ],
+      edgeColor: Cesium.Color.GREY,
+      edgeWidth: 2.0
+    },
     flyTo: true
   })
   map.addLayer(tilesetLayer)
 
-  // 3d模型裁剪
-  tilesetPlanClip = new mars3d.thing.TilesetPlanClip({
-    layer: tilesetLayer,
-    clipOutSide: false,
-    edgeColor: Cesium.Color.GREY,
-    edgeWidth: 2.0
-  })
-  map.addThing(tilesetPlanClip)
+  // 也兼容原生cesium的tileset，按下面方式使用
+  // let tilesetPlanClip = new mars3d.thing.TilesetPlanClip()
+  // tilesetPlanClip.clipTarget = tileset
 }
 
 /**
@@ -50,7 +57,7 @@ export function onUnmounted() {
 }
 
 export function drawPoly() {
-  tilesetPlanClip.clear()
+  tilesetLayer.planClip.clear()
   map.graphicLayer.startDraw({
     type: "polygon",
     style: {
@@ -62,15 +69,16 @@ export function drawPoly() {
       // 绘制成功后回调
       const positions = graphic.positionsShow
       map.graphicLayer.clear()
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
       // 加入positions才能使3d裁剪确定位置，生效
-      tilesetPlanClip.positions = positions
+      tilesetLayer.planClip.positions = positions
     }
   })
 }
 
 export function drawPoly2() {
-  tilesetPlanClip.clear()
+  tilesetLayer.planClip.clear()
 
   map.graphicLayer.startDraw({
     type: "polygon",
@@ -83,15 +91,16 @@ export function drawPoly2() {
       // 绘制成功后回调
       const positions = graphic.positionsShow
       map.graphicLayer.clear()
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
-      tilesetPlanClip.clipOutSide = true
-      tilesetPlanClip.positions = positions
+      tilesetLayer.planClip.clipOutSide = true
+      tilesetLayer.planClip.positions = positions
     }
   })
 }
 
 export function drawExtent() {
-  tilesetPlanClip.clear()
+  tilesetLayer.planClip.clear()
   map.graphicLayer.startDraw({
     type: "rectangle",
     style: {
@@ -104,16 +113,15 @@ export function drawExtent() {
       // 绘制成功后回调
       const positions = graphic.getOutlinePositions(false)
       map.graphicLayer.clear()
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
-      console.log("绘制坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 方便测试拷贝坐标
-
-      tilesetPlanClip.positions = positions
+      tilesetLayer.planClip.positions = positions
     }
   })
 }
 
 export function drawExtent2() {
-  tilesetPlanClip.clear()
+  tilesetLayer.planClip.clear()
   map.graphicLayer.startDraw({
     type: "rectangle",
     style: {
@@ -126,15 +134,14 @@ export function drawExtent2() {
       // 绘制成功后回调
       const positions = graphic.getOutlinePositions(false)
       map.graphicLayer.clear()
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
-      tilesetPlanClip.clipOutSide = true
-      tilesetPlanClip.positions = positions
-
-      console.log("绘制坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 方便测试拷贝坐标
+      tilesetLayer.planClip.clipOutSide = true
+      tilesetLayer.planClip.positions = positions
     }
   })
 }
 
 export function clear() {
-  tilesetPlanClip.clear()
+  tilesetLayer.planClip.clear()
 }

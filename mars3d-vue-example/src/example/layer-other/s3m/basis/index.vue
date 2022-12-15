@@ -7,12 +7,12 @@
       </template>
       <a-collapse-panel key="1" header="S3M示例">
         <div class="basis-button-contain">
-          <mars-button @click="showMaxNiaochaoDemo">人工建模(奥体公园)</mars-button>
-          <mars-button @click="showMaxCBDDemo">人工建模(CBD)</mars-button>
-          <mars-button @click="showMaxPipeDemo">人工建模(地下管网)</mars-button>
-          <mars-button @click="showBIMQiaoDemo">BIM(桥梁)</mars-button>
           <mars-button @click="showQxSuofeiyaDemo">倾斜摄影(哈尔滨索菲亚)</mars-button>
           <mars-button @click="showQxSrsbDemo">倾斜摄影(萨尔茨堡)</mars-button>
+          <!-- <mars-button @click="showBIMQiaoDemo">BIM(桥梁)</mars-button>
+          <mars-button @click="showMaxNiaochaoDemo">人工建模(奥体公园)</mars-button>
+          <mars-button @click="showMaxCBDDemo">人工建模(CBD)</mars-button> -->
+          <mars-button @click="showMaxPipeDemo">人工建模(地下管网)</mars-button>
         </div>
       </a-collapse-panel>
 

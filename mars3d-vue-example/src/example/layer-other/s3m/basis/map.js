@@ -34,7 +34,8 @@ export function onMounted(mapInstance) {
 
   globalNotify("已知问题提示", `当前使用的是原生Cesium+SuperMap3D插件方式，很多API不支持，完整方式需要参考Github开源代码切换Cesium到超图版Cesium。`)
 
-  showMaxNiaochaoDemo()
+  // showMaxNiaochaoDemo()
+  showQxSuofeiyaDemo()
 }
 
 /**
@@ -161,7 +162,7 @@ export function showBIMQiaoDemo() {
       layer.style3D.lineWidth = 0.5
       layer.style3D.lineColor = new Cesium.Color(60 / 255, 60 / 255, 60 / 255, 1)
       layer.style3D.fillStyle = Cesium.FillStyle.Fill_And_WireFrame
-      layer.wireFrameMode = Cesium.WireFrameType.EffectOutline
+      layer.wireFrameMode = Cesium.WireFrameType?.EffectOutline
     }
   })
 }

@@ -176,12 +176,16 @@ function addDemoGraphic3(graphicLayer) {
     ],
     style: {
       height: 200.0,
-      length: 600.0,
       width: 200.0,
-      cornerType: Cesium.CornerType.BEVELED,
-      material: Cesium.Color.BLUE.withAlpha(0.5),
-      outline: true,
-      outlineColor: Cesium.Color.WHITE
+      cornerType: Cesium.CornerType.MITERED,
+      materialType: mars3d.MaterialType.LineFlow,
+      materialOptions: {
+        image: "./img/textures/arrow-h.png",
+        axisY: false,
+        repeat: new Cesium.Cartesian2(30.0, 1.0),
+        color: "#ffff00",
+        speed: 30
+      }
     },
     attr: { remark: "示例3" }
   })
@@ -199,15 +203,16 @@ function addDemoGraphic4(graphicLayer) {
       width: 200.0,
       height: 100.0,
       diffHeight: 100,
-      cornerType: Cesium.CornerType.BEVELED,
-      material: Cesium.Color.YELLOW.withAlpha(0.5),
+      color: Cesium.Color.YELLOW.withAlpha(0.5),
       outline: true,
-      outlineColor: Cesium.Color.WHITE
+      outlineColor: Cesium.Color.WHITE,
+      cornerType: Cesium.CornerType.BEVELED
     },
     attr: { remark: "示例4" }
   })
   graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)
 }
+
 
 // 生成演示数据(测试数据量)
 export function addRandomGraphicByCount(count) {
@@ -239,7 +244,6 @@ export function addRandomGraphicByCount(count) {
     })
     graphicLayer.addGraphic(graphic)
   }
-
 
   graphicLayer.enabledEvent = true // 恢复事件
   return result.points.length

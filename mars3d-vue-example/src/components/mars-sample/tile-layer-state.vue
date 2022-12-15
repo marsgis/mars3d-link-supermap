@@ -13,6 +13,7 @@
     :row-selection="tileLayerRowSelection"
     :dataSource="tileLayerList"
     :columns="tileLayerColumns"
+    bordered
     :pagination="{ pageSize: 5 }"
     size="small"
     :customRow="tileLayerCustomRowObj"
@@ -417,6 +418,7 @@ const onChangeHighlight = () => {
 
 .title {
   text-align: center;
+  color: var(--mars-text-color);
 }
 
 .mars-pannel-item-label {

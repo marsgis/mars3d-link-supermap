@@ -74,7 +74,8 @@ export function removeAll() {
 export function measureSection() {
   measureObj.section({
     // maxPointNum:2,
-    splitNum: 300 // 插值次数
+    splitNum: 300, // 插值次数
+    exact: false // 是否进行精确计算， 传false时是否快速概略计算方式，该方式计算精度较低，但计算速度快，仅能计算在当前视域内坐标的高度
   })
 }
 

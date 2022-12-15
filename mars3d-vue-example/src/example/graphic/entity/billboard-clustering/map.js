@@ -2,14 +2,15 @@ import * as mars3d from "mars3d"
 
 export let map // mars3d.Map三维地图对象
 export let graphicLayer // 矢量图层对象
-let arrData
 
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
   scene: {
-    center: { lat: 24.688611, lng: 119.260277, alt: 1673759, heading: 348, pitch: -69 }
+    center: { lat: 24.688611, lng: 119.260277, alt: 1673759, heading: 348, pitch: -69 },
+    mapMode2D: Cesium.MapMode2D.ROTATE // 避免切换到二维时图标有黑影
   }
 }
+
 
 /**
  * 初始化地图业务，生命周期钩子函数（必须）
@@ -20,8 +21,34 @@ export const mapOptions = {
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
-  // 创建矢量数据图层
-  graphicLayer = new mars3d.layer.GraphicLayer({
+  // 创建矢量数据图层（业务数据图层）
+  graphicLayer = new mars3d.layer.BusineDataLayer({
+    url: "//data.mars3d.cn/file/apidemo/mudi.json",
+    dataColumn: "data", // 数据接口中对应列表所在的取值字段名
+    lngColumn: "lng",
+    latColumn: "lat",
+    altColumn: "z",
+    symbol: {
+      type: "billboard", // 对应是 mars3d.graphic.BillboardEntity
+      styleOptions: {
+        image: "img/marker/mark-blue.png",
+        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        scaleByDistance: new Cesium.NearFarScalar(1000, 0.7, 5000000, 0.3),
+        label: {
+          text: "{text}",
+          font_size: 19,
+          color: Cesium.Color.AZURE,
+          outline: true,
+          outlineColor: Cesium.Color.BLACK,
+          outlineWidth: 2,
+          horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          pixelOffset: new Cesium.Cartesian2(10, 0), // 偏移量
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 80000)
+        }
+      }
+    },
     // 点的聚合配置
     clustering: {
       enabled: true,
@@ -43,33 +70,14 @@ export function onMounted(mapInstance) {
       //   })
       // },
     }
-    // tooltip: '{text}',
   })
   map.addLayer(graphicLayer)
 
-  // 访问后端接口，取数据
-  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/mudi.json" })
-    .then(function (res) {
-      arrData = res.data
-      addFeature(graphicLayer, arrData)
-    })
-    .catch(function (error) {
-      console.log("加载JSON出错", error)
-    })
-}
 
-/**
- * 释放当前地图业务的生命周期函数
- * @returns {void} 无
- */
-export function onUnmounted() {
-  map = null
+  graphicLayer.on("clustering", function(event) {
+    console.log("新增聚合对象", event)
+  })
 
-  graphicLayer.remove()
-  graphicLayer = null
-}
-
-function addFeature(graphicLayer, arr) {
   graphicLayer.bindPopup(function (event) {
     const item = event.graphic?.attr
     if (!item) {
@@ -123,82 +131,43 @@ function addFeature(graphicLayer, arr) {
       }
     }
   })
+}
 
-  for (let i = 0, len = arr.length; i < len; i++) {
-    const item = arr[i]
+/**
+ * 释放当前地图业务的生命周期函数
+ * @returns {void} 无
+ */
+export function onUnmounted() {
+  graphicLayer.remove()
+  graphicLayer = null
 
-    const graphic = new mars3d.graphic.BillboardEntity({
-      position: new mars3d.LngLatPoint(item.lng, item.lat, item.z || 0),
-      style: {
-        image: "img/marker/mark-blue.png",
-        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        scaleByDistance: new Cesium.NearFarScalar(1000, 0.7, 5000000, 0.3),
-        label: {
-          text: item.text,
-          font_size: 19,
-          color: Cesium.Color.AZURE,
-          outline: true,
-          outlineColor: Cesium.Color.BLACK,
-          outlineWidth: 2,
-          horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          pixelOffset: new Cesium.Cartesian2(10, 0), // 偏移量
-          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 80000)
-        }
-      },
-      attr: item
-    })
-
-    graphicLayer.addGraphic(graphic)
-  }
+  map = null
 }
 
 // 计算贴地高度示例代码，可以将获取到的高度更新到数据库内，后续不用重复计算。
 export function getDataSurfaceHeight() {
-  if (!arrData) {
+  if (graphicLayer.length === 0) {
     globalMsg("数据尚未加载成功！")
     return
   }
-
-  const lonCol = "lng"
-  const latCol = "lat"
-  const heightCol = "z"
-
-  const positions = []
-  for (let i = 0, len = arrData.length; i < len; i++) {
-    const item = arrData[i]
-
-    // 所在经纬度坐标及海拔高度
-    const longitude = Number(item[lonCol])
-    const latitude = Number(item[latCol])
-    const height = Number(item[heightCol] || 0)
-
-    const position = Cesium.Cartesian3.fromDegrees(longitude, latitude, height)
-    positions.push(position)
-  }
-
   showLoading()
 
-  mars3d.PolyUtil.computeSurfacePoints({
-    map: map,
-    positions: positions
-  }).then((result) => {
+  // 对图层内的数据做贴地运算,自动得到贴地高度
+  graphicLayer.autoSurfaceHeight().then((graphics) => {
     hideLoading()
-    if (result.noHeight) {
-      console.log("部分数据未获取到高度值，贴地高度计算存在误差")
+
+    const arr = []
+    for (let i = 0, len = graphics.length; i < len; i++) {
+      const graphic = graphics[i]
+      const point = graphic.point
+      arr.push({
+        ...graphic.attr,
+        lat: point.lat,
+        lng: point.lng,
+        z: point.alt
+      })
     }
-
-    for (let i = 0, len = arrData.length; i < len; i++) {
-      const item = arrData[i]
-      const point = mars3d.LngLatPoint.fromCartesian(result.positions[i])
-
-      item[lonCol] = point.lng
-      item[latCol] = point.lat
-      item[heightCol] = point.alt // 得到计算的高度值
-    }
-
-    mars3d.Util.downloadFile("point.json", JSON.stringify({ data: arrData }))
+    mars3d.Util.downloadFile("point.json", JSON.stringify({ data: arr }))
   })
 }
 

@@ -65,7 +65,8 @@ function addDemoGraphic2(graphicLayer) {
     position: [116.257665, 30.869372, 1500],
     style: {
       url: "//data.mars3d.cn/gltf/mars/zhui.glb",
-      scale: 200
+      scale: 200,
+      minimumPixelSize: 50
     }
   })
   graphicLayer.addGraphic(graphic)

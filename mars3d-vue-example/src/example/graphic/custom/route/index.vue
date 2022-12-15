@@ -1,8 +1,8 @@
 <template>
-  <mars-dialog :visible="true" right="10" top="10" width="300">
+  <mars-dialog :visible="true" right="10" top="10">
     <mars-table :pagination="false" :customRow="rowClick" :columns="columns" :dataSource="dataSource" :row-selection="rowSelection" />
   </mars-dialog>
-  <mars-dialog customClass="message-list" :visible="true" right="10" top="310" width="300">
+  <mars-dialog customClass="message-list" :visible="true" right="10" top="500" width="300">
     <div v-for="(msgList, index) in msg" :key="index">
       <p>{{ msgList }}</p>
     </div>

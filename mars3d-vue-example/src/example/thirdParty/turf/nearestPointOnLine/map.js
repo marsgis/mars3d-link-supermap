@@ -96,7 +96,7 @@ function nearPoint() {
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
       scaleByDistance: new Cesium.NearFarScalar(10000, 1.0, 500000, 0.1),
-      clampToGround: false
+      clampToGround: true
     },
     popup: "最近点"
   })

@@ -8,6 +8,7 @@ export const mapOptions = {
     center: { lat: 31.77185, lng: 117.235049, alt: 18176, heading: 0, pitch: -69 }
   }
 }
+let mapSplit
 
 /**
  * 初始化地图业务，生命周期钩子函数（必须）
@@ -17,8 +18,10 @@ export const mapOptions = {
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
+  map.basemap = "高德电子"
 
-  map.basemap = undefined
+  mapSplit = new mars3d.control.MapSplit({})
+  map.addControl(mapSplit)
 
   addTileLayer()
 }
@@ -48,6 +51,8 @@ export function addTileLayer() {
     saturation: 0
   })
   map.addLayer(tileLayer)
+
+  mapSplit.setLayerSplitDirection(tileLayer, Cesium.SplitDirection.RIGHT) // 对模型分屏卷帘
 }
 
 export function removeTileLayer() {
@@ -59,8 +64,6 @@ export function removeTileLayer() {
 
 export function setFilterColor(color) {
   if (tileLayer) {
-    tileLayer.setOptions({
-      filterColor: color
-    })
+    tileLayer.layer.filterColor = Cesium.Color.fromCssColorString(color)
   }
 }

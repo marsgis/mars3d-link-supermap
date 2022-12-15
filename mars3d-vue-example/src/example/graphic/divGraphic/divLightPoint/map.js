@@ -2,6 +2,7 @@ import * as mars3d from "mars3d"
 
 export let map // mars3d.Map三维地图对象
 export let graphicLayer // 矢量图层对象
+export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出事件到面板中
 
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
@@ -111,11 +112,40 @@ function addDemoGraphic1(graphicLayer) {
         })
         graphicLayer.addGraphic(graphic)
       }
+      eventTarget.fire("addTableData", { graphicLayer })
     })
     .catch(function (error) {
       console.log("加载JSON出错", error)
     })
 }
+
+// BusineDataLayer 业务数据(通过API接口获取)图层
+// function addDemoGraphic2() {
+//   const dataLayer = new mars3d.layer.BusineDataLayer({
+//     url: "//data.mars3d.cn/file/apidemo/gaoxiao.json",
+//     symbol: {
+//       type: "divLightPoint",
+//       styleOptions: {
+//         color: "#f33349",
+//         size: 10,
+//         distanceDisplayCondition: true,
+//         distanceDisplayCondition_far: 200000,
+//         distanceDisplayCondition_near: 0
+//       }
+//     },
+//     // 自定义解析坐标
+//     formatPosition: (attr, graphic) => {
+//       const postion = attr["经纬度"].split(",") // 取到经纬度坐标
+//       if (postion.length !== 2) {
+//         return null
+//       } else {
+//         return postion
+//       }
+//     },
+//     popup: "all"
+//   })
+//   map.addLayer(dataLayer)
+// }
 
 // 生成演示数据(测试数据量)
 export function addRandomGraphicByCount(count) {

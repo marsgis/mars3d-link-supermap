@@ -30,6 +30,7 @@ module.exports = {
     AMap: "readonly",
     BMap: "readonly",
     kgUtil: "readonly",
+    shpUtil: "readonly",
     netcdfjs: "readonly",
     ol: "readonly",
     olcs: "readonly"

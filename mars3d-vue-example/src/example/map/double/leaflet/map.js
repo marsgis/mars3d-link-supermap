@@ -11,7 +11,7 @@ let map2d
  */
 export function onMounted(mapInstance) {
   map3d = mapInstance // 记录map
-  map3d.camera.percentageChanged = 0.01
+  map3d.camera.percentageChanged = 0.001
 
   globalNotify("已知问题提示", `三维事件目前监听不灵敏，视角同步不够平滑。 `)
 
@@ -83,7 +83,7 @@ function _map2d_extentChangeHandler(e) {
     ymin: bounds.getSouth(),
     ymax: bounds.getNorth()
   }
-  console.log(`'二维地图变化了，区域： ${JSON.stringify(extent)} `)
+  console.log(`二维地图变化了，区域： ${JSON.stringify(extent)} `)
 
   unbind3dEvent()
   map3d.camera.setView({

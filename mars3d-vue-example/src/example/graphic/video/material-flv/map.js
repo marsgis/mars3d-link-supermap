@@ -123,16 +123,15 @@ function addDemoGraphic1() {
 function addDemoGraphic2() {
   const graphic = new mars3d.graphic.PolygonEntity({
     positions: [
-      [119.481749, 28.440171],
-      [119.481385, 28.440457],
-      [119.481911, 28.44094],
-      [119.482254, 28.440653]
+      [119.481749, 28.440171, 130],
+      [119.481385, 28.440457, 130],
+      [119.481911, 28.44094, 130],
+      [119.482254, 28.440653, 130]
     ],
     styleType: "video", // 属性编辑框使用
     style: {
       material: videoElement,
-      stRotationDegree: 130, // 视频旋转角度
-      clampToGround: true
+      stRotationDegree: 130 // 视频旋转角度
     },
     attr: { remark: "示例2" }
   })

@@ -52,6 +52,7 @@ function addDemoGraphic1(graphicLayer) {
       scale: 0.5, // font_size放大，再缩小可以文字显示更清晰
       font_family: "黑体",
       color: "#ffffff",
+      background: true,
       backgroundColor: "rgba(226,190,40,0.5)",
       backgroundPadding: 15,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,

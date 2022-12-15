@@ -140,13 +140,9 @@ function addPlane(property, team) {
     },
     model: {
       url: "//data.mars3d.cn/gltf/mars/zhanji.glb",
-      scale: 0.001,
-      minimumPixelSize: 100,
-      show: true,
-      clampAnimations: true,
-      distanceDisplayCondition: true,
-      distanceDisplayCondition_near: 0,
-      distanceDisplayCondition_far: 900000
+      scale: 0.01,
+      minimumPixelSize: 50,
+      show: true
     },
     billboard: {
       show: false,

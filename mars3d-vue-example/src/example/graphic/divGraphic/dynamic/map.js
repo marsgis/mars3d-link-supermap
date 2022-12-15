@@ -14,7 +14,9 @@ export const mapOptions = {
   },
   control: {
     // animation: true, //是否创建 动画小器件，左下角仪表
-    timeline: true // 是否显示 时间线控件
+    timeline: true,
+    clockAnimate: true,
+    distanceLegend: { left: "100px", bottom: "27px" }
   }
 }
 
@@ -37,7 +39,6 @@ export function onMounted(mapInstance) {
     type: "3dtiles",
     url: "//data.mars3d.cn/3dtiles/qx-teh/tileset.json",
     position: { lng: 117.218434, lat: 31.81807, alt: 163 },
-    flatHeight: 120,
     maximumScreenSpaceError: 16,
     maximumMemoryUsage: 1024,
     dynamicScreenSpaceError: true,

@@ -193,7 +193,6 @@ function inintRoad(positionsSJ, positionsTD) {
 
   // =================添加高铁车头================
   const graphicHead = addTrainHead(arrProperty[0], availability)
-  map.trackedEntity = graphicHead.entity // 设置相机的视角跟随的Entity实例
 
   // =================添加车身====================
   const len = arrProperty.length
@@ -206,6 +205,10 @@ function inintRoad(positionsSJ, positionsTD) {
 
   // ==============添加铁路，定时更新================
   addRailway(graphicHead, mpoints)
+
+  // // 设置相机的视角跟随的Entity实例
+  // map.trackedEntity = graphicHead
+
 
   // ==============更新echarts================
   let lastDistance
@@ -239,7 +242,8 @@ function addTrainHead(position, availability, rotatePI) {
       url: "//data.mars3d.cn/gltf/mars/train/heada.glb",
       scale: 0.001,
       minimumPixelSize: 16,
-      heading: rotatePI ? 90 : -90
+      heading: rotatePI ? 90 : -90,
+      mergeOrientation: true // 用于设置模型不是标准的方向时的纠偏处理,在orientation基础的方式值上加上设置是heading值
     }
   })
   graphicLayer.addGraphic(graphicModel)
@@ -257,7 +261,8 @@ function addTrainBody(position, availability) {
       url: "//data.mars3d.cn/gltf/mars/train/body.glb",
       scale: 0.001,
       minimumPixelSize: 16,
-      heading: -90
+      heading: -90,
+      mergeOrientation: true // 用于设置模型不是标准的方向时的纠偏处理,在orientation基础的方式值上加上设置是heading值
     }
   })
   graphicLayer.addGraphic(graphicModel)

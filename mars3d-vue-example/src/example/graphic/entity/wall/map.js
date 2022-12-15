@@ -79,6 +79,7 @@ function addDemoGraphic1(graphicLayer) {
       materialOptions: {
         image: "img/textures/fence.png",
         color: "#00ff00",
+        mixt: true,
         speed: 10,
         axisY: true
       }
@@ -261,12 +262,14 @@ function addGeoJson(geojson, graphicLayer) {
 }
 
 function addDemoGraphic6(graphicLayer) {
+  const positions = [
+    [117.517578, 31.893561, 25.7],
+    [117.321028, 31.887207, 21.3],
+    [117.290341, 31.902469, 15.1]
+  ]
+
   const graphic = new mars3d.graphic.WallEntity({
-    positions: [
-      [117.353776, 31.887406, 21.2],
-      [117.321028, 31.887207, 21.3],
-      [117.290341, 31.902469, 15.1]
-    ],
+    positions: mars3d.PolyUtil.interLine(positions, { minDistance: "auto" }), // 切分坐标，使流动材质均匀些
     style: {
       diffHeight: 400,
       materialType: mars3d.MaterialType.LineFlow,
@@ -554,7 +557,7 @@ export function bindLayerContextMenu() {
         globalAlert("该对象的长度为:" + strDis)
       }
     },
-   {
+    {
       text: "计算围合面积",
       icon: "fa fa-reorder",
       show: (event) => {

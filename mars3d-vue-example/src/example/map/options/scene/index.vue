@@ -1,6 +1,6 @@
 <template>
   <mars-dialog :visible="true" right="10" top="10" bottom="40" width="360">
-    <mars-table :columns="columns" :data-source="data" bordered :pagination="false">
+    <mars-table :columns="columns" :data-source="data" bordered :pagination="false" :scroll="{ y: 800 }">
       <template #bodyCell="{ column, text, index }">
         <template v-if="column.dataIndex === 'name'">
           <a href="https://mars3d.cn/api/Map.html#.sceneOptions" target="_black">{{ text }}</a>
@@ -12,7 +12,7 @@
             v-if="data[index].operation === 'select'"
             v-model:value="scene"
             ref="select"
-            style="width: 120px"
+            style="width: 110px"
             @change="handleChange"
             :options="selectOptions"
           >

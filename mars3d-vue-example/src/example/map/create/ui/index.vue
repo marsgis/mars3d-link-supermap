@@ -59,12 +59,10 @@
             </a-form-item>
 
             <a-form-item label="鼠标操作">
-              <div class="f-tac">
-                <a-space>
-                  <mars-switch v-model:checked="formState.isScale" @change="onSwitchChange" />
-                  <span>是否允许</span>
-                </a-space>
-              </div>
+              <a-space>
+                <mars-switch v-model:checked="formState.isScale" @change="onSwitchChange" />
+                <span>是否允许</span>
+              </a-space>
             </a-form-item>
 
             <a-form-item label="颜色选择">
@@ -142,11 +140,6 @@
       </a-form>
     </div>
   </mars-dialog>
-  <!-- <my-dialog v-model:visible="visible" left="50" width="200" top="50" icon="setting" :draggable="true" warpper="#sanbox-warpper">
-    <ul>
-      <li v-for="i in couter" :key="i">{{ i }}</li>
-    </ul>
-  </my-dialog> -->
 </template>
 
 <script setup lang="ts">
@@ -226,7 +219,7 @@ const modelOptions = [
   {
     value: "jingche",
     label: "警车",
-    style: { scale: 8, url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf" }
+    style: { scale: 1, url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf" }
   },
   {
     value: "qiche",

@@ -1,6 +1,6 @@
 <template>
-  <mars-dialog :visible="true" right="10" top="10">
-      <mars-gui :options="options" labelCol="1" ></mars-gui>
+  <mars-dialog :visible="true" right="10" top="10" width="200">
+      <mars-gui :options="options" labelCol="6" ></mars-gui>
   </mars-dialog>
 </template>
 
@@ -68,11 +68,11 @@ const options: GuiItem[] = [
     },
     data: [
       {
-        label: "位置信息状态栏",
+        label: "状态信息栏",
         value: "1"
       },
       {
-        label: "时钟面板（左下角）",
+        label: "时钟面板",
         value: "2"
       },
       {
@@ -114,9 +114,9 @@ const choosePannel = (data) => {
 }
 
 const findValue = (data, index) => {
-  return data.find((item) => {
+  return Boolean(data.find((item) => {
     return item === index
-  })
+  }))
 }
 
 const onBindLayer = (e) => {

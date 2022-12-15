@@ -1,5 +1,5 @@
 <template>
-  <mars-dialog :visible="true" right="10" top="10" width="300">
+  <mars-dialog :visible="true" right="10" top="10">
     <div class="f-mb">
       <a-space>
         <span class="mars-pannel-item-label">视椎体状态:</span>
@@ -54,7 +54,7 @@
     </div>
   </mars-dialog>
 
-  <mars-dialog :visible="true" right="10" bottom="50px" width="293">
+  <mars-dialog :visible="true" right="10" bottom="60px">
     <table class="mars-table tb-border">
       <tr>
         <td class="nametd">名称</td>
@@ -134,7 +134,6 @@ mapWork.eventTarget.on("satelliteChange", function (event: any) {
   formState.td_wd = nowData.td_wd
   formState.td_gd = nowData.td_gd
 })
-
 
 // 俯仰角
 const pitchChange = () => {

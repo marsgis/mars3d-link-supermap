@@ -54,7 +54,7 @@ function firstChart(data, dom) {
     },
     title: [
       {
-        text: "企业总数",
+        text: "总数",
         left: "49%",
         top: "44%",
         textAlign: "center",

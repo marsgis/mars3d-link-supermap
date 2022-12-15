@@ -20,6 +20,9 @@ export const mapOptions = {
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
+  globalNotify("已知问题提示", `(1) 当在180度经线或南北极时,存在渲染错乱问题。`)
+
+
   // 创建矢量数据图层
   graphicLayer = new mars3d.layer.GraphicLayer()
   map.addLayer(graphicLayer)

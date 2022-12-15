@@ -17,7 +17,9 @@ export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
   // 创建矢量数据图层
-  graphicLayer = new mars3d.layer.GraphicLayer()
+  graphicLayer = new mars3d.layer.GraphicLayer({
+    allowDrillPick: true // 如果存在坐标完全相同的图标点，可以打开该属性，click事件通过graphics判断
+  })
   map.addLayer(graphicLayer)
 
   // 在layer上绑定监听事件
@@ -40,7 +42,7 @@ export function onMounted(mapInstance) {
   addDemoGraphic9(graphicLayer)
   addDemoGraphic10(graphicLayer)
   addDemoGraphic11(graphicLayer)
-  addDemoGraphic12(graphicLayer)
+  // addDemoGraphic12(graphicLayer)
   addDemoGraphic13(graphicLayer)
   addDemoGraphic14(graphicLayer)
 }
@@ -72,6 +74,7 @@ function addDemoGraphic1(graphicLayer) {
   // 演示个性化处理graphic
   initGraphicManager(graphic)
 }
+
 // 也可以在单个Graphic上做个性化管理及绑定操作
 function initGraphicManager(graphic) {
   // 3.在graphic上绑定监听事件
@@ -144,6 +147,21 @@ function addDemoGraphic2(graphicLayer) {
 }
 
 function addDemoGraphic3(graphicLayer) {
+  // 演示重叠图标
+  const graphic0 = new mars3d.graphic.BillboardEntity({
+    position: new mars3d.LngLatPoint(116.307258, 30.999546, 1239.2),
+    style: {
+      image: "img/marker/lace-red.png",
+      scale: 1,
+      horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+      verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      pixelOffset: new Cesium.Cartesian2(0, -6), // 偏移量
+      distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 500000) // 按视距显示
+    },
+    attr: { remark: "示例3-重叠1" }
+  })
+  graphicLayer.addGraphic(graphic0) // 还可以另外一种写法: graphic.addTo(graphicLayer)
+
   const graphic = new mars3d.graphic.BillboardEntity({
     position: new mars3d.LngLatPoint(116.307258, 30.999546, 1239.2),
     style: {
@@ -154,9 +172,9 @@ function addDemoGraphic3(graphicLayer) {
       pixelOffset: new Cesium.Cartesian2(0, -6), // 偏移量
       distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 500000) // 按视距显示
     },
-    attr: { remark: "示例3" }
+    attr: { remark: "示例3-重叠2" }
   })
-  graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)
+  graphicLayer.addGraphic(graphic)
 }
 
 //
@@ -281,8 +299,10 @@ function addDemoGraphic11(graphicLayer) {
   const graphic = new mars3d.graphic.BillboardEntity({
     position: new mars3d.LngLatPoint(116.2, 30.8, 1000),
     style: {
-      image: "img/icon/redBaseCamp.png",
-      scale: 1,
+      // 支持base64
+      image:
+        "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iNzRweCIgaGVpZ2h0PSI4MnB4IiB2aWV3Qm94PSIwIDAgNzQgODIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8dGl0bGU+56m6PC90aXRsZT4KICAgIDxkZWZzPgogICAgICAgIDxsaW5lYXJHcmFkaWVudCB4MT0iMTAwJSIgeTE9IjUwJSIgeDI9IjMzLjYyOTE0ODglIiB5Mj0iNTcuNzg0Njc0MyUiIGlkPSJsaW5lYXJHcmFkaWVudC0xIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzdCNzk3OSIgc3RvcC1vcGFjaXR5PSIwIiBvZmZzZXQ9IjAlIj48L3N0b3A+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC44MTk4MjA4MDQiIG9mZnNldD0iMTAwJSI+PC9zdG9wPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgPGZpbHRlciB4PSItOS4xJSIgeT0iLTE1LjclIiB3aWR0aD0iMTE4LjIlIiBoZWlnaHQ9IjEzMS40JSIgZmlsdGVyVW5pdHM9Im9iamVjdEJvdW5kaW5nQm94IiBpZD0iZmlsdGVyLTIiPgogICAgICAgICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxLjEyIiBpbj0iU291cmNlR3JhcGhpYyI+PC9mZUdhdXNzaWFuQmx1cj4KICAgICAgICA8L2ZpbHRlcj4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjUwJSIgeTE9IjEwMCUiIHgyPSI1MCUiIHkyPSIzLjA2MTYxN2UtMTUlIiBpZD0ibGluZWFyR3JhZGllbnQtMyI+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNGRkU2NTEiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0ZGQzgyRCIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgICA8cGF0aCBkPSJNMzAuOTk3OTc4OSw2Ny4yMjAyOTE3IEMzMy42ODgyMDAzLDYyLjE3NzMwOTYgMzUuNzA2MDI5Niw1OS40OTQzMzI0IDM3LjA1MTQ2NjgsNTkuMTcxMzYwMSBDNTAuMjM0NjM4OCw1Ni4wMDY3Mzg1IDYwLjAzMiw0NC4xNDY5MDc1IDYwLjAzMiwzMCBDNjAuMDMyLDEzLjQzMTQ1NzUgNDYuNTkzMzc5LDAgMzAuMDE2LDAgQzEzLjQzODYyMSwwIDAsMTMuNDMxNDU3NSAwLDMwIEMwLDQ0LjExMzQwOTQgOS43NTEwMTgzMyw1NS45NTA1NjA1IDIyLjg4Njk0Miw1OS4xNDg3MzM2IEMyNC4yNDk5NDEsNTkuNDgwNTc5OCAyNi4yOTU3NDA0LDYyLjE3Mjc4NDUgMjkuMDI0MzQwMyw2Ny4yMjUzNDc2IEwyOS4wMjQzNjIsNjcuMjI1MzM1OSBDMjkuMzE4MjgxMSw2Ny43Njk1ODc1IDI5Ljk5Nzc1MjcsNjcuOTcyNTIyMSAzMC41NDIwMDQzLDY3LjY3ODYwMjkgQzMwLjczNTc0Myw2Ny41NzM5NzU4IDMwLjg5NDM0MzQsNjcuNDE0NTYyNiAzMC45OTc5Nzg5LDY3LjIyMDI5MTcgWiIgaWQ9InBhdGgtNCI+PC9wYXRoPgogICAgICAgIDxmaWx0ZXIgeD0iLTEyLjUlIiB5PSItMTAuOSUiIHdpZHRoPSIxMjUuMCUiIGhlaWdodD0iMTE5LjglIiBmaWx0ZXJVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIGlkPSJmaWx0ZXItNSI+CiAgICAgICAgICAgIDxmZU9mZnNldCBkeD0iMCIgZHk9IjAiIGluPSJTb3VyY2VBbHBoYSIgcmVzdWx0PSJzaGFkb3dPZmZzZXRPdXRlcjEiPjwvZmVPZmZzZXQ+CiAgICAgICAgICAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIuNSIgaW49InNoYWRvd09mZnNldE91dGVyMSIgcmVzdWx0PSJzaGFkb3dCbHVyT3V0ZXIxIj48L2ZlR2F1c3NpYW5CbHVyPgogICAgICAgICAgICA8ZmVDb2xvck1hdHJpeCB2YWx1ZXM9IjAgMCAwIDAgMCAgIDAgMCAwIDAgMCAgIDAgMCAwIDAgMCAgMCAwIDAgMC41IDAiIHR5cGU9Im1hdHJpeCIgaW49InNoYWRvd0JsdXJPdXRlcjEiPjwvZmVDb2xvck1hdHJpeD4KICAgICAgICA8L2ZpbHRlcj4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjUwJSIgeTE9Ii0yLjQ4OTQ5ODEzZS0xNSUiIHgyPSI1MCUiIHkyPSIxMDAlIiBpZD0ibGluZWFyR3JhZGllbnQtNiI+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNGRkZERkIiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0Y3QjUxRCIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDwvZGVmcz4KICAgIDxnIGlkPSLmkJzntKIiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJpY29u5LiO6aKc6ImyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTIwOS4wMDAwMDAsIC01MTIuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSLnqboiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyMTQuMDAwMDAwLCA1MTcuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8cG9seWdvbiBpZD0i6Lev5b6ELTIiIGZpbGw9InVybCgjbGluZWFyR3JhZGllbnQtMSkiIGZpbHRlcj0idXJsKCNmaWx0ZXItMikiIHBvaW50cz0iMzAuMDE2IDY5LjEwNzE0MjkgNjcgNTMuNTcxNDI4NiA2NyA3NSI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgPGcgaWQ9Iue8lue7hC0xNCI+CiAgICAgICAgICAgICAgICAgICAgPGcgaWQ9IuakreWchuW9oiI+CiAgICAgICAgICAgICAgICAgICAgICAgIDx1c2UgZmlsbD0iYmxhY2siIGZpbGwtb3BhY2l0eT0iMSIgZmlsdGVyPSJ1cmwoI2ZpbHRlci01KSIgeGxpbms6aHJlZj0iI3BhdGgtNCI+PC91c2U+CiAgICAgICAgICAgICAgICAgICAgICAgIDx1c2UgZmlsbD0idXJsKCNsaW5lYXJHcmFkaWVudC0zKSIgZmlsbC1ydWxlPSJldmVub2RkIiB4bGluazpocmVmPSIjcGF0aC00Ij48L3VzZT4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPGVsbGlwc2UgaWQ9IuakreWchuW9oiIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIuNCIgZmlsbC1vcGFjaXR5PSIwLjUxIiBmaWxsPSJ1cmwoI2xpbmVhckdyYWRpZW50LTYpIiBjeD0iMzAuMTI1IiBjeT0iMzAuMTExNjA3MSIgcng9IjIzLjkyNSIgcnk9IjIzLjkxMTYwNzEiPjwvZWxsaXBzZT4KICAgICAgICAgICAgICAgICAgICA8dGV4dCBpZD0iNiIgeD0nMzAnIHk9JzM0JyAgIHN0eWxlPSdkb21pbmFudC1iYXNlbGluZTptaWRkbGU7dGV4dC1hbmNob3I6bWlkZGxlOycgZm9udC1mYW1pbHk9IlBpbmdGYW5nU0MtU2VtaWJvbGQsIFBpbmdGYW5nIFNDIiBmb250LXNpemU9IjQwIiBmb250LXdlaWdodD0iNTAwIiBmaWxsPSIjRkZGRkZGIj4KICAgICAgICAgICAgICAgICAgICAgICAgMQogICAgICAgICAgICAgICAgICAgIDwvdGV4dD4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+",
+      scale: 0.5,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       verticalOrigin: Cesium.VerticalOrigin.CENTER
     },
@@ -291,17 +311,28 @@ function addDemoGraphic11(graphicLayer) {
   graphicLayer.addGraphic(graphic)
 }
 
+// 利用第3方库（gifler.js）加载gif
 function addDemoGraphic12(graphicLayer) {
+  let gifImgBuffer
   const graphic = new mars3d.graphic.BillboardEntity({
     position: new mars3d.LngLatPoint(116.3, 30.8, 1000),
     style: {
-      image: "img/marker/square.png",
+      image: new Cesium.CallbackProperty(() => {
+        return gifImgBuffer
+      }, false),
+      scale: 0.1,
       horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
       verticalOrigin: Cesium.VerticalOrigin.CENTER
     },
     attr: { remark: "示例12" }
   })
   graphicLayer.addGraphic(graphic)
+
+  // eslint-disable-next-line no-undef
+  const gif = gifler("img/icon/tf.gif")
+  gif.frames(document.createElement("canvas"), function (ctx, frame) {
+    gifImgBuffer = frame.buffer.toDataURL()
+  })
 }
 
 function addDemoGraphic13(graphicLayer) {
@@ -433,6 +464,10 @@ export function btnStopBounce() {
 // 在图层绑定Popup弹窗
 export function bindLayerPopup() {
   graphicLayer.bindPopup(function (event) {
+    if (event.graphics?.length > 1) {
+      return `您单击了重叠图标，该区域有${event.graphics.length}个对象` // 如果存在坐标完全相同的图标点时
+    }
+
     const attr = event.graphic.attr || {}
     attr["类型"] = event.graphic.type
     attr["来源"] = "我是layer上绑定的Popup"

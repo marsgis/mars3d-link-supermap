@@ -26,8 +26,9 @@
   <div class="f-mb" v-if="props.enabledDraw">
     <a-space>
       <span class="mars-pannel-item-label">数据维护:</span>
-      <mars-button @click="onClickStartDraw">{{ props.drawLabel1 }}</mars-button>
-      <mars-button v-if="props.drawLabel2" @click="onClickStartDraw2">{{ props.drawLabel2 }}</mars-button>
+      <mars-button v-if="!formState.isDrawing" @click="onClickStartDraw">{{ props.drawLabel1 }}</mars-button>
+      <mars-button v-if="props.drawLabel2 &&!formState.isDrawing" @click="onClickStartDraw2">{{ props.drawLabel2 }}</mars-button>
+      <mars-button v-if="formState.isDrawing" @click="onClickClearDrawing">取消绘制</mars-button>
 
       <a-checkbox
         v-if="props.interaction && formState.enabledEdit"
@@ -60,7 +61,7 @@
       <a-upload
         :multiple="false"
         name="file"
-        accept="json,geojson"
+        accept=".json,.geojson"
         :file-list="fileList"
         :showUploadList="false"
         :supportServerRender="true"
@@ -98,8 +99,8 @@
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'caozuo'">
           <a-space>
-            <mars-icon title="修改矢量数据样式" icon="editor" color="#f2f2f2" class="icon-vertical-a" @click.stop="startEditGraphic(record)" />
-            <mars-icon title="删除矢量数据" icon="delete" color="#f2f2f2" class="icon-vertical-a" @click.stop="deleteGraphic(record)" />
+            <mars-icon title="修改矢量数据样式" icon="editor" class="icon-vertical-a" @click.stop="startEditGraphic(record)" />
+            <mars-icon title="删除矢量数据" icon="delete" class="icon-vertical-a" @click.stop="deleteGraphic(record)" />
           </a-space>
         </template>
         <template v-else>
@@ -151,6 +152,7 @@ interface FormState {
   hasEdit: boolean
   hasTable: boolean
   count: number
+  isDrawing: boolean
 }
 
 const formState: UnwrapRef<FormState> = reactive({
@@ -163,7 +165,8 @@ const formState: UnwrapRef<FormState> = reactive({
   enabledEdit: true,
   hasEdit: false,
   hasTable: false,
-  count: props.defaultCount
+  count: props.defaultCount,
+  isDrawing: false
 })
 
 const currentPage = ref(5) // 分页查询每页条数
@@ -171,6 +174,27 @@ const currentPage = ref(5) // 分页查询每页条数
 // mapWork是map.js内定义的所有对象， 在项目中使用时可以改为import方式使用:  import * as mapWork from './map.js'
 const mapWork = window.mapWork
 const mars3d = mapWork.mars3d
+
+defineExpose({
+  addTableData(graphicLayer) {
+    console.log("addTableData", graphicLayer)
+
+    const list = graphicLayer.graphics
+    for (let i = list.length - 1; i >= 0; i--) {
+      const graphic = list[i]
+      if (graphic.isPrivate) {
+        continue
+      }
+      graphicDataList.value.push({
+        key: graphic.id,
+        name: getGraphicName(graphic)
+      })
+      if (graphic.show) {
+        rowKeys.value.push(graphic.id)
+      }
+    }
+  }
+})
 
 onMounted(() => {
   // 恢复默认状态
@@ -193,12 +217,18 @@ onMounted(() => {
       formState.enabledRightMenu = layer.hasContextMenu()
 
       const graphics = layer.getGraphics()
+
       if (graphics.length > 0) {
-        formState.enabledOpacity = graphics[0].hasOpacity
-        formState.enabledEdit = graphics[0].hasEdit
+        const lastgraphic = graphics[graphics.length - 1]
+        formState.enabledOpacity = lastgraphic.hasOpacity
+        formState.enabledEdit = lastgraphic.hasEdit
       }
 
       formState.hasTable = graphics.length > 0
+
+      layer.on([mars3d.EventType.drawCreated, mars3d.EventType.removeGraphic], function (e) {
+        formState.isDrawing = false
+      })
     }
   }, 500)
 })
@@ -256,9 +286,16 @@ const onClickFlyTo = () => {
 
 const onClickStartDraw = () => {
   mapWork.startDrawGraphic()
+  formState.isDrawing = true
 }
 const onClickStartDraw2 = () => {
   mapWork.startDrawGraphic2()
+  formState.isDrawing = true
+}
+const onClickClearDrawing = () => {
+  formState.isDrawing = false
+  const layer = getManagerLayer()
+  layer.clearDrawing()
 }
 
 const onChangeShow = () => {
@@ -497,19 +534,6 @@ function bindLayerContextMenu() {
   ])
 }
 
-interface FileItem {
-  uid: string
-  name?: string
-  status?: string
-  response?: string
-  url?: string
-}
-
-interface FileInfo {
-  file: FileItem
-  fileList: FileItem[]
-}
-
 //  清除数据
 const onClickClear = () => {
   const layer = getManagerLayer()
@@ -517,6 +541,8 @@ const onClickClear = () => {
   layer.enabledEvent = false // 关闭事件，大数据removeGraphic时效率低
   layer.clear()
   layer.enabledEvent = true
+
+  formState.isDrawing = false
 
   // 清除列表
   graphicDataList.value = []
@@ -569,6 +595,7 @@ const onClickImpFile = (info: any) => {
         graphicLayer.flyTo()
       } else {
         graphicLayer.loadGeoJSON(geojson, { flyTo: true })
+        initGraphicableData(graphicLayer)
       }
     }
   } else if (fileType === "kml") {
@@ -647,7 +674,7 @@ const showEditor = (graphic: any) => {
   emit("onStopEditor") // 关闭参数调节面板
 
   if (!graphic._conventStyleJson) {
-    graphic.options.style = graphic.toJSON().style // 因为示例中的样式可能有复杂对象，需要转为单个json简单对象
+    graphic.style = graphic.toJSON().style // 因为示例中的样式可能有复杂对象，需要转为单个json简单对象
     graphic._conventStyleJson = true // 只处理一次
   }
 
@@ -680,8 +707,7 @@ const graphicColumns = [
   {
     title: "名称",
     dataIndex: "name",
-    key: "name",
-    align: "center"
+    key: "name"
   },
   {
     title: "操作",
@@ -712,7 +738,7 @@ onMounted(() => {
   const graphicLayer = getManagerLayer()
   initGraphicableData(graphicLayer)
 
-  graphicLayer.on(mars3d.EventType.addGraphic, function (event) {
+  graphicLayer.on(mars3d.EventType.drawCreated, function (event) {
     const graphic = event.graphic
     if (graphic.isPrivate) {
       return
@@ -809,6 +835,6 @@ const deleteGraphic = (record: GraphicTableItem) => {
   margin: 10px 0 1px 0 !important;
 }
 .data-list {
-  width:450px;
+  width: 450px;
 }
 </style>

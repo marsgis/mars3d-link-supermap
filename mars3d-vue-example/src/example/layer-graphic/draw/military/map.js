@@ -195,8 +195,8 @@ export function openGeoJSON(file) {
     const reader = new FileReader()
     reader.readAsText(file, "UTF-8")
     reader.onloadend = function (e) {
-      let geojson = this.result
-      geojson = simplifyGeoJSON(geojson) // 简化geojson的点
+      const geojson = this.result
+      // geojson = simplifyGeoJSON(geojson) // 简化geojson的点
       graphicLayer.loadGeoJSON(geojson, {
         flyTo: true
       })
@@ -207,7 +207,7 @@ export function openGeoJSON(file) {
     reader.onloadend = function (e) {
       const strkml = this.result
       kgUtil.toGeoJSON(strkml).then((geojson) => {
-        geojson = simplifyGeoJSON(geojson) // 简化geojson的点
+        // geojson = simplifyGeoJSON(geojson) // 简化geojson的点
         console.log("kml2geojson", geojson)
 
         graphicLayer.loadGeoJSON(geojson, {
@@ -218,7 +218,7 @@ export function openGeoJSON(file) {
   } else if (fileType === "kmz") {
     // 加载input文件控件的二进制流
     kgUtil.toGeoJSON(file).then((geojson) => {
-      geojson = simplifyGeoJSON(geojson) // 简化geojson的点
+      // geojson = simplifyGeoJSON(geojson) // 简化geojson的点
       console.log("kmz2geojson", geojson)
 
       graphicLayer.loadGeoJSON(geojson, {
@@ -231,11 +231,11 @@ export function openGeoJSON(file) {
 }
 
 // 简化geojson的坐标
-function simplifyGeoJSON(geojson) {
-  try {
-    geojson = turf.simplify(geojson, { tolerance: 0.000001, highQuality: true, mutate: true })
-  } catch (e) {
-    console.log("加载出错", e)
-  }
-  return geojson
-}
+// function simplifyGeoJSON(geojson) {
+//   try {
+//     geojson = turf.simplify(geojson, { tolerance: 0.000001, highQuality: true, mutate: true })
+//   } catch (e) {
+//     console.log("加载出错", e)
+//   }
+//   return geojson
+// }

@@ -38,6 +38,7 @@ export function onMounted(mapInstance) {
   addDemoGraphic4(graphicLayer)
   addDemoGraphic5(graphicLayer)
   addDemoGraphic6(graphicLayer)
+  addDemoGraphic7(graphicLayer)
 }
 
 /**
@@ -213,6 +214,45 @@ function addDemoGraphic6(graphicLayer) {
     style: {
       color: "#ffff00",
       opacity: 0.6
+    },
+    attr: { remark: "示例6" }
+  })
+  graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)
+}
+
+function addDemoGraphic7(graphicLayer) {
+  // const extent = { xmin: 73.0, xmax: 136.0, ymin: 3.0, ymax: 59.0 } //中国区域
+  const extent = { xmin: 117.153681, xmax: 117.243941, ymin: 31.668831, ymax: 31.731177 } // 合肥南
+
+
+  const circleOuterPositions = mars3d.PolyUtil.getEllipseOuterPositions({
+    position: [117.198898, 31.702784, 8],
+    radius: 1000
+  })
+
+  const graphic = new mars3d.graphic.PolygonEntity({
+    positions: [
+      // 外环
+      [
+        [extent.xmin, extent.ymax],
+        [extent.xmin, extent.ymin],
+        [extent.xmax, extent.ymin],
+        [extent.xmax, extent.ymax],
+        [extent.xmin, extent.ymax]
+      ],
+      // 内环
+      mars3d.LngLatArray.toArray(circleOuterPositions)
+    ],
+    style: {
+      fill: true,
+      color: "rgb(2,26,79)",
+      opacity: 0.9,
+      outline: true,
+      outlineColor: "#39E09B",
+      outlineWidth: 4,
+      outlineOpacity: 0.8,
+      arcType: Cesium.ArcType.GEODESIC,
+      clampToGround: true
     },
     attr: { remark: "示例6" }
   })

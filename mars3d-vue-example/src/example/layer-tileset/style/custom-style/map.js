@@ -49,6 +49,7 @@ export function onMounted(mapInstance) {
     }
   ])
 
+  // 还原或删除赋予的属性
   // setTimeout(() => {
   //   tilesetLayer.setProperties()// 清除所有
   //   tilesetLayer.setProperties("id", [
@@ -75,6 +76,12 @@ export function onMounted(mapInstance) {
 
     return "rgba(255,255,255,0.7)"
   }
+
+  // 还原或删除赋予的样式
+  // setTimeout(() => {
+  //   tilesetLayer.style = undefined
+  // }, 5000)
+
 }
 
 /**

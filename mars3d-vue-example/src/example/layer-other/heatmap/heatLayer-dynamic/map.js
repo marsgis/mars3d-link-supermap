@@ -56,7 +56,7 @@ function showHeatMap() {
 
   // 为了演示动态更新
   let ratio = 0
-  map.on(mars3d.EventType.preUpdate, (e) => {
+  setInterval(() => {
     if (!isDynamic) {
       return
     }
@@ -66,14 +66,11 @@ function showHeatMap() {
       ratio = 0.0
     }
 
-    const gridData = new Array(100 * 100)
-    gridData.fill(0)
-
     lerpHeatMapData(heatMapData0, heatMapData1, ratio, resultHeatMapData)
 
     // 更新数据
     heatLayer.setPositions(resultHeatMapData, true)
-  })
+  }, 100)
 }
 
 let isDynamic = true

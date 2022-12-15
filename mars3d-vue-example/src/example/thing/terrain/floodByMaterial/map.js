@@ -30,7 +30,7 @@ export function onMounted(mapInstance) {
 
   // 基于地球材质，可以多个区域
   floodByMaterial = new mars3d.thing.FloodByMaterial({
-    color: new Cesium.Color(0.6, 0.7, 0.95, 0.5) // 淹没颜色
+    color: "rgba(0, 123, 230, 0.5)" // 淹没颜色
   })
   map.addThing(floodByMaterial)
 
@@ -63,9 +63,8 @@ export function btnDrawExtent(callback) {
   map.graphicLayer.startDraw({
     type: "rectangle",
     style: {
-      color: "#007be6",
-      opacity: 0.8,
-      outline: false
+      color: "rgba(0, 123, 230, 0.5)"
+      // clampToGround: true
     },
     success: function (graphic) {
       // 绘制成功后回调
@@ -87,9 +86,9 @@ export function btnDraw(callback) {
   map.graphicLayer.startDraw({
     type: "polygon",
     style: {
-      color: "#007be6",
-      opacity: 0.5,
+      color: "rgba(0, 123, 230, 0.5)",
       outline: false
+      // clampToGround: true
     },
     success: function (graphic) {
       const positions = graphic.positionsShow
@@ -137,6 +136,11 @@ export function begin(data) {
 // 高度选择
 export function onChangeHeight(height) {
   floodByMaterial.height = height
+}
+
+// 颜色发生改变
+export function onChangeColor(color) {
+  floodByMaterial.color = color
 }
 
 // 自动播放

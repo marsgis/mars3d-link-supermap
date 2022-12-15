@@ -125,6 +125,11 @@ export function onMounted(mapInstance) {
     eventType: mars3d.EventType.click
   })
   map.addEffect(outlineEffect)
+
+  // 从模型读取指定构件 加到 特效
+  // tiles3dLayer.readyPromise.then(function (e) {
+  //   addTileToTargetEffect(tiles3dLayer, outlineEffect)
+  // })
 }
 
 /**
@@ -133,4 +138,50 @@ export function onMounted(mapInstance) {
  */
 export function onUnmounted() {
   map = null
+}
+
+// 从模型读取指定构件 加到 特效
+function addTileToTargetEffect(tiles3dLayer, effect) {
+  const listGJ = new mars3d.MarsArray()
+  tiles3dLayer.tileset.tileLoad.addEventListener(function (tile) {
+    processTileFeatures(tile, function (feature) {
+      const attr = mars3d.Util.get3DTileFeatureAttr(feature) // 取属性
+
+      // 根据条件判断，将feature记录
+      if (attr.id === "4734ba6f3de83d861c3176a6273cac6d") {
+        listGJ.set(feature.featureId, feature.pickId)
+        effect.selected = listGJ.values
+      }
+    })
+  })
+
+  tiles3dLayer.tileset.tileUnload.addEventListener(function (tile) {
+    processTileFeatures(tile, function (feature) {
+      if (listGJ.contains(feature.featureId)) {
+        listGJ.remove(feature.featureId)
+        effect.selected = listGJ.values
+      }
+    })
+  })
+}
+
+function processContentFeatures(content, callback) {
+  const featuresLength = content.featuresLength
+  for (let i = 0; i < featuresLength; ++i) {
+    const feature = content.getFeature(i)
+    callback(feature)
+  }
+}
+
+function processTileFeatures(tile, callback) {
+  const content = tile.content
+  const innerContents = content.innerContents
+  if (Cesium.defined(innerContents)) {
+    const length = innerContents.length
+    for (let i = 0; i < length; ++i) {
+      processContentFeatures(innerContents[i], callback)
+    }
+  } else {
+    processContentFeatures(content, callback)
+  }
 }

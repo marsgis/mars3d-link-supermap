@@ -51,6 +51,7 @@ export function onMounted(mapInstance) {
   map = mapInstance // 记录map
 
   graphicLayer = new mars3d.layer.GraphicLayer({
+    // isRestorePositions: true,
     hasEdit: true,
     isAutoEditing: true // 绘制完成后是否自动激活编辑
   })
@@ -96,6 +97,15 @@ export function onMounted(mapInstance) {
   bindLayerContextMenu() // 在图层绑定右键菜单,对所有加到这个图层的矢量数据都生效
 
   loadDemoData()
+
+  // map.on(mars3d.EventType.keyup, function (e) {
+  //   console.log("按下了键盘", e)
+
+  //   // ESC按键
+  //   if (e.keyCode === 27) {
+  //     graphicLayer._graphic_drawing._positions_draw.pop() // 删除最后一个点
+  //   }
+  // })
 
   // 自定义提示
   // mars3d.Lang["_单击开始绘制"][0] = "新的提示内容";

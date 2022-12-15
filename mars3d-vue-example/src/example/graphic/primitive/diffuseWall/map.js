@@ -84,6 +84,7 @@ function addDemoGraphic1() {
     attr: { remark: "示例1" }
   })
   graphicLayer.addGraphic(diffuseWallGlow)
+
 }
 
 // 立体围墙扩散效果,圆状
@@ -99,6 +100,10 @@ function addDemoGraphic2() {
     attr: { remark: "示例2" }
   })
   graphicLayer.addGraphic(circleDiffuseWallGlow)
+
+  // setInterval(() => {
+  //   circleDiffuseWallGlow.uniforms.color = Cesium.Color.fromRandom({ alpha: 0.6 })
+  // }, 500)
 }
 
 // 生成演示数据(测试数据量)

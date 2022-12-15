@@ -20,7 +20,7 @@ export function onMounted(mapInstance) {
 
   map.basemap = 2017
 
-  queryPopulationApiData()
+  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/population.json" })
     .then(function (data) {
       showData(data)
     })
@@ -37,10 +37,7 @@ export function onUnmounted() {
   map = null
 }
 
-// 访问后端接口，取数据
-function queryPopulationApiData() {
-  return mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/population.json" })
-}
+
 
 function showData(data) {
   const heightScale = 2000000

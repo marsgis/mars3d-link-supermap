@@ -12,32 +12,32 @@
     <div class="f-mb">
       <a-row :gutter="[0, 10]">
         <a-col :span="8">漫游视角:</a-col>
-        <a-col :span="11">
-          <mars-select @change="changeSelect" v-model:value="formState.select" :options="selectOptions"> </mars-select>
+        <a-col :span="16">
+          <mars-select class="w-full" @change="changeSelect" v-model:value="formState.select" :options="selectOptions"> </mars-select>
         </a-col>
 
         <a-col v-show="formState.showFollowedX === '1'" :span="8" title="距离漫游对象的水平距离，单位：米">视角距离:</a-col>
-        <a-col v-show="formState.showFollowedX === '1'" :span="11">
-          <mars-input-number @change="changeFollowed" v-model:value="formState.followedX" :step="1" />
+        <a-col v-show="formState.showFollowedX === '1'" :span="16">
+          <mars-input-number class="w-full" @change="changeFollowed" v-model:value="formState.followedX" :step="1" />
         </a-col>
 
         <a-col v-show="formState.showFollowedZ === '1'" :span="8" title="距离漫游对象的高度，单位：米">视角高度:</a-col>
-        <a-col v-show="formState.showFollowedZ === '1'" :span="11">
+        <a-col v-show="formState.showFollowedZ === '1'" :span="16">
           <mars-input-number @change="changeFollowed" v-model:value="formState.followedZ" :step="1" />
         </a-col>
 
         <a-col v-show="formState.select === 'dy'" :span="8" title="偏离漫游对象的高度，单位：米">高度偏移值:</a-col>
-        <a-col v-show="formState.select === 'dy'" :span="11">
+        <a-col v-show="formState.select === 'dy'" :span="16">
           <mars-input-number @change="changeFollowed" v-model:value="formState.offsetZ" :step="1" />
         </a-col>
 
         <a-col v-show="formState.select === 'dy'" :span="8" title="偏离漫游对象的横向值，单位：米">横向偏移值:</a-col>
-        <a-col v-show="formState.select === 'dy'" :span="11">
+        <a-col v-show="formState.select === 'dy'" :span="16">
           <mars-input-number @change="changeFollowed" v-model:value="formState.offsetY" :step="1" />
         </a-col>
 
         <a-col v-show="formState.select === 'dy'" :span="8" title="偏离漫游对象的前后值，单位：米">前后偏移值:</a-col>
-        <a-col v-show="formState.select === 'dy'" :span="11">
+        <a-col v-show="formState.select === 'dy'" :span="16">
           <mars-input-number @change="changeFollowed" v-model:value="formState.offsetX" :step="1" />
         </a-col>
       </a-row>
@@ -45,27 +45,40 @@
 
     <div class="f-mb">
       <a-row :gutter="[0, 10]">
-        <a-col :span="8">调整模型角度:</a-col>
-        <a-col :span="11">
-          <mars-switch v-model:checked="formState.isHand" />
+        <a-col :span="8">heading值:</a-col>
+        <a-col :span="5">
+          <mars-switch v-model:checked="formState.customHeading" @change="changeAutoHeading" />
         </a-col>
+        <a-col :span="6" v-if="formState.customHeading">
+          <mars-slider class="sliderlen" @change="updateHeading" v-model:value="formState.slideHeadingStep" :min="0" :max="360" :step="0.01" />
+        </a-col>
+        <a-col :span="8" v-if="!formState.customHeading"> 根据路线自动 </a-col>
       </a-row>
     </div>
 
-    <div v-show="formState.isHand === true">
+    <div class="f-mb">
       <a-row :gutter="[0, 10]">
-        <a-col :span="8">heading值:</a-col>
-        <a-col :span="11">根据路线自动计算</a-col>
-
-        <a-col :span="8">pitch值(前后):</a-col>
-        <a-col :span="11">
-          <mars-slider @change="updatePitch" v-model:value="formState.slidePitchStep" :min="0" :max="360" :step="0.01" />
+        <a-col :span="8">pitch值:</a-col>
+        <a-col :span="5">
+          <mars-switch v-model:checked="formState.customPitch" @change="changeAutoPitch" />
         </a-col>
-
-        <a-col :span="8">roll值(左右):</a-col>
-        <a-col :span="11">
-          <mars-slider @change="updateRoll" v-model:value="formState.slideRollStep" :min="0" :max="360" :step="0.01" />
+        <a-col :span="6" v-if="formState.customPitch">
+          <mars-slider class="sliderlen" @change="updatePitch" v-model:value="formState.slidePitchStep" :min="0" :max="360" :step="0.01" />
         </a-col>
+        <a-col :span="8" v-if="!formState.customPitch"> 根据路线自动 </a-col>
+      </a-row>
+    </div>
+
+    <div class="f-mb">
+      <a-row :gutter="[0, 10]">
+        <a-col :span="8">roll值:</a-col>
+        <a-col :span="5">
+          <mars-switch v-model:checked="formState.customRoll" @change="changeAutoRoll" />
+        </a-col>
+        <a-col :span="6" v-if="formState.customRoll">
+          <mars-slider class="sliderlen" @change="updateRoll" v-model:value="formState.slideRollStep" :min="0" :max="360" :step="0.01" />
+        </a-col>
+        <a-col :span="8" v-if="!formState.customRoll"> 根据路线自动 </a-col>
       </a-row>
     </div>
   </mars-dialog>
@@ -90,8 +103,12 @@ interface FormState {
   offsetZ: number
   offsetY: number
   offsetX: number
-  isHand: boolean
+
+  customHeading: boolean
+  slideHeadingStep: number
+  customPitch: boolean
   slidePitchStep: number
+  customRoll: boolean
   slideRollStep: number
 }
 
@@ -106,8 +123,11 @@ const formState = reactive<FormState>({
   offsetZ: 0,
   offsetY: 0,
   offsetX: 0,
-  isHand: false,
+  customHeading: false,
+  slideHeadingStep: 0,
+  customPitch: false,
   slidePitchStep: 0,
+  customRoll: false,
   slideRollStep: 0
 })
 
@@ -196,17 +216,37 @@ const changeFollowed = () => {
   mapWork.updateCameraSetting(formState)
 }
 
+const changeAutoHeading = () => {
+  if (formState.customHeading) {
+    mapWork.fixedRoute.model.heading = formState.slideHeadingStep
+  } else {
+    mapWork.fixedRoute.model.heading = undefined
+  }
+}
+const updateHeading = () => {
+  mapWork.fixedRoute.model.heading = formState.slideHeadingStep
+}
+
+const changeAutoPitch = () => {
+  if (formState.customPitch) {
+    mapWork.fixedRoute.model.pitch = formState.slidePitchStep
+  } else {
+    mapWork.fixedRoute.model.pitch = undefined
+  }
+}
 const updatePitch = () => {
-  mapWork.fixedRoute.model.setStyle({
-    noPitchRoll: true, // 不使用路线自动的角度
-    pitch: formState.slidePitchStep
-  })
+  mapWork.fixedRoute.model.pitch = formState.slidePitchStep
+}
+
+const changeAutoRoll = () => {
+  if (formState.customPitch) {
+    mapWork.fixedRoute.model.roll = formState.slideRollStep
+  } else {
+    mapWork.fixedRoute.model.roll = undefined
+  }
 }
 const updateRoll = () => {
-  mapWork.fixedRoute.model.setStyle({
-    noPitchRoll: true, // 不使用路线自动的角度
-    roll: formState.slideRollStep
-  })
+  mapWork.fixedRoute.model.roll = formState.slideRollStep
 }
 </script>
 
@@ -215,7 +255,7 @@ const updateRoll = () => {
   width: 290px;
 }
 .ant-form-item .ant-select,
-.ant-input-number {
-  width: 120px;
+.sliderlen {
+  width: 100px;
 }
 </style>

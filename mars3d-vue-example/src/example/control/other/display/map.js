@@ -11,7 +11,7 @@ export const mapOptions = {
     infoBox: false,
     vrButton: true,
     fullscreenButton: true,
-    geocoder: true,
+    geocoder: "gaode",
     baseLayerPicker: true,
     clockAnimate: true, // 时钟动画控制(左下角)
     timeline: true, // 是否显示时间线控件
@@ -107,4 +107,9 @@ export function bindNav(val) {
 // 比例尺
 export function bindLegend(val) {
   map.controls.distanceLegend.show = val
+}
+
+// 图层
+export function bindLayer(val) {
+  document.getElementById("mars-manage-layer-btn").style.display = val ? "inline-block" : "none"
 }

@@ -5,7 +5,7 @@
         <a-row :gutter="[0, 10]">
           <a-col :span="7">模型角度:</a-col>
           <a-col :span="16">
-            <a-radio-group v-model:value="formState.noPitchRoll">
+            <a-radio-group v-model:value="formState.noPitchRoll" @change="updateModel" >
               <a-radio value="0">自动</a-radio>
               <a-radio value="1">手动</a-radio>
             </a-radio-group>
@@ -54,13 +54,15 @@ const formState: UnwrapRef<FormState> = reactive({
   slideRollStep: 10
 })
 
-
 const updateModel = () => {
-  mapWork.setMoelStyle({
-    noPitchRoll: formState.noPitchRoll === "1", // 不使用路线自动的角度
-    pitch: formState.slidePitchStep,
-    roll: formState.slideRollStep
-  })
+  if (formState.noPitchRoll === "1") {
+    mapWork.setMoelStyle({
+      pitch: formState.slidePitchStep,
+      roll: formState.slideRollStep
+    })
+  } else {
+    mapWork.clearMoelPitchRoll()
+  }
 }
 
 const onClickClear = () => {

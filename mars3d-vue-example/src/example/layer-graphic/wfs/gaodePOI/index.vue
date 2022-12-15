@@ -1,5 +1,5 @@
 <template>
-  <mars-dialog :visible="true" right="10" top="10" height="46">
+  <mars-dialog :visible="true" right="10" top="10">
     <layer-state />
   </mars-dialog>
 </template>

@@ -8,7 +8,7 @@
   </mars-dialog>
 
   <!-- ecahrt图表 -->
-  <mars-dialog v-model:visible="isShow" left="70" right="70" bottom="40" z-index="100">
+  <mars-dialog v-model:visible="isShow" :left="70" :right="240" :bottom="40">
     <div class="echatsView">
       <div id="echartsView1" style="width: 100%; height: 100%"></div>
     </div>

@@ -184,6 +184,9 @@ export function startDrawGraphic() {
       outlineWidth: 2
     }
   })
+  // .then((graphic) => {
+  //   graphic.position = mars3d.PointUtil.addPositionsHeight(graphic.positionShow, 2000)
+  // })
 }
 
 export function onClickStartBounce() {

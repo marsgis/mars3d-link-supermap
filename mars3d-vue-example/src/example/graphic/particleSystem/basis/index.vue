@@ -262,6 +262,36 @@ const options: GuiItem[] = [
       marsGuiRef.value.updateField("maximumParticleLife", data)
       mapWork.setStylyToGraphic({ maximumParticleLife: data })
     }
+  },
+  {
+    type: "slider",
+    field: "minimumSpeed",
+    label: "最小速度",
+    step: 0.1,
+    min: 0.1,
+    max: 60.0,
+    value: 1.0,
+    extra: "{minimumSpeed}",
+    extraWidth: 60,
+    change(data) {
+      marsGuiRef.value.updateField("minimumSpeed", data)
+      mapWork.setStylyToGraphic({ minimumSpeed: data })
+    }
+  },
+  {
+    type: "slider",
+    field: "maximumSpeed",
+    label: "最大速度",
+    step: 0.1,
+    min: 0.1,
+    max: 60.0,
+    value: 1.0,
+    extra: "{maximumSpeed}",
+    extraWidth: 70,
+    change(data) {
+      marsGuiRef.value.updateField("maximumSpeed", data)
+      mapWork.setStylyToGraphic({ maximumSpeed: data })
+    }
   }
 ]
 

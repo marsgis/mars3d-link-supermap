@@ -101,7 +101,7 @@ export function showDonghuaDemo() {
         type: "modelP",
         position: [117.184442, 31.842172, 33.92],
         style: {
-          url: "//data.mars3d.cn/gltf/mars/firedrill/xiaofangyuan-run.gltf",
+          url: "//data.mars3d.cn/gltf/sample/GroundVehicle/GroundVehicle.glb",
           scale: 300
         }
       }

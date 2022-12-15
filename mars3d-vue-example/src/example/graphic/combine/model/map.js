@@ -31,7 +31,7 @@ export function onMounted(mapInstance) {
     // let attr = event.graphic.attr
     console.log("单击了合并对象中的单个值为", pickedItem)
 
-    // 测试修改model
+    // 测试修改model，ModelCombine不支持单个模型的颜色等修改，只能改大小和方向
     // let instance = event.pickedObject
     // let scaleMatrix = Cesium.Matrix4.fromUniformScale(1.1)
     // let modelMatrix = Cesium.Matrix4.multiply(instance.modelMatrix, scaleMatrix, new Cesium.Matrix4())
@@ -78,6 +78,7 @@ export function addRandomGraphicByCount(count) {
     })
   }
 
+  // ModelCombine类仅对Cesium 1.97之前版本有效，1.97后Cesium移除了 Cesium.ModelInstanceCollection
   const modelCombine = new mars3d.graphic.ModelCombine({
     url: "//data.mars3d.cn/gltf/mars/qiche.gltf",
     instances: arrData

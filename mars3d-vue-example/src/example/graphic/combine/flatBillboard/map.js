@@ -2,6 +2,7 @@ import * as mars3d from "mars3d"
 
 export let map // mars3d.Map三维地图对象
 export let graphicLayer
+export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出事件到面板中
 
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
@@ -99,6 +100,8 @@ export function addDemoGraphic1() {
         instances: arrData
       })
       graphicLayer.addGraphic(flatBillboard)
+
+      eventTarget.fire("addTableData", { graphicLayer })
     })
     .catch(function (error) {
       console.log("加载JSON出错", error)

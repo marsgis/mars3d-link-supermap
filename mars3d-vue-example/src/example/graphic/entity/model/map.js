@@ -56,10 +56,10 @@ export function onUnmounted() {
 
 function addDemoGraphic1(graphicLayer) {
   const graphic = new mars3d.graphic.ModelEntity({
-    name: "消防员",
+    name: "警车",
     position: [116.346929, 30.861947, 401.34],
     style: {
-      url: "//data.mars3d.cn/gltf/mars/firedrill/xiaofangyuan-run.gltf",
+      url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
       scale: 20,
       minimumPixelSize: 50,
       heading: 90,
@@ -197,8 +197,21 @@ function addDemoGraphic3(graphicLayer) {
       minimumPixelSize: 50,
       silhouette: false,
 
+      label: {
+        text: "皖A12345",
+        font_size: 18,
+        color: "#ffffff",
+        pixelOffsetY: -50,
+        distanceDisplayCondition: true,
+        distanceDisplayCondition_far: 10000,
+        distanceDisplayCondition_near: 0
+      },
+
       // 高亮时的样式（默认为鼠标移入，也可以指定type:'click'单击高亮），构造后也可以openHighlight、closeHighlight方法来手动调用
       highlight: {
+        label: {
+          font_size: 30
+        },
         silhouette: true,
         silhouetteColor: "#ff0000",
         silhouetteSize: 4
@@ -230,6 +243,11 @@ function addDemoGraphic4(graphicLayer) {
       url: "//data.mars3d.cn/gltf/mars/wrj.glb",
       scale: 0.1,
       minimumPixelSize: 20
+    },
+    path: {
+      width: 2,
+      leadTime: 0, // 不显示前方路线
+      color: "#00ffff"
     },
     attr: { remark: "示例4" },
     hasEdit: false

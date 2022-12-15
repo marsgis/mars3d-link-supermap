@@ -1,6 +1,6 @@
 <template>
   <mars-dialog :visible="true"  right="10" top="10">
-    <graphic-layer-state :defaultCount="100" :interaction="false" />
+    <graphic-layer-state :defaultCount="100" />
   </mars-dialog>
 </template>
 

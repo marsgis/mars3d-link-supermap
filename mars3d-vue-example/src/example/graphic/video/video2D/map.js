@@ -23,18 +23,7 @@ export const mapOptions = {
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
-  addModel()
-}
 
-/**
- * 释放当前地图业务的生命周期函数
- * @returns {void} 无
- */
-export function onUnmounted() {
-  map = null
-}
-
-function addModel() {
   // 添加参考三维模型
   const tiles3dLayer = new mars3d.layer.TilesetLayer({
     name: "合肥国家大学科技园",
@@ -76,6 +65,14 @@ function addModel() {
   addDemoGraphic1()
 }
 
+/**
+ * 释放当前地图业务的生命周期函数
+ * @returns {void} 无
+ */
+export function onUnmounted() {
+  map = null
+}
+
 // 加载已配置好的视频（此参数为界面上“打印参数”按钮获取的）
 function addDemoGraphic1() {
   const video2D = new mars3d.graphic.Video2D({
@@ -91,6 +88,13 @@ function addDemoGraphic1() {
     }
   })
   graphicLayer.addGraphic(video2D)
+
+
+  // setTimeout(() => {
+  //   video2D.setStyle({
+  //     url: "//data.mars3d.cn/file/video/lukou.mp4"
+  //   })
+  // }, 10000)
 }
 
 export function getGraphic(graphicId) {
@@ -157,9 +161,6 @@ export function startDrawGraphic2() {
   }
 
   const cameraPosition = Cesium.clone(map.camera.position)
-
-  const fov = Cesium.Math.toDegrees(map.camera.frustum.fov) / 2 // 相机水平张角
-  const aspectRatio = map.scene.canvas.clientWidth / map.scene.canvas.clientHeight // 获取canvas宽高
 
   // 构造投射体
   const video2D = new mars3d.graphic.Video2D({

@@ -1,7 +1,7 @@
 <template>
   <mars-dialog :visible="true" right="10" top="10">
     <div class="infoView-content">
-      <a-form :label-col="labelCol">
+      <a-form :label-col="labelCol" labelAlign="right">
         <a-collapse collapsible="header" :defaultActiveKey="['1', '2', '3', '4']">
           <a-collapse-panel key="1" header="模型URL地址">
             <template #extra>
@@ -22,14 +22,14 @@
             <template #extra>
               <mars-button @click="locateToModel">定位至模型</mars-button>
             </template>
-            <a-form-item label="经度">
+            <a-form-item label="经度" :labelCol="{ span: 4 }" v-show="formState.transform">
               <mars-input-number v-model:value="formState.txtX" :step="0.000001" @change="formStateChange" style="width: 100%" />
             </a-form-item>
-            <a-form-item label="纬度">
+            <a-form-item label="纬度" :labelCol="{ span: 4 }" v-show="formState.transform">
               <mars-input-number v-model:value="formState.txtY" :step="0.000001" @change="formStateChange" style="width: 100%" />
             </a-form-item>
 
-            <a-form-item label="高度">
+            <a-form-item label="高度" :labelCol="{ span: 4 }">
               <a-row :gutter="10">
                 <a-col :span="14">
                   <mars-input-number v-model:value="formState.txtZ" :step="0.1" @change="formStateChange" />
@@ -41,7 +41,7 @@
             </a-form-item>
           </a-collapse-panel>
 
-          <a-collapse-panel key="3" header="模型方向">
+          <a-collapse-panel key="3" header="模型方向" v-show="formState.transform">
             <a-form-item label="变换垂直轴">
               <mars-select v-model:value="formState.axis" @change="formStateChange" :options="axisOptions"></mars-select>
             </a-form-item>
@@ -57,7 +57,7 @@
           </a-collapse-panel>
 
           <a-collapse-panel key="4" header="其他参数">
-            <a-form-item label="缩放比例">
+            <a-form-item label="缩放比例" v-show="formState.transform">
               <mars-input-number v-model:value="formState.scale" :step="0.1" @change="formStateChange" />
             </a-form-item>
             <a-form-item label="显示精度">
@@ -66,6 +66,7 @@
             <a-form-item label="透明度">
               <mars-slider :min="0.1" :max="1" :step="0.1" v-model:value="formState.opacity" @change="formStateChange" />
             </a-form-item>
+
             <a-form-item label="单击高亮构件">
               <mars-switch v-model:checked="formState.highlightEnable" @change="formStateChange" />
               <span class="popup-notification">
@@ -115,6 +116,7 @@ interface FormState {
   opacity: number
   highlightEnable: boolean
   popupEnable: boolean
+  transform: boolean
 }
 
 const formState = reactive<FormState>({
@@ -132,7 +134,8 @@ const formState = reactive<FormState>({
   maximumScreenSpaceError: 8,
   opacity: 1,
   highlightEnable: false,
-  popupEnable: true
+  popupEnable: true,
+  transform: false
 })
 
 const axisOptions = [
@@ -145,7 +148,7 @@ const axisOptions = [
   { value: "Y_UP_TO_Z_UP", label: "Y轴 -->Z轴" }
 ]
 
-const labelCol = { style: { width: "100px" } }
+const labelCol = { span: 9 }
 
 // 初始化界面
 onMounted(() => {
@@ -160,6 +163,7 @@ mapWork.eventTarget.on("tiles3dLayerLoad", function (event: any) {
     locParams.alt = 0 // 高度异常数据，自动赋值高度为0
   }
 
+  formState.transform = tiles3dLayer.transform
   formState.txtX = Number(locParams.lng.toFixed(6))
   formState.txtY = Number(locParams.lat.toFixed(6))
   formState.txtZ = Number(locParams.alt.toFixed(6))
@@ -216,7 +220,9 @@ function getLayerOptions() {
     axis: formState.axis ? formState.axis : undefined,
     proxy: formState.chkProxy ? "//server.mars3d.cn/proxy/" : undefined,
     opacity: formState.opacity,
-    show: true
+    show: true,
+    highlightEnable: formState.highlightEnable,
+    popupEnable: formState.popupEnable
   }
   return params
 }
@@ -307,14 +313,6 @@ const checkedTree = () => {
 }
 </script>
 <style scoped lang="less">
-.infoView-content {
-  width: 345px;
-}
-
-.ant-input {
-  width: 240px;
-}
-
 .popup-notification {
   margin-left: 8px;
 }

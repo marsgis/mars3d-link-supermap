@@ -175,6 +175,37 @@ export function bindLayerContextMenu() {
           graphicLayer.removeGraphic(parent)
         }
       }
+    },
+    {
+      text: "跟踪锁定",
+      icon: "fa fa-lock",
+      show: function (e) {
+        const graphic = e.graphic
+        if (!graphic) {
+          return false
+        }
+
+        if (graphic.entity instanceof Cesium.Entity) {
+          return true
+        } else if (graphic.trackedEntity instanceof Cesium.Entity) {
+          return true
+        }
+
+        return false
+      },
+      callback: function (e) {
+        map.trackedEntity = e.graphic
+      }
+    },
+    {
+      text: "取消锁定",
+      icon: "fa fa-unlock-alt",
+      show: function (e) {
+        return map.trackedEntity !== undefined
+      },
+      callback: function (e) {
+        map.trackedEntity = undefined
+      }
     }
   ])
 }

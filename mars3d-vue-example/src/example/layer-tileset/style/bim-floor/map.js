@@ -7,6 +7,9 @@ let tiles3dLayer
 export const mapOptions = {
   scene: {
     center: { lat: 31.842449, lng: 117.251173, alt: 144, heading: 4, pitch: -35 }
+  },
+  mouse: {
+    pickLimit: 99 // 鼠标穿透拾取的最大构件数量
   }
 }
 
@@ -30,6 +33,15 @@ export function onMounted(mapInstance) {
     highlight: {
       type: mars3d.EventType.click, // 默认为鼠标移入高亮，也可以指定click单击高亮
       color: "#00FF00"
+      // uniqueKey: "id"
+    },
+    // 是否允许鼠标穿透拾取
+    allowDrillPick: function (event) {
+      const alpha = event?.pickedObject?.color?.alpha
+      if (Cesium.defined(alpha) && alpha !== 1) {
+        return true // 鼠标不拾取前面遮挡的透明的构件，穿透拾取其后方不透明构件。
+      }
+      return false
     },
     flyTo: true
   })

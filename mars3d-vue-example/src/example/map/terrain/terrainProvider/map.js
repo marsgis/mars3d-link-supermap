@@ -11,6 +11,10 @@ export const mapOptions = {
   terrain: {
     url: "http://data.mars3d.cn/terrain",
     show: true
+  },
+  control: {
+    baseLayerPicker: true,
+    terrainProviderViewModels: getTerrainProviderViewModelsArr() // 自baseLayerPicker面板的地形可选数组
   }
 }
 
@@ -93,4 +97,50 @@ export function enabledTerrain(val) {
 // 是否开启三角网
 export function enabledTerrainSJW(val) {
   map.scene.globe._surface.tileProvider._debug.wireframe = val
+}
+
+function getTerrainProviderViewModelsArr() {
+  return [
+    new Cesium.ProviderViewModel({
+      name: "无地形",
+      tooltip: "WGS84标准球体",
+      iconUrl: "img/basemaps/TerrainEllipsoid.png",
+      creationFunction: function () {
+        return mars3d.LayerUtil.getNoTerrainProvider()
+      }
+    }),
+    new Cesium.ProviderViewModel({
+      name: "中国地形",
+      tooltip: "由 火星科技 提供的中国国内地形",
+      iconUrl: "img/basemaps/TerrainSTK.png",
+      creationFunction: function () {
+        return mars3d.LayerUtil.createTerrainProvider({
+          url: "http://data.mars3d.cn/terrain"
+        })
+      }
+    }),
+    new Cesium.ProviderViewModel({
+      name: "ArcGIS地形",
+      tooltip: "由 火星科技 提供的中国国内地形",
+      iconUrl: "img/basemaps/TerrainSTK.png",
+      creationFunction: function () {
+        return mars3d.LayerUtil.createTerrainProvider({
+          type: "arcgis",
+          url: "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer"
+        })
+      }
+    }),
+    new Cesium.ProviderViewModel({
+      name: "全球地形",
+      tooltip: "由 Cesium官方 提供的高分辨率全球地形",
+      iconUrl: "img/basemaps/TerrainSTK.png",
+      creationFunction: function () {
+        return mars3d.LayerUtil.createTerrainProvider({
+          type: "ion",
+          requestWaterMask: true,
+          requestVertexNormals: true
+        })
+      }
+    })
+  ]
 }

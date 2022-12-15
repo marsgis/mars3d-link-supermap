@@ -188,13 +188,20 @@ function addDemoGraphic5(graphicLayer) {
   let ymax = 31.810676
 
   const graphic = new mars3d.graphic.RectangleEntity({
-    rectangle: new Cesium.CallbackProperty((time) => {
+    positions: new Cesium.CallbackProperty((time) => {
       xmin -= 0.0001 // 只是为了测试动态位置
       ymin -= 0.0001
       xmax -= 0.0001
       ymax -= 0.0001
-      return Cesium.Rectangle.fromDegrees(xmin, ymin, xmax, ymax)
+      return [Cesium.Cartesian3.fromDegrees(xmin, ymin), Cesium.Cartesian3.fromDegrees(xmax, ymax)]
     }, false),
+    // rectangle: new Cesium.CallbackProperty((time) => {
+    //   xmin -= 0.0001 // 只是为了测试动态位置
+    //   ymin -= 0.0001
+    //   xmax -= 0.0001
+    //   ymax -= 0.0001
+    //   return Cesium.Rectangle.fromDegrees(xmin, ymin, xmax, ymax)
+    // }, false),
     style: {
       color: "rgba(0,255,255,0.5)"
     },

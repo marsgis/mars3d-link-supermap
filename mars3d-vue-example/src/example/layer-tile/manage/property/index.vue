@@ -104,7 +104,7 @@ const setLayerOptions = (attribute: string, val: number) => {
 </script>
 <style lang="less" scoped>
 .title {
-  color: @mars-base-color;
+  color: var(--mars-base-color);
   font-size: 16px;
   text-align: center;
 }

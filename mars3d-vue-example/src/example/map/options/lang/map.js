@@ -14,7 +14,7 @@ export const mapOptions = {
     infoBox: false,
     vrButton: true,
     fullscreenButton: true,
-    geocoder: true,
+    geocoder: "gaode",
     baseLayerPicker: true,
     clockAnimate: true, // 时钟动画控制(左下角)
     timeline: true, // 是否显示时间线控件

@@ -12709,6 +12709,7 @@
       }
     }
   })(_0x2493, 0xd9e51)
+
   let TextureManager = {
     cache: {},
     cacheSize: 0x0,
@@ -24425,7 +24426,7 @@
   exports.SubTextureUploadJob = SubTextureUploadJob
   exports.SuperMapImageryProvider = SuperMapImageryProvider
   exports.SuperMapTerrainProvider = SuperMapTerrainProvider
-  exports.TextureManager = TextureManager
+  exports.TextureManager2 = TextureManager //
   exports.VertexCompressOption = _0x25c9a4
   exports.ViewShed3D = ViewShed3D
   exports.ViewShedAnalysisFS = _0x313bb2

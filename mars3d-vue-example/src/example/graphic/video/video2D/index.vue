@@ -2,8 +2,8 @@
   <mars-dialog :visible="true" right="10" top="10">
     <graphic-layer-state
       :defaultCount="5"
-      drawLabel1="绘制投射视频"
-      drawLabel2="按当前相机投射视频"
+      drawLabel1="绘制"
+      drawLabel2="按当前相机"
       :customEditor="'video2D'"
       @onStartEditor="onStartEditor"
       @onStopEditor="onStopEditor"

@@ -32,6 +32,21 @@ export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
 
   map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+
+  // 固定光照时间
+  map.clock.currentTime = Cesium.JulianDate.fromDate(new Date("2022-11-01 12:00:00"))
+  // map.clock.shouldAnimate = false
+
+  // 固定光照方向
+  map.scene.light = new Cesium.DirectionalLight({
+    direction: map.scene.camera.direction
+  })
+  map.camera.percentageChanged = 0.001
+  map.on(mars3d.EventType.cameraChanged, function (event) {
+    map.scene.light.direction = map.scene.camera.direction
+  })
+
+
   // 调试面板
   map.viewer.extend(Cesium.viewerCesiumInspectorMixin)
   map.scene.globe.depthTestAgainstTerrain = false
@@ -126,7 +141,8 @@ export function bindTestTerrain(val) {
 }
 export function bindWireframe(val) {
   // 三角网
-  tiles3dLayer.tileset.debugWireframe = val
+  tiles3dLayer.tileset.debugWireframe = val // cesium1.97之前
+  // tiles3dLayer.tileset._enableDebugWireframe = val // cesium 1.98+
 }
 export function bindBoundbox(val) {
   // 包围盒
@@ -228,6 +244,7 @@ export function showQxSimiaoDemo() {
     //   type: mars3d.EventType.click, //默认为鼠标移入高亮，也可以指定click单击高亮
     //   color: "#00ffff",
     // },
+    // distanceDisplayCondition_far: 3000,
     center: {
       lat: 33.589536,
       lng: 119.032216,

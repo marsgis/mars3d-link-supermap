@@ -30,6 +30,13 @@
         </a-space>
       </div>
 
+      <div class="f-mb">
+        <a-space>
+          <span>淹没颜色:</span>
+          <mars-color-picker v-model:value="floodColor" @change="onChangeColor" />
+        </a-space>
+      </div>
+
       <div class="f-tac">
         <mars-button @click="begin">开始分析</mars-button>
       </div>
@@ -51,7 +58,11 @@
       </div>
 
       <div class="f-mb">
-        <span>当前高度:{{ formState.height }}</span>
+        <a-space>
+          <span>淹没颜色:</span>
+          <mars-color-picker v-model:value="floodColor" @change="onChangeColor" />
+          <span>当前高度:{{ formState.height }}</span>
+        </a-space>
       </div>
 
       <div class="f-tac">
@@ -89,6 +100,8 @@ const formState: UnwrapRef<FormState> = reactive({
 const isStart = ref(true)
 const isShow = ref(false)
 
+const floodColor = ref("rgba(0, 123, 230, 0.5)")
+
 // 监听到高度发生变化
 mapWork.eventTarget.on("heightChange", (e: any) => {
   isShow.value = true
@@ -124,6 +137,11 @@ const begin = () => {
 // 高度改变
 const onChangeHeight = () => {
   mapWork.onChangeHeight(formState.height)
+}
+
+// 颜色修改
+const onChangeColor = (e) => {
+  mapWork.onChangeColor(floodColor.value)
 }
 
 // 默认自动播放

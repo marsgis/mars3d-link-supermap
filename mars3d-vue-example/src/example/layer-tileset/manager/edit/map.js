@@ -15,6 +15,28 @@ export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
   map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+
+  // 固定光照时间
+  map.clock.currentTime = Cesium.JulianDate.fromDate(new Date("2022-11-01 12:00:00"))
+  // map.clock.shouldAnimate = false
+
+  // 固定光照方向
+  map.scene.light = new Cesium.DirectionalLight({
+    direction: map.scene.camera.direction
+  })
+  map.camera.percentageChanged = 0.001
+  map.on(mars3d.EventType.cameraChanged, function (event) {
+    map.scene.light.direction = map.scene.camera.direction
+  })
+
+  // 如果模型地址内有“+”符号，可以加下面方法进行自定义处理
+  Cesium.Resource.ReplaceUrl = function (url) {
+    if (url.endsWith(".json") || url.endsWith(".b3dm")) {
+      return url.replace(/\+/gm, "%2B") // 将3dtiles中的“+”符号转义下
+    } else {
+      return url
+    }
+  }
 }
 
 /**
@@ -68,7 +90,7 @@ export function showModel(url) {
       text: "开始编辑",
       icon: "fa fa-edit",
       show: function (e) {
-        return !tiles3dLayer.isEditing
+        return tiles3dLayer.hasEdit && !tiles3dLayer.isEditing
       },
       callback: (e) => {
         tiles3dLayer.startEditing()
@@ -78,7 +100,7 @@ export function showModel(url) {
     //   text: "停止编辑",
     //   icon: "fa fa-edit",
     //   show: function (e) {
-    //     return tiles3dLayer.isEditing
+    //     return tiles3dLayer.hasEdit && tiles3dLayer.isEditing
     //   },
     //   callback: (e) => {
     //     tiles3dLayer.stopEditing()
@@ -189,6 +211,13 @@ export function saveBookmark(params) {
     delete params.opacity
   }
 
+  if (params.highlightEnable === false) {
+    delete params.highlightEnable
+  }
+
+  if (params.popupEnable === true) {
+    delete params.popupEnable
+  }
   mars3d.Util.downloadFile("3dtiles图层配置.json", JSON.stringify(params))
 }
 

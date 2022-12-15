@@ -32,7 +32,7 @@ export function onUnmounted() {
 }
 
 function addDemoGraphics() {
-  Cesium.Resource.fetchJson("//data.mars3d.cn/file/apidemo/flights.json").then(function (data) {
+  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/flights.json" }).then(function (data) {
     const airports = data.airports.map(function (item) {
       return {
         name: item[0],

@@ -67,7 +67,7 @@ function addSatellite() {
     name: "自定义轨道",
     position: property, // 无tle，传入自定义的动态轨道位置属性
     model: {
-      url: "//data.mars3d.cn/gltf/mars/weixin2.gltf",
+      url: "//data.mars3d.cn/gltf/mars/weixin.gltf",
       scale: 1,
       minimumPixelSize: 90,
       autoHeading: true,

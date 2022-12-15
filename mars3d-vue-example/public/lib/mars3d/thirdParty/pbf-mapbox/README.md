@@ -1,7 +1,7 @@
 # Cesium对mvt的pbf的矢量瓦片图层的扩展插件
  
 
- 基于openlayer框架对pbf的解析，引接到cesium中来。 
+ 基于mapbox-gl框架对pbf的解析，引接到cesium中来。 
 
 
 https://github.com/kikitte/MVTImageryProvider

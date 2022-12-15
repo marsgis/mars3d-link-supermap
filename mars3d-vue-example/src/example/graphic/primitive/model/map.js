@@ -39,6 +39,7 @@ export function onMounted(mapInstance) {
   addDemoGraphic2(graphicLayer)
   addDemoGraphic3(graphicLayer)
   addDemoGraphic4(graphicLayer)
+  addDemoGraphic5(graphicLayer)
 }
 
 /**
@@ -54,10 +55,10 @@ export function onUnmounted() {
 
 function addDemoGraphic1(graphicLayer) {
   const graphic = new mars3d.graphic.ModelPrimitive({
-    name: "消防员",
+    name: "警车",
     position: [116.346929, 30.861947, 401.34],
     style: {
-      url: "//data.mars3d.cn/gltf/mars/firedrill/xiaofangyuan-run.gltf",
+      url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
       scale: 20,
       minimumPixelSize: 50,
       heading: 90,
@@ -202,6 +203,37 @@ function addDemoGraphic2(graphicLayer) {
 }
 
 function addDemoGraphic3(graphicLayer) {
+  // const textureUniformShader = new Cesium.CustomShader({
+  //   uniforms: {
+  //     // 动画的运行时间(以秒为单位)
+  //     u_time: {
+  //       type: Cesium.UniformType.FLOAT,
+  //       value: 1
+  //     },
+  //     // 用户定义的纹理
+  //     u_stripes: {
+  //       type: Cesium.UniformType.SAMPLER_2D,
+  //       value: new Cesium.TextureUniform({
+  //         url: "/img/textures/colors.png"
+  //       })
+  //     }
+  //   },
+  //   // 将纹理应用到模型上，但是将纹理坐标移动一点，这样它就变成动画了。
+  //   fragmentShaderText: `
+  //     void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)
+  //     {
+  //         vec2 texCoord = fsInput.attributes.texCoord_0 + 1.0 * vec2(u_time, 0.0);
+  //         material.diffuse = texture2D(u_stripes, texCoord).rgb;
+  //     }
+  //     `
+  // })
+  // // 监听postUpdate，来演示修改uniforms变量
+  // const startTime = performance.now()
+  // setInterval(() => {
+  //   const elapsedTimeSeconds = (performance.now() - startTime) / 1000
+  //   textureUniformShader.setUniform("u_time", elapsedTimeSeconds)
+  // }, 200)
+
   const graphic = new mars3d.graphic.ModelPrimitive({
     name: "汽车",
     position: [116.349194, 30.864603, 376.58],
@@ -210,6 +242,7 @@ function addDemoGraphic3(graphicLayer) {
       scale: 0.5,
       minimumPixelSize: 50,
       silhouette: false,
+      // customShader: textureUniformShader, // 自定义shader
 
       // 高亮时的样式（默认为鼠标移入，也可以指定type:'click'单击高亮），构造后也可以openHighlight、closeHighlight方法来手动调用
       highlight: {
@@ -264,6 +297,61 @@ function getSampledPositionProperty(points) {
     property.addSample(time, position)
   }
   return property
+}
+
+function addDemoGraphic5(graphicLayer) {
+  // 自定义shader
+  const pointCloudWaveShader = new Cesium.CustomShader({
+    uniforms: {
+      u_time: {
+        type: Cesium.UniformType.FLOAT,
+        value: 0
+      }
+    },
+    vertexShaderText: `
+        void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput)
+        {
+          // 这个模型的x和y坐标在[0,1]的范围内 方便地加倍作为UV坐标。
+          vec2 uv = vsInput.attributes.positionMC.xy;
+          // 使点云在空间和时间上都变化的复杂波中波动。振幅是基于点云的原始形状(它已经是一个波浪形表面)。波是相对于模型中心计算的，因此转换从[0,1]-> [- 1,1]-> [0,1]
+          float amplitude = 2.0 * vsInput.attributes.positionMC.z - 1.0;
+          float wave = amplitude * sin(2.0 * czm_pi * uv.x - 2.0 * u_time) * sin(u_time);
+          vsOutput.positionMC.z = 0.5 + 0.5 * wave;
+          // 通过改变点的大小，使点脉冲进出
+          vsOutput.pointSize = 10.0 + 5.0 * sin(u_time);
+        } `,
+    fragmentShaderText: `
+        void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material)
+        {
+            // 把这些点做成圆形而不是方形
+            float distance = length(gl_PointCoord - 0.5);
+            if (distance > 0.5) {
+                discard;
+            }
+            // 制作一个正弦调色板，沿波的大致方向移动，但速度不同。系数是任意选择的。
+            vec2 uv = fsInput.attributes.positionMC.xy;
+            material.diffuse = 0.2 * fsInput.attributes.color_0.rgb;
+            material.diffuse += vec3(0.2, 0.3, 0.4) + vec3(0.2, 0.3, 0.4) * sin(2.0 * czm_pi * vec3(3.0, 2.0, 1.0) * uv.x - 3.0 * u_time);
+        }`
+  })
+  // 监听postUpdate，来演示修改uniforms变量
+  const startTime = performance.now()
+  setInterval(() => {
+    const elapsedTimeSeconds = (performance.now() - startTime) / 1000
+    pointCloudWaveShader.setUniform("u_time", elapsedTimeSeconds)
+  }, 200)
+
+  const graphicModel = new mars3d.graphic.ModelPrimitive({
+    position: new mars3d.LngLatPoint(116.35265, 30.860337, 364.3),
+    style: {
+      url: "//data.mars3d.cn/gltf/sample/PointCloudWave/PointCloudWave.glb",
+      scale: 30,
+      customShader: pointCloudWaveShader
+    },
+    attr: { remark: "示例5" }
+  })
+  graphicLayer.addGraphic(graphicModel)
+
 }
 
 // 生成演示数据(测试数据量)

@@ -82,7 +82,7 @@ function addMeasure() {
     console.log("开始分析", event)
     clearInterResult()
     showLoading()
-    console.log("坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(event.positions))) // 方便测试拷贝坐标
+    console.log("坐标为", JSON.stringify(mars3d.LngLatArray.toArray(event.positions))) // 方便测试拷贝坐标
   })
 
   measure.on(mars3d.EventType.end, function (event) {
@@ -110,8 +110,9 @@ export function analysisMeasure() {
   // 手动绘制的方式分析
   measure
     .volume({
-      splitNum: 6 // 面内插值次数，控制精度[注意精度越大，分析时间越长]
-      // minHeight: 50  //可以设置一个固定的最低高度
+      splitNum: 6, // 面内插值次数，控制精度[注意精度越大，分析时间越长]
+      // minHeight: 50 , //可以设置一个固定的最低高度
+      exact: false // 是否进行精确计算， 传false时是否快速概略计算方式，该方式计算精度较低，但计算速度快，仅能计算在当前视域内坐标的高度
     })
     .then((e) => {
       measureVolume = e

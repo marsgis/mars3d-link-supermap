@@ -36,6 +36,7 @@ export function onMounted(mapInstance) {
   addDemoGraphic2(graphicLayer)
   addDemoGraphic3(graphicLayer)
   addDemoGraphic4(graphicLayer)
+  addDemoGraphic5(graphicLayer)
 }
 
 /**
@@ -140,6 +141,29 @@ function addDemoGraphic4(graphicLayer) {
       }
     },
     attr: { remark: "示例4" }
+  })
+  graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)
+}
+
+
+function addDemoGraphic5(graphicLayer) {
+  const graphic = new mars3d.graphic.Sector({
+    position: [117.237446, 31.753303, 23.1],
+    style: {
+      radius: 5000,
+      startAngle: 0, // 开始角度(正东方向为0,顺时针到360度)
+      endAngle: 60,
+
+      fill: false,
+      outline: true,
+      noCenter: true,
+      outlineStyle: {
+        width: 3,
+        color: "#ff0000",
+        closure: false
+      }
+    },
+    attr: { remark: "示例5" }
   })
   graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)
 }

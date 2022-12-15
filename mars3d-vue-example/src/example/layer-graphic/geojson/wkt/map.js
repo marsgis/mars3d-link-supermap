@@ -5,7 +5,7 @@ export let graphicLayer // 矢量图层对象
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
   scene: {
-    center: { lat: -10.999882, lng: -0.258788, alt: 8711459, heading: 10, pitch: -85 }
+    center: { lat: 31.587977, lng: 120.714577, alt: 580.9, heading: 4.8, pitch: -56.3 }
   }
 }
 
@@ -20,9 +20,9 @@ export const treeEvent = new mars3d.BaseClass()
 export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
 
-  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/airport.json" })
+  mars3d.Util.fetchJson({ url: "//data.mars3d.cn/file/apidemo/wkt-demo.json" })
     .then(function (json) {
-      addOrbitList(json)
+      addWktData(json)
     })
     .catch(function (e) {
       console.log("加载出错", e)
@@ -36,13 +36,8 @@ export function onMounted(mapInstance) {
 export function onUnmounted() {
   map = null
 }
-/**
- * 数据列表
- *
- * @param {Array} arr 拿到的json数据
- * @returns {void} 无
- */
-function addOrbitList(arr) {
+
+function addWktData(arr) {
   const features = []
   for (let i = 0, len = arr.length; i < len; i++) {
     const item = arr[i]
@@ -55,7 +50,6 @@ function addOrbitList(arr) {
 
   graphicLayer = new mars3d.layer.GeoJsonLayer({
     data: features,
-    crs: "EPSG:3857", // 标识数据的坐标系
     symbol: {
       styleOptions: {
         randomColor: true,
@@ -63,7 +57,7 @@ function addOrbitList(arr) {
         outlineColor: "#ffffff"
       }
     },
-    popup: "all",
+    popup: "{name} {类型}",
     flyTo: true
   })
 

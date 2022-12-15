@@ -54,8 +54,9 @@ export function drawExtent() {
       dimensions: new Cesium.Cartesian3(10, 10, 10)
     },
     success: function (graphic) {
-      map.graphicLayer.clear()
       const point = graphic.point
+      map.graphicLayer.clear()
+
       tilesetBoxClip.position = point
       eventTarget.fire("hasDraw", { point })
     }

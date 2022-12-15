@@ -134,7 +134,7 @@ function startRoam() {
       return
     }
 
-    frameNum = ++frameNum % 400
+    frameNum = ++frameNum % 100 // 调整间隔多少拍一次
     if (frameNum !== 0) {
       if (frameNum === 10 && graphicFrustum) {
         graphicLayer.removeGraphic(graphicFrustum)

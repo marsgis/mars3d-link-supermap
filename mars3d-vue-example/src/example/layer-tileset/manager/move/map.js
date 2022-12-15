@@ -13,8 +13,16 @@ export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
-
   map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+
+  // 如果模型地址内有“+”符号，可以加下面方法进行自定义处理
+  Cesium.Resource.ReplaceUrl = function (url) {
+    if (url.endsWith(".json") || url.endsWith(".b3dm")) {
+      return url.replace(/\+/gm, "%2B") // 将3dtiles中的“+”符号转义下
+    } else {
+      return url
+    }
+  }
 }
 
 /**
@@ -74,5 +82,11 @@ export function showModel(modelUrl) {
 
 export function setTranslation(x, y, z) {
   const translation = Cesium.Cartesian3.fromArray([x, y, z])
-  tiles3dLayer.tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+  const modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+  tiles3dLayer.tileset.modelMatrix = modelMatrix
+
+  // 打印值
+  const position = mars3d.PointUtil.getPositionByHprAndOffset(tiles3dLayer.position, new Cesium.Cartesian3(x, y, z))
+  const point = mars3d.LngLatPoint.parse(position)
+  console.log("新坐标为", point)
 }

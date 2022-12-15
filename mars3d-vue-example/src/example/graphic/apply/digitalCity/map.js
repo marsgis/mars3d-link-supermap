@@ -23,6 +23,16 @@ export const mapOptions = {
         { field: "name", name: "名称" },
         { field: "height", name: "楼高", unit: "米" }
       ],
+      // 裁剪区域
+      planClip: {
+        positions: [
+          [121.477666, 31.217061, 19.1],
+          [121.531567, 31.217061, 19.1],
+          [121.531567, 31.258551, 19.1],
+          [121.477666, 31.258551, 19.1]
+        ],
+        clipOutSide: true
+      },
       show: true
     },
     {
@@ -55,21 +65,7 @@ export const mapOptions = {
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
-
   map.basemap = 2017 // 切换到蓝色底图
-
-  // 3d模型裁剪
-  const tilesetPlanClip = new mars3d.thing.TilesetPlanClip({
-    layer: map.getLayerByAttr("上海市建筑物", "name"),
-    clipOutSide: true,
-    positions: [
-      [121.477666, 31.217061, 19.1],
-      [121.531567, 31.217061, 19.1],
-      [121.531567, 31.258551, 19.1],
-      [121.477666, 31.258551, 19.1]
-    ]
-  })
-  map.addThing(tilesetPlanClip)
 
   // 特效
   const bloomEffect = new mars3d.effect.BloomEffect({

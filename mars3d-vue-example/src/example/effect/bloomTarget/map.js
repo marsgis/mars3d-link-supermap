@@ -5,7 +5,7 @@ export let map // mars3d.Map三维地图对象
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
   scene: {
-    center: { lat: 31.653633, lng: 117.075814, alt: 310, heading: 33, pitch: -29 }
+    center: { lat: 31.648141, lng: 117.07114, alt: 943.1, heading: 27.6, pitch: -34.7 }
   }
 }
 
@@ -28,6 +28,10 @@ export function onMounted(mapInstance) {
     flyTo: true
   })
   map.addLayer(tiles3dLayer)
+
+  tiles3dLayer.on(mars3d.EventType.click, function (event) {
+    console.log("单击了模型", event)
+  })
 
   // 矢量图层
   const graphicLayer = new mars3d.layer.GraphicLayer()
@@ -120,6 +124,7 @@ export function onMounted(mapInstance) {
 
   // 添加特效
   const bloomTargetEffect = new mars3d.effect.BloomTargetEffect({
+    // objectsToExclude: [tiles3dLayer, graphicModel], // 排除不拾取的对象
     eventType: mars3d.EventType.click, // 单击时拾取
     color: Cesium.Color.YELLOW,
     contrast: 119,
@@ -129,6 +134,11 @@ export function onMounted(mapInstance) {
     stepSize: 5
   })
   map.addEffect(bloomTargetEffect)
+
+  // 从模型读取指定构件 加到 特效
+  // tiles3dLayer.readyPromise.then(function (e) {
+  //   addTileToTargetEffect(tiles3dLayer, bloomTargetEffect)
+  // })
 }
 
 /**
@@ -139,36 +149,48 @@ export function onUnmounted() {
   map = null
 }
 
-// 从模型读取构件 加到 特效
-// function addTileToTargetEffect(tiles3dLayer, bloomTargetEffect) {
-//   const targetTiles = []
-//   tiles3dLayer.readyPromise.then(function (e) {
-//     tiles3dLayer.tileset.tileVisible.addEventListener((tile) => {
-//       const content = tile.content
-//       const featuresLength = content.featuresLength
+// 从模型读取指定构件 加到 特效
+function addTileToTargetEffect(tiles3dLayer, effect) {
+  const listGJ = new mars3d.MarsArray()
+  tiles3dLayer.tileset.tileLoad.addEventListener(function (tile) {
+    processTileFeatures(tile, function (feature) {
+      const attr = mars3d.Util.get3DTileFeatureAttr(feature) // 取属性
 
-//       const pickIds = []
-//       for (let i = 0; i < featuresLength; i++) {
-//         const feature = content.getFeature(i)
-//         // 此条件可以按需自定义修改
-//         if (feature.featureId < 50) {
-//           if (!isInArray(targetTiles, feature.featureId)) {
-//             pickIds.push(feature.pickId)
-//           }
-//         }
-//       }
-//       bloomTargetEffect.selected = pickIds
-//     })
-//   })
-// }
+      // 根据条件判断，将feature记录
+      if (attr.id === "4734ba6f3de83d861c3176a6273cac6d") {
+        listGJ.set(feature.featureId, feature.pickId)
+        effect.selected = listGJ.values
+      }
+    })
+  })
 
-// 判断对象是否已经在数组内
-// function isInArray(arr, value) {
-//   for (let i = 0; i < arr.length; i++) {
-//     if (value === arr[i]) {
-//       return true
-//     }
-//   }
-//   arr.push(value)
-//   return false
-// }
+  tiles3dLayer.tileset.tileUnload.addEventListener(function (tile) {
+    processTileFeatures(tile, function (feature) {
+      if (listGJ.contains(feature.featureId)) {
+        listGJ.remove(feature.featureId)
+        effect.selected = listGJ.values
+      }
+    })
+  })
+}
+
+function processContentFeatures(content, callback) {
+  const featuresLength = content.featuresLength
+  for (let i = 0; i < featuresLength; ++i) {
+    const feature = content.getFeature(i)
+    callback(feature)
+  }
+}
+
+function processTileFeatures(tile, callback) {
+  const content = tile.content
+  const innerContents = content.innerContents
+  if (Cesium.defined(innerContents)) {
+    const length = innerContents.length
+    for (let i = 0; i < length; ++i) {
+      processContentFeatures(innerContents[i], callback)
+    }
+  } else {
+    processContentFeatures(content, callback)
+  }
+}

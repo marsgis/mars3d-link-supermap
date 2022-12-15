@@ -202,6 +202,7 @@ function addDemoGraphic4(graphicLayer) {
         speed: 20
       }
     },
+    hasMoveEdit: false, // 编辑示例：不允许移动，只能调整半径
     attr: { remark: "示例4" }
   })
   graphicLayer.addGraphic(graphic) // 还可以另外一种写法: graphic.addTo(graphicLayer)

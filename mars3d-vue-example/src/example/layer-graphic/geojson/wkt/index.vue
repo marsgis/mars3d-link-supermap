@@ -68,7 +68,7 @@ function initTree(dataItems: any) {
     if (layer) {
       const key = "01-" + Math.random()
       children.push({
-        title: layer.airportName,
+        title: layer["类型"],
         key: key,
         id: layer.graphic.id
       })

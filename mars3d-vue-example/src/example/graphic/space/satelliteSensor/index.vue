@@ -6,6 +6,7 @@
       :customEditor="'satelliteSensor'"
       @onStartEditor="onStartEditor"
       @onStopEditor="onStopEditor"
+      ref="graphicLayerStateRef"
     />
   </mars-dialog>
 
@@ -263,6 +264,13 @@ const chkSensorType = () => {
 const onChangeColor = () => {
   mapWork.updateColor(formState.areaColor)
 }
+
+let graphicLayer: any
+const graphicLayerStateRef = ref()
+mapWork.eventTarget.on("addTableData", function (event: any) {
+  graphicLayer = event.graphicLayer
+  graphicLayerStateRef.value.addTableData(graphicLayer)
+})
 </script>
 <style scoped lang="less">
 .inputNum {

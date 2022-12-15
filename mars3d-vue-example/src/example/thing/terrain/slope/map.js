@@ -4,6 +4,7 @@ export let map // mars3d.Map三维地图对象
 let slope
 let contourLine
 let graphicLayer
+
 /**
  * 初始化地图业务，生命周期钩子函数（必须）
  * 框架在地图初始化完成后自动调用该函数
@@ -12,9 +13,11 @@ let graphicLayer
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
-  addSlope()
+
   graphicLayer = new mars3d.layer.GraphicLayer()
   map.addLayer(graphicLayer)
+
+  addSlope()
 }
 
 /**
@@ -32,6 +35,13 @@ function addSlope() {
       scale: 0.3, // 箭头长度的比例（范围0.1-0.9）
       color: Cesium.Color.YELLOW,
       width: 15, // 箭头宽度
+      // materialType: mars3d.MaterialType.LineFlow,
+      // materialOptions: {
+      //   color: "#1a9850",
+      //   image: "img/textures/line-arrow-right.png",
+      //   speed: 10
+      // },
+      // clampToGround: true,
       show: true
     },
     tooltip: function (event) {
@@ -76,7 +86,7 @@ export function btnDrawExtent(splitNum) {
       const positions = graphic.getOutlinePositions(false)
       graphicLayer.clear()
 
-      console.log("绘制坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 方便测试拷贝坐标
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
       contourLine.positions = positions
 
@@ -106,7 +116,7 @@ export function btnDraw(splitNum) {
       const positions = graphic.positionsShow
       graphicLayer.clear()
 
-      console.log("绘制坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 方便测试拷贝坐标
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
       contourLine.positions = positions
 

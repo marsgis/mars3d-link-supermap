@@ -8,7 +8,7 @@
       </a-space>
     </a-form-item>
 
-    <mars-gui :options="options" ref="marsGuiRef"></mars-gui>
+    <mars-gui :options="options" :labelCol="5" ref="marsGuiRef"></mars-gui>
 
     <div class="f-pt">
       <mars-table :pagination="{ pageSize: 5 }" :row-selection="rowSelection" :dataSource="dataSource" :columns="columns" size="small" bordered>
@@ -118,6 +118,8 @@ const options: GuiItem[] = [
     type: "switch",
     field: "control",
     label: "状态控制",
+    extra: "显示其它区域",
+    extraWidth: 180,
     value: true,
     change(data) {
       mapWork.chkClippingPlanes(data)
@@ -131,7 +133,7 @@ interface TableItem {
 }
 
 const labelCol = ref({ span: 5 })
-const labelAlign = ref("left")
+const labelAlign = ref("right")
 
 // 表格数据
 const columns = ref([

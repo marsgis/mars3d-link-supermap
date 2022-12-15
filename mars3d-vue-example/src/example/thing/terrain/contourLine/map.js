@@ -87,11 +87,12 @@ export function btnDrawExtent() {
     },
     success: function (graphic) {
       // 绘制成功后回调
-      const positions = graphic.getOutlinePositions(false)
+      let positions = graphic.getOutlinePositions(false)
       map.graphicLayer.clear()
 
-      console.log("绘制坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 方便测试拷贝坐标
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
+      positions = mars3d.PointUtil.setPositionsHeight(positions, 0)
       const areaItem = contourLine.addArea(positions)
       addTableItem(areaItem)
     }
@@ -109,11 +110,12 @@ export function btnDraw() {
     },
     success: function (graphic) {
       // 绘制成功后回调
-      const positions = graphic.positionsShow
+      let positions = graphic.positionsShow
       map.graphicLayer.clear()
 
-      console.log("绘制坐标为", JSON.stringify(mars3d.PointTrans.cartesians2lonlats(positions))) // 方便测试拷贝坐标
+      console.log("绘制坐标为", JSON.stringify(mars3d.LngLatArray.toArray(positions))) // 方便测试拷贝坐标
 
+      positions = mars3d.PointUtil.setPositionsHeight(positions, 0)
       const areaItem = contourLine.addArea(positions)
       addTableItem(areaItem)
     }

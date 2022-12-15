@@ -1,5 +1,5 @@
 <template>
-  <mars-dialog :draggable="true" title="底图" :width="380" :position="{ top:50, left: 50 }">
+  <mars-dialog :draggable="true" title="底图" :width="380" :position="{ top: 50, left: 50 }">
     <ul class="basemap">
       <li v-for="(item, i) in baseMaps" :key="i" class="basemap-card" :class="{ 'active-card': active === item.id }" @click="changeBaseMaps(item)">
         <div><img class="icon" :src="`${item.options.icon || 'img/basemaps/bingAerial.png'}`" /></div>
@@ -63,11 +63,11 @@ function changeTerrain() {
   list-style-type: none;
   margin-top: 10px;
   margin-left: 10px;
-  float: left;
+  vertical-align: top;
   text-align: center;
   cursor: pointer;
   font-size: 12px;
-  color: #fff;
+  color: var(--mars-text-color);
   &:hover {
     .active-card();
   }
