@@ -1,7 +1,7 @@
 /**
  * 功能示例 的 widget配置（更多请参考基础项目Vue版）
  * @copyright 火星科技 mars3d.cn
- * @author 火星吴彦祖 2022-02-19
+ * @author 木遥 2022-02-19
  */
 import { defineAsyncComponent, markRaw } from "vue"
 import { WidgetState } from "@mars/widgets/common/store/widget"

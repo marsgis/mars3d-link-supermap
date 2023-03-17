@@ -36,7 +36,7 @@ export default ({ mode }: ConfigEnv) => {
       extensions: [".js", ".ts", ".jsx", ".tsx", ".json"]
     },
     optimizeDeps: {
-      include: ["mars3d", "kml-geojson",  "@mars/common/store/widget"],
+      include: ["mars3d", "kml-geojson", "@mars/common/store/widget"],
       exclude: ["mars3d-cesium"]
     },
     json: {
