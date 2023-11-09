@@ -25,7 +25,7 @@ export default ({ mode }: ConfigEnv) => {
       "process.env": {
         mode: mode,
         BASE_URL: ENV.VITE_BASE_URL,
-        API_BASE: ENV.VITE_API_BASE
+        API_BASE: ENV.VITE_API_URL
       },
       buildTime: new Date()
     },
