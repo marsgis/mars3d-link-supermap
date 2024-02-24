@@ -1,8 +1,8 @@
 /**
  * Mars3D三维可视化平台  mars3d
  *
- * 版本信息：v3.4.18
- * 编译日期：2022-12-13 20:24:33
+ * 版本信息：v3.4.26
+ * 编译日期：2024-02-24 14:41:09
  * 版权所有：Copyright by 火星科技  http://mars3d.cn
  * 使用单位：免费公开版 ，2022-06-01
  */
@@ -364,6 +364,7 @@
   line-height: 40px;
   padding: 2px;
   border: 1px solid lightgrey;
+  z-index: 99999;
 }
 .mars3d-slider .slider-splitter:hover {
   cursor: ew-resize;

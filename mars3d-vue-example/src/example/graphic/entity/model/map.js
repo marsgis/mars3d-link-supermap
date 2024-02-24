@@ -22,7 +22,7 @@ export const eventTarget = new mars3d.BaseClass()
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
   map.basemap = 2017 // 蓝色底图
-  map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+  // map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
 
   // 创建矢量数据图层
   graphicLayer = new mars3d.layer.GraphicLayer()

@@ -23,12 +23,11 @@ export const mapOptions = {
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
-  map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+  // // map.fixedLight = true // 超图版本改变了Cesium.DirectionalLight参数，无法用该属性。
 
   // globalNotify("已知问题提示", `当前使用的是原生Cesium+SuperMap3D插件方式，很多API不支持，完整方式需要参考Github开源代码切换Cesium到超图版Cesium。`)
 
-  // showMaxNiaochaoDemo()
-  showQxSuofeiyaDemo()
+  showMaxNiaochaoDemo()
 }
 
 /**
@@ -89,7 +88,7 @@ export function showMaxCBDDemo() {
 // 示例：  地下管网
 export function showMaxPipeDemo() {
   removeLayer()
-  globalMsg("插件版暂不支持 “fillForeColor” 参数的修改")
+  // globalMsg("插件版暂不支持 “fillForeColor” 参数的修改")
 
   s3mLayer = new mars3d.layer.S3MLayer({
     name: "地下管网",

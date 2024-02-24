@@ -14,7 +14,7 @@ export const eventTarget = new mars3d.BaseClass() // 事件对象，用于抛出
  */
 export function onMounted(mapInstance) {
   map = mapInstance // 记录map
-  map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+  // map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
 
   // 固定光照时间
   map.clock.currentTime = Cesium.JulianDate.fromDate(new Date("2022-11-01 12:00:00"))

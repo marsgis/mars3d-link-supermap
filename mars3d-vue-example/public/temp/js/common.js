@@ -32,10 +32,10 @@ function init() {
       // parentGlobal._mapInstance = initMapFun(json.map3d)
       // parentGlobal.mapWork = window // 这句话是将当前js对象绑定赋予给index.项目内进行调用
     })
-    .catch(function (error) {
-      console.log("加载JSON出错", error)
-      globalAlert(error ? error.message : "加载JSON出错")
-    })
+    // .catch(function (error) {
+    //   console.log("加载JSON出错", error)
+    //   globalAlert(error ? error.message : "加载JSON出错")
+    // })
 }
 init()
 

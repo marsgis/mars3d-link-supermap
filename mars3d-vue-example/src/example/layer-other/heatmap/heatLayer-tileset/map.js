@@ -29,7 +29,7 @@ export function onUnmounted() {
 }
 
 function addLayer() {
-  map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+  // map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
 
   const tilesetLayer = new mars3d.layer.TilesetLayer({
     name: "石化工厂",

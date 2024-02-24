@@ -31,7 +31,7 @@ export const mapOptions = {
 export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
 
-  map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
+  // map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
 
   // 固定光照时间
   map.clock.currentTime = Cesium.JulianDate.fromDate(new Date("2022-11-01 12:00:00"))
