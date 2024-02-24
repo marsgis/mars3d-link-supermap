@@ -1,9 +1,8 @@
 import { createApp, defineComponent } from "vue"
 import Application from "./App.vue"
 import MarsUIInstall from "@mars/components/mars-ui"
-import { injectState, getInjectKey } from "@mars/widgets/common/store/widget"
-import { getExampleId, getQueryString } from "@mars/utils/mars-util"
-import { cloneDeep } from "lodash"
+import { injectState, key } from "@mars/widgets/common/store/widget"
+import { getExampleId, getQueryString } from "@mars/utils/mars-util" 
 import store from "@mars/widgets/widget-store"
 import { Editor as MarsgisEditor } from "@marsgis/editor"
 import "@marsgis/editor/dist/style.css"
@@ -47,14 +46,13 @@ function initUI(simple: boolean) {
   if (simple) {
     vueApp = createApp(
       defineComponent({
-        template: "<div><div>"
+        template: "<div></div>"
       })
     )
   } else {
     vueApp = createApp(Application)
-    const key = getInjectKey()
 
-    vueApp.use(injectState(cloneDeep(store)), key)
+    vueApp.use(injectState(store), key)
   }
 
   MarsUIInstall(vueApp, {
@@ -75,4 +73,9 @@ function destoryUI() {
   vueApp = null
 }
 
-marsEditor.render(document.getElementById("root"), getExampleId(), getQueryString("name"))
+marsEditor.render({
+  container: document.getElementById("root"),
+  exampleId: getExampleId(),
+  exampleKey: getQueryString("key"),
+  fullName: getQueryString("name")
+})

@@ -1,7 +1,35 @@
 [
   {
+    "name": "超图特有示例",
+    "icon": "fa-globe",
+    "download": false,
+    "children": [
+      {
+        "name": "超图特有示例",
+        "details": "仅超图版本cesium使用的示例",
+        "children": [
+            {
+              "name": "超图S3M三维模型图层",
+              "thumbnail": "layero-s3m-basis.jpg",
+              "main": "supermap/s3m",
+              "hasPannel": true
+            },
+            {
+              "name": "图上标绘",
+              "thumbnail": "layerg-draw-draw.jpg",
+              "main": "supermap/draw",
+              "hasPannel": true,
+              "libs": ["mars3d", "kmlGeojson", "terraformer"]
+            }
+        ]
+      }
+    ]
+  },
+
+  {
     "name": "快速开始",
     "icon": "fa-globe",
+    "download": false,
     "children": [
       {
         "name": "创建三维场景",
@@ -595,13 +623,6 @@
             "thumbnail": "layer3d-type-basis.jpg",
             "main": "layer-tileset/type/basis",
             "params": "data=3dTiles",
-            "hasPannel": true
-          },
-          {
-            "name": "超图S3M三维模型图层",
-            "thumbnail": "layero-s3m-basis.jpg",
-            "main": "layer-other/s3m/basis",
-            "libs": ["mars3d", "cesium-comp", "mars3d-supermap"],
             "hasPannel": true
           }
         ]

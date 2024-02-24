@@ -16,8 +16,10 @@
         </div>
       </a-collapse-panel>
 
-      <a-collapse-panel key="2" header="开源仓库">
+      <a-collapse-panel key="2" header="相关链接">
+        <mars-button href="http://support.supermap.com.cn:8090/webgl/Cesium/examples/webgl/examples.html" target="_blank">超图官方示例</mars-button>
         <mars-button href="https://gitee.com/marsgis/mars3d-link-supermap" target="_blank">与超图结合开源仓库</mars-button>
+
       </a-collapse-panel>
     </a-collapse>
   </mars-dialog>

@@ -5,14 +5,7 @@ export let map
 // 需要覆盖config.json中地图属性参数（当前示例框架中自动处理合并）
 export const mapOptions = {
   scene: {
-    center: {
-      lat: 28.440864,
-      lng: 119.486477,
-      alt: 588.23,
-      heading: 268.6,
-      pitch: -37.8,
-      roll: 359.8
-    },
+    center: { lat: 45.769479, lng: 126.626015, alt: 589.6, heading: 251.3, pitch: -48.4 },
     fxaa: true,
     requestRenderMode: true // 显式渲染
   },
@@ -32,7 +25,7 @@ export function onMounted(mapInstance) {
   map = mapInstance // 记录首次创建的map
   map.fixedLight = true // 固定光照，避免gltf模型随时间存在亮度不一致。
 
-  globalNotify("已知问题提示", `当前使用的是原生Cesium+SuperMap3D插件方式，很多API不支持，完整方式需要参考Github开源代码切换Cesium到超图版Cesium。`)
+  // globalNotify("已知问题提示", `当前使用的是原生Cesium+SuperMap3D插件方式，很多API不支持，完整方式需要参考Github开源代码切换Cesium到超图版Cesium。`)
 
   // showMaxNiaochaoDemo()
   showQxSuofeiyaDemo()
@@ -178,8 +171,8 @@ export function showQxSuofeiyaDemo() {
     s3mOptions: {
       selectEnabled: false
     },
-    position: { alt: 140 },
-    center: { lat: 45.769034, lng: 126.623702, alt: 291, heading: 250, pitch: -36 },
+    position: { alt: 20 },
+    center: { lat: 45.769479, lng: 126.626015, alt: 589.6, heading: 251.3, pitch: -48.4 },
     flyTo: true
   })
   map.addLayer(s3mLayer)
