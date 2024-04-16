@@ -55,5 +55,4 @@ yarn.lock
 
 # 本地测试
 src/example/a-test
-public/lib/Cesium-*
 public/lib/mars3d-*
