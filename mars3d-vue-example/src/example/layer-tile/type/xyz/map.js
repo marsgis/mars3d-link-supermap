@@ -22,7 +22,7 @@ export const mapOptions = {
       name: "影像地图",
       icon: "img/basemaps/gaode_img.png",
       type: "xyz",
-      url: "//data.mars3d.cn/tile/googleImg/{z}/{x}/{y}.jpg",
+      url: "//data.mars3d.cn/tile/img/{z}/{x}/{y}.jpg",
       maximumLevel: 12
     },
     {

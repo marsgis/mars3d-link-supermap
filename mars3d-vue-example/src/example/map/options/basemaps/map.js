@@ -19,14 +19,14 @@ function initMap() {
         name: "天地图影像",
         icon: "img/basemaps/tdt_img.png",
         type: "tdt",
-        layer: "img_d", 
+        layer: "img_d",
         show: true
       },
       {
         name: "离线地图",
         icon: "img/basemaps/mapboxSatellite.png",
         type: "xyz",
-        url: "//data.mars3d.cn/tile/googleImg/{z}/{x}/{y}.jpg",
+        url: "//data.mars3d.cn/tile/img/{z}/{x}/{y}.jpg",
         maximumLevel: 12
       },
       {

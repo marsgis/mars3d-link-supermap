@@ -31,22 +31,6 @@ export const mapOptions = {
       url: "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
       enablePickFeatures: false
     },
-    {
-      name: "蓝色底图",
-      icon: "img/basemaps/bd-c-midnight.png",
-      type: "arcgis",
-      url: "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer",
-      enablePickFeatures: false,
-      chinaCRS: mars3d.ChinaCRS.GCJ02
-    },
-    {
-      name: "灰色底图",
-      icon: "img/basemaps/bd-c-grayscale.png",
-      type: "arcgis",
-      url: "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer",
-      enablePickFeatures: false,
-      chinaCRS: mars3d.ChinaCRS.GCJ02
-    }
   ]
 }
 
@@ -79,7 +63,7 @@ export function addTileLayer() {
 
   // 方式2：在创建地球后调用addLayer添加图层(直接new对应type类型的图层类)
   tileLayer = new mars3d.layer.ArcGisLayer({
-    url: "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer",
+    url: "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
     enablePickFeatures: false
     // queryParameters: {
     //   mosaicRule: `{"where":"t='20180525'"}`,

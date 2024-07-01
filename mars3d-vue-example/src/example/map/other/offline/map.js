@@ -13,7 +13,7 @@ export const mapOptions = {
       name: "卫星地图",
       type: "xyz",
       icon: "img/basemaps/mapboxSatellite.png",
-      url: "//data.mars3d.cn/tile/googleImg/{z}/{x}/{y}.jpg",
+      url: "//data.mars3d.cn/tile/img/{z}/{x}/{y}.jpg",
       minimumLevel: 0,
       maximumLevel: 12,
       show: true

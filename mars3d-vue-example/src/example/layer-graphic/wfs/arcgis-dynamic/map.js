@@ -31,22 +31,6 @@ export const mapOptions = {
       url: "https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
       enablePickFeatures: false
     },
-    {
-      name: "蓝色底图",
-      icon: "img/basemaps/bd-c-midnight.png",
-      type: "arcgis",
-      url: "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer",
-      enablePickFeatures: false,
-      chinaCRS: mars3d.ChinaCRS.GCJ02
-    },
-    {
-      name: "灰色底图",
-      icon: "img/basemaps/bd-c-grayscale.png",
-      type: "arcgis",
-      url: "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetGray/MapServer",
-      enablePickFeatures: false,
-      chinaCRS: mars3d.ChinaCRS.GCJ02
-    }
   ]
 }
 
