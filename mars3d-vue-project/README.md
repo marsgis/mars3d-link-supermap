@@ -613,7 +613,7 @@ const show = (name: string) => {
 {
   "mars3d": "~3.5.0",
   "mars3d-cesium": "~1.112.0",
-  "@turf/turf": "^6.5.0",
+  "@turf/turf": "^7.1.0",
   "kml-geojson": "^1.2.0",
   "vue": "^3.2.26",
   "vuex": "^4.0.2",
@@ -703,7 +703,7 @@ chainWebpack: (config) => {
 ```json
 //已忽略其他配置
 "dependencies": {
-  "@turf/turf": "^6.5.0",
+  "@turf/turf": "^7.1.0",
   "mars3d-cesium": "~1.112.0",
 },
 ```

@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@icon-park/svg": "^1.4.0",
-    "@turf/turf": "^6.5.0",
+    "@turf/turf": "^7.1.0",
     "ant-design-vue": "^3.2.5",
     "axios": "^0.25.0",
     "core-js": "^3.20.3",
