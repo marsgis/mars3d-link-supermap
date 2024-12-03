@@ -1,4 +1,4 @@
-import "mars3d/dist/mars3d.css"
+import "mars3d/mars3d.css"
 import "mars3d"
 import "mars3d-supermap"
 
