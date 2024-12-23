@@ -1,5 +1,5 @@
 <template>
-  <a-date-picker :locale="locale" :dayjs="dayjs" class="mars-date-picker" dropdownClassName="mars-datepicker-dropdown" v-bind="attrs">
+  <a-date-picker :locale="locale" :dayjs="dayjs" class="mars-date-picker" popupClassName="mars-datepicker-dropdown" v-bind="attrs">
     <template v-for="(comp, name) in slots" :key="name" v-slot:[name]>
       <component :is="comp" />
     </template>
@@ -27,24 +27,30 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .mars-date-picker {
-  color: @mars-base-color;
-  border-color: @mars-base-border-color !important;
-  background-color: transparent !important;
+  width: 100%;
+  height: 32px;
+  color: var(--mars-control-text);
+  border-color: var(--mars-control-border) !important;
+  background-color: var(--mars-control-bg) !important;
+  border-radius: 2px;
   &:hover {
-    border-color: @mars-primary-color !important;
+    border-color: var(--mars-primary-color) !important;
   }
 
   :deep(.ant-picker-input) {
-    input {
-      color: @mars-base-color !important;
+    > input {
+      color: var(--mars-control-text) !important;
+      &::placeholder {
+        color: var(--mars-control-placeholder);
+      }
     }
   }
   :deep(.ant-picker-clear) {
-    background: @mars-bg-base;
-    color: @mars-base-color !important;
+    background: var(--mars-base-bg);
+    color: var(--mars-control-text) !important;
   }
   :deep(.ant-picker-suffix *) {
-    color: @mars-base-color;
+    color: var(--mars-control-placeholder);
   }
 }
 </style>
@@ -55,7 +61,7 @@ export default defineComponent({
   }
   *,
   .ant-picker-content th {
-    color: @mars-base-color;
+    color: var(--mars-control-text);
   }
   .ant-picker-footer {
     border: none;
@@ -64,7 +70,26 @@ export default defineComponent({
     &:hover,
     &.ant-picker-cell-selected {
       .ant-picker-cell-inner {
-        background-color: @mars-primary-color !important;
+        // background-color: var(--mars-primary-color) !important; 基础项目中日期选中的是透明的
+        background-color: transparent !important;
+        color:#fff
+      }
+    }
+  }
+
+  .ant-picker-cell-disabled {
+    background-color: var(--mars-disable-color);
+  }
+
+  .ant-picker-time-panel-cell {
+    .ant-picker-time-panel-cell-inner {
+      color: var(--mars-control-text) !important;
+    }
+    &:hover,
+    &.ant-picker-time-panel-cell-selected {
+      background-color: var(--mars-primary-color) !important;
+      .ant-picker-time-panel-cell-inner {
+        background-color: var(--mars-primary-color) !important;
       }
     }
   }

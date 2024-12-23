@@ -1,30 +1,28 @@
 <template>
-  <mars-dialog title="坐标拾取" :handles="false" width="356" height="340" top="60" right="10" :min-width="340">
-    <template #icon>
-      <mars-icon icon="local" width="18" />
-    </template>
-    <div class="position-container">
-      <a-form>
-        <mars-gui ref="marsGuiRef" :options="options" labelCol="4"></mars-gui>
-      </a-form>
-      <div class="f-pt f-tac">
-        <a-space>
-          <mars-button @click="bindMourseClick">图上拾取</mars-button>
-          <mars-button @click="submitCenter">坐标定位</mars-button>
-        </a-space>
-      </div>
+  <mars-dialog title="坐标拾取" icon="local" width="330" top="60">
+    <mars-gui ref="marsGuiRef" :options="options" labelCol="5"></mars-gui>
+    <div class="f-pt f-tac control-btn">
+      <mars-button class="btn" @click="bindMourseClick">图上拾取</mars-button>
+      <mars-button class="btn" @click="submitCenter">坐标定位</mars-button>
     </div>
   </mars-dialog>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue"
+import { onMounted, onUnmounted, reactive, ref } from "vue"
 import useLifecycle from "@mars/common/uses/use-lifecycle"
+import { useWidget } from "@mars/common/store/widget"
 import * as mapWork from "./map"
 import type { GuiItem } from "@mars/components/mars-ui/mars-gui"
 
 // 启用map.ts生命周期
 useLifecycle(mapWork)
+const { updateWidget } = useWidget()
+
+// 取消工具栏高亮
+onUnmounted(() => {
+  updateWidget("toolbar", "location-point")
+})
 
 const marsGuiRef = ref()
 
@@ -32,16 +30,15 @@ onMounted(() => {
   const defaultPoitn = mapWork.defultPoint()
 
   marsUpdataPosition(defaultPoitn)
-
   marsPointTrans(defaultPoitn)
-
   marsProj4Trans(defaultPoitn)
 })
+
+
 const options: GuiItem[] = [
   {
     type: "radio",
     field: "type",
-    label: "类型",
     value: "1",
     data: [
       {
@@ -250,7 +247,7 @@ mapWork.eventTarget.on("clickMap", (event: any) => {
   marsPointTrans(data)
   marsProj4Trans(data)
   // 更新面板
-  // mapWork.updateMarker(false, data.lng, data.lat, data.alt)
+  mapWork.updateMarker(false, data.lng, data.lat, data.alt)
 })
 
 // 更新度分秒
@@ -296,11 +293,42 @@ const submitCenter = () => {
 }
 </script>
 <style lang="less" scoped>
-.position-container {
-  padding-top: 10px;
-  margin-right: 5px;
+.control-btn {
+  display: flex;
+
+  .btn {
+    flex: 1;
+
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
 }
-:deep(.mars-input) {
-  max-width: 192px;
+
+:deep(.ant-col) {
+  max-width: 100% !important;
+  text-align: left;
+}
+
+:deep(.ant-radio-group) {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+:deep(.ant-radio-group label:nth-child(3)) {
+  margin-right: 0px;
+}
+
+:deep(.ant-radio-group label:nth-child(3) span) {
+  padding-inline-end: 0px;
+}
+
+:deep(.ant-radio-inner) {
+  border-radius: 0px;
+}
+
+:deep(.ant-radio-inner::after) {
+  border-radius: 0px !important;
 }
 </style>

@@ -1,28 +1,32 @@
+<!--
+  地图渲染组件 (建议使用mars3d地图的地方都用该组件)
+  @copyright 火星科技 mars3d.cn
+  @author 木遥 2024-12-03
+-->
 <template>
   <div :id="withKeyId" class="mars3d-container"></div>
 </template>
 <script setup lang="ts">
-/**
- * 地图渲染组件
- * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-02-19
- */
-import { computed, onUnmounted, onMounted, h, ref } from "vue"
 import * as mars3d from "mars3d"
-import { getQueryString } from "@mars/utils/mars-util"
+import "./expand/index" // 引入插件或注册扩展js
 import { getDefaultContextMenu } from "@mars/utils/getDefaultContextMenu"
+
+import { computed, onUnmounted, onMounted, toRaw } from "vue"
 import { $alert, $message } from "@mars/components/mars-ui/index"
+import { useWidget } from "@mars/common/store/widget"
+import { Close, HistoryQuery, LandSurveying, Layers, Local, Tool } from "@icon-park/svg"
+const { activate, disableAll, isActivate, disable } = useWidget()
 
 const props = withDefaults(
   defineProps<{
-    url: string
-    mapKey?: string
-    options?: any
+    mapKey?: string // 多个地图时,可传入key区分地图
+    url?: string // 传入的地图构造参数url，可为空，只传options
+    options?: any // 传入的地图构造参数options，可覆盖url内的参数
   }>(),
   {
-    url: "",
     mapKey: "default",
-    options: () => ({})
+    url: undefined,
+    options: undefined
   }
 )
 
@@ -32,34 +36,27 @@ let map: mars3d.Map // 地图对象
 // 使用用户传入的 mapKey 拼接生成 withKeyId 作为当前显示容器的id
 const withKeyId = computed(() => `mars3d-container-${props.mapKey}`)
 
-onMounted(() => {
-  // 获取配置
-  mars3d.Util.fetchJson({ url: props.url }).then((data: any) => {
-    initMars3d({
-      // 合并配置项
-      ...data.map3d,
-      ...props.options
-    })
-  })
-})
-
 // onload事件将在地图渲染后触发
 const emit = defineEmits(["onload"])
-const initMars3d = (option: any) => {
-  map = new mars3d.Map(withKeyId.value, option)
 
-  // 绑定当前项目的默认右键菜单
-  map.bindContextMenu(getDefaultContextMenu(map))
-
-  // 如果有xyz传参，进行定位
-  const lat = getQueryString("lat")
-  const lng = getQueryString("lng")
-  if (lat && lng) {
-    map.flyToPoint(new mars3d.LngLatPoint(lng, lat), { duration: 0 })
+const initMars3d = async () => {
+  // 获取配置
+  let mapOptions
+  if (props.url) {
+    // 存在url时才读取
+    mapOptions = await mars3d.Util.fetchJson({ url: props.url })
+    if (mapOptions.map3d) {
+      mapOptions = mapOptions.map3d
+    }
+    if (props.options) {
+      mapOptions = mars3d.Util.merge(mapOptions, toRaw(props.options)) // 合并配置
+    }
+  } else if (props.options) {
+    mapOptions = toRaw(props.options)
   }
+  console.log("Map地图构造参数", mapOptions)
 
-  // 开场动画
-  // map.openFlyAnimation();
+  map = new mars3d.Map(withKeyId.value, mapOptions)
 
   // 针对不同终端的优化配置
   if (mars3d.Util.isPCBroswer()) {
@@ -80,10 +77,13 @@ const initMars3d = (option: any) => {
     map.scene.globe.showGroundAtmosphere = false
   }
 
-  // //二三维切换不用动画
+  // 二三维切换不用动画
   if (map.viewer.sceneModePicker) {
     map.viewer.sceneModePicker.viewModel.duration = 0.0
   }
+
+  // 绑定当前项目的默认右键菜单
+  map.bindContextMenu(getContextMenu())
 
   // webgl渲染失败后，刷新页面
   map.on(mars3d.EventType.renderError, async () => {
@@ -91,13 +91,12 @@ const initMars3d = (option: any) => {
     window.location.reload()
   })
 
-  // map构造完成后的一些处理
-  onMapLoad()
+  onMapLoad() // map构造完成后的一些处理
 
   emit("onload", map)
 }
 
-// map构造完成后的一些处理
+// map构造完成后的一些处理，可以按需注释和选用
 function onMapLoad() {
   // Mars3D地图内部使用，如右键菜单弹窗
   // @ts-ignore
@@ -111,27 +110,69 @@ function onMapLoad() {
     $alert(item.NAME)
   }
 
-  // 用于 config.json中配置的图层，绑定额外方法和参数
-  const tiles3dLayer = map.getLayer(204012, "id") // 上海市区
-  if (tiles3dLayer) {
-    tiles3dLayer.options.onSetOpacity = function (opacity: number) {
-      tiles3dLayer.style = {
-        color: {
-          conditions: [
-            ["${floor} >= 200", "rgba(45, 0, 75," + 0.5 * opacity + ")"],
-            ["${floor} >= 100", "rgba(170, 162, 204," + opacity + ")"],
-            ["${floor} >= 50", "rgba(224, 226, 238," + opacity + ")"],
-            ["${floor} >= 25", "rgba(252, 230, 200," + opacity + ")"],
-            ["${floor} >= 10", "rgba(248, 176, 87," + opacity + ")"],
-            ["${floor} >= 5", "rgba(198, 106, 11," + opacity + ")"],
-            ["true", "rgba(127, 59, 8," + opacity + ")"]
-          ]
-        }
-      }
-    }
-  }
 }
 
+function getContextMenu() {
+  const contextmenu: any = getDefaultContextMenu(map)
+
+  const children = []
+  const iconStyle: any = { theme: "outline", fill: "#fff", size: "18" }
+  const widgetList = [
+    { name: "底图切换", icon: LandSurveying(iconStyle), widget: "manage-basemap" },
+    { name: "图层管理", icon: Layers(iconStyle), widget: "manage-layers" },
+    // { name: "图上量算", icon: Ruler(iconStyle), widget: "measure" },
+    // { name: "空间分析", icon: Analysis(iconStyle), widget: "analysis" },
+    { name: "坐标定位", icon: Local(iconStyle), widget: "location-point" },
+    // { name: "地区导航", icon: Navigation(iconStyle), widget: "location-region" },
+    // { name: "我的标记", icon: Mark(iconStyle), widget: "addmarker" },
+    // { name: "视角书签", icon: Bookmark(iconStyle), widget: "bookmark" },
+    // { name: "地图打印", icon: Printer(iconStyle), widget: "print" },
+    // { name: "飞行漫游", icon: TakeOff(iconStyle), widget: "roamLine-list" },
+    // { name: "图上标绘", icon: HandPaintedPlate(iconStyle), widget: "plot" },
+    // { name: "卷帘对比", icon: SwitchContrast(iconStyle), widget: "map-split" },
+    // { name: "分屏对比", icon: FullScreenPlay(iconStyle), widget: "map-compare" },
+    { name: "兴趣点查询", icon: HistoryQuery(iconStyle), widget: "query-poi" }
+  ]
+  widgetList.forEach((item) => {
+    children.push({
+      name: item.name,
+      widget: item.widget,
+      text: function () {
+        if (isActivate(this.widget)) {
+          return "关闭" + this.name
+        } else {
+          return this.name
+        }
+      },
+      icon: item.icon,
+      callback: function (e) {
+        if (isActivate(this.widget)) {
+          disable(this.widget)
+        } else {
+          activate(this.widget)
+        }
+      }
+    })
+  })
+  children.push({
+    text: "关闭所有",
+    icon: Close(iconStyle),
+    callback: function (e) {
+      disableAll()
+    }
+  })
+
+  contextmenu.push({
+    text: "常用工具",
+    icon: Tool(iconStyle),
+    children
+  })
+  return contextmenu
+}
+
+onMounted(() => {
+  initMars3d()
+})
 // 组件卸载之前销毁mars3d实例
 onUnmounted(() => {
   if (map) {
@@ -150,9 +191,28 @@ onUnmounted(() => {
   left: 12px !important;
   right: auto !important;
 }
+
 .cesium-toolbar-button img {
+  width: 22px;
   height: 100%;
 }
+.cesium-toolbar-button:hover img {
+  width: 28px;
+}
+.cesium-svgPath-svg {
+  scale: 0.8;
+}
+.cesium-svgPath-svg:hover {
+  scale: 1;
+}
+.cesium-button .cesium-baseLayerPicker-selected {
+  width: 100%;
+}
+
+.cesium-button:hover .cesium-baseLayerPicker-selected {
+  width: 100%;
+}
+
 .cesium-viewer-toolbar > .cesium-toolbar-button,
 .cesium-navigationHelpButton-wrapper,
 .cesium-viewer-geocoderContainer {
@@ -161,15 +221,28 @@ onUnmounted(() => {
   clear: both;
   text-align: center;
 }
-.cesium-button {
-  background-color: @mars-bg-base;
-  color: #e6e6e6;
-  fill: #e6e6e6;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  line-height: 32px;
+
+.cesium-viewer-geocoderContainer form .cesium-geocoder-input {
+  border-width: 1px;
+  border-image: url("//data.mars3d.cn/img/control/border.svg") 1 round stretch;
 }
+
+.cesium-button {
+  background-color: rgba(39, 44, 54, 0.8);
+
+  border-radius: 2px;
+  border-width: 1px;
+  border-image: url("//data.mars3d.cn/img/control/border.svg") 1 round stretch;
+
+  color: #ffffff;
+  fill: #e6e6e6;
+  line-height: 38px;
+}
+
 .cesium-button:hover {
-  background: @mars-hover-btn-bg;
+  background-color: rgba(51, 133, 255, 1);
+  box-shadow: none;
+  border: none;
 }
 
 /**cesium 底图切换面板*/
@@ -178,7 +251,7 @@ onUnmounted(() => {
   left: 40px;
   max-height: 700px;
   margin-bottom: 5px;
-  background-color: @mars-bg-base;
+  background-color: rgba(23, 49, 71, 0.7);
 }
 
 /**cesium 帮助面板*/
@@ -188,16 +261,16 @@ onUnmounted(() => {
   left: 40px;
   transform-origin: left bottom;
   background: none;
-  background-color: @mars-bg-base;
-  .cesium-navigation-help-instructions {
-    background: none;
-  }
+  background-color: rgba(23, 49, 71, 0.8);
+
+  .cesium-navigation-help-instructions,
   .cesium-navigation-button {
     background: none;
   }
+
   .cesium-navigation-button-selected,
   .cesium-navigation-button-unselected:hover {
-    background: @mars-select-bg;
+    background-color: rgba(1, 35, 22, 1);
   }
 }
 
@@ -205,6 +278,7 @@ onUnmounted(() => {
 .cesium-sceneModePicker-wrapper {
   width: auto;
 }
+
 .cesium-sceneModePicker-wrapper .cesium-sceneModePicker-dropDown-icon {
   float: right;
   margin: 0 3px;
@@ -217,26 +291,39 @@ onUnmounted(() => {
   width: auto;
   z-index: 9999;
 }
+
 .cesium-geocoder-searchButton {
-  background-color: @mars-bg-base;
+  width: 38px;
+  height: 38px;
+  background-color: rgba(39, 44, 54, 0.8);
+  border-radius: 2px;
+  border-width: 1px;
+  border-image: url("//data.mars3d.cn/img/control/border.svg") 1 round stretch;
+  fill: #e6e6e6;
 }
+
 .cesium-viewer-geocoderContainer .cesium-geocoder-input {
+  height: 40px;
+  width: 40px;
   background-color: rgba(63, 72, 84, 0.7);
 }
+
 .cesium-viewer-geocoderContainer .cesium-geocoder-input:focus {
-  background-color: rgba(63, 72, 84, 0.9);
+  background-color: var(--mars-base-bg, rgba(63, 72, 84, 0.9));
 }
+
 .cesium-viewer-geocoderContainer .search-results {
-  background-color: @mars-bg-base;
+  background-color: rgba(23, 49, 71, 0.8);
 }
 
 /**cesium info信息框*/
 .cesium-infoBox {
   top: 50px;
-  background-color: @mars-bg-base;
+  background: var(--mars-base-bg, rgba(63, 72, 84, 0.9));
 }
+
 .cesium-infoBox-title {
-  background-color: @mars-bg-base;
+  background-color: rgba(23, 49, 71, 0.8);
 }
 
 /**cesium 任务栏的FPS信息*/
@@ -245,6 +332,7 @@ onUnmounted(() => {
   bottom: 35px;
   right: 50px;
 }
+
 .cesium-performanceDisplay-ms,
 .cesium-performanceDisplay-fps {
   color: #fff;
@@ -256,58 +344,163 @@ onUnmounted(() => {
   left: 10px;
   right: auto;
 }
+
 .cesium-cesiumInspector {
-  background-color: @mars-bg-base;
+  background-color: var(--mars-base-bg, rgba(63, 72, 84, 0.9));
 }
 
 /**覆盖mars3d内部控件的颜色等样式*/
 .mars3d-compass .mars3d-compass-outer {
-  fill: @mars-bg-base;
+  fill: rgba(39, 44, 54, 0.8);
 }
+.mars3d-compass .mars3d-compass-inner {
+  background: rgba(39, 44, 54, 0.8);
+  fill: #fff;
+}
+
 .mars3d-contextmenu-ul,
 .mars3d-sub-menu {
-  background-color: @mars-bg-base;
+  background-color: var(--mars-base-bg, rgba(63, 72, 84, 0.9));
+}
+.mars3d-contextmenu-ul {
+  border-radius: 2px;
+  border-width: 1px;
+  border-image: url("//data.mars3d.cn/img/control/border.svg") 1 round stretch;
+}
 
-  > li > a:hover,
-  > li > a:focus,
-  > li > .active {
-    background-color: @mars-hover-btn-bg;
-  }
+.mars3d-contextmenu-ul > li > a:hover,
+.mars3d-sub-menu > li > a:hover,
+.mars3d-contextmenu-ul > li > a:focus,
+.mars3d-sub-menu > li > a:focus,
+.mars3d-contextmenu-ul > li > .active,
+.mars3d-sub-menu > li > .active {
+  background-color: var(--mars-hover-color, #3ea6ff);
+}
 
-  > .active > a,
-  > .active > a:hover,
-  > .active > a:focus {
-    background-color: @mars-hover-btn-bg;
-  }
+.mars3d-contextmenu-ul > .active > a,
+.mars3d-sub-menu > .active > a,
+.mars3d-contextmenu-ul > .active > a:hover,
+.mars3d-sub-menu > .active > a:hover,
+.mars3d-contextmenu-ul > .active > a:focus,
+.mars3d-sub-menu > .active > a:focus {
+  background-color: var(--mars-hover-color, #3ea6ff);
 }
 
 /* Popup样式*/
 .mars3d-popup-color {
-  color: @mars-base-color;
+  color: var(--mars-text-color, #ffffff);
 }
+
 .mars3d-popup-background {
-  background: @mars-bg-base;
+  // background: none会导致剖面的popup没有颜色
+  background: var(--mars-base-bg, rgba(63, 72, 84, 0.9));
 }
+
+// .mars3d-popup-content-wrapper {
+//   box-shadow: none !important;
+//   padding: 0 !important;
+//   background: var(--mars-base-border) !important;
+//   border-radius: 4px;
+// }
+
 .mars3d-popup-content {
   margin: 15px;
+}
+.mars3d-popup-btn-custom {
+  padding: 3px 10px;
+  border: 1px solid #209ffd;
+  background: #209ffd1c;
+  color: var(--mars-text-color);
+}
+
+.mars3d-tooltip {
+  color: var(--mars-text-color, #ffffff);
+  background: var(--mars-base-bg, rgba(63, 72, 84, 0.9));
+  border: 1px solid var(--mars-base-bg, rgba(63, 72, 84, 0.9));
+}
+
+.mars3d-tooltip-top:before {
+  border-top-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
+}
+
+.mars3d-tooltip-bottom:before {
+  border-bottom-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
+}
+
+.mars3d-tooltip-left:before {
+  border-left-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
+}
+
+.mars3d-tooltip-right:before {
+  border-right-color: var(--mars-bg-base, rgba(23, 49, 71, 0.8));
 }
 .mars3d-template-content label {
   padding-right: 6px;
 }
+
+/* all 中的html样式 */
 .mars3d-template-titile {
-  border-bottom: 1px solid @mars-hover-btn-bg;
+  height: 33px;
+  line-height: 33px;
+  padding-left: 10px;
+  border-radius: 4px 4px 0px 0px;
+  box-shadow:
+    0px 6px 12px -2px rgba(50, 50, 93, 0.15),
+    0px 3px 7px -3px rgba(0, 0, 0, 0.2);
+  color: var(--mars-control-text) !important;
+  background: var(--mars-msg-title-bg);
+  font-family: var(--mars-font-family);
+
+  a {
+    font-size: 16px;
+    color: var(--mars-msg-title-color, #479be0);
+    text-decoration: none;
+  }
 }
-.mars3d-template-titile a {
-  font-size: 16px;
-}
-.mars3d-tooltip {
-  background: @mars-bg-base;
-  border: 1px solid @mars-bg-base;
+
+.mars3d-template-content {
+  margin-top: 0 !important;
+  background-color: var(--mars-dropdown-bg);
+  padding: 10px;
+  color: #eaf2ff;
+
+  label {
+    padding-right: 6px;
+  }
+
+  input {
+    color: var(--mars-text-color);
+    background-color: transparent !important;
+    padding: 4px 5px;
+  }
+
+  input::placeholder {
+    color: #cdcdcd !important;
+  }
+
+  textarea {
+    color: var(--mars-base-color);
+    background-color: transparent !important;
+    padding: 4px 5px;
+  }
+
+  textarea::placeholder {
+    color: #cdcdcd !important;
+  }
 }
 
 .mars3d-popup-btn-custom {
   padding: 3px 10px;
   border: 1px solid #209ffd;
   background: #209ffd1c;
+  color: var(--mars-text-color, #ffffff);
+}
+
+.mars3d-popup-content {
+  margin: 15px;
+}
+
+.mars3d-divGraphic:hover {
+  z-index: 999 !important;
 }
 </style>

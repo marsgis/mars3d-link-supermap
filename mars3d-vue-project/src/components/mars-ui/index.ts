@@ -13,11 +13,11 @@ import MarsInputGroup from "./mars-input-group/index.vue"
 import MarsDatePicker from "./mars-date-picker/index.vue"
 import MarsRangePicker from "./mars-range-picker/index.vue"
 import MarsColorPicker from "./mars-color-picker"
+import MarsColor from "./mars-color/index.vue"
 import MarsIcon from "./mars-icon/index.vue"
 import MarsSwitch from "./mars-switch/index.vue"
 import MarsDialog from "./mars-dialog/index.vue"
 import MarsSlider from "./mars-slider/index.vue"
-import MarsPannel from "./mars-pannel/index.vue"
 import MarsDropDown from "./mars-dropdown"
 import MarsGui from "./mars-gui/index.vue"
 import MarsTable from "./mars-table/index.vue"
@@ -66,7 +66,7 @@ import {
 } from "ant-design-vue"
 
 import "./mars-echarts"
-
+import "./themes"
 import "./index.less"
 import "./function.less"
 
@@ -89,12 +89,12 @@ const components = [
   MarsDropDown,
   MarsIcon,
   MarsDialog,
-  MarsPannel,
   MarsTextarea,
   MarsSwitch,
   MarsSlider,
   MarsGui,
-  MarsTable
+  MarsTable,
+  MarsColor
 ]
 
 let marsUIConfig: Record<string, any>
@@ -123,7 +123,6 @@ export default function (app: App, config: Record<string, any> = {}): App {
   app.use(Switch)
   app.use(Space)
   app.use(Slider)
-  app.use(Table)
   app.use(Tree)
   app.use(Upload)
   app.use(Progress)
@@ -138,7 +137,7 @@ export default function (app: App, config: Record<string, any> = {}): App {
   app.use(Divider)
   app.use(Card)
   app.use(Image)
-  app.use(Pagination)  
+  app.use(Pagination)
   app.use(Table)
   app.use(Empty)
 

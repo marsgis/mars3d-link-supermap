@@ -1,5 +1,5 @@
 <template>
-  <a-select class="mars-select" dropdownClassName="mars-select-dropdown" v-bind="attrs">
+  <a-select class="mars-select" popupClassName="mars-select-dropdown" v-bind="attrs">
     <template v-for="(comp, name) in slots" :key="name" v-slot:[name]>
       <component :is="comp" />
     </template>
@@ -22,40 +22,30 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .mars-select {
-  color: @mars-base-color;
-  background-color: transparent !important;
-  background: none;
+  width: 100%;
+  height: 32px;
+  background-color: var(--mars-control-bg);
+  border-radius: 2px;
+  box-shadow: none;
   :deep(.ant-select-selector) {
-    border-color: @mars-base-border-color !important;
+    height: 100% !important;
+    border-color: var(--mars-control-border);
+    border-radius: 2px;
     background: none;
-    background-color: transparent !important;
+    color: var(--mars-text-color);
     &:hover,
     &:focus {
-      border-color: #4db3ff !important;
+      border-color: var(--mars-hover-color);
+    }
+    .ant-select-selection-item {
+      color: var(--mars-control-text) !important;
+      line-height: 32px !important;
     }
   }
 
   :deep(.ant-select-arrow) {
-    color: @mars-base-color !important;
+    color: var(--mars-control-placeholder);
   }
 }
 </style>
-<style lang="less">
-// 下拉选择
-.mars-select-dropdown {
-  padding: 0 !important;
-  .mars-drop-bg();
-  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-    background: @mars-list-active;
-  }
-  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-    font-weight: 700;
-    background: @mars-list-active;
-  }
-  .ant-select-item {
-    transition: none;
-    color: @mars-base-color !important;
-    text-align: center;
-  }
-}
-</style>
+<style lang="less"></style>

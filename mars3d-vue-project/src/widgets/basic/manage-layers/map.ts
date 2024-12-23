@@ -1,7 +1,7 @@
 /**
  * 图层管理
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-01-10
+ * @author 火星渣渣灰 2022-01-10
  */
 import * as mars3d from "mars3d"
 const Cesium = mars3d.Cesium
@@ -16,6 +16,7 @@ let map: mars3d.Map // 地图对象
  */
 export function onMounted(mapInstance: mars3d.Map) {
   map = mapInstance // 记录首次创建的map
+
 }
 
 /**
@@ -26,16 +27,33 @@ export function onUnmounted() {
   map = null
 }
 
-export function addLayer(layer: mars3d.layer.BaseLayer) {
-  map.addLayer(layer)
+
+export function getLayrsTree(params) {
+  return map.getLayrsTree(params)
 }
 
-export function getLayers() {
-  return map.getLayers({
-    basemaps: true, // 是否取config.json中的basempas
-    layers: true // 是否取config.json中的layers
-  })
+export function getLayerById(id) {
+  return map.getLayerById(id)
 }
+
+export function getLayerByAttr(attrValue: string | number, attrName?: string) {
+  return map.getLayerByAttr(attrValue, attrName)
+}
+
+// 更新图层勾选状态
+export function updateLayerShow(layer, show) {
+  if (show) {
+    if (!layer.isAdded) {
+      map.addLayer(layer)
+    }
+    layer.show = true
+
+    layer.flyTo() // 如果不想勾选定位，注释该行
+  } else {
+    layer.show = false
+  }
+}
+
 
 // **********************************  图层的结构树控件  ****************************** //
 export function flytoModelNode(nodeid: number, nodesphere: any) {
@@ -85,3 +103,20 @@ export function checkModelStyle(layerid: number, arrIds: any) {
     }
   })
 }
+
+export function exchangeLayer(thisLayerId, moveLayerId) {
+  const thisLayer = map.getLayerById(thisLayerId)
+  const moveLayer = map.getLayerById(moveLayerId)
+
+  if (thisLayer == null || moveLayer == null) {
+    return
+
+  }
+  const or = thisLayer.zIndex
+  thisLayer.zIndex = moveLayer.zIndex // 向上移动
+  moveLayer.zIndex = or // 向下移动
+  console.log(`${thisLayer.name}:${thisLayer.zIndex},  ${moveLayer.name}:${moveLayer.zIndex}`)
+}
+
+
+

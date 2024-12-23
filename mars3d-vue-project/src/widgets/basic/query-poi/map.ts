@@ -1,69 +1,85 @@
 /**
  * 高德POI 查询栏 （左上角）
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-01-10
+ * @author 火星渣渣灰 2022-01-10
  */
 import * as mars3d from "mars3d"
+import QueryPopup from "./query-popup.vue"
+import { initVue3Popup } from "@mars/utils/file-util"
+
 const Cesium = mars3d.Cesium
 
 let map: mars3d.Map // 地图对象
-let graphicLayer: mars3d.layer.GraphicLayer
-let queryPoi: mars3d.query.GaodePOI // GaodePOI查询
+export let graphicLayer: mars3d.layer.GraphicLayer
+let queryPoi: mars3d.query.TdtPOI // TdtPOI查询
 let address: any = null
+let queryAddressDOM
+
+const imgArr = []
 
 // 初始化当前业务
-export function onMounted(mapInstance: mars3d.Map): void {
+export async function onMounted(mapInstance: mars3d.Map): Promise<void> {
+  for (let i = 0; i < 6; i++) {
+    const img = await getCanvas(i + 1)
+    imgArr.push(img)
+  }
+
   map = mapInstance // 记录map
 
-  queryPoi = new mars3d.query.GaodePOI({
+  // 下侧状态栏提示
+  const locationBar = map.control.locationBar?.container
+  if (locationBar) {
+    queryAddressDOM = mars3d.DomUtil.create(
+      "div",
+      "mars3d-locationbar-content mars3d-locationbar-autohide",
+      map.control.locationBar.container
+    )
+    queryAddressDOM.style.marginRight = "50px"
+  }
+
+  queryPoi = new mars3d.query.TdtPOI({
     // city: '合肥市',
   })
 
   graphicLayer = new mars3d.layer.GraphicLayer({
-    name: "PIO查询",
+    name: "POI查询",
     pid: 99 // 图层管理 中使用，父节点id
   })
 
-  graphicLayer.bindPopup(function (event: any) {
-    const item = event.graphic?.attr
-    if (!item) {
+  graphicLayer.bindPopup((event) => {
+    const attr = event.graphic.attr || {}
+    if (!attr) {
       return
     }
-    let inHtml = `<div class="mars3d-template-titile"><a href="https://www.amap.com/detail/${item.id}"  target="_black" style="color: #ffffff; ">${item.name}</a></div><div class="mars3d-template-content" >`
 
-    if (item.tel !== "") {
-      inHtml += "<div><label>电话:</label>" + item.tel + "</div>"
-    }
-
-    if (item.address) {
-      inHtml += "<div><label>地址:</label>" + item.address + "</div>"
-    }
-    if (item.type) {
-      const fl = item.type
-      if (fl !== "") {
-        inHtml += "<div><label>类别:</label>" + fl + "</div>"
-      }
-    }
-    inHtml += "</div>"
-    return inHtml
-  })
+    const dom = initVue3Popup(QueryPopup, attr)
+    return dom
+  }, { offsetY: -20 })
 
   map.addLayer(graphicLayer)
 
   map.on(mars3d.EventType.cameraChanged, cameraChanged)
 }
 
-function cameraChanged() {
-  queryPoi.getAddress({
-    location: map.getCenter(),
-    success: (result: any) => {
-      address = result
-    }
+async function cameraChanged() {
+  const radius = map.camera.positionCartographic.height // 单位：米
+  if (radius > 100000) {
+    address = null
+    if (queryAddressDOM) { queryAddressDOM.innerHTML = "" }
+    return
+  }
+
+  address = await queryPoi.getAddress({
+    location: map.getCenter()
   })
+  if (address && queryAddressDOM) { queryAddressDOM.innerHTML = "地址：" + address.address }
 }
 
 // 释放当前业务
 export function onUnmounted(): void {
+  if (!map) {
+    return
+  }
   map.removeLayer(graphicLayer)
   map.off(mars3d.EventType.cameraChanged, cameraChanged)
   graphicLayer.remove()
@@ -77,10 +93,7 @@ export function queryData(val: string) {
   return queryPoi.autoTip({
     text: val,
     city: address?.city,
-    location: map.getCenter(),
-    success: (result: any) => {
-      return result
-    }
+    location: map.getCenter()
   })
 }
 
@@ -89,10 +102,7 @@ export function querySiteList(text: string, page: number) {
     text,
     count: 6,
     page: page - 1,
-    city: address?.city,
-    success: (result: any) => {
-      return result
-    }
+    city: address?.city
   })
 }
 
@@ -104,7 +114,7 @@ export function querySiteList(text: string, page: number) {
 export function showPOIArr(arr: any): void {
   clearLayers()
 
-  arr.forEach((item: any) => {
+  arr.forEach(async (item: any, index: number) => {
     const jd = Number(item.lng)
     const wd = Number(item.lat)
     if (isNaN(jd) || isNaN(wd)) {
@@ -115,11 +125,11 @@ export function showPOIArr(arr: any): void {
     item.lat = wd
 
     // 添加实体
-    const graphic = new mars3d.graphic.PointEntity({
+    const graphic = new mars3d.graphic.BillboardEntity({
       position: Cesium.Cartesian3.fromDegrees(jd, wd),
       style: {
         pixelSize: 10,
-        color: "#3388ff",
+        color: "#ffffff",
         outline: true,
         outlineColor: "#ffffff",
         outlineWidth: 2,
@@ -129,7 +139,7 @@ export function showPOIArr(arr: any): void {
         label: {
           text: item.name,
           font_size: 20,
-          color: "rgb(240,255,255)",
+          color: "#ffffff",
           outline: true,
           outlineWidth: 2,
           outlineColor: Cesium.Color.BLACK,
@@ -139,7 +149,8 @@ export function showPOIArr(arr: any): void {
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 200000),
           clampToGround: true, // 贴地
           visibleDepth: false // 是否被遮挡
-        }
+        },
+        image: imgArr[index]
       },
       attr: item
     })
@@ -149,8 +160,32 @@ export function showPOIArr(arr: any): void {
   })
 
   if (arr.length > 1) {
-    graphicLayer.flyTo()
+    graphicLayer.flyTo({ radius: 5000, pitch: -90 })
   }
+}
+
+let indexMark
+
+// 获取Canvas对象
+async function getCanvas(text) {
+  if (!indexMark) {
+    indexMark = await Cesium.Resource.fetchImage({ url: "//data.mars3d.cn/img/marker/bg/poi-num.png" })
+  }
+
+  const canvas = document.createElement("canvas")
+  canvas.width = 19
+  canvas.height = 25
+  const ctx = canvas.getContext("2d")
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.drawImage(indexMark, 0, 0) // 绘制图片
+
+  // 绘制文字
+  ctx.fillStyle = "#ffffff"
+  ctx.font = "22px 楷体"
+  ctx.textBaseline = "middle"
+  ctx.fillText(text, 4, 10)
+
+  return canvas.toDataURL("image/png")
 }
 
 /**

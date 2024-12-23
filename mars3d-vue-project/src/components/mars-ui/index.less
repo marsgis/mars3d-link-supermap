@@ -2,7 +2,7 @@
  * 所有页面全局公共CSS
  *
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-01-01
+ * @author 火星渣渣灰 2022-01-01
  */
 
 /* 清除内外边距 */
@@ -37,7 +37,6 @@ td {
   /* table elements 表格元素 */
   margin: 0;
   padding: 0;
-  color: #fff;
   -moz-user-select: none; /*火狐*/
   -webkit-user-select: none; /*webkit浏览器*/
   -ms-user-select: none; /*IE10*/
@@ -53,11 +52,14 @@ td {
 
 body,
 html {
-  background-color: @mars-bg-base !important;
-  color: @mars-base-color !important;
+  // 会影响整体字体颜色，挪到 .centerDiv-container 样式中
+  // background-color: var(--mars-base-bg) !important;
+  // color: var(--mars-text-color) !important;
   font-size: 14px;
-  min-width: 900px;
+  // min-width: 900px;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 
   * {
     scrollbar-base-color: #f4f7fc;
@@ -69,29 +71,13 @@ html {
     scrollbar-highlight-color: #f4f7fc;
     scrollbar-darkshadow-color: #f4f7fc;
     font-size: 14px;
-    scrollbar-width: thin;
+    box-sizing: border-box; // 使padding 不影响盒子的宽高；
   }
-}
-
-.base-overlay {
-  .ant-dropdown-menu {
-    background-color: rgba(63, 72, 84, 0.7) !important;
-    .mars-icon {
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-  }
-}
-
-.icon-vertical-a {
-  width: 20px;
-  height: 20px;
-  vertical-align: -0.3em !important;
 }
 
 .mars-primary-table {
   width: 100%;
-  border-color: @mars-base-border-color;
+  border-color: var(--mars-control-border);
 
   tr td:nth-of-type(1) {
     width: 100px;
@@ -99,5 +85,6 @@ html {
 
   td {
     padding: 5px;
+    color: var(--mars-control-text);
   }
 }

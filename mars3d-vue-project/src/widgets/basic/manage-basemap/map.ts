@@ -1,10 +1,11 @@
 /**
  * 底图控制
  * @copyright 火星科技 mars3d.cn
- * @author 木遥 2022-01-10
+ * @author 火星渣渣灰 2022-01-10
  */
 import * as mars3d from "mars3d"
 
+const Cesium = mars3d.Cesium
 let map: mars3d.Map // 地图对象
 
 // 初始化当前业务

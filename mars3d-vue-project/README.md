@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">基于Vue3.x技术栈的 Mars3D🌎基础项目系统</p>
+
 <p align="center">
   <a target="_black" href="https://www.npmjs.com/package/mars3d">
     <img alt="Npm version" src="https://img.shields.io/npm/v/mars3d.svg?style=flat&logo=npm&label=版本号" />
@@ -24,15 +25,15 @@ Mars3D 基础项目 是基于[Mars3D 平台](http://mars3d.cn)做的一个应用
  
  
 ## 项目特性 
-- **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发
+- **最新技术栈**：使用 Vue3/Vite 等前端前沿技术开发
 - **TypeScript**: 应用程序级 JavaScript 的语言
 - **适用于地图场景的widget模块化**: 继续沿用了原生 JS 版本 widget 架构的一些思想，使用 vue 方式实现了各 widget 功能
  
 
+ > 如果您不熟悉Vue，也可以阅读：[基础项目原生JS版](http://mars3d.cn/dev/guide/project/jcxm-es5.html)  、[基础项目React版](http://mars3d.cn/dev/guide/project/jcxm-react.html)
+
  
-## 文档
-- [官网教程地址](http://mars3d.cn/dev/guide/project/vue.html) 
-  
+
 
 ## 视频讲解
 
@@ -87,6 +88,7 @@ git clone git@gitee.com:marsgis/mars3d-vue-project.git
 ```
 
 ### 运行命令
+请将机器Node版本升级到v16及以上版本
 
 #### 首次运行前安装依赖
 
@@ -107,13 +109,12 @@ npm run serve
 
 ```
 npm run build
-
 npm run serve:dist  //测试dist运行状态
 ```
 
 ## 运行效果
 
-访问[基础项目 Vue 版](http://mars3d.cn/project/jcxm-vue/index.html) 在线体验效果和功能
+访问[基础项目 Vue 版](http://mars3d.cn/project/vue/index.html) 在线体验效果和功能
  
  ![image](http://marsgis.cn/img/project/mars3d-vue-project-jcxm/1.jpg)
 
@@ -121,16 +122,11 @@ npm run serve:dist  //测试dist运行状态
 
 ## 浏览器支持
 
-本地开发推荐使用`Chrome 80+` 浏览器
+推荐使用`Chrome 90+` 浏览器， 建议升级浏览器到最新版本访问。
 
-支持现代浏览器, 不支持 IE
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt=" Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
+| IE | Edge | Firefox | Chrome | Safari |
 | :-: | :-: | :-: | :-: | :-: |
 | not support | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
-
- 
-
 
 ## 如何反馈问题？
 
@@ -153,7 +149,7 @@ npm run serve:dist  //测试dist运行状态
 - [Es6+](http://es6.ruanyifeng.com/) - 熟悉 es6 基本语法
 - [Ant Design Vue](https://next.antdv.com/components/overview-cn/)：UI 控件库 
 - [ESlint](https://eslint.bootcss.com/)：代码检查工具
-- [IconPark](https://iconpark.oceanengine.com/official)：UI 图标库
+- [IconPark](https://iconpark.oceanengine.com/official)：UI 图标库 
 
 > 需要有一定的知识储备，包括 vue3.0 中的 composition Api 模式等，建议浏览下[Web 前端知识视频讲解](https://www.bilibili.com/video/BV1xr4y1U73r/)
 
@@ -184,9 +180,9 @@ mars3d-vue-project
 
 #### 功能主目录
 
-项目所有功能主要在 `src/widgets/*/*`目录下，每一个功能对应了叶子目录下的一个`index.vue`和 `map.ts` 文件，复杂的 widget 目录下也会有相关子组建 `xxx.vue`。
+项目所有功能主要在 `src/widgets/*/*`目录下，每一个功能对应了叶子目录下的一个`index.vue`和 `map.ts` 文件，复杂的 widget 目录下也会有相关子组件 `xxx.vue`。
 
-vue 下的 widget 设计，沿用了我们 [原生 JS 版基础项目](http://mars3d.cn/dev/guide/project/widget.html)的设计理念：
+vue 下的 widget 设计，沿用了我们 [原生 JS 版基础项目](http://mars3d.cn/dev/guide/project/jcxm-es5.html)的设计理念：
 
 - 所有的 widget 都是按需加载
 - 只需要通过简单的配置，即可控制不同业务面板间的互斥关系
@@ -296,8 +292,7 @@ onUnmounted(() => {
 
 mars-dialog 是弹窗组件，我们 widget 内可以按需选择下面 2 个使用：
 
-- mars-dialog 弹框 组件: `src/components/mars-work/mars-dialog.vue`
-- mars-pannel 普通面板组件: `src/components/mars-work/mars-pannel.vue`
+- mars-dialog 弹框 组件: `src/components/mars-work/mars-dialog.vue` 
 
 mars-dialog 支持的配置参数包括：
 
@@ -544,17 +539,17 @@ activate 和 disable 函数支持 string（直接传递 name） 和 Widget（传
 
 ```vue
 <template>
-  <mars-pannel>
+  <mars-dialog :draggable="false">
     <a-space>
       <mars-button @click="show('sample-pannel')">面板示例</mars-button>
       <mars-button @click="show('sample-dialog')">弹窗示例</mars-button>
       <mars-button @click="show('ui')">UI面板</mars-button>
     </a-space>
-  </mars-pannel>
+  </mars-dialog>
 </template>
 
 <script setup lang="ts">
-import MarsPannel from "@mars/components/mars-work/mars-pannel.vue"
+import MarsDialog from "@mars/components/mars-work/mars-dialog.vue"
 import { useWidget } from "@mars/common/store/widget"
 
 const { activate } = useWidget()
@@ -611,8 +606,8 @@ const show = (name: string) => {
 ```json
 // dependencies中添加
 {
-  "mars3d": "~3.5.0",
-  "mars3d-cesium": "~1.112.0",
+  "mars3d": "~3.8.0",
+  "mars3d-cesium": "~1.124.0",
   "@turf/turf": "^7.1.0",
   "kml-geojson": "^1.2.0",
   "vue": "^3.2.26",
@@ -620,7 +615,8 @@ const show = (name: string) => {
   "vue-color-kit": "^1.0.5",
   "axios": "^0.23.0",
   "core-js": "^3.6.5",
-  "ant-design-vue": "3.0.0-alpha.13",
+  "ant-design-vue": "^3.2.5",
+  "@icon-park/vue-next": "^1.3.5",
   "nprogress": "^0.2.0",
   "echarts": "^5.2.2",
   "localforage": "^1.10.0"
@@ -685,29 +681,17 @@ app.use(injectState(widgetStore), key)
 ## 开发中常见问题
 
 
-### 1. 如果切换mars3d到授权版
+### 1. 如何切换mars3d到授权版
 
- 参考 [获取Mars3D](http://mars3d.cn/dev/guide/basics/download.html)中“从 Mars3D官网 下载获取”章节介绍。
+ 参考 [获取Mars3D](http://mars3d.cn/dev/guide/start/download.html)中“从 Mars3D官网 下载获取”章节介绍。
 
- 流程大概是：
-- 将npm安装后的`node_modules/mars3d/`下的所有文件拷贝一份放在`src\common\mars3d-sdk\`目录。
-- 将离线包内文件 覆盖至`src\common\mars3d-sdk\dist\`目录下。
-- 修改webpack或vue.config等相关配置文件中，增加下面配置
-```js 
-//已忽略其他配置
-chainWebpack: (config) => {
-    config.resolve.alias.set("mars3d", resolve("src/common/mars3d-sdk"))
-},
-```
-- 修改`package.json`删除mars3d包，增加@turf/turf mars3d-cesium包
-```json
-//已忽略其他配置
-"dependencies": {
-  "@turf/turf": "^7.1.0",
-  "mars3d-cesium": "~1.112.0",
-},
-```
- ![image](http://mars3d.cn/dev/img/guide/basics-download-import.jpg) 
+流程大概是：
+- 配置后，无需改动源码，在项目代码中使用时与使用npm包是一样的方式，如 `import * as mars3d from "mars3d";`
+- 将 npm 安装后的`node_modules/mars3d/`下的所有文件拷贝一份放在`packages/mars3d/`目录。
+- 将`mars3d-sdk.rar`离线包内文件 覆盖至`packages/mars3d/dist/`目录下。
+- 修改`package.json`中mars3d包配置为：` "mars3d": "file:packages/mars3d",`
+ 
+![image](http://mars3d.cn/dev/img/guide/basics-download-import.jpg)
 
 
 ### 2. 局域网离线使用时注意事项

@@ -26,7 +26,7 @@ export function onUnmounted(): void {
 
 // 获取默认point点
 export function defultPoint() {
-  const point = map.getCenter()
+  const point: mars3d.LngLatPoint = map.getCenter()
   point.format()
   return {
     lng: point.lng,
@@ -83,7 +83,7 @@ export function updateMarker(hasCenter: boolean, jd: number, wd: number, alt: nu
 
   if (pointEntity == null) {
     pointEntity = new mars3d.graphic.PointEntity({
-      position: position,
+      position,
       style: {
         color: "#3388ff",
         pixelSize: 10,
