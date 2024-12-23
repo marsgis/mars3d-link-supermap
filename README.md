@@ -31,7 +31,7 @@
 ## mars3d与超图的融合有2个方式
 
 ### 方式1：原生Cesium库+s3m插件
- 可以访问[S3M图层示例](https://mars3d.cn/editor-vue.html?id=layer-other/s3m/basis)体验，
+ 可以访问[S3M图层示例](http://mars3d.cn/editor-vue.html?id=layer-other/s3m/basis)体验，
  
  mars3d(含Cesium) + s3m独立插件 + mars3d-supermap，需要引入的资源为：
 ```js
