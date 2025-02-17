@@ -11,9 +11,9 @@
   },
   "type": "module",
   "dependencies": {
-    "mars3d": "~3.8.10",
-    "mars3d-supermap": "~3.8.10",
-    "@turf/turf": "^6.5.0",
+    "mars3d": "~3.9.0",
+    "mars3d-supermap": "~3.9.0",
+    "@turf/turf": "^7.2.0",
     "mars3d-cesium": "~1.126.0",
     "vue": "^3.4.19"
   },
