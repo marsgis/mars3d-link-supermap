@@ -608,7 +608,7 @@ const show = (name: string) => {
 {
   "mars3d": "~3.9.0",
   "mars3d-cesium": "~1.126.0",
-  "@turf/turf": "^7.1.0",
+  "@turf/turf": "^7.2.0",
   "kml-geojson": "^1.2.0",
   "vue": "^3.2.26",
   "vuex": "^4.0.2",
