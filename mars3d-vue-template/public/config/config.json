@@ -11,7 +11,7 @@
     "showSkyAtmosphere": true,
     "fog": true,
     "fxaa": true,
-    "requestRenderMode": true,
+    "requestRenderMode": false,
     "contextOptions": {
       "requestWebgl1": false,
       "webgl": {
