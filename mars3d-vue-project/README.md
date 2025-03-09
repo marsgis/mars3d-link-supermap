@@ -607,7 +607,7 @@ const show = (name: string) => {
 // dependencies中添加
 {
   "mars3d": "~3.9.0",
-  "mars3d-cesium": "~1.126.0",
+  "mars3d-cesium": "~1.127.0",
   "@turf/turf": "^7.2.0",
   "kml-geojson": "^1.2.0",
   "vue": "^3.2.26",
