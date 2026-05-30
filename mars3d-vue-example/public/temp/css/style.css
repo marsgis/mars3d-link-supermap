@@ -1,0 +1,171 @@
+/*
+* 地图页面css
+*/
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, Tahoma, Arial, "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  background: #000;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+  text-decoration: none;
+  margin-top: 1px;
+  margin-right: 2px;
+}
+
+a:hover,
+a:focus {
+  color: #89bceb;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline: none;
+  outline-offset: -2px;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: none;
+}
+
+#centerDiv3D {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  border: none;
+  overflow: hidden;
+  position: relative;
+}
+
+/*用于测试非全屏地图*/
+/* #centerDiv3D {
+  height: calc(100% - 200px);
+  width: calc(100% - 400px);
+  left: 200px;
+  right: 200px;
+  top: 100px;
+  bottom: 100px;
+} */
+
+.content {
+  overflow: auto;
+  position: relative;
+  background: transparent;
+  height: 400px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*滚动条*/
+body,
+html {
+  scrollbar-base-color: #f4f7fc;
+  scrollbar-track-color: #f4f7fc;
+  scrollbar-face-color: #797979;
+  scrollbar-arrow-color: #f4f7fc;
+  scrollbar-shadow-color: #f4f7fc;
+  scrollbar-3dlight-color: #f4f7fc;
+  scrollbar-highlight-color: #f4f7fc;
+  scrollbar-darkshadow-color: #f4f7fc;
+}
+
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border: 0;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  padding-top: 100px;
+  -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.1), inset -1px -1px 0 rgba(0, 0, 0, 0.07);
+  background-color: #797979;
+  min-height: 28px;
+  border-radius: 4px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+  -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/**给控件工具按钮栏加边框样式*/
+.cesium-button,
+.cesium-geocoder-searchButton,
+.cesium-viewer-geocoderContainer form .cesium-geocoder-input ,
+.mars3d-contextmenu-ul,
+.mars3d-contextmenu-line {
+  border-image: url("https://data.mars3d.cn/img/control/border.svg") 1 round stretch;
+}
+
+/* 自定义Popup样式*/
+.mars3d-popup-btn-custom {
+  padding: 3px 10px;
+  border: 1px solid #209ffd;
+  background: #209ffd1c;
+  color: #ffffff;
+}

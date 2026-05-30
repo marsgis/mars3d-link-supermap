@@ -1,0 +1,41 @@
+{
+	"name": "mars3d",
+	"version": "3.11.3",
+	"description": "Mars3D三维可视化平台",
+	"main": "./mars3d.js",
+	"types": "./mars3d.d.ts",
+	"peerDependencies": {
+		"@turf/turf": "^7.2.0",
+		"mars3d-cesium": "^1.131.0"
+	},
+	"devDependencies": {},
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/marsgis/mars3d.git"
+	},
+	"bugs": {
+		"url": "https://github.com/marsgis/mars3d/issues",
+		"email": "wh@marsgis.cn"
+	},
+	"keywords": [
+		"marsgis",
+		"mars3d",
+		"cesium",
+		"webgl",
+		"gis",
+		"3dgis",
+		"webgis"
+	],
+	"author": "mars3d团队",
+	"license": "Apache-2.0",
+	"homepage": "http://mars3d.cn",
+	"build": {
+		"plugin": false,
+		"globals": {
+			"@turf/turf": "turf",
+			"mars3d-cesium": "Cesium"
+		},
+		"minify": "obfuscator"
+	}
+}

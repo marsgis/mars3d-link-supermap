@@ -1,0 +1,49 @@
+[
+  {
+    "name": "超图服务支持",
+    "icon": "fa-photo",
+    "dev": "basis/tile/",
+    "children": [
+      {
+        "name": "瓦片服务相关",
+        "details": "支持直接加载常用的互联网第3方在线地图服务,地图服务及版权归第3方所有，mars3d不提供地图服务。",
+        "children": [
+          {
+            "name": "超图瓦片服务",
+            "thumbnail": "layert-online-supermap.jpg",
+            "main": "layer-tile/online/supermap",
+            "api": "XyzLayer.html",
+            "hasPannel": true
+          }
+        ]
+      },
+      {
+        "name": "矢量服务相关",
+        "children": [
+          {
+            "name": "超图S3M三维模型",
+            "thumbnail": "layero-s3m-basis.jpg",
+            "main": "layer-other/s3m/basis",
+            "libs": [
+              "mars3d",
+              "cesium-comp",
+              "mars3d-supermap"
+            ],
+            "hasPannel": true
+          },
+          {
+            "name": "iServer矢量服务查询",
+            "thumbnail": "query-iserver.jpg",
+            "main": "query/iserver",
+            "api": "QueryIServer.html",
+            "hasPannel": true,
+            "libs": [
+              "iserverGeojson",
+              "mars3d"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,22 @@
+/**
+ * 组件中开启 map.ts 生命周期
+ * @copyright mars3d.cn
+ * @author 火星渣渣灰 2022-02-19
+ */
+import { inject, onBeforeMount, onBeforeUnmount } from "vue"
+
+export default function useLifecycle(mapWork: any): void {
+  const getMapInstance = inject<any>("getMapInstance")
+  onBeforeMount(() => {
+    if (mapWork.onMounted) {
+      const map = getMapInstance()
+      // @ts-ignore
+      mapWork.onMounted(map, window.mars3d)
+    }
+  })
+  onBeforeUnmount(() => {
+    if (mapWork.onUnmounted) {
+      mapWork.onUnmounted()
+    }
+  })
+}

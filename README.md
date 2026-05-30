@@ -54,6 +54,7 @@
   下面2个项目模版中cesium及SuperMap3D.js采用静态引入的，mars3d采用npm安装import导入的。
 | 目录  |   说明  | 
 |  ----  | ----  |
+|[mars3d-vue-example](./mars3d-vue-example/README.md)	|  功能示例Vue版 | 
 |[mars3d-vue-template](./mars3d-vue-template/README.md)	|  最简项目Vue版 | 
 |[mars3d-vue-project](./mars3d-vue-project/README.md)	|  基础项目Vue版 |  
 
