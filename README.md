@@ -90,9 +90,6 @@
 
   
 
-## mars3d-supermap插件源码
-可以访问：[https://github.com/marsgis/mars3d-plugin](https://github.com/marsgis/mars3d-plugin/)
-
 
 
 ## Mars3D 是什么 
