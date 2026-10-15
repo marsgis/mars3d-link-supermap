@@ -99,6 +99,15 @@ const mars3d = instance?.appContext.config.globalProperties.mars3d;
 const Cesium = instance?.appContext.config.globalProperties.Cesium;
 ```
 
+## **⚠️ 授权与合规说明**
+> 本仓库涉及的 `Cesium-supermap/Cesium.js`、`SuperMap3D.js` 等超图版 Cesium 库及 S3M 相关插件（[SuperMap iClient3D for WebGL](https://github.com/SuperMap/iClient3D-for-WebGL)）均为**北京超图软件股份有限公司（SuperMap Software Co., Ltd.）的商业产品**，其版权归超图所有，**并非开源软件，也不属于 Mars3D 团队**。
+> - 本仓库仅以“使用指引”方式引用上述资源，**未内置、不分发**任何超图库文件；使用者需自行从超图官方渠道获取。
+> - 将超图相关产品用于**生产环境或商业用途**前，请务必先取得超图公司的正式授权许可（参考 [超图官网](https://www.supermap.com/) 及产品许可协议），否则存在侵权风险。
+> - Mars3D 部分按其自身授权条款执行，超图产品的授权与 Mars3D 授权相互独立、互不包含。
+ 
+
+
+
 ## Mars3D 是什么
 
 > `Mars3D平台` 是一款基于 WebGL 技术实现的三维客户端开发平台，基于[Cesium](https://cesium.com/cesiumjs/)优化提升与 B/S 架构设计，支持多行业扩展的轻量级高效能 GIS 开发平台，能够免安装、无插件地在浏览器中高效运行，并可快速接入与使用多种 GIS 数据和三维模型，呈现三维空间的可视化，完成平台在不同行业的灵活应用。

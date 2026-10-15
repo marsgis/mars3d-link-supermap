@@ -11,7 +11,7 @@ const Cesium = mars3d.Cesium
 
 let map: mars3d.Map // 地图对象
 export let graphicLayer: mars3d.layer.GraphicLayer
-let queryPoi: mars3d.query.TdtPOI // TdtPOI查询
+let queryPoi: mars3d.query.QueryPOI // TdtPOI查询
 let address: any = null
 let queryAddressDOM
 
@@ -19,7 +19,7 @@ const imgArr = []
 
 // 初始化当前业务
 export async function onMounted(mapInstance: mars3d.Map): Promise<void> {
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 10; i++) {
     const img = await getCanvas(i + 1)
     imgArr.push(img)
   }
@@ -37,7 +37,7 @@ export async function onMounted(mapInstance: mars3d.Map): Promise<void> {
     queryAddressDOM.style.marginRight = "50px"
   }
 
-  queryPoi = new mars3d.query.TdtPOI({
+  queryPoi = new mars3d.query.QueryPOI({
     // city: '合肥市',
   })
 
@@ -58,10 +58,10 @@ export async function onMounted(mapInstance: mars3d.Map): Promise<void> {
 
   map.addLayer(graphicLayer)
 
-  map.on(mars3d.EventType.cameraChanged, cameraChanged)
+  map.on(mars3d.EventType.cameraMoveEnd, cameraMoveEnd)
 }
 
-async function cameraChanged() {
+async function cameraMoveEnd() {
   const radius = map.camera.positionCartographic.height // 单位：米
   if (radius > 100000) {
     address = null
@@ -80,11 +80,12 @@ export function onUnmounted(): void {
   if (!map) {
     return
   }
-  map.removeLayer(graphicLayer)
-  map.off(mars3d.EventType.cameraChanged, cameraChanged)
   graphicLayer.remove()
   queryPoi = null
   address = null
+
+  map.removeLayer(graphicLayer)
+  map.off(mars3d.EventType.cameraMoveEnd, cameraMoveEnd)
   map = null
 }
 
@@ -92,8 +93,8 @@ export function onUnmounted(): void {
 export function queryData(val: string) {
   return queryPoi.autoTip({
     text: val,
-    city: address?.city,
-    location: map.getCenter()
+    extent: map.getExtent(),
+    city: address?.city
   })
 }
 
@@ -102,6 +103,7 @@ export function querySiteList(text: string, page: number) {
     text,
     count: 6,
     page: page - 1,
+    extent: map.getExtent(),
     city: address?.city
   })
 }
@@ -128,6 +130,7 @@ export function showPOIArr(arr: any): void {
     const graphic = new mars3d.graphic.BillboardEntity({
       position: Cesium.Cartesian3.fromDegrees(jd, wd),
       style: {
+        image: imgArr[index],
         pixelSize: 10,
         color: "#ffffff",
         outline: true,
@@ -135,22 +138,7 @@ export function showPOIArr(arr: any): void {
         outlineWidth: 2,
         scaleByDistance: new Cesium.NearFarScalar(1000, 1, 1000000, 0.1),
         clampToGround: true, // 贴地
-        visibleDepth: false, // 是否被遮挡
-        label: {
-          text: item.name,
-          font_size: 20,
-          color: "#ffffff",
-          outline: true,
-          outlineWidth: 2,
-          outlineColor: Cesium.Color.BLACK,
-          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          pixelOffsetY: -10, // 偏移量
-          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0.0, 200000),
-          clampToGround: true, // 贴地
-          visibleDepth: false // 是否被遮挡
-        },
-        image: imgArr[index]
+        visibleDepth: false // 是否被遮挡
       },
       attr: item
     })
@@ -169,7 +157,7 @@ let indexMark
 // 获取Canvas对象
 async function getCanvas(text) {
   if (!indexMark) {
-    indexMark = await Cesium.Resource.fetchImage({ url: "//data.mars3d.cn/img/marker/bg/poi-num.png" })
+    indexMark = await Cesium.Resource.fetchImage({ url: "./img/marker/bg/poi-num.png" })
   }
 
   const canvas = document.createElement("canvas")

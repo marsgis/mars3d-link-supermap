@@ -25,8 +25,7 @@
 
 
   Mars3D支持结合`Cesium相关的各类平台`来兼容使用，方便结合不同平台的优点来达到完成各种项目需求。本仓库是Mars3D平台，在[超图版Cesium库](http://support.supermap.com.cn:8090/webgl/index.html)技术栈下的示例和多个应用项目模版。
- 
- 
+
 
 ## mars3d与超图的融合有2个方式
 
@@ -88,7 +87,13 @@
 - 超图Cesium修改了地球的半径参数(Cesium.Ellipsoid.WGS84值不同，原生Cesium是椭球，超图是圆球)，造成3dtiles加载位置偏差很大。 
 
 
-  
+   
+## **⚠️ 授权与合规说明**
+> 本仓库涉及的 `Cesium-supermap/Cesium.js`、`SuperMap3D.js` 等超图版 Cesium 库及 S3M 相关插件（[SuperMap iClient3D for WebGL](https://github.com/SuperMap/iClient3D-for-WebGL)）均为**北京超图软件股份有限公司（SuperMap Software Co., Ltd.）的商业产品**，其版权归超图所有，**并非开源软件，也不属于 Mars3D 团队**。
+> - 本仓库仅以“使用指引”方式引用上述资源，**未内置、不分发**任何超图库文件；使用者需自行从超图官方渠道获取。
+> - 将超图相关产品用于**生产环境或商业用途**前，请务必先取得超图公司的正式授权许可（参考 [超图官网](https://www.supermap.com/) 及产品许可协议），否则存在侵权风险。
+> - Mars3D 部分按其自身授权条款执行，超图产品的授权与 Mars3D 授权相互独立、互不包含。
+ 
 
 
 

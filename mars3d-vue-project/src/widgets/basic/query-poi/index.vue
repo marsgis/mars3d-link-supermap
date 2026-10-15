@@ -3,11 +3,18 @@
     <div class="query-poi" @mousedown="clickVoid">
       <div class="mars-base-border_gradient">
         <div class="query-poi__search">
-          <mars-input placeholder="搜索 地点" v-model:value="searchTxt" class="input" data-event="prevent"
-                      @blur="startCloseSearch" @focus="showHistoryList" allowClear
-                      @input="handleSearch(searchTxt)"></mars-input>
+          <mars-input
+            placeholder="搜索 地点"
+            v-model:value="searchTxt"
+            class="input"
+            data-event="prevent"
+            @blur="startCloseSearch"
+            @focus="showHistoryList"
+            allowClear
+            @input="handleSearch(searchTxt)"
+          ></mars-input>
           <mars-button class="button">
-            <img src="/img/icon/search.png" alt="" />
+            <img src="./img/search.png" alt="" @click="selectPoint(searchTxt)"/>
           </mars-button>
         </div>
       </div>
@@ -41,8 +48,7 @@
           </ul>
           <div class="query-site__page">
             <p class="query-site-allcount">共{{ allCount }}条结果</p>
-            <a-pagination @change="(page) => querySiteList(searchTxt, page)" size="small" :total="allCount" pageSize="6"
-                          :simple="true" />
+            <a-pagination @change="(page) => querySiteList(searchTxt, page)" size="small" :total="allCount" pageSize="6" :simple="true" />
           </div>
         </template>
         <a-empty class="f-push-10-t" v-else />
@@ -145,7 +151,6 @@ const selectPoint = async (value: any) => {
 
   $showLoading()
   addHistory(value)
-  console.log("开始搜索", value)
 
   siteSource.value = []
   allCount.value = 0
