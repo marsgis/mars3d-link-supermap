@@ -1,12 +1,12 @@
 {
 	"name": "mars3d",
-	"version": "3.11.3",
+	"version": "3.12.0",
 	"description": "Mars3D三维可视化平台",
 	"main": "./mars3d.js",
 	"types": "./mars3d.d.ts",
 	"peerDependencies": {
 		"@turf/turf": "^7.2.0",
-		"mars3d-cesium": "^1.131.0"
+		"mars3d-cesium": "^1.146.0"
 	},
 	"devDependencies": {},
 	"scripts": {},
@@ -37,5 +37,6 @@
 			"mars3d-cesium": "Cesium"
 		},
 		"minify": "obfuscator"
-	}
+	},
+	"_fp": "HX"
 }

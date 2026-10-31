@@ -1,4 +1,5 @@
- 
+# Mars3D 三维地球客户端开发平台
+
 <p align="center">
 <img src="http://mars3d.cn/logo.png" width="200px" />
 </p>
@@ -20,23 +21,26 @@
   </a>
 </p>
 
+## 简要介绍
 
+ `Mars3D平台` 是一款基于 WebGL 技术实现的三维客户端开发平台，基于[Cesium](https://cesium.com/cesiumjs/)优化提升与B/S架构设计，支持多行业扩展的轻量级高效能GIS开发平台，能够免安装、无插件地在浏览器中高效运行，并可快速接入与使用多种GIS数据和三维模型，呈现三维空间的可视化，完成平台在不同行业的灵活应用。
 
 当前仓库包含SDK更新日志、和其他仓库导航。
- 
-Github：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
 
-国内Gitee：[https://gitee.com/marsgis/mars3d](https://gitee.com/marsgis/mars3d)  
- 
-更新日志: [CHANGE.md](./CHANGE.md)
+## 相关地址
+- 官网地址：[http://mars3d.cn](http://mars3d.cn)
+- github地址：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
+- 国内Gitee：[https://gitee.com/marsgis/mars3d](https://gitee.com/marsgis/mars3d)
+- 开发教程：[http://mars3d.cn/docs/](http://mars3d.cn/docs/)
+- API文档：[http://mars3d.cn/api/](http://mars3d.cn/api/)
+- 更新日志：[CHANGE.md](./CHANGE.md)
 
- 
+## 本地版本信息
+见同目录 `package.json` 的 `version` 字段
 
-## 平台介绍
- 
- `Mars3D平台` 是一款基于 WebGL 技术实现的三维客户端开发平台，基于[Cesium](https://cesium.com/cesiumjs/)优化提升与B/S架构设计，支持多行业扩展的轻量级高效能GIS开发平台，能够免安装、无插件地在浏览器中高效运行，并可快速接入与使用多种GIS数据和三维模型，呈现三维空间的可视化，完成平台在不同行业的灵活应用。
- 
-
+## 本地文件说明
+含 `extends/`、`img/`、`plugins/`、`thirdParty/` 子目录。
+目录内文件：`mars3d.css`、`mars3d.d.ts`、`mars3d.js`、`package.json`
 
 ## 学习资料
 
@@ -48,7 +52,6 @@ Github：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
 ### 反馈问题
  为了方便交流及留存，所有bug及建议均统一提交至：[github issues](https://github.com/marsgis/mars3d/issues)  或 
  [国内gitee issues](https://gitee.com/marsgis/mars3d/issues)
-
 
 
 
@@ -90,12 +93,6 @@ Github：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
 
 
 
-
-
- 
-
- 
-
 ## 平台相关效果  
  功能示例：
  ![image](http://marsgis.cn/img/project/mars3d-doc/example1.jpg)
@@ -119,7 +116,7 @@ Github：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
 
 工厂园区项目：[在线体验](http://mars3d.cn/project/vue-gcyq/)
 
- ![image](http://cdn.marsgis.cn/mall/mars3d-vue-gcyq/1.jpg)
+ ![image](https://cdn.marsgis.cn/mall/mars3d-vue-gcyq/1.jpg)
 
  美丽乡村项目：[在线体验](http://mars3d.cn/project/vue-mlxc/)
 
@@ -133,12 +130,12 @@ Github：[https://github.com/marsgis/mars3d](https://github.com/marsgis/mars3d)
   
 图上标绘工具：[在线体验](http://studio.mars3d.cn/project-map/offline-plot.html)
 
- ![image](http://cdn.marsgis.cn/mall/mars3d-studio-plot/1.jpg)
+ ![image](https://cdn.marsgis.cn/mall/mars3d-studio-plot/1.jpg)
 
 
 地图场景配置工具：[在线体验](http://studio.mars3d.cn/project-map/offline-map.html)
 
- ![image](http://cdn.marsgis.cn/mall/mars3d-studio-map/1.jpg)
+ ![image](https://cdn.marsgis.cn/mall/mars3d-studio-map/1.jpg)
 
 ## 📄 版权说明 / License
 
