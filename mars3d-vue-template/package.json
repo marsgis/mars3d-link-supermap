@@ -12,7 +12,7 @@
   "type": "module",
   "dependencies": {
     "mars3d": "~3.12.0",
-    "mars3d-supermap": "~3.11.9",
+    "mars3d-supermap": "~3.12.0",
     "@turf/turf": "^7.2.0",
     "mars3d-cesium": "~1.146.0",
     "vue": "^3.4.19"
